@@ -4,7 +4,17 @@ title: Home
 ---
 
 <div class="home">
-  <h1 class="page-heading">Blog Posts</h1>
+  <h1 class="page-heading">Clifford Quantum Cellular Automata</h1>
+  
+  <div class="qca-visualization">
+    <img src="{{ '/assets/images/qca_plot.png' | relative_url }}" alt="1D Clifford QCA Visualization" class="qca-image" />
+    <p class="qca-description">
+      Visualization of a 1-Dimensional Clifford Quantum Cellular Automaton with 500 cells evolving over 250 time steps.
+      The colors represent different Pauli operators (I, X, Z, Y) as they propagate through the lattice.
+    </p>
+  </div>
+
+  <h2 class="page-heading">Blog Posts</h2>
 
   <ul class="post-list">
     {% for post in site.posts %}

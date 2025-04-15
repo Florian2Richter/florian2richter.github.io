@@ -52,6 +52,28 @@ nav a:hover {
   text-decoration: underline;
 }
 
+/* QCA Visualization */
+.qca-visualization {
+  margin: 2rem 0;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.qca-image {
+  width: 100%;
+  display: block;
+}
+
+.qca-description {
+  padding: 1rem;
+  background-color: #f6f8fa;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #444;
+}
+
 /* Posts */
 .post {
   margin-bottom: 3rem;
