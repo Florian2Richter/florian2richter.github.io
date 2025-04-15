@@ -3,28 +3,65 @@ layout: default
 title: Home
 ---
 
-<div class="home">
-  <h1 class="page-heading">Clifford Quantum Cellular Automata</h1>
-  
-  <div class="qca-visualization">
-    <img src="{{ '/assets/images/qca_plot.png' | relative_url }}" alt="1D Clifford QCA Visualization" class="qca-image" />
-    <p class="qca-description">
-      Visualization of a 1-Dimensional Clifford Quantum Cellular Automaton with 500 cells evolving over 250 time steps.
-      The colors represent different Pauli operators (I, X, Z, Y) as they propagate through the lattice.
-    </p>
-  </div>
+<div class="qca-visualization">
+  <img src="{{ '/assets/images/qca_plot.png' | relative_url }}" alt="1D Clifford QCA Visualization" class="qca-image" />
+  <p class="qca-description">
+    Visualization of a 1-Dimensional Clifford Quantum Cellular Automaton with 500 cells evolving over 250 time steps.
+    The colors represent different Pauli operators (I, X, Z, Y) as they propagate through the lattice.
+  </p>
+</div>
 
-  <h2 class="page-heading">Blog Posts</h2>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
+<!-- Recent Blog Posts Section -->
+<div class="category-container">
+  <h2 class="section-heading">Recent Posts</h2>
+  <ul class="posts-list">
+    {% for post in site.posts limit:5 %}
       <li>
-        <h2>
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        </h2>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
         <p class="post-meta">{{ post.date | date: "%B %-d, %Y" }}</p>
-        {{ post.excerpt }}
-        <a href="{{ post.url | relative_url }}">Continue reading...</a>
+        <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<!-- Quantum Cellular Automata Section -->
+<div class="category-container">
+  <h2 class="section-heading">Quantum Cellular Automata</h2>
+  <ul class="posts-list">
+    {% assign qca_posts = site.posts | where_exp: "post", "post.categories contains 'qca'" %}
+    {% for post in qca_posts limit:5 %}
+      <li>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <p class="post-meta">{{ post.date | date: "%B %-d, %Y" }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<!-- Quantum Computing Theory Section -->
+<div class="category-container">
+  <h2 class="section-heading">Quantum Computing Theory</h2>
+  <ul class="posts-list">
+    {% assign theory_posts = site.posts | where_exp: "post", "post.categories contains 'theory'" %}
+    {% for post in theory_posts limit:5 %}
+      <li>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <p class="post-meta">{{ post.date | date: "%B %-d, %Y" }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<!-- Clifford Groups Section -->
+<div class="category-container">
+  <h2 class="section-heading">Clifford Groups</h2>
+  <ul class="posts-list">
+    {% assign clifford_posts = site.posts | where_exp: "post", "post.categories contains 'clifford'" %}
+    {% for post in clifford_posts limit:5 %}
+      <li>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <p class="post-meta">{{ post.date | date: "%B %-d, %Y" }}</p>
       </li>
     {% endfor %}
   </ul>

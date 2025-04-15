@@ -1,31 +1,51 @@
 /* Base styles */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Lato', 'Avenir Next', 'Avenir', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.6;
   color: #333;
-  max-width: 900px;
+  max-width: 980px;
   margin: 0 auto;
   padding: 2rem 1rem;
   background-color: #fff;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+a {
+  color: #447;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .container {
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
 /* Header */
 header {
-  border-bottom: 1px solid #eee;
   padding-bottom: 1rem;
   margin-bottom: 2rem;
 }
 
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
 .site-title {
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin: 0;
+  font-weight: normal;
 }
 
 .site-title a {
@@ -36,25 +56,44 @@ header {
 .site-description {
   margin-top: 0.5rem;
   color: #777;
+  font-style: italic;
 }
 
 nav {
-  margin-top: 1rem;
+  display: flex;
+  gap: 1.5rem;
 }
 
 nav a {
-  margin-right: 1rem;
-  color: #0366d6;
+  color: #447;
   text-decoration: none;
+  font-size: 1.1rem;
 }
 
 nav a:hover {
   text-decoration: underline;
 }
 
+/* Main Content */
+.main-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Section Headings */
+.section-heading {
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.3rem;
+}
+
 /* QCA Visualization */
 .qca-visualization {
-  margin: 2rem 0;
+  margin: 2rem 0 3rem 0;
   border: 1px solid #e1e4e8;
   border-radius: 6px;
   overflow: hidden;
@@ -74,26 +113,60 @@ nav a:hover {
   color: #444;
 }
 
-/* Posts */
-.post {
+/* Posts Lists */
+.category-container {
   margin-bottom: 3rem;
 }
 
-.post-title {
-  margin-bottom: 0.5rem;
+.posts-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 1rem;
+}
+
+.posts-list li {
+  margin-bottom: 1rem;
+}
+
+.posts-list h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+
+.posts-list p {
+  margin-top: 0.3rem;
+  color: #666;
 }
 
 .post-meta {
   color: #777;
-  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Individual Posts */
+.post-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: normal;
 }
 
 .post-content h2 {
   margin-top: 2rem;
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+.post-content h3 {
+  font-size: 1.3rem;
+  font-weight: normal;
 }
 
 .post-content img {
   max-width: 100%;
+  display: block;
+  margin: 1.5rem auto;
 }
 
 .post-content blockquote {
@@ -101,6 +174,7 @@ nav a:hover {
   padding-left: 1rem;
   color: #666;
   margin-left: 0;
+  font-style: italic;
 }
 
 /* Code and mathematics */
@@ -109,6 +183,7 @@ code {
   padding: 0.2em 0.4em;
   border-radius: 3px;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.9em;
 }
 
 pre {
@@ -135,4 +210,5 @@ footer {
   padding-top: 1rem;
   border-top: 1px solid #eee;
   color: #777;
+  font-size: 0.9rem;
 } 
