@@ -69,4 +69,4 @@ All posts should include `mathjax: true` in the front matter to enable LaTeX sup
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE). 
+This project is open source and available under the [MIT License](LICENSE). # Test commit
