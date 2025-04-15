@@ -1,0 +1,21 @@
+title: Clifford Quantum Cellular Automata
+description: Exploring 1-D Clifford Quantum Cellular Automata
+author: Florian
+baseurl: ""
+url: "https://florian2richter.github.io"
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+
+# Defaults
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      mathjax: true 
