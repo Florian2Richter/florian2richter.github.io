@@ -2,6 +2,7 @@
 layout: post
 title: "What is a Cellular Automata?"
 date: 2025-04-15
+permalink: /2025/04/15/what-is-cellular-automata.html
 categories: [qca, theory]
 mathjax: true
 ---
