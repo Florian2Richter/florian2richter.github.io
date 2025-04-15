@@ -3,10 +3,13 @@ body {
   font-family: 'Lato', 'Avenir Next', 'Avenir', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.6;
   color: #333;
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  background-color: #fff;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  background-image: url('/assets/images/subtle_background.jpg');
+  background-size: cover;
+  background-attachment: fixed;
   font-weight: 400;
   font-size: 16px;
 }
@@ -22,24 +25,26 @@ a:hover {
 
 .container {
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
 /* Header */
 header {
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
+  background-color: #222;
+  color: #eee;
+  padding: 1rem 0;
+  margin-bottom: 0;
 }
 
 .site-header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 0.5rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .site-title {
@@ -50,13 +55,11 @@ header {
 
 .site-title a {
   text-decoration: none;
-  color: #333;
+  color: #eee;
 }
 
 .site-description {
-  margin-top: 0.5rem;
-  color: #777;
-  font-style: italic;
+  display: none;
 }
 
 nav {
@@ -65,7 +68,7 @@ nav {
 }
 
 nav a {
-  color: #447;
+  color: #eee;
   text-decoration: none;
   font-size: 1.1rem;
 }
@@ -74,30 +77,86 @@ nav a:hover {
   text-decoration: underline;
 }
 
-/* Main Content */
+/* Main Content Area */
 .main-content {
-  max-width: 800px;
+  max-width: 1100px;
   margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Section Headings */
 .section-heading {
-  font-size: 1.5rem;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-  font-weight: bold;
+  font-size: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  font-weight: normal;
   color: #333;
   border-bottom: 1px solid #eee;
   padding-bottom: 0.3rem;
 }
 
+/* Card Grid Layout */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Topic Card */
+.topic-card {
+  border: 1px solid #ccc;
+  border-radius: 0;
+  overflow: hidden;
+  background-color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.topic-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.card-title {
+  font-size: 1.4rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: normal;
+  text-align: center;
+}
+
+.card-source {
+  text-align: center;
+  font-style: italic;
+  margin-top: 0.5rem;
+  color: #666;
+}
+
 /* QCA Visualization */
 .qca-visualization {
-  margin: 2rem 0 3rem 0;
+  margin: 0 0 3rem 0;
   border: 1px solid #e1e4e8;
-  border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
 }
 
 .qca-image {
@@ -114,10 +173,6 @@ nav a:hover {
 }
 
 /* Posts Lists */
-.category-container {
-  margin-bottom: 3rem;
-}
-
 .posts-list {
   list-style-type: none;
   padding-left: 0;
@@ -206,9 +261,10 @@ pre code {
 
 /* Footer */
 footer {
+  text-align: center;
   margin-top: 3rem;
-  padding-top: 1rem;
-  border-top: 1px solid #eee;
+  padding: 1rem;
+  background-color: #f5f5f5;
   color: #777;
   font-size: 0.9rem;
 } 

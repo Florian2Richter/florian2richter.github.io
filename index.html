@@ -3,66 +3,63 @@ layout: default
 title: Home
 ---
 
-<div class="qca-visualization">
-  <img src="{{ '/assets/images/qca_plot.png' | relative_url }}" alt="1D Clifford QCA Visualization" class="qca-image" />
-  <p class="qca-description">
-    Visualization of a 1-Dimensional Clifford Quantum Cellular Automaton with 500 cells evolving over 250 time steps.
-    The colors represent different Pauli operators (I, X, Z, Y) as they propagate through the lattice.
-  </p>
+<h2 class="section-heading">Recent Exciting Things!</h2>
+
+<div class="card-grid">
+  <div class="topic-card">
+    <img src="{{ '/assets/images/qca_plot.png' | relative_url }}" alt="Clifford QCA Visualization" class="card-image">
+    <div class="card-content">
+      <h3 class="card-title">Clifford QCA Simulation</h3>
+    </div>
+  </div>
+  
+  <div class="topic-card">
+    <img src="{{ '/assets/images/qca_plot.png' | relative_url }}" alt="Quantum Computing Visualization" class="card-image">
+    <div class="card-content">
+      <h3 class="card-title">Quantum Computing</h3>
+    </div>
+  </div>
 </div>
 
-<!-- Recent Blog Posts Section -->
-<div class="category-container">
-  <h2 class="section-heading">Recent Posts</h2>
-  <ul class="posts-list">
-    {% for post in site.posts limit:5 %}
-      <li>
-        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-        <p class="post-meta">{{ post.date | date: "%B %-d, %Y" }}</p>
-        <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
-      </li>
-    {% endfor %}
-  </ul>
+<h2 class="section-heading">Quantum Cellular Automata</h2>
+
+<div class="card-grid">
+  <div class="topic-card">
+    <img src="{{ '/assets/images/qca_plot.png' | relative_url }}" alt="Introduction to QCA" class="card-image">
+    <div class="card-content">
+      <h3 class="card-title">Introduction to Clifford QCA</h3>
+    </div>
+  </div>
+  
+  <div class="topic-card">
+    <img src="{{ '/assets/images/qca_plot.png' | relative_url }}" alt="1D QCA Properties" class="card-image">
+    <div class="card-content">
+      <h3 class="card-title">Properties of 1D Clifford QCA</h3>
+    </div>
+  </div>
+  
+  <div class="topic-card">
+    <img src="{{ '/assets/images/qca_plot.png' | relative_url }}" alt="Local Rules" class="card-image">
+    <div class="card-content">
+      <h3 class="card-title">Understanding Local Rules</h3>
+    </div>
+  </div>
 </div>
 
-<!-- Quantum Cellular Automata Section -->
-<div class="category-container">
-  <h2 class="section-heading">Quantum Cellular Automata</h2>
-  <ul class="posts-list">
-    {% assign qca_posts = site.posts | where_exp: "post", "post.categories contains 'qca'" %}
-    {% for post in qca_posts limit:5 %}
-      <li>
-        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-        <p class="post-meta">{{ post.date | date: "%B %-d, %Y" }}</p>
-      </li>
-    {% endfor %}
-  </ul>
-</div>
+<h2 class="section-heading">Quantum Computing Theory</h2>
 
-<!-- Quantum Computing Theory Section -->
-<div class="category-container">
-  <h2 class="section-heading">Quantum Computing Theory</h2>
-  <ul class="posts-list">
-    {% assign theory_posts = site.posts | where_exp: "post", "post.categories contains 'theory'" %}
-    {% for post in theory_posts limit:5 %}
-      <li>
-        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-        <p class="post-meta">{{ post.date | date: "%B %-d, %Y" }}</p>
-      </li>
-    {% endfor %}
-  </ul>
-</div>
-
-<!-- Clifford Groups Section -->
-<div class="category-container">
-  <h2 class="section-heading">Clifford Groups</h2>
-  <ul class="posts-list">
-    {% assign clifford_posts = site.posts | where_exp: "post", "post.categories contains 'clifford'" %}
-    {% for post in clifford_posts limit:5 %}
-      <li>
-        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-        <p class="post-meta">{{ post.date | date: "%B %-d, %Y" }}</p>
-      </li>
-    {% endfor %}
-  </ul>
+<div class="card-grid">
+  <div class="topic-card">
+    <img src="{{ '/assets/images/qca_plot.png' | relative_url }}" alt="Clifford Groups" class="card-image">
+    <div class="card-content">
+      <h3 class="card-title">Clifford Groups</h3>
+    </div>
+  </div>
+  
+  <div class="topic-card">
+    <img src="{{ '/assets/images/qca_plot.png' | relative_url }}" alt="Pauli Operators" class="card-image">
+    <div class="card-content">
+      <h3 class="card-title">Pauli Operators</h3>
+    </div>
+  </div>
 </div> 

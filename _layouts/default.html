@@ -28,18 +28,13 @@
 </head>
 <body>
   <header>
-    <div class="container">
-      <div class="site-header">
-        <h1 class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
-        <nav>
-          <a href="{{ '/' | relative_url }}">Blog</a>
-          <a href="{{ '/about' | relative_url }}">About</a>
-          <a href="mailto:{{ site.email }}">Contact</a>
-        </nav>
-      </div>
-      {% if site.description %}
-      <p class="site-description">{{ site.description }}</p>
-      {% endif %}
+    <div class="site-header">
+      <h1 class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+      <nav>
+        <a href="{{ '/' | relative_url }}">Blog</a>
+        <a href="{{ '/about' | relative_url }}">About</a>
+        <a href="mailto:{{ site.email }}">Contact</a>
+      </nav>
     </div>
   </header>
 
@@ -48,9 +43,7 @@
   </main>
 
   <footer>
-    <div class="container">
-      <p>&copy; {{ site.time | date: '%Y' }} {{ site.author }}. All rights reserved.</p>
-    </div>
+    <p>&copy; {{ site.time | date: '%Y' }} {{ site.author }}. All rights reserved.</p>
   </footer>
 </body>
 </html> 
