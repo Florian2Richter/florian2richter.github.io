@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "What is a Cellular Automata?"
+title: "1-D Clifford Quantum Cellular Automata (CQCA)?"
 date: 2025-04-15
 permalink: /2025/04/15/what-is-cellular-automata.html
 categories: [qca, theory]
 mathjax: true
 ---
 
-# What is a Cellular Automata?
+# 1-D Clifford Quantum Cellular Automata (CQCA)
 
 Cellular automata are mathematical models that consist of a grid of cells, where each cell can be in one of a finite number of states. The grid evolves in discrete time steps according to a set of rules that determine the state of each cell based on the states of its neighboring cells.
 
