@@ -9,7 +9,7 @@ mathjax: true
 
 ## Motivation 
 
-This chapter is just here to explain why and for whom I’m writing this blogpost in the first place. If you’re mainly interested in what the colorful images in the [app}(https://clifford-qca-1d-wqukva9js5377m8nz48nd8.streamlit.app/) show and what they mean, feel free to skip ahead to the math section. (Insert link or reference to the next chapter here.)
+This chapter is just here to explain why and for whom I’m writing this blogpost in the first place. If you’re mainly interested in what the colorful images in the [app](https://clifford-qca-1d-wqukva9js5377m8nz48nd8.streamlit.app/) show and what they mean, feel free to skip ahead to the math section. (Insert link or reference to the next chapter here.)
 
 The idea for this post grew out of my many failed attempts to explain the difference between classical and quantum computers—usually during coffee breaks or longer breakout sessions. Even when talking to people with solid backgrounds in classical computer science, I always ran out of time before I could paint a satisfying picture of how quantum systems really work.
 
