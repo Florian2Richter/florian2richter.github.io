@@ -23,7 +23,7 @@ But the power of binary logic doesn't stop at information storage. Equally funda
 
 In stark contrast stands the elegant simplicity of a *cellular automaton*: a rule that updates the state of a bit based solely on the states of its neighboring bits.
 
-To illustrate the surprising richness of this deceptively simple setup, consider a one-dimensional array of bits—a lattice—where each bit updates based on a fixed local rule. Suppose we define a local update rule that maps three adjacent input bits at time $$t_0$$ to a single output bit at time $$t_1$$. For example, we consider a neighborhood $$(x\!-\!1,\, x,\, x\!+\!1)$$ and denote the corresponding bits at time $$t_0$$ as $b^{(t_0)}_{x-1}, b^{(t_0)}_x, b^{(t_0)}_{x+1}$$. The rule then assigns an output bit $$b^{(t_1)}_x$$ based on this triplet.
+To illustrate the surprising richness of this deceptively simple setup, consider a one-dimensional array of bits—a lattice—where each bit updates based on a fixed local rule. Suppose we define a local update rule that maps three adjacent input bits at time $$t_0$$ to a single output bit at time $$t_1$$. For example, we consider a neighborhood $$(x\!-\!1,\, x,\, x\!+\!1)$$ and denote the corresponding bits at time $$t_0$$ as $$b^{(t_0)}_{x-1}, b^{(t_0)}_x, b^{(t_0)}_{x+1}$$. The rule then assigns an output bit $$b^{(t_1)}_x$$ based on this triplet.
 
 How many distinct local rules can we define?
 
@@ -47,11 +47,11 @@ This *locality* and *uniformity*—each cell updating according to the same rule
 
 What begins as a single bit eventually gives rise to a structure bearing striking resemblance to the [Sierpiński triangle](https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle)—a classic fractal. This emergence of large-scale order from local, deterministic rules is a hallmark of cellular automata.
 
-The 256 different [1D cellular automata](https://en.wikipedia.org/wiki/Elementary_cellular_automaton) have been extensively studied and serve as models for dynamics in diverse fields—from physics to biology to computer science.
+The 256 different [1D cellular automata](https://en.wikipedia.org/wiki/Elementary_cellular_automaton) have been extensively studied and serve as models for dynamics in diverse fields—from physics to biology to computer science. They are characterized by showing simple translations (named gliders), oscillations, fractals, and pure random behovarior.
 
 We now turn to a subset of these automata, which we will later generalize to explore applications in the theory of stabilizer states in quantum information.
 
-** Linear Cellular Automata
+##Linear Cellular Automata
 
 
 *[This is a template for your blog post. You can continue writing about cellular automata, their properties, and applications.]* 
