@@ -33,12 +33,16 @@ A convenient way to represent such a rule is as a bitstring of length 8, where e
 
 Once the rule is fixed, we apply it across the entire lattice in a *translationally invariant* fashion: for each position $$x$$, the output bit at time $$t_1$$, denoted $$b^{(t_1)}_x$$, depends solely on the input bits $$b^{(t_0)}_{x-1}, b^{(t_0)}_x, b^{(t_0)}_{x+1}$$ (see Figure 1). Conceptually, this is akin to applying a 1D convolution kernel in machine learning—except that instead of computing a weighted sum, we apply a discrete, rule-based transformation.
 
-![Local update rule applied to a bitstring](/assets/images/wolfram_rule_150.svg)  
+<div style="margin-bottom: -10px;">
+![Local update rule applied to a bitstring](/assets/images/wolfram_rule_150.svg)
+</div>
 *Figure 1: A single update step in an elementary cellular automaton. The three highlighted source bits at time $$t_0$$ form the local neighborhood that determines the output bit at position $$x$$ and time $$t_1$$.*
 
 This *locality* and *uniformity*—each cell updating according to the same rule, based only on its immediate neighbors—are what make cellular automata so simple to define, yet so surprisingly rich in behavior. To see this in action, consider the full time evolution of Rule 150, starting from a single active cell. Each new row corresponds to a new time step, computed by repeatedly applying the local update rule discussed earlier. The resulting global pattern is shown in Figure 2.
 
-![Evolution of Rule 150 cellular automaton](/assets/images/full_ca_150_evolution.png)  
+<div style="margin-bottom: -10px;">
+![Evolution of Rule 150 cellular automaton](/assets/images/full_ca_150_evolution.png)
+</div>
 *Figure 2: Time evolution of Rule 150 (bitstring: $$10010110$$) starting from a single active cell. Left: The first few time steps showing how the pattern begins to form. Right: Extended evolution over hundreds of time steps revealing the emergent fractal structure with triangular self-similar patterns.*
 
 What begins as a single bit eventually gives rise to a structure bearing striking resemblance to the [Sierpiński triangle](https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle)—a classic fractal. This emergence of large-scale order from local, deterministic rules is a hallmark of cellular automata.
