@@ -21,7 +21,9 @@ So instead of trying to explain the entire universe of quantum computing, I thou
 If you're looking for a deeper dive into general quantum computing, I recommend Quantum Computation and Quantum Information by Nielsen and Chuang. For CQCAs specifically, I'll list some more targeted references at the end of the post. (Insert actual recommendations here.)
 -->
 
-## Recap of Classical Systems and Cellular Automata
+## Recap of 1-D Cellular Automata
+
+![Example of an elementary cellular automaton rule](/assets/images/cellular-automata/elementary-ca-example.svg)
 
 As most people in the computer science world know, the smallest unit of state in a classical computer is a bit, which can take on just two values: 0 or 1. And yet, with just this minimal alphabet, we can encode all information—by stringing together long sequences of bits and storing them on hard drives or transmitting them over networks.
 
@@ -31,31 +33,6 @@ So what happens if we try to translate this idea into the quantum world?
 Can such rich complexity also emerge in systems governed by quantum rules?
 Is there even a meaningful quantum analog of a cellular automaton—and what would it look like?
 
-## Quantum Cellular Automata
 
-Quantum Cellular Automata (QCA) extend the concept to the quantum realm. Instead of classical bits, QCAs operate on quantum bits (qubits). The evolution of the system is governed by quantum mechanics, allowing for quantum superposition and entanglement.
-
-### Clifford Quantum Cellular Automata
-
-Clifford Quantum Cellular Automata are a special class of QCAs where the update rules are restricted to Clifford operations. These operations include:
-
-- Hadamard gate ($H$)
-- Phase gate ($S$)
-- CNOT gate
-
-In the one-dimensional case, we can express the dynamics using Pauli operators. The evolution of the system is given by:
-
-$$U P_i U^\dagger = \prod_j P_j^{f(i,j)}$$
-
-Where $P_i$ is a Pauli operator at site $i$, and $f(i,j)$ determines how the operators transform.
-
-## Applications
-
-Clifford QCAs have applications in:
-
-- Quantum error correction
-- Topological quantum computing
-- Quantum simulations
-- Understanding quantum information propagation
 
 *[This is a template for your blog post. You can continue writing about cellular automata, their properties, and applications.]* 

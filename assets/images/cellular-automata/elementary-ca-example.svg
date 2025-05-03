@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="700" viewBox="0 0 1100 700">
+  <style>
+    text {
+      font-family: 'Comic Sans MS', cursive;
+      font-size: 48px;
+      fill: #333;
+    }
+    .cell {
+      rx: 30;
+      ry: 30;
+      width: 100;
+      height: 100;
+      stroke-width: 3;
+    }
+    .cell-value {
+      font-family: 'Comic Sans MS', cursive;
+      font-size: 48px;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+    .active {
+      fill: #ffeb99;
+      stroke: #e6c700;
+    }
+    .inactive {
+      fill: #fffaed;
+      stroke: #e6e6e6;
+    }
+    .arrow {
+      stroke: #333;
+      stroke-width: 3;
+      fill: none;
+    }
+    .arrow-head {
+      fill: #333;
+    }
+  </style>
+
+  <!-- Title -->
+  <text x="400" y="80">3 source bits</text>
+
+  <!-- Top row cells -->
+  <rect class="cell inactive" x="20" y="120" />
+  <text class="cell-value" x="70" y="170" fill="#ccc">1</text>
+  
+  <rect class="cell inactive" x="170" y="120" />
+  <text class="cell-value" x="220" y="170" fill="#ccc">0</text>
+  
+  <rect class="cell active" x="320" y="120" />
+  <text class="cell-value" x="370" y="170">1</text>
+  
+  <rect class="cell active" x="470" y="120" />
+  <text class="cell-value" x="520" y="170">0</text>
+  
+  <rect class="cell active" x="620" y="120" />
+  <text class="cell-value" x="670" y="170">1</text>
+  
+  <rect class="cell inactive" x="770" y="120" />
+  <text class="cell-value" x="820" y="170" fill="#ccc">0</text>
+  
+  <rect class="cell inactive" x="920" y="120" />
+  <text class="cell-value" x="970" y="170" fill="#ccc">0</text>
+
+  <!-- Arrow -->
+  <text x="650" y="350">time step</text>
+  <line class="arrow" x1="550" y1="270" x2="550" y2="440" />
+  <polygon class="arrow-head" points="550,450 540,430 560,430" />
+
+  <!-- Bottom row cells -->
+  <rect class="cell inactive" x="20" y="490" />
+  <text class="cell-value" x="70" y="540" fill="#ccc">1</text>
+  
+  <rect class="cell inactive" x="170" y="490" />
+  <text class="cell-value" x="220" y="540" fill="#ccc">0</text>
+  
+  <rect class="cell inactive" x="320" y="490" />
+  <text class="cell-value" x="370" y="540" fill="#ccc">1</text>
+  
+  <rect class="cell active" x="470" y="490" />
+  <text class="cell-value" x="520" y="540">0</text>
+  
+  <rect class="cell inactive" x="620" y="490" />
+  <text class="cell-value" x="670" y="540" fill="#ccc">1</text>
+  
+  <rect class="cell inactive" x="770" y="490" />
+  <text class="cell-value" x="820" y="540" fill="#ccc">1</text>
+  
+  <rect class="cell inactive" x="920" y="490" />
+  <text class="cell-value" x="970" y="540" fill="#ccc">0</text>
+
+  <!-- Output bit label -->
+  <text x="550" y="670">output bit</text>
+</svg> 
