@@ -23,7 +23,7 @@ But the power of binary logic doesn't stop at information storage. Equally funda
 
 In stark contrast stands the elegant simplicity of a *cellular automaton*: a rule that updates the state of a bit based solely on the states of its neighboring bits.
 
-To illustrate the surprising richness of this deceptively simple setup, consider a one-dimensional array of bits—a lattice—where each bit updates based on a fixed local rule. Suppose we define a local update rule that maps three adjacent input bits at time $$t_0$$ to a single output bit at time $$t_1$$. For example, we consider a neighborhood $$(x\!-\!1,\, x,\, x\!+\!1)$$ and denote the corresponding bits at time $$t_0$$ as $$\{b_{x-1}, b_x, b_{x+1}\}$$. The rule then assigns an output bit $$b^{(t_1)}_x$$ based on this triplet.
+To illustrate the surprising richness of this deceptively simple setup, consider a one-dimensional array of bits—a lattice—where each bit updates based on a fixed local rule. Suppose we define a local update rule that maps three adjacent input bits at time $$t_0$$ to a single output bit at time $$t_1$$. For example, we consider a neighborhood $$(x\!-\!1,\, x,\, x\!+\!1)$$ and denote the corresponding bits at time $$t_0$$ as $b^{(t_0)}_{x-1}, b^{(t_0)}_x, b^{(t_0)}_{x+1}$$. The rule then assigns an output bit $$b^{(t_1)}_x$$ based on this triplet.
 
 How many distinct local rules can we define?
 
@@ -36,12 +36,10 @@ Once the rule is fixed, we apply it across the entire lattice in a *translationa
 ![Local update rule applied to a bitstring](/assets/images/wolfram_rule_150.svg)  
 *Figure 1: A single update step in an elementary cellular automaton. The three highlighted source bits at time $$t_0$$ form the local neighborhood that determines the output bit at position $$x$$ and time $$t_1$$.*
 
-This *locality* and *uniformity*—each cell updating according to the same rule, based only on its immediate neighbors—are what make cellular automata so simple to define, yet so surprisingly rich in behavior. Despite the apparent triviality of a 3-bit rule like Rule 150, iterating it over time reveals unexpected structure and beauty.
+This *locality* and *uniformity*—each cell updating according to the same rule, based only on its immediate neighbors—are what make cellular automata so simple to define, yet so surprisingly rich in behavior. To see this in action, consider the full time evolution of Rule 150, starting from a single active cell. Each new row corresponds to a new time step, computed by repeatedly applying the local update rule discussed earlier. The resulting global pattern is shown in Figure 2.
 
-To see this in action, consider the full time evolution of Rule 150, starting from a single active cell. Each new row corresponds to a new time step, computed by repeatedly applying the local update rule discussed earlier. The resulting global pattern is shown in Figure 2.
-
-![Evolution of Rule 150 cellular automaton](/assets/images/full_ca_150.png)  
-*Figure 2: Time evolution of Rule 150 starting from a single active cell. Each row represents the state of the system at a successive time step, showing how complex patterns emerge from simple rules. This particular pattern exhibits fractal-like characteristics with triangular self-similar structures.*
+![Evolution of Rule 150 cellular automaton](/assets/images/full_ca_150_evolution.png)  
+*Figure 2: Time evolution of Rule 150 (bitstring: $$10010110$$) starting from a single active cell. Left: The first few time steps showing how the pattern begins to form. Right: Extended evolution over hundreds of time steps revealing the emergent fractal structure with triangular self-similar patterns.*
 
 What begins as a single bit eventually gives rise to a structure bearing striking resemblance to the [Sierpiński triangle](https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle)—a classic fractal. This emergence of large-scale order from local, deterministic rules is a hallmark of cellular automata.
 
@@ -49,7 +47,7 @@ The 256 different [1D cellular automata](https://en.wikipedia.org/wiki/Elementar
 
 We now turn to a subset of these automata, which we will later generalize to explore applications in the theory of stabilizer states in quantum information.
 
-
+** Linear Cellular Automata
 
 
 *[This is a template for your blog post. You can continue writing about cellular automata, their properties, and applications.]* 
