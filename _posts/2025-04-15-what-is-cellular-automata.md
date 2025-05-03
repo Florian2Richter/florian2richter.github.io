@@ -36,9 +36,9 @@ But the power of binary logic doesn't stop at information storage. Equally funda
 
 In stark contrast stands the elegant simplicity of a *cellular automaton*: a rule that updates the state of a bit based solely on the states of its neighboring bits.
 
-To illustrate the surprising richness of this simple concept, let us think it through. Starting with an elementary setup, we consider three bits at time \( t_0 \), say \( 1, 0, 1 \), and map these to a single output bit at time \( t_1 \), i.e., 0 or 1. What is the degree of freedom we have in defining such a rule?
+To illustrate the surprising richness of this simple concept, let us think it through. Starting with an elementary setup, we consider three bits at time $$t_0$$, say $$\{1, 0, 1\}$$, and map these to a single output bit at time $$t_1$$, i.e., 0 or 1. What is the degree of freedom we have in defining such a rule?
 
-Three bits can represent \( 2^3 = 8 \) different configurations. For each of these input configurations, we can independently choose an output bit—either 0 or 1. Therefore, the total number of distinct update rules is
+Three bits can represent $$2^3 = 8$$ different configurations. For each of these input configurations, we can independently choose an output bit—either 0 or 1. Therefore, the total number of distinct update rules is $$2^8 = 256$$.
 
 ![Wolfram Rule 150 visualization](/assets/images/wolfram_rule_150.svg)
 *Figure 1: *
