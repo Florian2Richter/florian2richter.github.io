@@ -23,7 +23,7 @@ But the power of binary logic doesn't stop at information storage. Equally funda
 
 In stark contrast stands the elegant simplicity of a *cellular automaton*: a rule that updates the state of a bit based solely on the states of its neighboring bits.
 
-To illustrate the surprising richness of this deceptively simple setup, let us examine a minimal case. Suppose we work with a one-dimensional string of bits — a lattice — and define a local update rule that maps three adjacent input bits at time $$t_0$$ to a single output bit at time $$t_1$$. For example, we consider a neighborhood $$(x-1, x, x+1)$$ and denote the corresponding bits at time $$t_0$$ as $$\{b_{x-1}, b_x, b_{x+1}\}$$. The rule then assigns an output bit $$b^{(t_1)}_x$$ based on this triplet.
+To illustrate the surprising richness of this deceptively simple setup, let us examine a minimal case. Suppose we work with a one-dimensional string of bits — a lattice — and define a local update rule that maps three adjacent input bits at time $$t_0$$ to a single output bit at time $$t_1$$. For example, we consider a neighborhood $$(x\!-\!1,\, x,\, x\!+\!1)$$ and denote the corresponding bits at time $$t_0$$ as $$\{b_{x-1}, b_x, b_{x+1}\}$$. The rule then assigns an output bit $$b^{(t_1)}_x$$ based on this triplet.
 
 What degree of freedom do we have in defining such a rule?
 
@@ -31,10 +31,13 @@ Each triplet of bits has $$2^3 = 8$$ possible configurations. For each of these 
 
 A convenient way to represent such a rule is as a bitstring of length 8, where each position encodes the output associated with one of the 8 input configurations (ordered, for instance, lexicographically from $$111$$ down to $$000$$). This encoding allows us to label rules by an integer from 0 to 255 — the decimal value of the bitstring. For instance, Rule 110 corresponds to the bitstring $$01101110$$.
 
-Once the rule is fixed, we apply it across the entire lattice in a *translationally invariant* fashion: for each position $$x$$, the output bit at time $$t_1$$, denoted $$b^{(t_1)}_x$$, depends solely on the input bits $$b^{(t_0)}_{x-1}, b^{(t_0)}_x, b^{(t_0)}_{x+1}$$. This locality and uniformity are what make these systems both simple to define and surprisingly rich in behavior.
+Once the rule is fixed, we apply it across the entire lattice in a *translationally invariant* fashion: for each position $$x$$, the output bit at time $$t_1$$, denoted $$b^{(t_1)}_x$$, depends solely on the input bits $$b^{(t_0)}_{x-1}, b^{(t_0)}_x, b^{(t_0)}_{x+1}$$ (see Figure 1). This is conceptually similar to applying a 1-D convolution kernel over the input — a well-known operation in machine learning — except that instead of computing a weighted sum, we apply a discrete rule to each local pattern.
 
-![Wolfram Rule 150 visualization](/assets/images/wolfram_rule_150.svg)
-*Figure 1: *
+This locality and uniformity are what make these systems both simple to define and surprisingly rich in behavior.
+
+![Local update rule applied to a bitstring](/assets/images/wolfram_rule_150.svg)
+*Figure 1: A single update step in an elementary cellular automaton. The three highlighted source bits at time $$t_0$$ form the local neighborhood that determines the output bit at position $$x$$ and time $$t_1$$.*
+
 
 
 
