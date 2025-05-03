@@ -25,7 +25,11 @@ If you're looking for a deeper dive into general quantum computing, I recommend 
 
 As most people in the computer science world know, the smallest unit of state in a classical computer is a bit, which can take on just two values: 0 or 1. And yet, with just this minimal alphabet, we can encode all information—by stringing together long sequences of bits and storing them on hard drives or transmitting them over networks.
 
+![Wolfram Rule 150 visualization](/assets/images/wolfram_rule_150.svg)
+
 But the power of binary logic doesn't stop at information storage. Even with very simple rules, these bits can create surprisingly rich dynamics. One example: cellular automata. A classical cellular automaton is essentially a rule for updating the state of a bit based on the states of its neighbors. Even this simple setup—like one bit looking at its immediate neighbors—already leads to 256 distinct patterns, known as the [elementary cellular automata](https://en.wikipedia.org/wiki/Elementary_cellular_automaton). Some of these generate trivial outcomes; others create fractal structures or chaotic patterns, all from basic local rules.
+
+![Evolution of Rule 150 cellular automaton](/assets/images/full_ca_150.png)
 
 So what happens if we try to translate this idea into the quantum world?
 Can such rich complexity also emerge in systems governed by quantum rules?
