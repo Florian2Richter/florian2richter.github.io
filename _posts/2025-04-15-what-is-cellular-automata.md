@@ -15,24 +15,25 @@ mathjax: true
 - Stabilizer Codes
 - Entanglement
 
-## Recap of Cellular Automata
+## A Minimal Model of Computation: Cellular Automata
 
-As most people in the computer science world know, the smallest unit of state in a classical computer is a bit, which can take on just two values: 0 or 1. And yet, with just this minimal alphabet, we can encode all information—by stringing together long sequences of bits and storing them on hard drives or transmitting them over networks.
+In classical computing, the smallest unit of state is the bit, which can take on just two values: 0 or 1. And yet, with just this minimal alphabet, we can encode all information—by stringing together long sequences of bits and storing them on hard drives or transmitting them over networks.
 
-But the power of binary logic doesn't stop at information storage. Equally fundamental is the processing—or time evolution—of information, which underpins virtually all modern computing applications. The logic governing this evolution has become deeply complex. Take, for example, modern CPU architectures: they implement speculative execution and branch prediction, using past instruction patterns to guess future outcomes. These systems operate with layers of caching, parallelism, and dynamic scheduling, making the underlying logic incredibly intricate and often opaque.
+But the power of binary logic doesn't stop at information storage. Equally fundamental is the *processing* of information—its time evolution—which underpins virtually all modern computation. The logic governing this evolution has become deeply complex. Take, for example, modern CPU architectures: they implement speculative execution and branch prediction, using past instruction patterns to guess future outcomes. These systems operate with layers of caching, parallelism, and dynamic scheduling, making the underlying logic incredibly intricate and often opaque.
 
 In stark contrast stands the elegant simplicity of a *cellular automaton*: a rule that updates the state of a bit based solely on the states of its neighboring bits.
 
-To illustrate the surprising richness of this deceptively simple setup, let us examine a minimal case. Suppose we work with a one-dimensional string of bits — a lattice — and define a local update rule that maps three adjacent input bits at time $$t_0$$ to a single output bit at time $$t_1$$. For example, we consider a neighborhood $$(x\!-\!1,\, x,\, x\!+\!1)$$ and denote the corresponding bits at time $$t_0$$ as $$\{b_{x-1}, b_x, b_{x+1}\}$$. The rule then assigns an output bit $$b^{(t_1)}_x$$ based on this triplet.
+To illustrate the surprising richness of this deceptively simple setup, consider a one-dimensional array of bits—a lattice—where each bit updates based on a fixed local rule. Suppose we define a local update rule that maps three adjacent input bits at time $$t_0$$ to a single output bit at time $$t_1$$. For example, we consider a neighborhood $$(x\!-\!1,\, x,\, x\!+\!1)$$ and denote the corresponding bits at time $$t_0$$ as $$\{b_{x-1}, b_x, b_{x+1}\}$$. The rule then assigns an output bit $$b^{(t_1)}_x$$ based on this triplet.
 
-What degree of freedom do we have in defining such a rule?
+How many distinct local rules can we define?
 
-Each triplet of bits has $$2^3 = 8$$ possible configurations. For each of these 8 input combinations, the rule may independently specify an output bit — either 0 or 1. Thus, the total number of such local update rules is $$2^8 = 256$$. This entire space of rules is what defines the class of *elementary cellular automata*.
+Each triplet of bits has $$2^3 = 8$$ possible configurations. For each of these 8 input combinations, the rule may independently specify an output bit—either 0 or 1. Thus, the total number of such local update rules is $$2^8 = 256$$. These 256 local rules define the class of *elementary cellular automata*.
 
-A convenient way to represent such a rule is as a bitstring of length 8, where each position encodes the output associated with one of the 8 input configurations (ordered, for instance, lexicographically from $$111$$ down to $$000$$). This encoding allows us to label rules by an integer from 0 to 255 — the decimal value of the bitstring. For instance, Rule 110 corresponds to the bitstring $$01101110$$.
+A convenient way to represent such a rule is as a bitstring of length 8, where each position encodes the output associated with one of the 8 input configurations (ordered, for instance, lexicographically from $$111$$ down to $$000$$). This encoding allows us to label rules by an integer from 0 to 255—the decimal value of the bitstring. For instance, Rule 110 corresponds to the bitstring $$01101110$$.
 
-Once the rule is fixed, we apply it across the entire lattice in a *translationally invariant* fashion: for each position $$x$$, the output bit at time $$t_1$$, denoted $$b^{(t_1)}_x$$, depends solely on the input bits $$b^{(t_0)}_{x-1}, b^{(t_0)}_x, b^{(t_0)}_{x+1}$$ (see Figure 1). This is conceptually similar to applying a 1-D convolution kernel over the input — a well-known operation in machine learning — except that instead of computing a weighted sum, we apply a discrete rule to each local pattern.
-![Local update rule applied to a bitstring](/assets/images/wolfram_rule_150.svg)
+Once the rule is fixed, we apply it across the entire lattice in a *translationally invariant* fashion: for each position $$x$$, the output bit at time $$t_1$$, denoted $$b^{(t_1)}_x$$, depends solely on the input bits $$b^{(t_0)}_{x-1}, b^{(t_0)}_x, b^{(t_0)}_{x+1}$$ (see Figure 1). Conceptually, this is akin to applying a 1D convolution kernel in machine learning—except that instead of computing a weighted sum, we apply a discrete, rule-based transformation.
+
+![Local update rule applied to a bitstring](/assets/images/wolfram_rule_150.svg)  
 *Figure 1: A single update step in an elementary cellular automaton. The three highlighted source bits at time $$t_0$$ form the local neighborhood that determines the output bit at position $$x$$ and time $$t_1$$.*
 
 This *locality* and *uniformity*—each cell updating according to the same rule, based only on its immediate neighbors—are what make cellular automata so simple to define, yet so surprisingly rich in behavior. Despite the apparent triviality of a 3-bit rule like Rule 150, iterating it over time reveals unexpected structure and beauty.
@@ -42,14 +43,11 @@ To see this in action, consider the full time evolution of Rule 150, starting fr
 ![Evolution of Rule 150 cellular automaton](/assets/images/full_ca_150.png)  
 *Figure 2: Time evolution of Rule 150 starting from a single active cell. Each row represents the state of the system at a successive time step, showing how complex patterns emerge from simple rules. This particular pattern exhibits fractal-like characteristics with triangular self-similar structures.*
 
-What begins as a lone bit eventually gives rise to a structure bearing striking resemblance to the **Sierpiński triangle**—a classic fractal. This emergence of large-scale order from local, deterministic rules is a hallmark of cellular automata and one of the reasons they continue to fascinate mathematicians, computer scientists, and physicists alike.
+What begins as a single bit eventually gives rise to a structure bearing striking resemblance to the [Sierpiński triangle](https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle)—a classic fractal. This emergence of large-scale order from local, deterministic rules is a hallmark of cellular automata.
 
+The 256 different [1D cellular automata](https://en.wikipedia.org/wiki/Elementary_cellular_automaton) have been extensively studied and serve as models for dynamics in diverse fields—from physics to biology to computer science.
 
-
-
-
- Even this simple setup—like one bit looking at its immediate neighbors—already leads to 256 distinct patterns, known as the [elementary cellular automata](https://en.wikipedia.org/wiki/Elementary_cellular_automaton). Some of these generate trivial outcomes; others create fractal structures or chaotic patterns, all from basic local rules.
-
+We now turn to a subset of these automata, which we will later generalize to explore applications in the theory of stabilizer states in quantum information.
 
 
 
