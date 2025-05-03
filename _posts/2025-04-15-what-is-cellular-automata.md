@@ -14,19 +14,6 @@ mathjax: true
 - Symplectic Automata
 - Stabilizer Codes
 - Entanglement
-<!-- 
-## Motivation 
-
-This chapter is just here to explain why and for whom I'm writing this blogpost in the first place. If you're mainly interested in what the colorful images in the [app](https://clifford-qca-1d-wqukva9js5377m8nz48nd8.streamlit.app/) show and what they mean, feel free to skip ahead to the math section. (Insert link or reference to the next chapter here.)
-
-The idea for this post grew out of my many failed attempts to explain the difference between classical and quantum computers—usually during coffee breaks or longer breakout sessions. Even when talking to people with solid backgrounds in classical computer science, I always ran out of time before I could paint a satisfying picture of how quantum systems really work.
-
-But then I remembered something from my time in quantum information: certain quantum systems, like those constrained to Clifford operations, can actually be simulated efficiently on a classical computer. That makes them not just useful, but also a little easier to understand—at least compared to full-blown quantum systems.
-
-So instead of trying to explain the entire universe of quantum computing, I thought: why not focus on a well-behaved corner of it? One that's still interesting and quantum, but simple enough to simulate and visualize. That's how I landed on Clifford quantum cellular automata (CQCAs)—a sweet spot between complexity and intuition.
-
-If you're looking for a deeper dive into general quantum computing, I recommend Quantum Computation and Quantum Information by Nielsen and Chuang. For CQCAs specifically, I'll list some more targeted references at the end of the post. (Insert actual recommendations here.)
--->
 
 ## Recap of Cellular Automata
 
