@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <style>
+    .triangle {
+      fill: #ff9999;
+      stroke: none;
+    }
+  </style>
+  <!-- Sierpinski Triangle Pattern -->
+  <path class="triangle" d="M400,10 L53,550 L747,550 Z M400,70 L747,490 L747,550 Z M400,70 L53,490 L53,550 Z M400,70 L123,490 L677,490 Z M400,130 L677,430 L677,490 Z M400,130 L123,430 L123,490 Z M400,130 L193,430 L607,430 Z M400,190 L607,370 L607,430 Z M400,190 L193,370 L193,430 Z M400,190 L263,370 L537,370 Z M400,250 L537,310 L537,370 Z M400,250 L263,310 L263,370 Z M400,250 L333,310 L467,310 Z"/>
+</svg> 
