@@ -32,11 +32,17 @@ Each triplet of bits has $$2^3 = 8$$ possible configurations. For each of these 
 A convenient way to represent such a rule is as a bitstring of length 8, where each position encodes the output associated with one of the 8 input configurations (ordered, for instance, lexicographically from $$111$$ down to $$000$$). This encoding allows us to label rules by an integer from 0 to 255 — the decimal value of the bitstring. For instance, Rule 110 corresponds to the bitstring $$01101110$$.
 
 Once the rule is fixed, we apply it across the entire lattice in a *translationally invariant* fashion: for each position $$x$$, the output bit at time $$t_1$$, denoted $$b^{(t_1)}_x$$, depends solely on the input bits $$b^{(t_0)}_{x-1}, b^{(t_0)}_x, b^{(t_0)}_{x+1}$$ (see Figure 1). This is conceptually similar to applying a 1-D convolution kernel over the input — a well-known operation in machine learning — except that instead of computing a weighted sum, we apply a discrete rule to each local pattern.
-
-This locality and uniformity are what make these systems both simple to define and surprisingly rich in behavior.
-
 ![Local update rule applied to a bitstring](/assets/images/wolfram_rule_150.svg)
 *Figure 1: A single update step in an elementary cellular automaton. The three highlighted source bits at time $$t_0$$ form the local neighborhood that determines the output bit at position $$x$$ and time $$t_1$$.*
+
+This *locality* and *uniformity*—each cell updating according to the same rule, based only on its immediate neighbors—are what make cellular automata so simple to define, yet so surprisingly rich in behavior. Despite the apparent triviality of a 3-bit rule like Rule 150, iterating it over time reveals unexpected structure and beauty.
+
+To see this in action, consider the full time evolution of Rule 150, starting from a single active cell. Each new row corresponds to a new time step, computed by repeatedly applying the local update rule discussed earlier. The resulting global pattern is shown in Figure 2.
+
+![Evolution of Rule 150 cellular automaton](/assets/images/full_ca_150.png)  
+*Figure 2: Time evolution of Rule 150 starting from a single active cell. Each row represents the state of the system at a successive time step, showing how complex patterns emerge from simple rules. This particular pattern exhibits fractal-like characteristics with triangular self-similar structures.*
+
+What begins as a lone bit eventually gives rise to a structure bearing striking resemblance to the **Sierpiński triangle**—a classic fractal. This emergence of large-scale order from local, deterministic rules is a hallmark of cellular automata and one of the reasons they continue to fascinate mathematicians, computer scientists, and physicists alike.
 
 
 
@@ -44,12 +50,7 @@ This locality and uniformity are what make these systems both simple to define a
 
  Even this simple setup—like one bit looking at its immediate neighbors—already leads to 256 distinct patterns, known as the [elementary cellular automata](https://en.wikipedia.org/wiki/Elementary_cellular_automaton). Some of these generate trivial outcomes; others create fractal structures or chaotic patterns, all from basic local rules.
 
-![Evolution of Rule 150 cellular automaton](/assets/images/full_ca_150.png)
-*Figure 2: Time evolution of Rule 150 starting from a single active cell. Each row represents the state of the system at a successive time step, showing how complex patterns emerge from simple rules. This particular pattern exhibits fractal-like characteristics with triangular self-similar structures.*
 
-So what happens if we try to translate this idea into the quantum world?
-Can such rich complexity also emerge in systems governed by quantum rules?
-Is there even a meaningful quantum analog of a cellular automaton—and what would it look like?
 
 
 
