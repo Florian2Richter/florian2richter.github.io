@@ -23,9 +23,15 @@ But the power of binary logic doesn't stop at information storage. Equally funda
 
 In stark contrast stands the elegant simplicity of a *cellular automaton*: a rule that updates the state of a bit based solely on the states of its neighboring bits.
 
-To illustrate the surprising richness of this simple concept, let us think it through. Starting with an elementary setup, we consider three bits at time $$t_0$$, say $$\{1, 0, 1\}$$, and map these to a single output bit at time $$t_1$$, i.e., 0 or 1. What is the degree of freedom we have in defining such a rule?
+To illustrate the surprising richness of this deceptively simple setup, let us examine a minimal case. Suppose we work with a one-dimensional string of bits — a lattice — and define a local update rule that maps three adjacent input bits at time $$t_0$$ to a single output bit at time $$t_1$$. For example, we consider a neighborhood $$(x-1, x, x+1)$$ and denote the corresponding bits at time $$t_0$$ as $$\{b_{x-1}, b_x, b_{x+1}\}$$. The rule then assigns an output bit $$b^{(t_1)}_x$$ based on this triplet.
 
-Three bits can represent $$2^3 = 8$$ different configurations. For each of these input configurations, we can independently choose an output bit—either 0 or 1. Therefore, the total number of distinct update rules is $$2^8 = 256$$.
+What degree of freedom do we have in defining such a rule?
+
+Each triplet of bits has $$2^3 = 8$$ possible configurations. For each of these 8 input combinations, the rule may independently specify an output bit — either 0 or 1. Thus, the total number of such local update rules is $$2^8 = 256$$. This entire space of rules is what defines the class of *elementary cellular automata*.
+
+A convenient way to represent such a rule is as a bitstring of length 8, where each position encodes the output associated with one of the 8 input configurations (ordered, for instance, lexicographically from $$111$$ down to $$000$$). This encoding allows us to label rules by an integer from 0 to 255 — the decimal value of the bitstring. For instance, Rule 110 corresponds to the bitstring $$01101110$$.
+
+Once the rule is fixed, we apply it across the entire lattice in a *translationally invariant* fashion: for each position $$x$$, the output bit at time $$t_1$$, denoted $$b^{(t_1)}_x$$, depends solely on the input bits $$b^{(t_0)}_{x-1}, b^{(t_0)}_x, b^{(t_0)}_{x+1}$$. This locality and uniformity are what make these systems both simple to define and surprisingly rich in behavior.
 
 ![Wolfram Rule 150 visualization](/assets/images/wolfram_rule_150.svg)
 *Figure 1: *
