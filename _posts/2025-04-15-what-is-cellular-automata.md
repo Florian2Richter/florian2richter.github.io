@@ -21,7 +21,12 @@ In classical computing, the smallest unit of state is the bit, which can take on
 
 But the power of binary logic doesn't stop at information storage. Equally fundamental is the *processing* of information—its time evolution—which underpins virtually all modern computation. The logic governing this evolution has become deeply complex. Take, for example, modern CPU architectures: they implement speculative execution and branch prediction, using past instruction patterns to guess future outcomes. These systems operate with layers of caching, parallelism, and dynamic scheduling, making the underlying logic incredibly intricate and often opaque.
 
-In stark contrast stands the elegant simplicity of a *cellular automaton*: a rule that updates the state of a bit based solely on the states of its neighboring bits.
+In stark contrast stands the elegant simplicity of a *cellular automaton*: a rule that updates the state of a bit based on on a set of very easy rules.
+
+To get a feeling for the possible complexity of time evolutions, we consider the possibilities for a "single cell" automaton depicted in figure 1.
+
+![Single-cell cellular automaton](/assets/images/single_cell_CA.svg)  
+*Figure 1: A single-cell cellular automaton showing possible state transitions. The state of a cell depends solely on its previous state according to a simple update rule.*
 
 To illustrate the surprising richness of this deceptively simple setup, consider a one-dimensional array of bits—a lattice—where each bit updates based on a fixed local rule. Suppose we define a local update rule that maps three adjacent input bits at time $$t_0$$ to a single output bit at time $$t_1$$. For example, we consider a neighborhood $$(x\!-\!1,\, x,\, x\!+\!1)$$ and denote the corresponding bits at time $$t_0$$ as $$b^{(t_0)}_{x-1}, b^{(t_0)}_x, b^{(t_0)}_{x+1}$$. The rule then assigns an output bit $$b^{(t_1)}_x$$ based on this triplet.
 
@@ -39,7 +44,7 @@ Once the rule is fixed, we apply it across the entire lattice in a *translationa
 This *locality* and *uniformity*—each cell updating according to the same rule, based only on its immediate neighbors—are what make cellular automata so simple to define, yet so surprisingly rich in behavior. To see this in action, consider the full time evolution of Rule 150, starting from a single active cell. Each new row corresponds to a new time step, computed by repeatedly applying the local update rule discussed earlier. The resulting global pattern is shown in Figure 2.
 
 ![Evolution of Rule 150 cellular automaton](/assets/images/full_ca_150_evolution.png)  
-*Figure 2: Time evolution of Rule 150 (bitstring: $$10010110$$) starting from a single active cell. Left: The first few time steps showing how the pattern begins to form. Right: Extended evolution over hundreds of time steps revealing the emergent fractal structure with triangular self-similar patterns.*
+*Figure 2: Time evolution of Rule 150 (bitstring: $$10010110$$) starting from a single active cell. Left: The first few time steps showing how the pattern begins to form from a single bit. Right: Extended evolution over hundreds of time steps revealing the emergent fractal structure with triangular self-similar patterns.*
 
 What begins as a single bit eventually gives rise to a structure bearing striking resemblance to the [Sierpiński triangle](https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle)—a classic fractal. This emergence of large-scale order from local, deterministic rules is a hallmark of cellular automata.
 
