@@ -33,9 +33,11 @@ Here, we evolve one time step by updating a bit $$b^{(t=0)}$$ based solely on it
 *Figure 1: A single-cell automaton showing possible state transitions. The new state depends solely on the current state, via a simple update rule.*
 
 How many such different possibilities for time-step rules exist? Since there are two possible input values (0 and 1), and each can be mapped independently to either 0 or 1, there are  
+
 $$
 2 \times 2 = 4
 $$
+
 distinct rules:
 
 1. Always output 0  
