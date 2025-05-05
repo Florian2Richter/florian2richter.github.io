@@ -81,3 +81,17 @@ What begins as a single bit eventually gives rise to a structure bearing a strik
 The 256 different [1D cellular automata](https://en.wikipedia.org/wiki/Elementary_cellular_automaton) have been extensively studied and serve as models for dynamics in diverse fields—from physics to biology to computer science. They are characterized by simple translations (called *gliders*), oscillations, fractals, and pure random behavior.
 
 We now turn to a subset of these automata, which we will later generalize to explore applications in the theory of stabilizer states in quantum information.
+
+## Linear Automata on a larger state space
+Now, inspired by the similarities to 1D convolutions, we want to introduce the concept of *linearity*. In the context of cellular automata over binary state spaces (i.e., bits), a rule is called **linear** if the update function \( f \) satisfies the following condition for all inputs \( x \) and \( y \):
+\[
+$$f(x + y) = f(x) + f(y)$$
+\]
+
+Attentive readers may notice that the left-hand side of the equation assumes a notion of addition for bitstrings. To make this precise, we need an operation that maps two bitstrings (or individual bits) back to a bitstring of the same form. This is achieved by defining addition *modulo 2*, which corresponds to the **XOR** operation. That is, for individual bits, we define:
+\[
+$$0 + 0 = 0,\quad 1 + 0 = 1,\quad 0 + 1 = 1,\quad 1 + 1 = 0$$
+\]
+
+Equipping the set \( \{0, 1\} \) with addition and multiplication modulo 2 yields the mathematical structure known as a **finite field**, specifically the field $$ \mathbb{F}_2$$ (or $$ mathbb{F}_2$$). Within this field, linearity allows us to reason about cellular automata using tools from algebra and vector space theory.
+
