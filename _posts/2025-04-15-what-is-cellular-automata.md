@@ -17,16 +17,44 @@ mathjax: true
 
 ## A Minimal Model of Computation: Cellular Automata
 
-In classical computing, the smallest unit of state is the bit, which can take on just two values: 0 or 1. And yet, with just this minimal alphabet, we can encode all information—by stringing together long sequences of bits and storing them on hard drives or transmitting them over networks.
+In classical computing, the smallest unit of state is the **bit**, which can take on just two values: 0 or 1. And yet, using only this minimal alphabet, we can encode all digital information—by arranging long sequences of bits and storing them on hard drives or transmitting them across networks.
 
-But the power of binary logic doesn't stop at information storage. Equally fundamental is the *processing* of information—its time evolution—which underpins virtually all modern computation. The logic governing this evolution has become deeply complex. Take, for example, modern CPU architectures: they implement speculative execution and branch prediction, using past instruction patterns to guess future outcomes. These systems operate with layers of caching, parallelism, and dynamic scheduling, making the underlying logic incredibly intricate and often opaque.
+But the power of binary logic extends beyond storage. Equally fundamental is the *processing* of information—its evolution over time—which underpins all modern computation. The logic that governs this evolution has grown extraordinarily complex. Consider today’s CPU architectures: they implement techniques like *speculative execution* and *branch prediction*, using past instruction patterns to anticipate future behavior. These systems are layered with caches, pipelines, parallelism, and dynamic scheduling, creating a highly intricate and often opaque web of computational processes.
 
-In stark contrast stands the elegant simplicity of a *cellular automaton*: a rule that updates the state of a bit based on on a set of very easy rules.
+In stark contrast stands the elegant minimalism of a **cellular automaton**: a system where each cell updates its state according to a simple, local rule.
 
-To get a feeling for the possible complexity of time evolutions, we consider the possibilities for a "single cell" automaton depicted in figure 1.
+### Single-Cell Automata
+
+To build intuition for how information might evolve in such systems, let’s begin with the simplest case: a *single-cell automaton*, illustrated in Figure 1. While not a true cellular automaton—since it lacks spatial neighbors—this setup still provides a useful starting point.
+
+Here, we evolve one time step by updating a bit \( b \) based solely on its current value, either 0 or 1.
 
 ![Single-cell cellular automaton](/assets/images/single_cell_CA.svg)  
-*Figure 1: A single-cell cellular automaton showing possible state transitions. The state of a cell depends solely on its previous state according to a simple update rule.*
+*Figure 1: A single-cell automaton showing possible state transitions. The new state depends solely on the current state, via a simple update rule.*
+
+How many such update rules exist? Since there are two possible input values (0 and 1), and each can be mapped independently to either 0 or 1, there are  
+\[
+2 \times 2 = 4
+\]  
+distinct rules:
+
+1. Always output 0  
+2. Always output 1  
+3. Identity (output equals input)  
+4. NOT (flip the bit)
+
+None of these rules leads to a rich or chaotic time evolution. The most interesting behavior comes from the NOT rule, which causes the bit to oscillate between 0 and 1 at each time step.
+
+Still, this simple setting introduces a convenient way to represent such rules—as a **bitstring** of length 2. The first bit encodes the output for input 1, the second for input 0. For example:
+
+- The identity rule becomes `10`  
+- The NOT rule becomes `01`  
+- Constant 0: `00`  
+- Constant 1: `11`
+
+This compact representation allows us to label rules by their decimal equivalent, e.g., `10` → **Rule 2**, `01` → **Rule 1**, and so on. This same encoding approach generalizes to more complex automata, where longer bitstrings capture richer local configurations.
+
+
 
 To illustrate the surprising richness of this deceptively simple setup, consider a one-dimensional array of bits—a lattice—where each bit updates based on a fixed local rule. Suppose we define a local update rule that maps three adjacent input bits at time $$t_0$$ to a single output bit at time $$t_1$$. For example, we consider a neighborhood $$(x\!-\!1,\, x,\, x\!+\!1)$$ and denote the corresponding bits at time $$t_0$$ as $$b^{(t_0)}_{x-1}, b^{(t_0)}_x, b^{(t_0)}_{x+1}$$. The rule then assigns an output bit $$b^{(t_1)}_x$$ based on this triplet.
 
@@ -34,7 +62,7 @@ How many distinct local rules can we define?
 
 Each triplet of bits has $$2^3 = 8$$ possible configurations. For each of these 8 input combinations, the rule may independently specify an output bit—either 0 or 1. Thus, the total number of such local update rules is $$2^8 = 256$$. These 256 local rules define the class of *elementary cellular automata*.
 
-A convenient way to represent such a rule is as a bitstring of length 8, where each position encodes the output associated with one of the 8 input configurations (ordered, for instance, lexicographically from $$111$$ down to $$000$$). This encoding allows us to label rules by an integer from 0 to 255—the decimal value of the bitstring. For instance, Rule 110 corresponds to the bitstring $$01101110$$.
+A
 
 Once the rule is fixed, we apply it across the entire lattice in a *translationally invariant* fashion: for each position $$x$$, the output bit at time $$t_1$$, denoted $$b^{(t_1)}_x$$, depends solely on the input bits $$b^{(t_0)}_{x-1}, b^{(t_0)}_x, b^{(t_0)}_{x+1}$$ (see Figure 1). Conceptually, this is akin to applying a 1D convolution kernel in machine learning—except that instead of computing a weighted sum, we apply a discrete, rule-based transformation.
 
