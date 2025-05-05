@@ -1,12 +1,31 @@
+---
+layout: post
+title: "1-D Symplectic Cellular Automata and its Application to Stabilizer States"
+date: 2025-04-15
+permalink: /2025/04/15/what-is-cellular-automata.html
+categories: [qca, theory]
+mathjax: true
+---
+
+## Overview
+- 1-D Cellular Automata
+- Linearity in 1-D
+- Increasing State Space
+- Symplectic Automata
+- Stabilizer Codes
+- Entanglement
+
+## A Minimal Model of Computation: Cellular Automata
+
 In classical computing, the smallest unit of state is the **bit**, which can take on just two values: 0 or 1. And yet, using only this minimal alphabet, we can encode all digital information—by arranging long sequences of bits and storing them on hard drives or transmitting them across networks.
 
-But the power of binary logic extends beyond storage. Equally fundamental is the *processing* of information—its evolution over time—which underpins all modern computation. The logic that governs this evolution has grown extraordinarily complex. Consider today’s CPU architectures: they implement techniques like *speculative execution* and *branch prediction*, using past instruction patterns to anticipate future behavior. These systems are layered with caches, pipelines, parallelism, and dynamic scheduling, creating a highly intricate and often opaque web of computational processes.
+But the power of binary logic extends beyond storage. Equally fundamental is the *processing* of information—its evolution over time—which underpins all modern computation. The logic that governs this evolution has grown extraordinarily complex. Consider today's CPU architectures: they implement techniques like *speculative execution* and *branch prediction*, using past instruction patterns to anticipate future behavior. These systems are layered with caches, pipelines, parallelism, and dynamic scheduling, creating a highly intricate and often opaque web of computational processes.
 
 In stark contrast stands the elegant minimalism of a **cellular automaton**: a system where each cell updates its state according to a simple, local rule.
 
 ### Single-Cell Automata
 
-To build intuition for how information might evolve in such systems, let’s begin with the simplest case: a *single-cell automaton*, illustrated in Figure 1. While not a true cellular automaton—since it lacks spatial neighbors—this setup still provides a useful starting point to introduce some notation.
+To build intuition for how information might evolve in such systems, let's begin with the simplest case: a *single-cell automaton*, illustrated in Figure 1. While not a true cellular automaton—since it lacks spatial neighbors—this setup still provides a useful starting point to introduce some notation.
 
 Here, we evolve one time step by updating a bit $$b^{t=0}$$ based solely on its current value, either 0 or 1.
 
@@ -26,7 +45,7 @@ distinct rules:
 
 Not very surprisingly, none of these rules leads to a rich time evolution. Still, the most "interesting" behavior comes from the NOT rule, which causes the bit to oscillate between 0 and 1 at each time step.
 
-Let us take the opportunity to introduce a convenient way to represent such rules—as a **bitstring** that uniquely determines the automaton’s behavior. Consider the first bit of the string as the output for the input value 1, and the second bit as the output for input value 0. This results in the following representation of all four automata:
+Let us take the opportunity to introduce a convenient way to represent such rules—as a **bitstring** that uniquely determines the automaton's behavior. Consider the first bit of the string as the output for the input value 1, and the second bit as the output for input value 0. This results in the following representation of all four automata:
 
 - Identity rule: `10`  
 - NOT rule: `01`  
