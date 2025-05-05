@@ -34,7 +34,7 @@ Here, we evolve one time step by updating a bit $$b^{t=0}$$ based solely on its 
 
 How many such different possibilities for time-step rules exist? Since there are two possible input values (0 and 1), and each can be mapped independently to either 0 or 1, there are  
 \[
-$$2 \times 2 = 4$$
+2 \times 2 = 4
 \]  
 distinct rules:
 
@@ -93,5 +93,5 @@ Attentive readers may notice that the left-hand side of the equation assumes a n
 $$0 + 0 = 0,\quad 1 + 0 = 1,\quad 0 + 1 = 1,\quad 1 + 1 = 0$$
 \]
 
-Equipping the set \( \{0, 1\} \) with addition and multiplication modulo 2 yields the mathematical structure known as a **finite field**, specifically the field $$ \mathbb{F}_2$$ (or $$ mathbb{F}_2$$). Within this field, linearity allows us to reason about cellular automata using tools from algebra and vector space theory.
+Equipping the set \( \{0, 1\} \) with addition and multiplication modulo 2 yields the mathematical structure known as a **finite field**, specifically the field $$ \mathbb{F}_2$$ (also referred to as Galois field $$ \mathrm{GF}(2)$$). Within this field, linearity allows us to reason about cellular automata using tools from algebra and vector space theory.
 
