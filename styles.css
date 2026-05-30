@@ -1,0 +1,16 @@
+/* Reading width tuned for long-form math posts */
+main.content {
+  max-width: 760px;
+}
+
+/* Tighten figure captions */
+figcaption,
+.figure-caption {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* MathJax display equations: a touch more breathing room */
+mjx-container[display="true"] {
+  margin: 1.2em 0 !important;
+}

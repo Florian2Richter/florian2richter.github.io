@@ -1,0 +1,281 @@
+---
+title: "How finely can you divide a depolarizing channel?"
+description: "Clifford channels are a tiny corner of the space of quantum channels, and yet they let you divide the most destructive channel of all into nearly as many discrete steps as the full quantum machinery allows. The room to do this lives in a surprising place."
+author: "Florian Richter"
+date: "2026-05-30"
+categories: [quantum, channels, clifford, finite-fields]
+draft: true
+format:
+  html:
+    toc: true
+    toc-depth: 2
+---
+
+Take a photograph and make a photocopy. Then a photocopy of the
+photocopy. Do it again. And again.
+
+If you keep going long enough, the picture is gone. What's on the page
+is grey noise that could plausibly have started as almost anything. The
+information about the original has been erased.
+
+This is a familiar form of loss. Each pass through the copier loses a
+little, the losses pile up, and eventually nothing remains. Heat works
+this way too. So does mixing dye into water, or scrambling a Rubik's
+cube, or letting milk cool in a glass. Everywhere you look, processes
+that destroy information are processes that destroy it in *steps*:
+many small irreversible nudges that add up.
+
+Now think about how you'd design such a process. You have full control
+of the photocopier. The cheap thing you can do is make it violently
+destructive: a single pass turns any input into grey noise. Erasure in
+one step. Done.
+
+You can also build copiers that never quite finish in any finite number
+of passes, and only erase everything in the infinite limit of repeated
+copying. This is a genuinely interesting region of design space.
+Characterising which copiers really do erase everything in the limit
+(as opposed to settling onto some non-trivial steady image, or
+oscillating, or simply slowing to a crawl) is the subject of a
+substantial literature on ergodic and mixing channels.[^mixing-ref] It
+is not, however, the question of this post.
+
+This post's question sits between those two. How *slowly* can you
+erase, while still finishing in finitely many steps?
+
+Concretely: among all copy-of-a-copy operations that erase the
+original after some exact number $k$ of identical applications, how
+large can $k$ be?
+
+[^mixing-ref]: TODO: pick one of the candidate references suggested in
+chat (e.g. Burgarth et al. 2013 on ergodic/mixing channels, or Sanz et
+al. 2010 on the quantum Wielandt inequality), or Michael Wolf's
+*Quantum Channels & Operations: Guided Tour* lecture notes for a more
+pedagogical entry point.
+
+That largest $k$ is where this post lives, and it has different answers
+in different settings. If the copier has to behave like a classical
+probabilistic process, you get one bound. Upgrade to quantum mechanics,
+and the bound becomes *quadratically* larger. Then restrict the quantum
+copier to a tightly constrained, low-parameter family of operations, a
+family with vastly less freedom than the general quantum case, and you
+might expect the bound to drop most of the way back down.
+
+It almost doesn't. The factor-of-2 gap that remains is the punchline.
+The reason it remains is a piece of finite-field bookkeeping that
+turns out, if you sit with it, to be unreasonably beautiful.
+
+<!-- =================================================================== -->
+## The classical setup {#sec-classical}
+
+Let's make the photocopier mathematically precise. We start with the
+classical case, where everything is ordinary probability theory.
+
+Pick a small number of distinct states that your image can be in. Say
+there are three: black, grey, and white. Then "the image" at any
+moment is described by a probability distribution over these three
+states. Maybe right now the image is definitely white,
+$p = (0, 0, 1)$. Maybe after some processing it has drifted to
+$p = (0.4, 0.5, 0.1)$, meaning the image is 40% likely black, 50%
+grey, 10% white, with the uncertainty representing whatever noise has
+crept in.
+
+The set of all such probability distributions over $d$ states is a
+familiar geometric object: a $(d - 1)$-dimensional simplex. For
+$d = 3$ it is a triangle. The corners are the pure states (definitely
+this colour, no uncertainty), and the centre is the uniform
+distribution (totally unsure, every colour equally likely).
+
+![**Figure 1.** The $d = 3$ probability simplex, drawn as a triangle.
+Vertices are the pure states; the centre is the uniform
+distribution.](figures/simplex-d3.svg){#fig-simplex-d3}
+
+A copy operation takes one probability distribution and returns
+another. The mathematical object that does this is a *stochastic
+matrix*: a $d \times d$ matrix $S$ whose columns are themselves
+probability distributions. Column $j$ tells you "if the input is
+definitely state $j$, here is the probability distribution of the
+output." And $S$ acts on a general distribution $p$ by matrix
+multiplication: $Sp$ is the output distribution.
+
+Two facts about stochastic matrices are worth pinning down before we
+keep going. First, $S^k$ describes what happens if you apply $S$ to
+its own output $k$ times in a row, so the question of finite roots is
+going to be a question about powers of matrices. Second, the entries
+of $S^k$ stay non-negative and the columns still sum to one, so no
+matter how many times you copy, the result is still a stochastic
+matrix and still maps the simplex to the simplex. Nothing escapes.
+
+Now we can say precisely what "total erasure" means. The most
+depolarising copier you can write down is the one whose every column
+is the uniform distribution. Every input state, no matter which one,
+produces the same uniform output:
+$$
+P = \frac{1}{d}\begin{pmatrix}
+1 & 1 & \cdots & 1 \\
+1 & 1 & \cdots & 1 \\
+\vdots & \vdots & \ddots & \vdots \\
+1 & 1 & \cdots & 1
+\end{pmatrix}.
+$$
+
+Apply $P$ to anything and you get the uniform distribution back. All
+information about the input has been thrown away in a single step.
+Apply $P$ again and nothing changes; the simplex has been crushed to a
+single point, the centre, and $P$ just keeps mapping it there.
+
+This $P$ is the *completely depolarising channel*, or CDC. (More
+precisely it is the *bistochastic* CDC, the one that preserves the
+uniform distribution. There are other CDCs that crush the simplex to
+some other fixed point. For the rest of this post, "CDC" will always
+mean the bistochastic one.)
+
+With $P$ pinned down we can ask the post's question, precisely. A
+*$k$-th root* of $P$ is a stochastic matrix $S$ such that
+$$
+S^k = P \quad \text{and} \quad S^r \ne P \text{ for any } r < k.
+$$
+The second condition is just "the erasure really happens at step $k$,
+not earlier." How large can $k$ be?
+
+The answer is sharp: $k \leq d - 1$.
+
+The proof is a piece of standard linear algebra. The Jordan
+decomposition of $S$ pins down what its $k$-th power can look like,
+and the constraint that $S^k$ equals the rank-one matrix $P$ leaves
+exactly the room you'd expect. The geometric picture is simpler. The
+simplex is $(d - 1)$-dimensional. Each application of $S$ can collapse
+at most one of those independent dimensions of variance without
+overshooting and erasing the whole thing prematurely. After $d - 1$
+collapses there is nothing left for the next step to do, and you have
+arrived at $P$.[^classical-bound-proof]
+
+[^classical-bound-proof]: TODO: cite the Jordan-block argument for
+the classical case (Section 2.5 / 3.1.3 of the thesis, or a standard
+reference on roots of stochastic matrices).
+
+For $d = 2$ the bound says $k = 1$, which is to say there are no
+non-trivial roots. The two-state CDC can only be split into one step,
+itself. Total erasure of one classical bit is a one-shot affair.
+
+For $d = 3$ the bound is $k = 2$. A square root of the bistochastic
+$3 \times 3$ CDC exists, and it acts on the simplex by funnelling
+every point along a two-step trajectory to the centre.
+
+![**Figure 2.** A square root $S$ of the $d = 3$ bistochastic CDC,
+visualised on the simplex. A starting distribution is mapped to an
+intermediate point by $S$, and then to the centre by a second
+application of $S$. The map $S^2 = P$ collapses every starting point
+to the centre in exactly two steps.](figures/simplex-root-d3.svg){#fig-root-d3}
+
+And that is the classical story. A clean bound, a clean construction,
+and not much more to say about it.
+
+The interesting thing is what happens to that bound when we let
+ourselves leave classical probability behind.
+
+<!-- =================================================================== -->
+## The quantum upgrade {#sec-quantum}
+
+If qubits, gates, and the $|0\rangle, |1\rangle$ notation aren't
+already part of your mental furniture, the gentlest on-ramp I know of
+is Matuschak and Nielsen's
+[Quantum Computing for the Very Curious](https://quantum.country/qcvc).
+Read it first, or just keep going and chase the link when something
+looks unfamiliar.
+
+<!-- TODO:
+  - Mixed states, density matrices. Bloch ball for the qubit case.
+  - Quantum channels (CPTP maps): light touch, cite Stinespring/Kraus
+    rather than develop.
+  - The completely depolarizing channel: everything mapped to the maximally
+    mixed state. Bloch ball collapses to its centre. [FIGURE]
+  - The bound jumps from $d - 1$ to $d^2 - 1$, via the Jordan-block
+    argument on a $d^2 \times d^2$ representation matrix.
+  - The puzzle: can $d^2 - 1$ actually be *achieved*? It's an upper bound
+    from a structural argument, the existence question is separate.
+-->
+
+<!-- =================================================================== -->
+## Clifford channels as the playground {#sec-clifford}
+
+<!-- TODO:
+  - Restrict to prime $d$ so that $\mathbb{F}_d$ is a field.
+    Brief sidebar: what is $\mathbb{F}_d$? (just-in-time).
+  - Weyl operators $\mathbf{w}(\eta)$, $\eta \in \mathbb{F}_d^2$.
+    Generalised Pauli operators. Projective representation.
+  - The covariance property motivating the "Clifford" name.
+  - Definition: a Clifford channel is one with
+    $T[\mathbf{w}(\eta)] = \lambda(\eta)\, \mathbf{w}(h(\eta))$,
+    parametrised by $h \in GL(2, \mathbb{F}_d)$ and
+    $\lambda: \mathbb{F}_d^2 \to \mathbb{C}$.
+  - "Two pieces of data" — emphasise how *little* freedom this is compared
+    to a full $d^2 \times d^2$ Choi matrix.
+-->
+
+<!-- =================================================================== -->
+## The reduction (the pivot) {#sec-reduction}
+
+<!-- TODO: This is the "wait, what just happened?" moment — give it air.
+  - Compute $T^n[\mathbf{w}(\eta)]$:
+    $\prod_{k=0}^{n-1} \lambda(h^k(\eta)) \, \mathbf{w}(h^n(\eta))$.
+  - The action on Weyl labels is just $h^n$ — a linear map on
+    $\mathbb{F}_d^2$ — and the accumulated phase is a product of $\lambda$
+    values along the orbit.
+  - Conclusion: the question "is $T$ a $k$-th root of the CDC?" reduces to
+    a question about (a) the order of $h$ and (b) where $\lambda$
+    vanishes along orbits.
+  - The channel question has become a question about finite-dimensional
+    linear algebra over $\mathbb{F}_d$.
+-->
+
+<!-- =================================================================== -->
+## Ingredient 1: the order of $h$ {#sec-ingredient-h}
+
+<!-- TODO:
+  - What's the maximum order of an element of $GL(2, \mathbb{F}_d)$?
+  - Answer: $d^2 - 1$, achieved by the companion matrix of a primitive
+    polynomial of degree 2 over $\mathbb{F}_d$.
+  - Sidebar (at moment of need): primitive polynomials, brief intuition
+    about extension fields $\mathbb{F}_{d^2}$.
+  - Worked example: $d = 3$, exhibit a specific $h$ of order $8 = 3^2 - 1$.
+-->
+
+<!-- =================================================================== -->
+## Ingredient 2: orbits and where $\lambda$ vanishes {#sec-ingredient-lambda}
+
+<!-- TODO:
+  - A max-order $h$ acts transitively on $\mathbb{F}_d^2 \setminus \{0\}$
+    — one big orbit of size $d^2 - 1$.
+  - But $\lambda$ has a symmetry forcing it to vanish in inverse pairs
+    (the $\lambda(\xi) = \overline{\lambda(-\xi)}$ relation, traced back to
+    complete positivity).
+  - So we need $\lambda$ vanishing on at least one $\pm$-pair inside the
+    big orbit — and that's enough.
+  - Conclusion: a Clifford root of order $\frac{d^2 - 1}{2}$ exists.
+  - [FIGURE] Show the orbit on $\mathbb{F}_d^2$ with the vanishing pair
+    marked.
+-->
+
+<!-- =================================================================== -->
+## Punchline {#sec-punchline}
+
+<!-- TODO: A short section. The headline:
+  The "room" in the divisibility problem doesn't live in the richness of
+  the channel class. It lives in the orbit structure of a single linear
+  map on $\mathbb{F}_d^2$. Clifford channels — a vastly more constrained
+  class — get within a factor of 2 of the general $d^2 - 1$ bound, and the
+  reason is a counting argument about finite-field orbits.
+-->
+
+<!-- =================================================================== -->
+## What's next {#sec-closing}
+
+<!-- TODO:
+  - The factor-of-2 gap is closed by a general construction (perturbation
+    of the Jordan block) covered in the paper
+    *How long can it take for a quantum channel to forget everything?*
+  - Note that the Clifford story didn't make it into the paper because the
+    general result subsumes it — but it's the cleanest place to *see* the
+    finite-field representation theory at work.
+  - Link to thesis / paper.
+-->

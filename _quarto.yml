@@ -1,0 +1,36 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Florian's Blog"
+  description: "Notes on quantum information, Clifford channels, and the corners of math that make them tick."
+  site-url: "https://florian2richter.github.io"
+  repo-url: "https://github.com/Florian2Richter/florian2richter.github.io"
+  navbar:
+    background: dark
+    left:
+      - href: index.qmd
+        text: Blog
+      - href: about.qmd
+        text: About
+    right:
+      - icon: github
+        href: "https://github.com/Florian2Richter"
+        aria-label: GitHub
+      - icon: envelope
+        href: "mailto:florian2richter@gmail.com"
+        aria-label: Email
+  page-footer:
+    center: "© 2026 Florian Richter"
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    html-math-method: mathjax
+    fig-cap-location: bottom
+    link-external-newwindow: true

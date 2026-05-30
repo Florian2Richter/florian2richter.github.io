@@ -1,0 +1,10 @@
+---
+title: "About"
+---
+
+I am Florian Richter, an AI Evangelist with a background in quantum information.
+This blog is where I write up ideas from quantum information theory at the level
+of detail I'd want to read myself.
+
+For collaboration inquiries, write to
+[florian2richter@gmail.com](mailto:florian2richter@gmail.com).
