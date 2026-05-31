@@ -37,15 +37,17 @@ R = 210.0                  # projected radius (orthographic => silhouette is a c
 ALPHA = math.radians(35.0)  # azimuth
 ELEV = math.radians(20.0)   # elevation above the equator
 
-# Palette. Structure stays navy; STATE colour encodes purity, exactly as
-# Figure 1. Purity tr(rho^2) = (1 + r^2)/2 runs from 1/2 at the centre
-# (maximally mixed) to 1 on the surface (pure), so the ball is filled with
-# a green shell fading to a pale core, and the poles are green.
-OUTLINE = "#1a3550"
-MUTED = "#3a5a72"
-GREEN = "#1f7a50"        # pure states (the surface, the poles)
-PALE = "#e4eeea"         # the maximally mixed core
-MIXED_RING = "#5f7d70"   # the faint ring at I/2
+# Blue-grey scientific palette, shared with Figure 1. Purity
+# tr(rho^2) = (1 + r^2)/2 runs from 1/2 at the centre to 1 on the surface,
+# so the ball is a blue-teal shell fading to a soft blue-grey core (never
+# white): poles blue-teal, wireframe muted blue-grey, axes dark blue-grey.
+OUTLINE = "#829aa6"      # wireframe / grid lines (muted blue-grey)
+MUTED = "#829aa6"
+PURE = "#2d6f8f"         # silhouette boundary + poles (blue-teal)
+AXIS = "#233746"         # axes + text labels (dark blue-grey)
+MIXED = "#d6e5ea"        # gradient centre (soft blue-grey)
+MIXED_RING = "#5e7886"   # the faint ring at I/2
+CENTER = "#f5f7f8"       # centre marker fill
 
 FONT_FAMILY = "Georgia, 'Times New Roman', serif"
 
@@ -198,13 +200,13 @@ def build_svg():
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
             markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="{OUTLINE}"/>
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="{AXIS}"/>
     </marker>
     <radialGradient id="purity" cx="{CX:g}" cy="{CY:g}" r="{R:g}"
                     gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="{PALE}" stop-opacity="0.12"/>
-      <stop offset="60%" stop-color="#6fae8e" stop-opacity="0.26"/>
-      <stop offset="100%" stop-color="{GREEN}" stop-opacity="0.5"/>
+      <stop offset="0%" stop-color="{MIXED}" stop-opacity="0.30"/>
+      <stop offset="60%" stop-color="#5f93ad" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="{PURE}" stop-opacity="0.40"/>
     </radialGradient>
   </defs>''')
 
@@ -245,7 +247,7 @@ def build_svg():
     parts.append('\n\n  <!-- Silhouette (pure-state boundary) -->')
     parts.append(
         f'\n  <circle cx="{CX}" cy="{CY}" r="{R}" '
-        f'fill="none" stroke="{OUTLINE}" stroke-width="{SILHOUETTE_W}"/>'
+        f'fill="none" stroke="{PURE}" stroke-width="{SILHOUETTE_W}"/>'
     )
 
     # --- Layer 4: coordinate axes ---
@@ -260,14 +262,14 @@ def build_svg():
         sx1, sy1, _ = project((tx, ty, tz))
         parts.append(
             f'\n  <line x1="{sx0:.2f}" y1="{sy0:.2f}" x2="{sx1:.2f}" y2="{sy1:.2f}" '
-            f'stroke="{OUTLINE}" stroke-width="{AXIS_W}" marker-end="url(#arrow)"/>'
+            f'stroke="{AXIS}" stroke-width="{AXIS_W}" marker-end="url(#arrow)"/>'
         )
     # z: polar axis from the south pole up through the top, arrowhead at +z.
     zb = project((0.0, 0.0, -1.0))
     zt = project((0.0, 0.0, AXIS_EXT))
     parts.append(
         f'\n  <line x1="{zb[0]:.2f}" y1="{zb[1]:.2f}" x2="{zt[0]:.2f}" y2="{zt[1]:.2f}" '
-        f'stroke="{OUTLINE}" stroke-width="{AXIS_W}" marker-end="url(#arrow)"/>'
+        f'stroke="{AXIS}" stroke-width="{AXIS_W}" marker-end="url(#arrow)"/>'
     )
 
     # --- Layer 5: state markers ---
@@ -277,13 +279,13 @@ def build_svg():
     # The poles are pure states: green.
     for (sx, sy, _) in (north, south):
         parts.append(
-            f'\n  <circle cx="{sx:.2f}" cy="{sy:.2f}" r="5.5" fill="{GREEN}"/>'
+            f'\n  <circle cx="{sx:.2f}" cy="{sy:.2f}" r="5.5" fill="{PURE}"/>'
         )
     # Centre: the maximally mixed state I/2, a faint hollow ring.
     parts.append(
         f'\n  <circle cx="{CX}" cy="{CY}" r="7.5" '
-        f'fill="#f7faf8" fill-opacity="0.55" stroke="{MIXED_RING}" '
-        f'stroke-width="1.6" stroke-opacity="0.6"/>'
+        f'fill="{CENTER}" fill-opacity="0.7" stroke="{MIXED_RING}" '
+        f'stroke-width="1.6" stroke-opacity="0.85"/>'
     )
 
     # --- Layer 6: labels ---
@@ -296,8 +298,8 @@ def build_svg():
         )
 
     # Pole kets are pure states: green, matching their dots.
-    parts.append(ket(*north[:2], "|0\u27e9", -20, -10, anchor="end", fill=GREEN))
-    parts.append(ket(*south[:2], "|1\u27e9", 0, 34, anchor="middle", fill=GREEN))
+    parts.append(ket(*north[:2], "|0\u27e9", -20, -10, anchor="end", fill=AXIS))
+    parts.append(ket(*south[:2], "|1\u27e9", 0, 34, anchor="middle", fill=AXIS))
 
     # Axis labels at the arrow tips.
     xl = project((AXIS_LABEL_EXT, 0.0, 0.0))
@@ -305,15 +307,15 @@ def build_svg():
     zl = project((0.0, 0.0, 1.32))
     parts.append(
         f'\n  <text x="{xl[0]:.2f}" y="{xl[1] + 6:.2f}" text-anchor="middle" '
-        f'font-size="{AXIS_LABEL_SIZE}" font-style="italic" fill="{OUTLINE}">x</text>'
+        f'font-size="{AXIS_LABEL_SIZE}" font-style="italic" fill="{AXIS}">x</text>'
     )
     parts.append(
         f'\n  <text x="{yl[0] - 4:.2f}" y="{yl[1] + 6:.2f}" text-anchor="end" '
-        f'font-size="{AXIS_LABEL_SIZE}" font-style="italic" fill="{OUTLINE}">y</text>'
+        f'font-size="{AXIS_LABEL_SIZE}" font-style="italic" fill="{AXIS}">y</text>'
     )
     parts.append(
         f'\n  <text x="{zl[0] + 8:.2f}" y="{zl[1]:.2f}" text-anchor="start" '
-        f'font-size="{AXIS_LABEL_SIZE}" font-style="italic" fill="{OUTLINE}">z</text>'
+        f'font-size="{AXIS_LABEL_SIZE}" font-style="italic" fill="{AXIS}">z</text>'
     )
 
     # Centre label, de-emphasised like the ring.

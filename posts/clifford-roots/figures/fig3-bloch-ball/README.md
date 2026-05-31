@@ -15,9 +15,8 @@ dashed.
 
 **Colour encodes purity** (the shared scheme, see the figures
 `README.md`). The quantum purity `tr(rho^2) = (1 + r^2)/2` runs from 1/2
-at the centre to 1 on the surface, so the ball is filled with a green
-shell fading to a pale core (the "inside the sphere" depth), the poles
-`|0>`, `|1>` are green, and `I/2` is a faint hollow ring. The wireframe
+at the centre to 1 on the surface, so the ball is a blue-teal shell fading to a soft blue-grey core (the "inside the sphere" depth), the poles
+`|0>`, `|1>` are blue-teal, and `I/2` is a faint hollow ring. The wireframe
 and axes stay navy.
 
 ## The interaction
@@ -96,10 +95,9 @@ author's original design.
   The marker never fully vanishes, so the maximally mixed state stays
   visible at the centre. Dial these if the centre feels too faint or the
   shrink too strong.
-- **Marker colour:** the marker shifts green (surface, pure) to pale
-  (centre, mixed) by its normalised purity `r^2`, via the `purityColour`
-  helper in the script; a dark-green stroke keeps it visible when pale.
-  The interior gradient stops are in the generator's `defs`.
+- **Marker colour:** the placed marker is a fixed contrasting amber
+  (`STATE #bf6f30`), so it pops against the blue field. The interior
+  gradient stops are in the generator's `defs`.
 
 After any change, re-render the post and confirm the figure and its
 `@fig-bloch` reference. No edit to `index.qmd` is needed.

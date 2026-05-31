@@ -54,15 +54,17 @@ T = [
     [1.0 / 3, 1.0 / 3, 1.0 / 3],
 ]
 
-# Palette. Structure navy; STATE colour = purity (green -> pale); arrows
-# neutral grey.
-OUTLINE = "#1a3550"
-MUTED = "#3a5a72"
-GREEN_RGB = (31, 122, 80)
-PALE_RGB = (228, 238, 233)
-DARK_GREEN = "#0f5538"     # dot outlines, so pale (mixed) dots stay visible
-MIXED_RING = "#5f7d70"
-ARROW_GREY = "#8a98a5"
+# Blue-grey scientific palette, shared with Figure 1. Colour encodes
+# purity (blue-teal -> soft blue-grey); arrows neutral blue-grey.
+OUTLINE = "#233746"        # text labels (dark blue-grey)
+MUTED = "#829aa6"          # grid lines (medians) + muted sublabels
+PURE = "#2d6f8f"           # boundary + pure-state dots (blue-teal)
+PURE_RGB = (45, 111, 143)  # field high end (pure)
+MIXED_RGB = (214, 229, 234)  # field low end (maximally mixed, soft blue-grey)
+DARK_DOT = "#1c4a60"       # dot outlines, so pale (mixed) dots stay visible
+MIXED_RING = "#5e7886"     # the faint ring at p0
+CENTER = "#f5f7f8"         # centre marker fill
+ARROW_GREY = "#829aa6"
 
 FONT_FAMILY = "Georgia, 'Times New Roman', serif"
 
@@ -96,9 +98,9 @@ def purity_t(p):
 
 
 def purity_colour(t):
-    r = round(PALE_RGB[0] + t * (GREEN_RGB[0] - PALE_RGB[0]))
-    g = round(PALE_RGB[1] + t * (GREEN_RGB[1] - PALE_RGB[1]))
-    b = round(PALE_RGB[2] + t * (GREEN_RGB[2] - PALE_RGB[2]))
+    r = round(MIXED_RGB[0] + t * (PURE_RGB[0] - MIXED_RGB[0]))
+    g = round(MIXED_RGB[1] + t * (PURE_RGB[1] - MIXED_RGB[1]))
+    b = round(MIXED_RGB[2] + t * (PURE_RGB[2] - MIXED_RGB[2]))
     return f"#{r:02x}{g:02x}{b:02x}"
 
 
@@ -184,12 +186,12 @@ def build_svg():
     # --- Simplex outline ---
     pts = " ".join(f"{x},{y}" for x, y in VERTICES)
     parts.append('\n\n  <!-- Simplex outline -->')
-    parts.append(f'\n  <polygon points="{pts}" fill="none" stroke="{OUTLINE}" '
+    parts.append(f'\n  <polygon points="{pts}" fill="none" stroke="{PURE}" '
                  f'stroke-width="{SIMPLEX_STROKE_W}" stroke-linejoin="round"/>')
 
     # --- Medians ---
     parts.append('\n\n  <!-- Medians -->')
-    parts.append(f'\n  <g stroke="{OUTLINE}" stroke-width="{MEDIAN_STROKE_W}" '
+    parts.append(f'\n  <g stroke="{MUTED}" stroke-width="{MEDIAN_STROKE_W}" '
                  f'stroke-opacity="{MEDIAN_OPACITY}" stroke-dasharray="4,5">')
     for v, opp in ((cV1, midpoint(cV2, cV3)), (cV2, midpoint(cV1, cV3)),
                    (cV3, midpoint(cV1, cV2))):
@@ -213,7 +215,7 @@ def build_svg():
     # --- Dots, coloured by purity ---
     def dot(c, r, p, stroke=True):
         col = purity_colour(purity_t(p))
-        st = f' stroke="{DARK_GREEN}" stroke-width="1.3"' if stroke else ''
+        st = f' stroke="{DARK_DOT}" stroke-width="1.3"' if stroke else ''
         return f'\n  <circle cx="{c[0]:.1f}" cy="{c[1]:.1f}" r="{r}" fill="{col}"{st}/>'
 
     parts.append('\n\n  <!-- Intermediate points (purity-coloured) -->')
@@ -225,8 +227,8 @@ def build_svg():
 
     parts.append('\n\n  <!-- Maximally mixed state p0 (faint ring) -->')
     parts.append(f'\n  <circle cx="{cP0[0]:.1f}" cy="{cP0[1]:.1f}" r="{RING_P0}" '
-                 f'fill="#f7faf8" fill-opacity="0.55" stroke="{MIXED_RING}" '
-                 f'stroke-width="1.6" stroke-opacity="0.6"/>')
+                 f'fill="{CENTER}" fill-opacity="0.7" stroke="{MIXED_RING}" '
+                 f'stroke-width="1.6" stroke-opacity="0.85"/>')
 
     # --- Labels ---
     green = purity_colour(1.0)
@@ -237,11 +239,11 @@ def build_svg():
                 f'font-size="{size}"{st} fill="{fill}">{s}</text>')
 
     parts.append('\n\n  <!-- Vertex labels (green) + vectors (muted) -->')
-    parts.append(text(cV1[0] - 8, cV1[1] + 26, "e₁", LABEL_SIZE, green, "end", True))
+    parts.append(text(cV1[0] - 8, cV1[1] + 26, "e₁", LABEL_SIZE, OUTLINE,"end", True))
     parts.append(text(cV1[0] - 8, cV1[1] + 44, "(1, 0, 0)", VECTOR_LABEL_SIZE, MUTED, "end"))
-    parts.append(text(cV2[0] + 16, cV2[1] + 8, "e₂", LABEL_SIZE, green, "start", True))
+    parts.append(text(cV2[0] + 16, cV2[1] + 8, "e₂", LABEL_SIZE, OUTLINE,"start", True))
     parts.append(text(cV2[0] + 16, cV2[1] + 26, "(0, 1, 0)", VECTOR_LABEL_SIZE, MUTED, "start"))
-    parts.append(text(cV3[0], cV3[1] - 28, "e₃", LABEL_SIZE, green, "middle", True))
+    parts.append(text(cV3[0], cV3[1] - 28, "e₃", LABEL_SIZE, OUTLINE,"middle", True))
     parts.append(text(cV3[0], cV3[1] - 10, "(0, 0, 1)", VECTOR_LABEL_SIZE, MUTED, "middle"))
 
     def qlabel(x, y, sub, anchor):
@@ -256,7 +258,7 @@ def build_svg():
 
     parts.append('\n\n  <!-- p0 label (de-emphasised) -->')
     parts.append(text(cP0[0] + 13, cP0[1] - 4, "p₀", LABEL_SIZE, MIXED_RING, "start", True))
-    parts.append(text(cP0[0] + 13, cP0[1] + 14, "(⅓, ⅓, ⅓)", VECTOR_LABEL_SIZE, "#8aa097", "start"))
+    parts.append(text(cP0[0] + 13, cP0[1] + 14, "(⅓, ⅓, ⅓)", VECTOR_LABEL_SIZE, MIXED_RING, "start"))
 
     parts.append('\n</svg>\n')
     return "".join(parts)

@@ -24,15 +24,15 @@ e2 -> q_a -> p0     (e1 and e2 MERGE at q_a)
 e3 -> q_b -> p0
 ```
 
-- The simplex carries the same **purity field** as Figure 1 (green pure
-  corners fading to a pale centre).
-- Starting points `e1, e2, e3` at the vertices are pure, so green.
+- The simplex carries the same **purity field** as Figure 1 (blue-teal pure
+  corners fading to a blue-grey centre).
+- Starting points `e1, e2, e3` at the vertices are pure, so blue-teal.
 - Intermediate points `q_a, q_b` are coloured by their own purity. `q_a`
-  is already quite mixed, so it reads pale; `q_b` a little greener. `q_a`
+  is already quite mixed, so it reads pale; `q_b` a little more blue-teal. `q_a`
   is drawn slightly larger because two trajectories arrive there.
 - All arrows are **neutral grey** (three step-1, two converging on `q_a`;
   two step-2). Colour is reserved for purity, so the arrows carry only
-  the dynamics; the dots draining green to pale carry the erasure.
+  the dynamics; the dots draining blue-teal to blue-grey carry the erasure.
 - The uniform distribution `p0` is a faint hollow ring at the centre.
 
 **The merge at `q_a` is the headline:** three step-1 arrows arrive but
@@ -67,12 +67,12 @@ picture stays correct if `T` is ever changed.
 
 ## Colour scheme
 
-Purity scheme shared with Figure 1: navy `#1a3550` structure, green
-`#1f7a50` (pure) fading to pale `#e4eeea` (maximally mixed), `#3a5a72`
-muted labels. Dots that are mixed get a dark-green `#0f5538` outline so
-they stay visible when pale. Arrows are neutral grey `#8a98a5`. The
-user-clicked trajectory uses the same purity colours; it is set apart by
-**shape** (a square `rho0`), not colour.
+Blue-grey scheme shared with Figure 1: `AXIS #233746` labels, `GRID
+#829aa6` grid lines, blue-teal `PURE #2d6f8f` (pure) fading to blue-grey
+`MIXED #d6e5ea` (maximally mixed). Mixed dots get a dark blue-teal
+`#1c4a60` outline. Default-trajectory arrows are neutral grey. The user
+trajectory is the contrasting amber `STATE #bf6f30`, with the placed point
+also set apart by **shape** (a square).
 
 ## To modify
 
@@ -88,11 +88,11 @@ user-clicked trajectory uses the same purity colours; it is set apart by
 
 Clicking inside the simplex drops a starting distribution `rho0` as a
 **square** (distinct in shape from the round structural dots), coloured
-by its purity, then shows `S rho0` and `S^2 rho0` as purity-coloured dots
-joined by grey arrows, and a readout of the three probability vectors
+by its purity, then shows `S rho0` and `S^2 rho0` as amber dots
+joined by amber arrows, and a readout of the three probability vectors
 `rho0`, `S rho0`, `S^2 rho0`. The second image always lands on `p0`,
 which the reader can verify for any point they pick. On desktop a faint
-green dot previews where a click would land. The three baked default
+amber dot previews where a click would land. The three baked default
 trajectories stay visible at all
 times; the user trajectory is purely additive and clears on a click
 outside the triangle.

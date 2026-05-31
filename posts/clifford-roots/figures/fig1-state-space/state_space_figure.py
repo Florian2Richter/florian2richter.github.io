@@ -50,13 +50,15 @@ P0 = (
     (VERTEX_E1[1] + VERTEX_E2[1] + VERTEX_E3[1]) / 3,
 )
 
-# Palette. Structure stays dark navy; STATE colour encodes purity, green
-# (pure) fading to a pale glow (maximally mixed).
-OUTLINE = "#1a3550"
-MUTED = "#3a5a72"
-GREEN_RGB = (31, 122, 80)      # pure state, full purity
-PALE_RGB = (228, 238, 233)     # maximally mixed end of the field
-MIXED_RING = "#5f7d70"         # the faint ring at p0
+# Blue-grey scientific palette. Colour encodes purity: blue-teal (pure)
+# fading to a soft blue-grey (maximally mixed), never to white.
+OUTLINE = "#233746"            # axes, ticks, text labels (dark blue-grey)
+MUTED = "#829aa6"              # grid lines (medians) and muted sublabels
+PURE = "#2d6f8f"               # boundary + pure-state dots (blue-teal)
+PURE_RGB = (45, 111, 143)      # field high end (pure)
+MIXED_RGB = (214, 229, 234)    # field low end (maximally mixed, soft blue-grey)
+MIXED_RING = "#5e7886"         # the faint ring at p0
+CENTER = "#f5f7f8"             # centre marker fill
 
 SIMPLEX_FILL_OPACITY = 0.9
 MESH_N = 26                    # triangular subdivisions of the purity field
@@ -84,10 +86,10 @@ def purity_t(p):
 
 
 def purity_colour(t):
-    """Lerp from the pale (maximally mixed) colour to green (pure)."""
-    r = round(PALE_RGB[0] + t * (GREEN_RGB[0] - PALE_RGB[0]))
-    g = round(PALE_RGB[1] + t * (GREEN_RGB[1] - PALE_RGB[1]))
-    b = round(PALE_RGB[2] + t * (GREEN_RGB[2] - PALE_RGB[2]))
+    """Lerp from the soft blue-grey (maximally mixed) to blue-teal (pure)."""
+    r = round(MIXED_RGB[0] + t * (PURE_RGB[0] - MIXED_RGB[0]))
+    g = round(MIXED_RGB[1] + t * (PURE_RGB[1] - MIXED_RGB[1]))
+    b = round(MIXED_RGB[2] + t * (PURE_RGB[2] - MIXED_RGB[2]))
     return f"#{r:02x}{g:02x}{b:02x}"
 
 
@@ -187,14 +189,14 @@ def build_svg():
     parts.append('\n\n  <!-- Simplex outline -->')
     parts.append(
         f'\n  <polygon points="{points_str}" fill="none" '
-        f'stroke="{OUTLINE}" stroke-width="{SIMPLEX_STROKE_W}" '
+        f'stroke="{PURE}" stroke-width="{SIMPLEX_STROKE_W}" '
         f'stroke-linejoin="round"/>'
     )
 
     # --- Layer 4: medians (faint barycentric hint) ---
     parts.append('\n\n  <!-- Medians -->')
     parts.append(
-        f'\n  <g stroke="{OUTLINE}" stroke-width="{MEDIAN_STROKE_W}" '
+        f'\n  <g stroke="{MUTED}" stroke-width="{MEDIAN_STROKE_W}" '
         f'stroke-opacity="{MEDIAN_OPACITY}" stroke-dasharray="4,5">'
     )
     for v, opp in ((VERTEX_E1, midpoint(VERTEX_E2, VERTEX_E3)),
@@ -225,8 +227,8 @@ def build_svg():
     parts.append('\n\n  <!-- Maximally mixed state p0 (faint ring) -->')
     parts.append(
         f'\n  <circle cx="{P0[0]}" cy="{P0[1]}" r="7.5" '
-        f'fill="#f7faf8" fill-opacity="0.55" '
-        f'stroke="{MIXED_RING}" stroke-width="1.6" stroke-opacity="0.6"/>'
+        f'fill="{CENTER}" fill-opacity="0.7" '
+        f'stroke="{MIXED_RING}" stroke-width="1.6" stroke-opacity="0.85"/>'
     )
 
     # --- Layer 8: labels ---
@@ -240,7 +242,7 @@ def build_svg():
         parts.append(
             f'\n  <text x="{vx + lx}" y="{vy + ly}" text-anchor="{anchor}" '
             f'font-size="{LABEL_SIZE}" font-style="italic" '
-            f'fill="{green}">{label}</text>'
+            f'fill="{OUTLINE}">{label}</text>'
         )
         parts.append(
             f'\n  <text x="{vx + vox}" y="{vy + voy}" text-anchor="{anchor}" '
@@ -254,7 +256,7 @@ def build_svg():
     )
     parts.append(
         f'\n  <text x="{P0[0] + 14}" y="{P0[1] + 18}" '
-        f'font-size="13" fill="#8aa097">(⅓, ⅓, ⅓)</text>'
+        f'font-size="13" fill="{MIXED_RING}">(⅓, ⅓, ⅓)</text>'
     )
 
     parts.append('\n</svg>\n')

@@ -53,23 +53,32 @@ the interaction stays correct if the figure is regenerated.
 ## Colour scheme: purity
 
 Across the three **state-space** figures (simplex, trajectories, Bloch
-ball) colour encodes **purity**, the quantity the post is about. A state
-is green and saturated when pure, and fades toward a pale glow as it
-approaches the maximally mixed state, which is drawn as a faint hollow
-ring (de-emphasised, but locatable). The same notion drives all three:
+ball) the *background field* encodes **purity**, the quantity the post
+is about. The field is a calm blue-teal where states are pure, fading to
+a soft blue-grey at the maximally mixed state (a tinted centre, never
+white), which is drawn as a faint hollow ring (de-emphasised, but
+locatable). The same notion drives all three:
 
 - classical purity is the collision probability `sum_i p_i^2`, from `1/d`
   (uniform) to `1` (pure);
 - qubit purity is `tr(rho^2) = (1 + r^2)/2`, from `1/2` (centre) to `1`
   (surface).
 
-So "erasure" reads visually as draining from green to pale, and the
-Bloch ball's "inside the sphere" depth is the same language in 3D. The
-endpoints are green `#1f7a50` and pale `#e4eeea`; structure (axes,
-outlines, wireframe) stays navy `#1a3550`; dynamics (Figure 2's arrows)
-are neutral grey, since colour is reserved for purity. The interactive
-markers take the clicked state's purity colour; a user-placed point is
-set apart by **shape** (a square), not colour.
+So "erasure" reads visually as the field draining from blue-teal to
+blue-grey, and the Bloch ball's "inside the sphere" depth is the same
+language in 3D. The blue-grey scientific palette:
+
+- field high end (pure / boundary / pure-state dots): `PURE #2d6f8f`
+- field low end (maximally mixed): `MIXED #d6e5ea`
+- axes and text labels: `AXIS #233746`
+- grid lines (medians, wireframe): `GRID #829aa6`
+- centre marker fill: `CENTER #f5f7f8`, with a visible blue-grey outline
+
+The **current sampled state** (the interactive marker the reader places)
+is a contrasting muted **amber `#bf6f30`**, so it pops against the blue
+field. In Figure 2 the whole user trajectory is amber; the placed point
+is also set apart by **shape** (a square). The static default
+trajectories there use neutral-grey arrows.
 
 Figure 4 (the orbit cycle) is the label plane `F_d^2`, not a state
 space, so purity does not apply there; it uses its own scheme.
