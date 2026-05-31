@@ -1002,11 +1002,6 @@ window.Quarto = {
       <span class="si-head-label">Sampled distribution (p₁, p₂, p₃)</span>
       <span class="si-vec" data-si="vec">click inside the triangle</span>
     </div>
-    <div class="si-rows">
-      <div class="si-row"><span class="si-key">p₁</span><span class="si-track"><span class="si-fill" data-si="fill"></span></span><span class="si-val" data-si="val">—</span></div>
-      <div class="si-row"><span class="si-key">p₂</span><span class="si-track"><span class="si-fill" data-si="fill"></span></span><span class="si-val" data-si="val">—</span></div>
-      <div class="si-row"><span class="si-key">p₃</span><span class="si-track"><span class="si-fill" data-si="fill"></span></span><span class="si-val" data-si="val">—</span></div>
-    </div>
   </div>
 </div>
 
@@ -1072,12 +1067,10 @@ window.Quarto = {
     function setReadout(b) {
       vecEl.textContent = '(' + fmt(b[0]) + ', ' + fmt(b[1]) + ', ' + fmt(b[2]) + ')';
       vecEl.classList.add('is-set');
-      for (var i = 0; i < 3; i++) { fills[i].style.width = pct(b[i]) + '%'; vals[i].textContent = pct(b[i]) + '%'; }
     }
     function clearReadout() {
       vecEl.textContent = 'click inside the triangle';
       vecEl.classList.remove('is-set');
-      for (var i = 0; i < 3; i++) { fills[i].style.width = '0%'; vals[i].textContent = '—'; }
     }
 
     svg.addEventListener('pointermove', function (e) {
