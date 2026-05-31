@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Florian Richter">
+<meta name="dcterms.date" content="2026-05-30">
+<meta name="description" content="Clifford channels are a tiny corner of the space of quantum channels, and yet they let you divide the most destructive channel of all into nearly as many discrete steps as the full quantum machinery allows. The room to do this lives in a surprising place.">
+
+<title>How finely can you divide a depolarizing channel? – Florian’s Blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ffa89bd206045b07aecb59a8f2eeccba.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="quarto:status" content="draft">
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Florian’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Florian2Richter"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:florian2richter@gmail.com"> <i class="bi bi-envelope" role="img" aria-label="Email">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#sec-classical" id="toc-sec-classical" class="nav-link active" data-scroll-target="#sec-classical">The classical setup</a></li>
+  <li><a href="#sec-quantum" id="toc-sec-quantum" class="nav-link" data-scroll-target="#sec-quantum">The quantum upgrade</a></li>
+  <li><a href="#sec-clifford" id="toc-sec-clifford" class="nav-link" data-scroll-target="#sec-clifford">Clifford channels as the playground</a></li>
+  <li><a href="#sec-reduction" id="toc-sec-reduction" class="nav-link" data-scroll-target="#sec-reduction">The reduction (the pivot)</a></li>
+  <li><a href="#sec-ingredient-h" id="toc-sec-ingredient-h" class="nav-link" data-scroll-target="#sec-ingredient-h">Ingredient 1: the order of <span class="math inline">h</span></a></li>
+  <li><a href="#sec-ingredient-lambda" id="toc-sec-ingredient-lambda" class="nav-link" data-scroll-target="#sec-ingredient-lambda">Ingredient 2: orbits and where <span class="math inline">\lambda</span> vanishes</a></li>
+  <li><a href="#sec-punchline" id="toc-sec-punchline" class="nav-link" data-scroll-target="#sec-punchline">Punchline</a></li>
+  <li><a href="#sec-closing" id="toc-sec-closing" class="nav-link" data-scroll-target="#sec-closing">What’s next</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">How finely can you divide a depolarizing channel?</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">quantum</div>
+    <div class="quarto-category">channels</div>
+    <div class="quarto-category">clifford</div>
+    <div class="quarto-category">finite-fields</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Clifford channels are a tiny corner of the space of quantum channels, and yet they let you divide the most destructive channel of all into nearly as many discrete steps as the full quantum machinery allows. The room to do this lives in a surprising place.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Florian Richter </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 30, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Take a photograph and make a photocopy. Then a photocopy of the photocopy. Do it again. And again.</p>
+<p>If you keep going long enough, the picture is gone. What’s on the page is grey noise that could plausibly have started as almost anything. The information about the original has been erased.</p>
+<p>This is a familiar form of loss. Each pass through the copier loses a little, the losses pile up, and eventually nothing remains. Heat works this way too. So does mixing dye into water, or scrambling a Rubik’s cube, or letting milk cool in a glass. Everywhere you look, processes that destroy information are processes that destroy it in <em>steps</em>: many small irreversible nudges that add up.</p>
+<p>Now think about how you’d design such a process. You have full control of the photocopier. The cheap thing you can do is make it violently destructive: a single pass turns any input into grey noise. Erasure in one step. Done.</p>
+<p>You can also build copiers that never quite finish in any finite number of passes, and only erase everything in the infinite limit of repeated copying. This is a genuinely interesting region of design space. Characterising which copiers really do erase everything in the limit (as opposed to settling onto some non-trivial steady image, or oscillating, or simply slowing to a crawl) is the subject of a substantial literature on ergodic and mixing channels.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> It is not, however, the question of this post.</p>
+<p>This post’s question sits between those two. How <em>slowly</em> can you erase, while still finishing in finitely many steps?</p>
+<p>Concretely: among all copy-of-a-copy operations that erase the original after some exact number <span class="math inline">k</span> of identical applications, how large can <span class="math inline">k</span> be?</p>
+<p>That largest <span class="math inline">k</span> is where this post lives, and it has different answers in different settings. If the copier has to behave like a classical probabilistic process, you get one bound. Upgrade to quantum mechanics, and the bound becomes <em>quadratically</em> larger. Then restrict the quantum copier to a tightly constrained, low-parameter family of operations, a family with vastly less freedom than the general quantum case, and you might expect the bound to drop most of the way back down.</p>
+<p>It almost doesn’t. The factor-of-2 gap that remains is the punchline. The reason it remains is a piece of finite-field bookkeeping that turns out, if you sit with it, to be unreasonably beautiful.</p>
+<!-- =================================================================== -->
+<section id="sec-classical" class="level2">
+<h2 class="anchored" data-anchor-id="sec-classical">The classical setup</h2>
+<p>Let’s make the photocopier mathematically precise. We start with the classical case, where everything is ordinary probability theory.</p>
+<p>Pick a small number of distinct states that your image can be in. Say there are three: black, grey, and white. Then “the image” at any moment is described by a probability distribution over these three states. Maybe right now the image is definitely white, which we write as <span class="math inline">(0, 0, 1)</span>. Maybe after some processing it has drifted to <span class="math inline">(0.4, 0.5, 0.1)</span>: 40% likely black, 50% grey, 10% white, the uncertainty standing in for whatever noise has crept in.</p>
+<p>The set of all such probability distributions over <span class="math inline">d</span> states is a familiar geometric object: a <span class="math inline">(d - 1)</span>-dimensional simplex. For <span class="math inline">d = 3</span> it is a triangle. The corners are the pure states (definitely this colour, no uncertainty), and the centre is the uniform distribution (totally unsure, every colour equally likely).</p>
+<div id="fig-simplex-d3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-simplex-d3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/simplex-d3.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-simplex-d3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: <strong>Figure 1.</strong> The <span class="math inline">d = 3</span> probability simplex, drawn as a triangle. Vertices are the pure states; the centre is the uniform distribution.
+</figcaption>
+</figure>
+</div>
+<p>A copy operation takes one probability distribution as input and returns another. Before we write down what kind of object such an operation is, it is worth asking what we want to insist on.</p>
+<p>The first thing is <em>linearity</em>. The copier <span class="math inline">S</span> has to be a linear map: if you feed it a coin-flip mixture of two inputs, the output has to be the same coin-flip mixture of the two separate outputs. Anything else would let the copier react to information beyond what the input distribution actually contains, which is a contradiction in terms.</p>
+<details class="aside">
+<summary>Why must mixtures behave this way?</summary>
+<p>Suppose you decide your input on the flip of a coin: with probability <span class="math inline">\alpha</span> you start from distribution <span class="math inline">p</span>, and with probability <span class="math inline">1 - \alpha</span> you start from <span class="math inline">q</span>. The total input, before you flip the coin, is the mixture <span class="math inline">\alpha p + (1 - \alpha) q</span>.</p>
+<p>Apply the copier <span class="math inline">S</span>. You can describe what comes out in two ways. From inside the experiment, the output is “<span class="math inline">S(p)</span> with probability <span class="math inline">\alpha</span>, <span class="math inline">S(q)</span> otherwise,” which is the distribution <span class="math inline">\alpha S(p) + (1 - \alpha) S(q)</span>. From outside, ignoring the coin flip, you simply fed the copier a single mixture, so the output is <span class="math inline">S(\alpha p + (1 - \alpha) q)</span>.</p>
+<p>These two descriptions had better agree: <span class="math display">
+S\bigl(\alpha p + (1 - \alpha) q\bigr) \;=\; \alpha S(p) + (1 - \alpha) S(q).
+</span> If they disagreed, “the input is a probability distribution” would stop meaning what we want it to mean. So <span class="math inline">S</span> is linear.</p>
+</details>
+<p>And a linear map is just a matrix. So from here on our copier is a matrix, which we will call <span class="math inline">S</span>, and applying it to a distribution is ordinary matrix multiplication.</p>
+<p>That already pins down what the entries of <span class="math inline">S</span> can look like. Feed in a pure state, all the probability on one entry, and the output is just one column of <span class="math inline">S</span>. For that column to be a probability distribution in its own right, its entries must be non-negative and sum to one: <span class="math display">
+S_{ij} \geq 0, \qquad \sum_i S_{ij} = 1.
+</span> The same holds for every column, and linearity then takes care of every mixture in between. A matrix of this kind, non-negative entries with every column summing to one, is called a <em>stochastic matrix</em>: exactly the linear maps that send probability distributions to probability distributions.</p>
+<p>There is one more restriction we will impose, and it turns out to be the most interesting one in retrospect. We will only consider copiers that leave the <em>uniform distribution</em> untouched: the flat distribution that puts equal weight on every state has to come back out exactly as it went in.</p>
+<p>Why? The uniform distribution represents <em>no information</em> about the state of the image: every outcome equally likely. A copier that maps “no information” to “some information” would be generating knowledge out of nothing, which is the opposite of what an erasure process ought to do. For a process whose job is to lose information, the uniform distribution is a natural fixed point to leave alone. (In the quantum upgrade later in the post, the analogous restriction is more than just natural, it is the standard convention. For now, take it as a sensible thing to ask for.)</p>
+<p>This small demand has a tidy consequence. We already know the columns of <span class="math inline">S</span> sum to one. Insisting that the uniform distribution survives forces the <em>rows</em> to sum to one as well. A stochastic matrix with that extra symmetry is called <em>bistochastic</em>, and from here on “copier” will mean “bistochastic matrix.”</p>
+<details class="aside">
+<summary>The one-line computation</summary>
+<p>Write <span class="math inline">u = (1/d, \ldots, 1/d)</span> for the uniform distribution and ask for <span class="math inline">Su = u</span>. Reading off entry <span class="math inline">i</span> of the output, <span class="math display">
+(Su)_i \;=\; \sum_j S_{ij} \cdot \frac{1}{d}
+\;=\; \frac{1}{d} \sum_j S_{ij}
+\;\overset{!}{=}\; \frac{1}{d},
+</span> which is exactly <span class="math inline">\sum_j S_{ij} = 1</span> for every row <span class="math inline">i</span>.</p>
+</details>
+<p>One small fact worth pinning down before we go further: the product of two bistochastic matrices is bistochastic, which you can verify directly from the row and column sum conditions. So <span class="math inline">S^k</span> stays bistochastic for any <span class="math inline">k</span>, and the question of finite roots is going to be a question about powers of matrices that stay safely inside our chosen class.</p>
+<p>Now we can say precisely what “total erasure” means. The most depolarising copier you can write down is the one whose every column is the uniform distribution. Every input state, no matter which one, produces the same uniform output: <span class="math display">
+P = \frac{1}{d}\begin{pmatrix}
+1 &amp; 1 &amp; \cdots &amp; 1 \\
+1 &amp; 1 &amp; \cdots &amp; 1 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; 1 &amp; \cdots &amp; 1
+\end{pmatrix}.
+</span></p>
+<p>Apply <span class="math inline">P</span> to anything and you get the uniform distribution back. All information about the input has been thrown away in a single step. Apply <span class="math inline">P</span> again and nothing changes: the simplex has been crushed to a single point, the centre, and <span class="math inline">P</span> just keeps mapping it there. This <span class="math inline">P</span> is bistochastic by inspection (every row sums to one as well), and it is the <em>completely depolarising channel</em> in dimension <span class="math inline">d</span>, or CDC for short.</p>
+<p>With <span class="math inline">P</span> pinned down we can ask the post’s question, precisely. A <em><span class="math inline">k</span>-th root</em> of <span class="math inline">P</span> is a bistochastic matrix <span class="math inline">S</span> such that <span class="math display">
+S^k = P \quad \text{and} \quad S^r \ne P \text{ for any } r &lt; k.
+</span> The second condition is just “the erasure really happens at step <span class="math inline">k</span>, not earlier.” How large can <span class="math inline">k</span> be?</p>
+<p>The answer is sharp: <span class="math inline">k \leq d - 1</span>.</p>
+<p>The proof is a piece of standard linear algebra. The Jordan decomposition of <span class="math inline">S</span> pins down what its <span class="math inline">k</span>-th power can look like, and the constraint that <span class="math inline">S^k</span> equals the rank-one matrix <span class="math inline">P</span> leaves exactly the room you’d expect. The geometric picture is simpler. The simplex is <span class="math inline">(d - 1)</span>-dimensional. Each application of <span class="math inline">S</span> can collapse at most one of those independent dimensions of variance without overshooting and erasing the whole thing prematurely. After <span class="math inline">d - 1</span> collapses there is nothing left for the next step to do, and you have arrived at <span class="math inline">P</span>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>For <span class="math inline">d = 2</span> the bound says <span class="math inline">k = 1</span>, which is to say there are no non-trivial roots. The two-state CDC can only be split into one step, itself. Total erasure of one classical bit is a one-shot affair.</p>
+<p>For <span class="math inline">d = 3</span> the bound is <span class="math inline">k = 2</span>. A square root of the bistochastic <span class="math inline">3 \times 3</span> CDC exists, and it acts on the simplex by funnelling every point along a two-step trajectory to the centre.</p>
+<div id="fig-root-d3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-root-d3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/simplex-root-d3.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-root-d3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: <strong>Figure 2.</strong> A square root <span class="math inline">S</span> of the <span class="math inline">d = 3</span> bistochastic CDC, visualised on the simplex. A starting distribution is mapped to an intermediate point by <span class="math inline">S</span>, and then to the centre by a second application of <span class="math inline">S</span>. The map <span class="math inline">S^2 = P</span> collapses every starting point to the centre in exactly two steps.
+</figcaption>
+</figure>
+</div>
+<p>And that is the classical story. A clean bound, a clean construction, and not much more to say about it.</p>
+<p>The interesting thing is what happens to that bound when we let ourselves leave classical probability behind.</p>
+<!-- =================================================================== -->
+</section>
+<section id="sec-quantum" class="level2">
+<h2 class="anchored" data-anchor-id="sec-quantum">The quantum upgrade</h2>
+<p>If qubits and the <span class="math inline">|0\rangle, |1\rangle</span> notation aren’t already part of your mental furniture, the gentlest on-ramp I know of is Matuschak and Nielsen’s <a href="https://quantum.country/qcvc">Quantum Computing for the Very Curious</a>. Read it first, or just keep going and chase the link when something looks unfamiliar. We will lean on it rather than rebuild it.</p>
+<p>Everything so far was a rehearsal. The real question is about quantum information, and a quantum state carries more than a probability distribution does. More in a way we can count, and the count turns out to be the whole plot of this section.</p>
+<p>Go back to the smallest example. A classical bit is a probability distribution over two outcomes: one number between zero and one, with the rest left over. Those states form a line segment. One dimension of freedom, the two definite bits at its ends and the coin-flip state in the middle.</p>
+<p>A quantum bit, a <em>qubit</em>, has more room than that line. Its state is no longer a list of probabilities but a small matrix, called a <em>density matrix</em>. You do not need its inner workings here, only its shape: the states of a single qubit fill a solid ball in three dimensions, the <em>Bloch ball</em>. The definite states, the quantum versions of “this bit is certainly <span class="math inline">0</span>,” sit on the surface. Blends of them sit inside. At the dead centre is the state of total ignorance, the quantum coin flip.</p>
+<div id="fig-bloch" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bloch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/bloch-ball.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bloch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: <strong>Figure 3.</strong> The Bloch ball: the state space of a single qubit. Pure states live on the surface, mixed states inside, and the maximally mixed state sits at the centre. Compare the classical bit, whose states fill only a line segment.
+</figcaption>
+</figure>
+</div>
+<p>Notice what happened to the dimension. The classical bit lived on a line, one dimension. The qubit lives in a ball, <em>three</em>. That is no accident, and the pattern is the point. A quantum state in dimension <span class="math inline">d</span> is a <span class="math inline">d \times d</span> density matrix: Hermitian, with non-negative eigenvalues, and trace one. Count the real numbers it takes to pin one down and you get <span class="math inline">d^2 - 1</span>.</p>
+<details class="aside">
+<summary>Where $d^2 - 1$ comes from</summary>
+<p>A <span class="math inline">d \times d</span> Hermitian matrix is fixed by <span class="math inline">d^2</span> real numbers: <span class="math inline">d</span> real numbers on the diagonal, plus the entries above the diagonal, each complex and so worth two reals, with everything below the diagonal forced by Hermiticity. The off-diagonal count is <span class="math inline">2 \cdot \tfrac{d(d-1)}{2} = d(d-1)</span>, and <span class="math inline">d + d(d-1) = d^2</span>. Fixing the trace to one removes a single degree of freedom, leaving <span class="math inline">d^2 - 1</span>.</p>
+</details>
+<p>So the quantum state space is <span class="math inline">(d^2 - 1)</span>-dimensional, against the classical simplex’s <span class="math inline">d - 1</span>. For a single bit, three against one. The freedom grew <em>quadratically</em>, and every result in this post is a shadow of that one fact.</p>
+<p>The rest of the cast carries over almost unchanged. A quantum copier is a <em>channel</em>: a linear map that turns density matrices into density matrices. It has to be linear for exactly the reason it was classically, that a coin-flip mixture of inputs must come out as the same coin-flip mixture of outputs. There is one extra demand with no classical echo, called <em>complete positivity</em>, which insists the map keeps sending valid states to valid states even when it acts on only part of a larger entangled system. Channels are well understood objects with a clean structure theory.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> For us they are simply the right notion of “physically allowed operation,” and we will not pry them open.</p>
+<p>We make the same restriction we made classically. Out of all channels we keep the ones that leave the state of total ignorance untouched. Classically that was the uniform distribution. Here it is the <em>maximally mixed state</em>, the centre of the Bloch ball, written <span class="math inline">I/d</span> with <span class="math inline">I</span> the identity matrix. A channel that fixes it invents no information from nothing and secretly prefers no state to any other, which is the least we should ask of a process whose only job is to forget. (Such channels have a name, <em>unital</em>, but the name matters less than the picture.)</p>
+<p>Total erasure is the same idea as before, too. The <em>completely depolarising channel</em> sends every input, no exceptions, to the maximally mixed state. The whole Bloch ball collapses to its centre point in a single step. This is the quantum CDC, and it is the operator we now want to take roots of.</p>
+<p>Here is where that quadratic shows up where it counts. Ask the same question as in the classical case: how large can <span class="math inline">k</span> be, if a channel <span class="math inline">S</span> satisfies <span class="math inline">S^k = P</span> but no smaller power does? The argument has the same skeleton. The channel acts linearly on the space the states live in, the completely depolarising channel crushes that whole space to a point, and each application of <span class="math inline">S</span> can retire at most one dimension without overshooting. Only now the space is <span class="math inline">(d^2 - 1)</span>-dimensional, so <span class="math display">
+k \;\leq\; d^2 - 1.
+</span></p>
+<p>Set <span class="math inline">d = 2</span>. The classical bound was <span class="math inline">k \leq 1</span>: a single bit could not be erased in more than one step. The quantum bound is <span class="math inline">k \leq 3</span>. Three gentle steps to forget one qubit, where one classical bit allowed only the abrupt single step. The room to subdivide erasure grew, and it grew quadratically.</p>
+<p>One honest caveat before we move on. That <span class="math inline">d^2 - 1</span> is an <em>upper</em> bound, and it came from a structural argument that does not, by itself, build anything. Whether some channel actually attains it, erasing in exactly <span class="math inline">d^2 - 1</span> steps and no fewer, is a separate and harder question. It is also the question the rest of this post is really about. We will approach it from an unlikely direction: not by ransacking the enormous space of all channels, but by tying our hands almost completely and seeing how close we can still get.</p>
+<!-- =================================================================== -->
+</section>
+<section id="sec-clifford" class="level2">
+<h2 class="anchored" data-anchor-id="sec-clifford">Clifford channels as the playground</h2>
+<p>We promised to tie our hands. The way to do it is to stop treating channels as arbitrary maps and start viewing them through one particular, highly structured <em>basis</em> of operations. Once the basis is in place, the channels we want will almost name themselves.</p>
+<p>Begin, as always, with the qubit, where the basis is already famous. Every <span class="math inline">2 \times 2</span> matrix is a combination of four: the identity <span class="math inline">I</span> and the three <em>Pauli matrices</em> <span class="math inline">X</span>, <span class="math inline">Y</span>, <span class="math inline">Z</span>. Here <span class="math inline">X</span> is a bit flip, swapping <span class="math inline">|0\rangle</span> and <span class="math inline">|1\rangle</span>; <span class="math inline">Z</span> is a phase flip; and <span class="math inline">Y</span> is what you get by doing both. Because these four span every <span class="math inline">2 \times 2</span> matrix, a qubit channel is fixed entirely by what it does to them. The Paulis are a coordinate system for quantum operations.</p>
+<p>The same coordinate system exists in every dimension, and it grows out of two basic moves. Fix <span class="math inline">d</span> levels, <span class="math inline">|0\rangle</span> through <span class="math inline">|d-1\rangle</span>. The first move is a <em>shift</em>: bump every level up by one, <span class="math inline">|j\rangle \to |j+1\rangle</span>, wrapping around at the top. The second is a <em>phase kick</em>: multiply level <span class="math inline">j</span> by a root of unity that depends on <span class="math inline">j</span>. The shift generalises the bit flip <span class="math inline">X</span>, the phase kick generalises <span class="math inline">Z</span>.</p>
+<p>Combine these two moves in all possible amounts and you get <span class="math inline">d^2</span> operators, one for each pair of exponents. We label them by that pair. Write <span class="math inline">\eta = (a, b)</span>, with <span class="math inline">a</span> counting shifts and <span class="math inline">b</span> counting phase kicks, and call the resulting operator <span class="math inline">\mathbf{w}(\eta)</span>, a <em>Weyl operator</em>. There are exactly <span class="math inline">d^2</span> of them, and like the four Paulis they form a basis: every <span class="math inline">d \times d</span> matrix is some combination of Weyl operators. This is the coordinate system we will use for the rest of the post.</p>
+<p>From here on we take <span class="math inline">d</span> to be a <em>prime</em>. The reason is in the aside, but the short version is that the arguments ahead need to divide by the labels, not merely add them, and division behaves only when <span class="math inline">d</span> is prime. The labels then live in a genuine two-dimensional plane, <span class="math inline">\mathbb{F}_d^2</span>.</p>
+<details class="aside">
+<summary>The operators explicitly, and why $d$ must be prime</summary>
+<p>Write <span class="math inline">\omega = e^{2\pi i / d}</span>. The two moves are the <em>shift</em> and <em>clock</em> operators, <span class="math display">
+X|j\rangle = |j + 1 \bmod d\rangle, \qquad Z|j\rangle = \omega^{\,j}|j\rangle,
+</span> and a general Weyl operator is a product <span class="math inline">\mathbf{w}(a,b) \sim X^a Z^b</span>, fixed up to a phase convention we will not need. The exponents <span class="math inline">a</span> and <span class="math inline">b</span> live modulo <span class="math inline">d</span>: shift <span class="math inline">d</span> times and you are back where you started.</p>
+<p>In the bookkeeping ahead we will need to <em>divide</em> by these exponents, not just add and multiply them, and division modulo <span class="math inline">d</span> works cleanly only when <span class="math inline">d</span> is prime. So we take <span class="math inline">d</span> prime. The integers modulo a prime form a <em>field</em>, written <span class="math inline">\mathbb{F}_d</span>: a number system with addition, subtraction, multiplication, and division all behaving as you expect, just with finitely many elements. The labels then live in the plane <span class="math inline">\mathbb{F}_d^2</span>, and <span class="math inline">h</span> below will be ordinary linear algebra over that field.</p>
+</details>
+<p>One feature lifts the Weyl operators above being merely a basis. Multiply two of them and you get a third, up to a phase: <span class="math display">
+\mathbf{w}(\eta)\,\mathbf{w}(\xi) = (\text{phase}) \cdot \mathbf{w}(\eta + \xi).
+</span> The labels simply add. The leftover phase is the toll for working with matrices rather than plain vectors, and it is why this assignment is called a <em>projective</em> representation of the group of labels. We will never need the phase’s exact form, only that the labels add.</p>
+<p>One label stands apart. The label <span class="math inline">\eta = 0</span> is the identity operator itself, the “trace direction” that every copier we allow has to leave untouched. The other <span class="math inline">d^2 - 1</span> labels are the directions that can actually be forgotten. That number should look familiar: it is exactly the <span class="math inline">d^2 - 1</span> dimensions of the quantum state space we counted on the Bloch ball. The Weyl labels are those dimensions, relabelled.</p>
+<p>Now we can say which channels are tame. Apply a general channel to a Weyl operator and you get back some sprawling mixture of all <span class="math inline">d^2</span> of them. A <em>Clifford channel</em> refuses the sprawl. It sends each Weyl operator to a single other Weyl operator, rescaled: <span class="math display">
+T[\mathbf{w}(\eta)] = \lambda(\eta)\,\mathbf{w}(h(\eta)).
+</span> Two pieces of data, and nothing else.</p>
+<p>The first piece is <span class="math inline">h</span>. It says where each label goes: the operator labelled <span class="math inline">\eta</span> lands on the one labelled <span class="math inline">h(\eta)</span>. This <span class="math inline">h</span> is a linear map on the label plane, an invertible <span class="math inline">2 \times 2</span> matrix over <span class="math inline">\mathbb{F}_d</span>, an element of <span class="math inline">GL(2, \mathbb{F}_d)</span>. All it does is shuffle the coordinate system among itself.</p>
+<p>The second piece is <span class="math inline">\lambda</span>. It pins a number <span class="math inline">\lambda(\eta)</span> to each label, the factor by which that coordinate is stretched or shrunk. This is where forgetting will live. A <span class="math inline">\lambda</span> smaller than one in magnitude damps a coordinate; a <span class="math inline">\lambda</span> equal to zero erases it outright.</p>
+<p>The name is borrowed. The <em>Clifford group</em> is the set of quantum gates that map Paulis to Paulis under conjugation, the well-behaved gates at the centre of quantum error correction. Clifford channels are their noisy, irreversible cousins: maps that still respect the Weyl coordinate system even as they leak and forget.</p>
+<p>It is worth dwelling on how little data this is. A general channel in dimension <span class="math inline">d</span> is described by its Choi matrix, an object of size <span class="math inline">d^2 \times d^2</span> carrying on the order of <span class="math inline">d^4</span> free numbers. A Clifford channel is a <span class="math inline">2 \times 2</span> matrix over <span class="math inline">\mathbb{F}_d</span> together with a list of <span class="math inline">d^2</span> numbers. We have thrown away almost all the freedom. The whole wager of this post is that what survives is still enough.</p>
+<p>And here is the move that makes the wager pay. We want to know what a copier does when it runs many times over, which means iterating <span class="math inline">T</span>. For a general channel, iteration is a fog: mixtures of mixtures, with no visible structure to grab. For a Clifford channel, watch what happens to a single Weyl operator when we apply <span class="math inline">T</span> again, and again. That is the next section.</p>
+<!-- =================================================================== -->
+</section>
+<section id="sec-reduction" class="level2">
+<h2 class="anchored" data-anchor-id="sec-reduction">The reduction (the pivot)</h2>
+<p>We left off promising to iterate. So let us iterate, and watch.</p>
+<p>Apply <span class="math inline">T</span> to a single Weyl operator. By definition it comes back rescaled and relabelled: <span class="math display">
+T[\mathbf{w}(\eta)] = \lambda(\eta)\,\mathbf{w}(h(\eta)).
+</span> Now apply <span class="math inline">T</span> again. The output is itself a Weyl operator, so <span class="math inline">T</span> knows exactly what to do with it: <span class="math display">
+T^2[\mathbf{w}(\eta)] = \lambda(\eta)\,T[\mathbf{w}(h(\eta))]
+= \lambda(\eta)\,\lambda(h(\eta))\,\mathbf{w}(h^2(\eta)).
+</span> Apply it <span class="math inline">n</span> times and the pattern is plain: <span class="math display">
+T^n[\mathbf{w}(\eta)] = \Biggl(\prod_{j=0}^{n-1} \lambda\bigl(h^j(\eta)\bigr)\Biggr)\,\mathbf{w}\bigl(h^n(\eta)\bigr).
+</span></p>
+<p>Sit with that for a moment, because the fog has lifted completely.</p>
+<p>Iterating the channel did two clean, separate things. The label moved, <span class="math inline">\eta \to h(\eta) \to h^2(\eta) \to \cdots</span>, a single point hopping around the plane <span class="math inline">\mathbb{F}_d^2</span> under repeated application of the one matrix <span class="math inline">h</span>. And an amplitude piled up, a running product of <span class="math inline">\lambda</span> values, one factor collected at each label the point lands on.</p>
+<p>That sequence of labels, <span class="math inline">\eta, h(\eta), h^2(\eta), \ldots</span>, is the <em>orbit</em> of <span class="math inline">\eta</span> under <span class="math inline">h</span>. The entire life of the channel, run any number of times, is bookkept by two finite-field facts: how the orbit travels, and what <span class="math inline">\lambda</span> does along it. The infinite-dimensional machinery of quantum channels has collapsed into a point hopping around a plane of <span class="math inline">d^2</span> labels, multiplying numbers as it goes.</p>
+<p>Now recall what we are chasing. The completely depolarising channel <span class="math inline">P</span> erases everything: it leaves the identity <span class="math inline">\mathbf{w}(0)</span> alone and annihilates every other Weyl operator, <span class="math display">
+P[\mathbf{w}(\eta)] = 0 \quad \text{for every } \eta \neq 0.
+</span> That is just “every state goes to the maximally mixed state,” written in the Weyl coordinate system. The identity label takes care of itself: <span class="math inline">\lambda(0) = 1</span> because the channel preserves the trace, so <span class="math inline">\mathbf{w}(0)</span> is fixed at every step. All the action is on the <span class="math inline">d^2 - 1</span> nonzero labels.</p>
+<p>So asking for <span class="math inline">T^k = P</span> is asking for the accumulated amplitude to be <em>zero</em> on every nonzero label after exactly <span class="math inline">k</span> steps: <span class="math display">
+\prod_{j=0}^{k-1} \lambda\bigl(h^j(\eta)\bigr) = 0
+\qquad \text{for every } \eta \neq 0.
+</span> A product of numbers is zero exactly when one of its factors is. So the condition says something you can picture: travelling along the orbit of any nonzero <span class="math inline">\eta</span>, within the first <span class="math inline">k</span> steps the point must pass through at least one label where <span class="math inline">\lambda</span> vanishes. And <span class="math inline">k</span> has to be the <em>smallest</em> such number, since we want the erasure to land at step <span class="math inline">k</span> and not a step sooner. Push <span class="math inline">k</span> as high as it will go while still erasing every orbit, and you have found the longest root.</p>
+<p>This is the pivot of the whole post, so let me state it with no quantum mechanics in the sentence at all. We want a point that, started anywhere nonzero and moved repeatedly by <span class="math inline">h</span>, takes as long as possible to first land on a label where <span class="math inline">\lambda</span> vanishes. Two things govern that delay, and they are independent:</p>
+<ol type="1">
+<li><p><strong>How long the orbits are.</strong> If <span class="math inline">h</span> carries a point through many distinct labels before it repeats, there is more room to postpone the first vanishing. This is a question about the matrix <span class="math inline">h</span> by itself: its <em>order</em>, and how it cuts the <span class="math inline">d^2 - 1</span> nonzero labels into orbits. That is the next section.</p></li>
+<li><p><strong>Where <span class="math inline">\lambda</span> is allowed to vanish.</strong> We need <span class="math inline">\lambda</span> to hit zero at least once on every orbit, but as late as possible. And <span class="math inline">\lambda</span> is not free to vanish wherever it pleases: a constraint inherited from complete positivity forces its zeros to come in pairs, and that pairing is exactly what costs us a factor of two. That is the section after.</p></li>
+</ol>
+<p>Solve those two and the bound drops out. The astonishing part, already half in view, is that neither question mentions a quantum channel any more. From here on we are doing linear algebra over a finite field.</p>
+<!-- =================================================================== -->
+</section>
+<section id="sec-ingredient-h" class="level2">
+<h2 class="anchored" data-anchor-id="sec-ingredient-h">Ingredient 1: the order of <span class="math inline">h</span></h2>
+<p>The first ingredient is the easy one to state. We want the point to visit as many labels as possible before it starts repeating, so we want the orbits of <span class="math inline">h</span> to be long. How long can they get?</p>
+<p>There are <span class="math inline">d^2 - 1</span> nonzero labels in all, so no orbit can be longer than that. The happy fact is that the maximum is reached. There exist matrices <span class="math inline">h</span> in <span class="math inline">GL(2, \mathbb{F}_d)</span> whose single orbit sweeps through <em>every</em> nonzero label before returning home: one grand cycle of length <span class="math inline">d^2 - 1</span>, visiting all of <span class="math inline">\mathbb{F}_d^2 \setminus \{0\}</span>. Such an <span class="math inline">h</span> acts <em>transitively</em> on the nonzero labels.</p>
+<p>Where do these maximal matrices come from? From a second field hiding inside the first. The plane <span class="math inline">\mathbb{F}_d^2</span> is two-dimensional over <span class="math inline">\mathbb{F}_d</span>, and it happens to also <em>be</em> a larger field, the field <span class="math inline">\mathbb{F}_{d^2}</span> with <span class="math inline">d^2</span> elements. In any finite field the nonzero elements, multiplied together, form a single cycle: there is a <em>generator</em> whose powers run through every nonzero element exactly once. Multiplication by that generator is an <span class="math inline">\mathbb{F}_d</span>-linear map on the plane, and as a matrix it is our maximal <span class="math inline">h</span>.</p>
+<details class="aside">
+<summary>Primitive polynomials, and why the order is exactly $d^2 - 1$</summary>
+<p>A <em>primitive polynomial</em> of degree two over <span class="math inline">\mathbb{F}_d</span> is an irreducible quadratic whose root generates the multiplicative group of <span class="math inline">\mathbb{F}_{d^2}</span>. Call that root <span class="math inline">g</span>. Its powers <span class="math inline">g, g^2, g^3, \ldots</span> cycle through all <span class="math inline">d^2 - 1</span> nonzero elements of <span class="math inline">\mathbb{F}_{d^2}</span> before <span class="math inline">g^{\,d^2 - 1} = 1</span> brings them back, so <span class="math inline">g</span> has multiplicative order exactly <span class="math inline">d^2 - 1</span>.</p>
+<p>Viewing <span class="math inline">\mathbb{F}_{d^2}</span> as the plane <span class="math inline">\mathbb{F}_d^2</span>, multiplication by <span class="math inline">g</span> is a linear map, and in a basis it is the <em>companion matrix</em> of the primitive polynomial. It inherits the order <span class="math inline">d^2 - 1</span>, and that is the largest order any element of <span class="math inline">GL(2, \mathbb{F}_d)</span> can have. (Every other kind of element, the diagonalisable ones and the single-eigenvalue ones, tops out lower; the irreducible “Singer” elements like this one are the champions.)</p>
+</details>
+<p>It pays to see one. Take <span class="math inline">d = 3</span>, so we are working modulo <span class="math inline">3</span> and the plane has <span class="math inline">3^2 - 1 = 8</span> nonzero points. The polynomial <span class="math inline">x^2 + x + 2</span> is primitive over <span class="math inline">\mathbb{F}_3</span>, and its companion matrix is <span class="math display">
+h = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}.
+</span> Start at the label <span class="math inline">(1,0)</span> and apply <span class="math inline">h</span> over and over, doing all the arithmetic modulo <span class="math inline">3</span>: <span class="math display">
+(1,0) \to (0,1) \to (1,2) \to (2,2) \to (2,0) \to (0,2) \to (2,1) \to (1,1) \to (1,0).
+</span> Eight steps, eight distinct labels, every nonzero point of the plane visited exactly once, and then home. This <span class="math inline">h</span> has order <span class="math inline">8 = 3^2 - 1</span>, the most a <span class="math inline">2 \times 2</span> matrix over <span class="math inline">\mathbb{F}_3</span> can manage. One orbit, as long as the plane allows.</p>
+<p>If <span class="math inline">\lambda</span> could vanish at just a single point of this cycle, we would be done, and we would reach the full quantum bound: a point starting one step past the lone zero would have to travel all <span class="math inline">d^2 - 1</span> steps to come back to it. That would be a root of order <span class="math inline">d^2 - 1</span>. But <span class="math inline">\lambda</span> cannot vanish at only one point, and the reason is the second ingredient.</p>
+<!-- =================================================================== -->
+</section>
+<section id="sec-ingredient-lambda" class="level2">
+<h2 class="anchored" data-anchor-id="sec-ingredient-lambda">Ingredient 2: orbits and where <span class="math inline">\lambda</span> vanishes</h2>
+<p>So we need <span class="math inline">\lambda</span> to vanish somewhere on the orbit, and we would like it to vanish as rarely as possible, ideally just once. Here the channel pushes back. The amplitudes <span class="math inline">\lambda</span> are not ours to set freely. They have to come from an honest quantum channel, and that demand, complete positivity, leaves a fingerprint.</p>
+<p>The fingerprint is a symmetry. Being a quantum channel, <span class="math inline">T</span> sends Hermitian operators to Hermitian operators, since the density matrices it acts on are Hermitian. Tracing what that requires of the amplitudes gives a clean relation between the label <span class="math inline">\eta</span> and its negative: <span class="math display">
+\lambda(-\eta) = \overline{\lambda(\eta)}.
+</span> Take absolute values and the consequence is stark: <span class="math inline">|\lambda(-\eta)| = |\lambda(\eta)|</span>. The amplitude at a label and the amplitude at its mirror image always have the same size. In particular, <strong>if <span class="math inline">\lambda</span> vanishes at <span class="math inline">\eta</span>, it must vanish at <span class="math inline">-\eta</span> as well.</strong> The zeros come in mirror pairs.</p>
+<details class="aside">
+<summary>Where $\lambda(-\eta) = \overline{\lambda(\eta)}$ comes from</summary>
+<p>A Weyl operator is not Hermitian, but its adjoint is another Weyl operator: <span class="math inline">\mathbf{w}(\eta)^\dagger = \mathbf{w}(-\eta)</span>, up to the same phase convention we have been ignoring. A channel obeys <span class="math inline">T[A^\dagger] = T[A]^\dagger</span>, because it must turn Hermitian inputs into Hermitian outputs. Apply this to <span class="math inline">A = \mathbf{w}(\eta)</span>. On one side, <span class="math inline">T[\mathbf{w}(\eta)^\dagger] = T[\mathbf{w}(-\eta)] = \lambda(-\eta)\,\mathbf{w}(h(-\eta))</span>. On the other, <span class="math inline">T[\mathbf{w}(\eta)]^\dagger = \overline{\lambda(\eta)}\,\mathbf{w}(h(\eta))^\dagger = \overline{\lambda(\eta)}\,\mathbf{w}(-h(\eta))</span>. Since <span class="math inline">h</span> is linear, <span class="math inline">h(-\eta) = -h(\eta)</span>, so the two Weyl operators match and the coefficients must agree: <span class="math inline">\lambda(-\eta) = \overline{\lambda(\eta)}</span>.</p>
+</details>
+<p>Now put the two ingredients together. On the grand cycle, the mirror map <span class="math inline">\eta \mapsto -\eta</span> has a tidy meaning: it is exactly the halfway point. Multiplying a label by <span class="math inline">-1</span> is the same as stepping <span class="math inline">h</span> around half the cycle, <span class="math inline">(d^2 - 1)/2</span> steps. (For this halving to make sense we need <span class="math inline">-1 \neq 1</span>, that is, <span class="math inline">d</span> an odd prime, which we assume from here.) So the two zeros of <span class="math inline">\lambda</span>, forced to be mirror images, sit at opposite poles of the cycle, cutting it into two equal arcs of length <span class="math inline">(d^2 - 1)/2</span>.</p>
+<div id="fig-orbit" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-orbit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/orbit-d3.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-orbit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: <strong>Figure 4.</strong> The grand orbit of <span class="math inline">h</span> for <span class="math inline">d = 3</span>: the eight nonzero labels arranged in the cycle <span class="math inline">(1,0) \to (0,1) \to \cdots \to (1,1) \to (1,0)</span>. Complete positivity forces the zeros of <span class="math inline">\lambda</span> into a mirror pair (here <span class="math inline">(1,0)</span> and its antipode <span class="math inline">(2,0)</span>), splitting the cycle into two arcs of four steps each.
+</figcaption>
+</figure>
+</div>
+<p>And that settles it. Whichever point you start from, you reach one of the two zeros within half a turn of the cycle. The longest you can be made to wait is the length of one arc, <span class="math inline">(d^2 - 1)/2</span> steps. Choose <span class="math inline">\lambda</span> to vanish on exactly one mirror pair and to be a suitable nonzero size everywhere else (which keeps the channel completely positive), and you have built a Clifford channel that erases in exactly <span class="math display">
+k = \frac{d^2 - 1}{2}
+</span> steps and no fewer. A Clifford root of the completely depolarising channel of that order exists.</p>
+<p>For our qutrit, <span class="math inline">d = 3</span>, that is a root of order <span class="math inline">4</span>: four gentle steps to erase a qutrit using nothing but the two-piece Clifford data. The mirror pair of zeros sits at <span class="math inline">(1,0)</span> and <span class="math inline">(2,0)</span> in the cycle above, and every other label is at most four steps from one of them.</p>
+<!-- =================================================================== -->
+</section>
+<section id="sec-punchline" class="level2">
+<h2 class="anchored" data-anchor-id="sec-punchline">Punchline</h2>
+<p>Line up the three bounds. How finely can you divide total erasure, the completely depolarising channel, into equal steps?</p>
+<ul>
+<li>Classically, with a bistochastic copier: <span class="math inline">d - 1</span> steps.</li>
+<li>With a general quantum channel: <span class="math inline">d^2 - 1</span> steps.</li>
+<li>With a Clifford channel, the stripped-down two-piece kind: <span class="math inline">\dfrac{d^2 - 1}{2}</span> steps.</li>
+</ul>
+<p>For a qutrit those numbers are <span class="math inline">2</span>, <span class="math inline">8</span>, and <span class="math inline">4</span>. The Clifford copier, carrying almost no information about itself, lands at <span class="math inline">4</span>: within a factor of two of the full quantum power of <span class="math inline">8</span>, and already twice the classical <span class="math inline">2</span>.</p>
+<p>That is the part worth carrying away. When we restricted from all quantum channels down to Clifford channels, we threw away almost all the freedom. A general channel needs of order <span class="math inline">d^4</span> numbers to describe; a Clifford channel needs a <span class="math inline">2 \times 2</span> matrix over <span class="math inline">\mathbb{F}_d</span> and a short list of amplitudes. You might have guessed the bound would collapse most of the way back to the classical <span class="math inline">d - 1</span>. It barely moved.</p>
+<p>The reason is that the room to subdivide erasure never lived in the richness of the channel in the first place. It lived in the orbit structure of a single linear map on a small finite plane. The longest root is as long as the longest orbit of <span class="math inline">h</span>, and a well-chosen <span class="math inline">h</span> runs through all <span class="math inline">d^2 - 1</span> labels at once. The only thing the quantum machinery buys you over this finite-field skeleton is the factor of two, and even that is not channel richness: it is the one symmetry, <span class="math inline">\lambda(-\eta) = \overline{\lambda(\eta)}</span>, that complete positivity stamps on the amplitudes and nothing more.</p>
+<p>A question that began with photocopiers and density matrices turns out to be answered, almost entirely, by asking how long a point can wander in the plane <span class="math inline">\mathbb{F}_d^2</span> before it is forced to step on a marked square. That is the unreasonable beauty promised at the top.</p>
+<!-- =================================================================== -->
+</section>
+<section id="sec-closing" class="level2">
+<h2 class="anchored" data-anchor-id="sec-closing">What’s next</h2>
+<p>One loose thread remains: the factor of two. Is <span class="math inline">(d^2 - 1)/2</span> the end of the story, or just the end of the <em>Clifford</em> story? It is only the Clifford story. The full quantum bound <span class="math inline">d^2 - 1</span> really can be reached, by a channel that gives up the tidy Weyl structure we leaned on. Instead of asking a single matrix <span class="math inline">h</span> to do all the work, one builds the root directly at the level of the channel’s representation, nudging a Jordan block into exactly the shape the bound allows. That construction does not care about mirror pairs, so the factor of two disappears, and the gap to <span class="math inline">d^2 - 1</span> closes.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>That more general result subsumes the Clifford one, which is why the Clifford construction does not appear in the final paper. I wanted to write it up anyway, because it is the cleanest place I know to actually <em>see</em> the finite-field representation theory at work. In the general construction the orbit structure is buried inside linear algebra over <span class="math inline">\mathbb{C}</span>. Here it sits on the surface: a point hopping around a plane of <span class="math inline">d^2</span> labels, a matrix of order <span class="math inline">d^2 - 1</span>, and a single symmetry that costs a factor of two. The whole argument fits in the palm of your hand, and you can check the <span class="math inline">d = 3</span> case by stepping around an eight-point cycle with a pencil.</p>
+<p>The full development, including the classical and general quantum bounds and the Clifford channels above, is in my diploma thesis.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>TODO: pick one of the candidate references suggested in chat (e.g.&nbsp;Burgarth et al.&nbsp;2013 on ergodic/mixing channels, or Sanz et al.&nbsp;2010 on the quantum Wielandt inequality), or Michael Wolf’s <em>Quantum Channels &amp; Operations: Guided Tour</em> lecture notes for a more pedagogical entry point.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>TODO: cite the Jordan-block argument for the classical case (Section 2.5 / 3.1.3 of the thesis, or a standard reference on roots of stochastic matrices).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>For the structure theory of quantum channels, including the Kraus decomposition and the Stinespring dilation, the standard reference is Nielsen and Chuang, <em>Quantum Computation and Quantum Information</em>, chapter 8. Michael Wolf’s lecture notes <em>Quantum Channels and Operations: Guided Tour</em> are a more focused modern treatment.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>TODO: fill in the exact citation for the general <span class="math inline">d^2 - 1</span> construction (working title <em>How long can it take for a quantum channel to forget everything?</em>), once the published reference is settled.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Florian Richter, <em>Roots of the completely depolarising channel</em> (diploma thesis), Leibniz Universität Hannover, 2010. Chapter 5 covers the Clifford channels discussed here. TODO: confirm the exact thesis title and add a direct link to the PDF in the repository.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/florian2richter\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Florian Richter</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
