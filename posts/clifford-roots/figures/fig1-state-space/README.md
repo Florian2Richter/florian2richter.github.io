@@ -10,14 +10,22 @@ The classical state space for a three-outcome system: the probability
 of R^3. Three coordinate axes from the origin, the triangle spanning the
 three unit basis vectors `e1, e2, e3` (the pure states), faint dashed
 medians hinting at the barycentric structure, and the uniform
-distribution `p0 = (1/3, 1/3, 1/3)` marked in red at the centroid.
+distribution `p0 = (1/3, 1/3, 1/3)` at the centroid.
+
+**Colour encodes purity** (see the figures `README.md` for the shared
+scheme): the simplex is filled with the purity field `sum_i p_i^2`,
+green and saturated at the three pure corners, fading to a pale glow at
+the maximally mixed centre. `p0` is drawn as a faint hollow ring,
+de-emphasised but locatable.
 
 ## The interaction
 
-Clicking inside the triangle places a teal marker and reads off the
-probability distribution `(p1, p2, p3)` for that point, computed from
-barycentric coordinates relative to the three vertices. Three live bars
-show the components. On desktop, hovering shows a faint preview marker. A
+Clicking inside the triangle places a marker, coloured by the clicked
+point's purity (green near a pure corner, fading toward the centre), and
+reads off the probability distribution `(p1, p2, p3)` for that point,
+computed from barycentric coordinates relative to the three vertices.
+Three live bars show the components. On desktop, hovering shows a faint
+preview marker. A
 click outside the triangle clears the marker. With JavaScript off, the
 static triangle renders unchanged and the readout shows placeholder text.
 
@@ -57,9 +65,9 @@ ordering is the only coupling between the Python and the JS.
   edits as long as the polygon vertices stay in `e1, e2, e3` order.
 - **Readout styling:** the scoped `.simplex-interactive` CSS lives in the
   `<style>` block at the top of `interactive.qmd`.
-- **Marker colour:** the user-placed marker is teal (`#1d9e75` fill,
-  `#0f6e56` stroke) to set it apart from the structural red `p0` dot; to
-  reuse the red, change the two marker circle fills/strokes in the script.
+- **Purity colours:** the green/pale endpoints are the `GREEN_RGB` and
+  `PALE_RGB` constants in `state_space_figure.py`, mirrored in the
+  `purityColour` helper in the script. Change them in both to retune.
 - **Readout placement:** the readout sits below the figure (consistent at
   all widths). To place it beside the figure on wide screens, wrap the SVG
   and `.si-readout` in a flex/grid container with a responsive breakpoint.

@@ -29,7 +29,10 @@ column vectors starting from `(1,0)`.
   evenly on a circle in cycle order, draws directed arrows between
   consecutive labels, and highlights the antipodal vanishing pair plus
   the two arcs in contrasting strokes.
-- Same blue palette and conventions as the other figures.
+- Navy structural palette and conventions as the other figures. Note
+  the purity colour scheme does NOT apply here: this is the label plane
+  `F_d^2`, not a state space, so there is no purity to encode. Use a
+  distinct accent for the highlighted vanishing pair / arcs.
 - Output `orbit-d3.svg`.
 
 ## Interactive potential (optional, later)

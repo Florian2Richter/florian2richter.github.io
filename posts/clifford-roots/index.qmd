@@ -293,9 +293,11 @@ every point along a two-step trajectory to the centre (@fig-root-d3).
 {{< include figures/fig2-simplex-root/interactive.qmd >}}
 
 One square root $S$ of the $d = 3$ bistochastic CDC (others exist),
-visualised on the simplex. Each pure state (purple) reaches the uniform
-distribution $p_0$ in two steps: one application of $S$ to an
-intermediate point (teal), a second to the centre, since $S^2 = P$. The
+visualised on the simplex. Colour tracks purity: green at the pure
+corners, fading to the pale maximally mixed centre. Each pure state
+reaches the uniform distribution $p_0$ in two steps, one application of
+$S$ to an intermediate point, a second to the centre, since $S^2 = P$,
+and you can watch the colour drain from green toward pale as it goes. The
 merge is the point. Both $e_1$ and $e_2$ land on the same intermediate
 point $q_a$, so three arrows arrive at step one but only two leave at
 step two. Information is erased in a stage. Click anywhere inside the

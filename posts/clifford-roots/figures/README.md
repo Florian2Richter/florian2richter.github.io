@@ -50,6 +50,30 @@ geometry from the SVG itself (the `<polygon points>` for Figure 1, the
 `data-*` projection attributes for Figure 3), so nothing is retyped and
 the interaction stays correct if the figure is regenerated.
 
+## Colour scheme: purity
+
+Across the three **state-space** figures (simplex, trajectories, Bloch
+ball) colour encodes **purity**, the quantity the post is about. A state
+is green and saturated when pure, and fades toward a pale glow as it
+approaches the maximally mixed state, which is drawn as a faint hollow
+ring (de-emphasised, but locatable). The same notion drives all three:
+
+- classical purity is the collision probability `sum_i p_i^2`, from `1/d`
+  (uniform) to `1` (pure);
+- qubit purity is `tr(rho^2) = (1 + r^2)/2`, from `1/2` (centre) to `1`
+  (surface).
+
+So "erasure" reads visually as draining from green to pale, and the
+Bloch ball's "inside the sphere" depth is the same language in 3D. The
+endpoints are green `#1f7a50` and pale `#e4eeea`; structure (axes,
+outlines, wireframe) stays navy `#1a3550`; dynamics (Figure 2's arrows)
+are neutral grey, since colour is reserved for purity. The interactive
+markers take the clicked state's purity colour; a user-placed point is
+set apart by **shape** (a square), not colour.
+
+Figure 4 (the orbit cycle) is the label plane `F_d^2`, not a state
+space, so purity does not apply there; it uses its own scheme.
+
 ## How a figure is wired into the post
 
 In `index.qmd`, each figure is a Quarto figure div that includes the

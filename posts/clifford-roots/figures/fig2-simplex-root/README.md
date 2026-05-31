@@ -24,12 +24,16 @@ e2 -> q_a -> p0     (e1 and e2 MERGE at q_a)
 e3 -> q_b -> p0
 ```
 
-- Starting points `e1, e2, e3` at the vertices, in purple.
-- Intermediate points `q_a, q_b` (teal). `q_a` is drawn slightly larger
-  because two trajectories arrive there.
-- Step-1 arrows in purple (three of them, two converging on `q_a`).
-- Step-2 arrows in teal (only two leave).
-- The uniform distribution `p0` in red at the centre.
+- The simplex carries the same **purity field** as Figure 1 (green pure
+  corners fading to a pale centre).
+- Starting points `e1, e2, e3` at the vertices are pure, so green.
+- Intermediate points `q_a, q_b` are coloured by their own purity. `q_a`
+  is already quite mixed, so it reads pale; `q_b` a little greener. `q_a`
+  is drawn slightly larger because two trajectories arrive there.
+- All arrows are **neutral grey** (three step-1, two converging on `q_a`;
+  two step-2). Colour is reserved for purity, so the arrows carry only
+  the dynamics; the dots draining green to pale carry the erasure.
+- The uniform distribution `p0` is a faint hollow ring at the centre.
 
 **The merge at `q_a` is the headline:** three step-1 arrows arrive but
 only two step-2 arrows leave, so the figure shows information being lost
@@ -63,11 +67,12 @@ picture stays correct if `T` is ever changed.
 
 ## Colour scheme
 
-Blue baseline shared with Figure 1 (`#a8c5d8` fill, `#1a3550` outlines,
-`#3a5a72` muted, `#c0392b` red `p0`), plus two dynamic accents: purple
-`#5a2d7a` for step-1 dynamics, teal `#3a7a7a` for step-2. A fourth accent
-(soft orange) is reserved for the user-clicked trajectory in the planned
-interactive layer.
+Purity scheme shared with Figure 1: navy `#1a3550` structure, green
+`#1f7a50` (pure) fading to pale `#e4eeea` (maximally mixed), `#3a5a72`
+muted labels. Dots that are mixed get a dark-green `#0f5538` outline so
+they stay visible when pale. Arrows are neutral grey `#8a98a5`. The
+user-clicked trajectory uses the same purity colours; it is set apart by
+**shape** (a square `rho0`), not colour.
 
 ## To modify
 
@@ -82,12 +87,13 @@ interactive layer.
 ## Interactive layer
 
 Clicking inside the simplex drops a starting distribution `rho0` as a
-soft-orange **square** (distinct from the round structural dots), then
-shows `S rho0` and `S^2 rho0` as orange dots joined by orange arrows, and
-a readout of the three probability vectors `rho0`, `S rho0`, `S^2 rho0`.
-The second image always lands on `p0`, which the reader can verify for
-any point they pick. On desktop a faint orange dot previews where a click
-would land. The three baked default trajectories stay visible at all
+**square** (distinct in shape from the round structural dots), coloured
+by its purity, then shows `S rho0` and `S^2 rho0` as purity-coloured dots
+joined by grey arrows, and a readout of the three probability vectors
+`rho0`, `S rho0`, `S^2 rho0`. The second image always lands on `p0`,
+which the reader can verify for any point they pick. On desktop a faint
+green dot previews where a click would land. The three baked default
+trajectories stay visible at all
 times; the user trajectory is purely additive and clears on a click
 outside the triangle.
 

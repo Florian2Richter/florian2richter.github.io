@@ -6,9 +6,14 @@ a 2D face sitting inside the positive octant of R^3. Three coordinate
 axes from the origin show the embedding; the triangular face spans the
 three unit basis vectors.
 
-The figure follows the layout of Figure 3.1 in Richter's diploma thesis
-(state-space figure), but uses a restrained blue-toned palette and
-includes vertex probability-vector labels.
+Colour encodes PURITY. A distribution's purity is the collision
+probability sum_i p_i^2, which runs from 1/d at the uniform distribution
+(maximally mixed) to 1 at a pure state. We fill the simplex with this
+field: green and saturated at the three pure corners, fading to a pale
+glow at the maximally mixed centre. This is the classical analogue of
+tr(rho^2) for a qubit, so the same visual language carries over to the
+Bloch ball. The maximally mixed state p0 is drawn as a faint hollow
+ring: de-emphasised, but locatable.
 
 Usage:
     python state_space_figure.py [output.svg]
@@ -22,52 +27,74 @@ import sys
 
 
 # ---------------------------------------------------------------------------
-# Knobs — edit these to tweak the figure.
+# Knobs -- edit these to tweak the figure.
 # ---------------------------------------------------------------------------
 
 CANVAS = (640, 620)  # viewBox width, height
 
-# Projection of R^3 axes to 2D.
-# Origin near lower-centre; axes splay outward.
 ORIGIN = (310, 430)
 
 # Simplex vertices (where each axis hits "1") in canvas coordinates.
-# These define the projection of e_1, e_2, e_3 in R^3 to 2D.
 VERTEX_E1 = (140, 510)   # front-left ("out of the page")
 VERTEX_E2 = (540, 430)   # to the right
 VERTEX_E3 = (310, 130)   # upward
+VERTICES = (VERTEX_E1, VERTEX_E2, VERTEX_E3)
 
 # Axes extend past the simplex vertices (for arrowheads).
 AXIS_E1_END = (95, 530)
 AXIS_E2_END = (590, 430)
 AXIS_E3_END = (310, 75)
 
-# Centroid (uniform distribution p_0) — computed automatically.
 P0 = (
     (VERTEX_E1[0] + VERTEX_E2[0] + VERTEX_E3[0]) / 3,
     (VERTEX_E1[1] + VERTEX_E2[1] + VERTEX_E3[1]) / 3,
 )
 
-# Palette — same blue tones as the v3 standalone simplex.
-SIMPLEX_FILL = "#a8c5d8"
-SIMPLEX_FILL_OPACITY = 0.55
-SIMPLEX_STROKE = "#1a3550"
-AXIS_COLOR = "#1a3550"
-LABEL_COLOR = "#1a3550"
-MUTED_COLOR = "#3a5a72"
-ACCENT_COLOR = "#c0392b"  # the p_0 dot
+# Palette. Structure stays dark navy; STATE colour encodes purity, green
+# (pure) fading to a pale glow (maximally mixed).
+OUTLINE = "#1a3550"
+MUTED = "#3a5a72"
+GREEN_RGB = (31, 122, 80)      # pure state, full purity
+PALE_RGB = (228, 238, 233)     # maximally mixed end of the field
+MIXED_RING = "#5f7d70"         # the faint ring at p0
 
-# Stroke widths.
+SIMPLEX_FILL_OPACITY = 0.9
+MESH_N = 26                    # triangular subdivisions of the purity field
+
+FONT_FAMILY = "Georgia, 'Times New Roman', serif"
+LABEL_SIZE = 22
+VECTOR_LABEL_SIZE = 14
+
 SIMPLEX_STROKE_W = 2.2
 AXIS_STROKE_W = 1.8
 TICK_STROKE_W = 1.6
 MEDIAN_STROKE_W = 0.9
 MEDIAN_OPACITY = 0.22
 
-# Font.
-FONT_FAMILY = "Georgia, 'Times New Roman', serif"
-LABEL_SIZE = 22
-VECTOR_LABEL_SIZE = 14
+
+# ---------------------------------------------------------------------------
+# Purity -> colour
+# ---------------------------------------------------------------------------
+
+def purity_t(p):
+    """Normalised purity of a distribution p: 0 at the uniform
+    distribution, 1 at a pure state. t = (sum p_i^2 - 1/3) / (1 - 1/3)."""
+    s = sum(x * x for x in p)
+    return max(0.0, min(1.0, (s - 1.0 / 3) / (2.0 / 3)))
+
+
+def purity_colour(t):
+    """Lerp from the pale (maximally mixed) colour to green (pure)."""
+    r = round(PALE_RGB[0] + t * (GREEN_RGB[0] - PALE_RGB[0]))
+    g = round(PALE_RGB[1] + t * (GREEN_RGB[1] - PALE_RGB[1]))
+    b = round(PALE_RGB[2] + t * (GREEN_RGB[2] - PALE_RGB[2]))
+    return f"#{r:02x}{g:02x}{b:02x}"
+
+
+def barycentric_to_canvas(p):
+    x = sum(p[i] * VERTICES[i][0] for i in range(3))
+    y = sum(p[i] * VERTICES[i][1] for i in range(3))
+    return (x, y)
 
 
 # ---------------------------------------------------------------------------
@@ -75,12 +102,9 @@ VECTOR_LABEL_SIZE = 14
 # ---------------------------------------------------------------------------
 
 def tick_perpendicular(point, axis_direction, length=14):
-    """Return endpoints of a small tick mark, perpendicular to an axis,
-    centred at `point`. `axis_direction` is any vector along the axis.
-    """
     ax, ay = axis_direction
     norm = (ax ** 2 + ay ** 2) ** 0.5
-    px, py = -ay / norm, ax / norm  # perpendicular unit vector
+    px, py = -ay / norm, ax / norm
     cx, cy = point
     return (
         (cx - length / 2 * px, cy - length / 2 * py),
@@ -90,6 +114,11 @@ def tick_perpendicular(point, axis_direction, length=14):
 
 def midpoint(p, q):
     return ((p[0] + q[0]) / 2, (p[1] + q[1]) / 2)
+
+
+def bary_grid(a, b, n):
+    """Barycentric coords of grid point (a, b) at subdivision n."""
+    return (a / n, b / n, (n - a - b) / n)
 
 
 # ---------------------------------------------------------------------------
@@ -107,116 +136,125 @@ def build_svg():
         f'font-family="{FONT_FAMILY}">'
     )
 
-    # Arrowhead marker for axes.
     parts.append(f'''
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
             markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="{AXIS_COLOR}"/>
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="{OUTLINE}"/>
     </marker>
   </defs>''')
 
-    # --- Layer 1: axes behind the simplex (so the simplex fill sits on top) ---
-    # The three axes emanate from the origin. We draw them first so that the
-    # fill of the simplex covers the portions hidden "behind" the simplex
-    # face when read as a 3D figure.
+    # --- Layer 1: axes behind the simplex ---
     parts.append('\n  <!-- Coordinate axes -->')
     for end in (AXIS_E1_END, AXIS_E2_END, AXIS_E3_END):
         parts.append(
             f'\n  <line x1="{ORIGIN[0]}" y1="{ORIGIN[1]}" '
             f'x2="{end[0]}" y2="{end[1]}"\n'
-            f'        stroke="{AXIS_COLOR}" stroke-width="{AXIS_STROKE_W}"\n'
+            f'        stroke="{OUTLINE}" stroke-width="{AXIS_STROKE_W}"\n'
             f'        marker-end="url(#arrow)"/>'
         )
 
-    # --- Layer 2: the simplex face ---
-    points_str = " ".join(f"{x},{y}" for x, y in [VERTEX_E1, VERTEX_E2, VERTEX_E3])
-    parts.append('\n\n  <!-- Simplex (triangular face) -->')
-    parts.append(
-        f'\n  <polygon points="{points_str}"\n'
-        f'           fill="{SIMPLEX_FILL}" fill-opacity="{SIMPLEX_FILL_OPACITY}"\n'
-        f'           stroke="{SIMPLEX_STROKE}" stroke-width="{SIMPLEX_STROKE_W}"\n'
-        f'           stroke-linejoin="round"/>'
-    )
+    # --- Layer 2: the purity field (triangular mesh) ---
+    parts.append('\n\n  <!-- Purity field: green at the pure corners, '
+                 'pale at the maximally mixed centre -->')
+    parts.append('\n  <g stroke-linejoin="round">')
+    n = MESH_N
 
-    # --- Layer 3: medians inside the simplex (faint barycentric hint) ---
-    parts.append('\n\n  <!-- Medians from each vertex to opposite edge midpoint -->')
-    parts.append(
-        f'\n  <g stroke="{SIMPLEX_STROKE}" stroke-width="{MEDIAN_STROKE_W}" '
-        f'stroke-opacity="{MEDIAN_OPACITY}" stroke-dasharray="4,5">'
-    )
-    median_endpoints = [
-        (VERTEX_E1, midpoint(VERTEX_E2, VERTEX_E3)),
-        (VERTEX_E2, midpoint(VERTEX_E1, VERTEX_E3)),
-        (VERTEX_E3, midpoint(VERTEX_E1, VERTEX_E2)),
-    ]
-    for (sx, sy), (ex, ey) in median_endpoints:
-        parts.append(
-            f'\n    <line x1="{sx}" y1="{sy}" x2="{ex}" y2="{ey}"/>'
+    def tile(corners):
+        cen = tuple(sum(c[k] for c in corners) / 3 for k in range(3))
+        colour = purity_colour(purity_t(cen))
+        pts = " ".join(
+            "%.2f,%.2f" % barycentric_to_canvas(c) for c in corners
         )
+        return (f'\n    <polygon points="{pts}" fill="{colour}" '
+                f'fill-opacity="{SIMPLEX_FILL_OPACITY}" '
+                f'stroke="{colour}" stroke-width="0.6" '
+                f'stroke-opacity="{SIMPLEX_FILL_OPACITY}"/>')
+
+    for a in range(n):
+        for b in range(n - a):
+            up = (bary_grid(a, b, n), bary_grid(a + 1, b, n),
+                  bary_grid(a, b + 1, n))
+            parts.append(tile(up))
+            if a + b < n - 1:
+                down = (bary_grid(a + 1, b, n), bary_grid(a, b + 1, n),
+                        bary_grid(a + 1, b + 1, n))
+                parts.append(tile(down))
     parts.append('\n  </g>')
 
-    # --- Layer 4: tick marks where axes meet simplex vertices ---
-    parts.append('\n\n  <!-- Unit tick marks on the axes at the simplex vertices -->')
-    tick_specs = [
-        (VERTEX_E1, (VERTEX_E1[0] - ORIGIN[0], VERTEX_E1[1] - ORIGIN[1])),
-        (VERTEX_E2, (VERTEX_E2[0] - ORIGIN[0], VERTEX_E2[1] - ORIGIN[1])),
-        (VERTEX_E3, (VERTEX_E3[0] - ORIGIN[0], VERTEX_E3[1] - ORIGIN[1])),
-    ]
-    for vertex, axis_dir in tick_specs:
+    # --- Layer 3: crisp simplex outline on top of the mesh ---
+    points_str = " ".join(f"{x},{y}" for x, y in VERTICES)
+    parts.append('\n\n  <!-- Simplex outline -->')
+    parts.append(
+        f'\n  <polygon points="{points_str}" fill="none" '
+        f'stroke="{OUTLINE}" stroke-width="{SIMPLEX_STROKE_W}" '
+        f'stroke-linejoin="round"/>'
+    )
+
+    # --- Layer 4: medians (faint barycentric hint) ---
+    parts.append('\n\n  <!-- Medians -->')
+    parts.append(
+        f'\n  <g stroke="{OUTLINE}" stroke-width="{MEDIAN_STROKE_W}" '
+        f'stroke-opacity="{MEDIAN_OPACITY}" stroke-dasharray="4,5">'
+    )
+    for v, opp in ((VERTEX_E1, midpoint(VERTEX_E2, VERTEX_E3)),
+                   (VERTEX_E2, midpoint(VERTEX_E1, VERTEX_E3)),
+                   (VERTEX_E3, midpoint(VERTEX_E1, VERTEX_E2))):
+        parts.append(f'\n    <line x1="{v[0]}" y1="{v[1]}" '
+                     f'x2="{opp[0]}" y2="{opp[1]}"/>')
+    parts.append('\n  </g>')
+
+    # --- Layer 5: tick marks at the vertices ---
+    parts.append('\n\n  <!-- Unit tick marks -->')
+    for vertex in VERTICES:
+        axis_dir = (vertex[0] - ORIGIN[0], vertex[1] - ORIGIN[1])
         (sx, sy), (ex, ey) = tick_perpendicular(vertex, axis_dir, length=14)
         parts.append(
             f'\n  <line x1="{sx:.1f}" y1="{sy:.1f}" '
             f'x2="{ex:.1f}" y2="{ey:.1f}" '
-            f'stroke="{AXIS_COLOR}" stroke-width="{TICK_STROKE_W}"/>'
+            f'stroke="{OUTLINE}" stroke-width="{TICK_STROKE_W}"/>'
         )
 
-    # --- Layer 5: vertex dots ---
-    parts.append('\n\n  <!-- Vertex dots -->')
-    for vx, vy in (VERTEX_E1, VERTEX_E2, VERTEX_E3):
-        parts.append(
-            f'\n  <circle cx="{vx}" cy="{vy}" r="5.5" fill="{LABEL_COLOR}"/>'
-        )
+    # --- Layer 6: pure-state dots (green) ---
+    green = purity_colour(1.0)
+    parts.append('\n\n  <!-- Pure states (green) -->')
+    for vx, vy in VERTICES:
+        parts.append(f'\n  <circle cx="{vx}" cy="{vy}" r="6" fill="{green}"/>')
 
-    # --- Layer 6: vertex labels and probability vectors ---
-    parts.append('\n\n  <!-- Vertex labels and their probability vectors -->')
+    # --- Layer 7: maximally mixed state p0 (faint hollow ring) ---
+    parts.append('\n\n  <!-- Maximally mixed state p0 (faint ring) -->')
+    parts.append(
+        f'\n  <circle cx="{P0[0]}" cy="{P0[1]}" r="7.5" '
+        f'fill="#f7faf8" fill-opacity="0.55" '
+        f'stroke="{MIXED_RING}" stroke-width="1.6" stroke-opacity="0.6"/>'
+    )
+
+    # --- Layer 8: labels ---
+    parts.append('\n\n  <!-- Vertex labels (green) + probability vectors (muted) -->')
     label_specs = [
-        # (vertex, label, vector, label_offset, vector_offset, anchor)
-        # e_1: down-left of the front-left vertex (more vertical clearance for arrowhead)
-        (VERTEX_E1, 'e₁', '(1, 0, 0)', (-16, 28),  (-16, 48), 'end'),
-        # e_2: right of the right vertex, offset down to clear the arrowhead
-        (VERTEX_E2, 'e₂', '(0, 1, 0)', (22, 8),    (22, 28),  'start'),
-        # e_3: up-left of the top vertex. Vector goes BELOW the letter
-        # (i.e. between letter and vertex) so the reading order is letter-first.
-        (VERTEX_E3, 'e₃', '(0, 0, 1)', (-22, -8),  (-22, 12), 'end'),
+        (VERTEX_E1, 'e₁', '(1, 0, 0)', (-16, 28), (-16, 48), 'end'),
+        (VERTEX_E2, 'e₂', '(0, 1, 0)', (22, 8), (22, 28), 'start'),
+        (VERTEX_E3, 'e₃', '(0, 0, 1)', (-22, -8), (-22, 12), 'end'),
     ]
-    for (vx, vy), label, vec, (lx, ly), (vx_off, vy_off), anchor in label_specs:
+    for (vx, vy), label, vec, (lx, ly), (vox, voy), anchor in label_specs:
         parts.append(
             f'\n  <text x="{vx + lx}" y="{vy + ly}" text-anchor="{anchor}" '
             f'font-size="{LABEL_SIZE}" font-style="italic" '
-            f'fill="{LABEL_COLOR}">{label}</text>'
+            f'fill="{green}">{label}</text>'
         )
         parts.append(
-            f'\n  <text x="{vx + vx_off}" y="{vy + vy_off}" text-anchor="{anchor}" '
-            f'font-size="{VECTOR_LABEL_SIZE}" '
-            f'fill="{MUTED_COLOR}">{vec}</text>'
+            f'\n  <text x="{vx + vox}" y="{vy + voy}" text-anchor="{anchor}" '
+            f'font-size="{VECTOR_LABEL_SIZE}" fill="{MUTED}">{vec}</text>'
         )
 
-    # --- Layer 7: centroid p_0 ---
-    parts.append('\n\n  <!-- Centroid p_0 -->')
-    parts.append(
-        f'\n  <circle cx="{P0[0]}" cy="{P0[1]}" r="6.5" '
-        f'fill="{ACCENT_COLOR}"/>'
-    )
+    parts.append('\n\n  <!-- p0 label (de-emphasised) -->')
     parts.append(
         f'\n  <text x="{P0[0] + 14}" y="{P0[1] - 2}" '
-        f'font-size="21" font-style="italic" '
-        f'fill="{LABEL_COLOR}">p₀</text>'
+        f'font-size="21" font-style="italic" fill="{MIXED_RING}">p₀</text>'
     )
     parts.append(
         f'\n  <text x="{P0[0] + 14}" y="{P0[1] + 18}" '
-        f'font-size="13" '
-        f'fill="{MUTED_COLOR}">(⅓, ⅓, ⅓)</text>'
+        f'font-size="13" fill="#8aa097">(⅓, ⅓, ⅓)</text>'
     )
 
     parts.append('\n</svg>\n')
@@ -225,9 +263,8 @@ def build_svg():
 
 def main():
     output_path = sys.argv[1] if len(sys.argv) > 1 else "state_space.svg"
-    svg = build_svg()
     with open(output_path, "w", encoding="utf-8") as f:
-        f.write(svg)
+        f.write(build_svg())
     print(f"Wrote {output_path}")
 
 

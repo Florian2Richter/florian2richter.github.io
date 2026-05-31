@@ -6,12 +6,19 @@ referenced in the prose as `@fig-bloch`.
 ## What it shows
 
 The qubit state space: a wireframe Bloch ball under a fixed orthographic
-projection (azimuth 35 degrees, elevation 20 degrees), drawn in the same
-restrained blue palette as Figure 1. Latitude and longitude lines, a
-crisp silhouette, three coordinate axes (x, y, z) from the centre, the
-poles `|0>` and `|1>`, and the maximally mixed state `I/2` marked in red
-at the centre. Front-hemisphere wires are solid, back-hemisphere wires
+projection (azimuth 35 degrees, elevation 20 degrees). Latitude and
+longitude lines, a crisp silhouette, three coordinate axes (x, y, z) from
+the centre, the poles `|0>` and `|1>`, and the maximally mixed state
+`I/2` at the centre. Front-hemisphere wires are solid, back-hemisphere
+wires
 dashed.
+
+**Colour encodes purity** (the shared scheme, see the figures
+`README.md`). The quantum purity `tr(rho^2) = (1 + r^2)/2` runs from 1/2
+at the centre to 1 on the surface, so the ball is filled with a green
+shell fading to a pale core (the "inside the sphere" depth), the poles
+`|0>`, `|1>` are green, and `I/2` is a faint hollow ring. The wireframe
+and axes stay navy.
 
 ## The interaction
 
@@ -89,9 +96,10 @@ author's original design.
   The marker never fully vanishes, so the maximally mixed state stays
   visible at the centre. Dial these if the centre feels too faint or the
   shrink too strong.
-- **Marker colour:** the user marker is teal to contrast with the red
-  `I/2` centre dot; change the two marker circle fills/strokes to reuse
-  the red.
+- **Marker colour:** the marker shifts green (surface, pure) to pale
+  (centre, mixed) by its normalised purity `r^2`, via the `purityColour`
+  helper in the script; a dark-green stroke keeps it visible when pale.
+  The interior gradient stops are in the generator's `defs`.
 
 After any change, re-render the post and confirm the figure and its
 `@fig-bloch` reference. No edit to `index.qmd` is needed.

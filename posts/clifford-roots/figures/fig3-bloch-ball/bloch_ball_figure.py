@@ -37,12 +37,15 @@ R = 210.0                  # projected radius (orthographic => silhouette is a c
 ALPHA = math.radians(35.0)  # azimuth
 ELEV = math.radians(20.0)   # elevation above the equator
 
-# Palette — identical to the Figure 1 simplex.
-SPHERE_FILL = "#a8c5d8"
-SPHERE_FILL_OPACITY = 0.12
+# Palette. Structure stays navy; STATE colour encodes purity, exactly as
+# Figure 1. Purity tr(rho^2) = (1 + r^2)/2 runs from 1/2 at the centre
+# (maximally mixed) to 1 on the surface (pure), so the ball is filled with
+# a green shell fading to a pale core, and the poles are green.
 OUTLINE = "#1a3550"
 MUTED = "#3a5a72"
-ACCENT = "#c0392b"  # the centre 1/2 dot
+GREEN = "#1f7a50"        # pure states (the surface, the poles)
+PALE = "#e4eeea"         # the maximally mixed core
+MIXED_RING = "#5f7d70"   # the faint ring at I/2
 
 FONT_FAMILY = "Georgia, 'Times New Roman', serif"
 
@@ -190,20 +193,26 @@ def build_svg():
         f'data-elev-deg="{math.degrees(ELEV):g}">'
     )
 
-    # Arrowhead marker for the axes (same as Figure 1).
+    # Arrowhead marker plus the purity gradient (green shell, pale core).
     parts.append(f'''
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
             markerWidth="8" markerHeight="8" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="{OUTLINE}"/>
     </marker>
+    <radialGradient id="purity" cx="{CX:g}" cy="{CY:g}" r="{R:g}"
+                    gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="{PALE}" stop-opacity="0.12"/>
+      <stop offset="60%" stop-color="#6fae8e" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="{GREEN}" stop-opacity="0.5"/>
+    </radialGradient>
   </defs>''')
 
-    # --- Layer 1: faint interior fill (suggests the ball's volume) ---
-    parts.append('\n\n  <!-- Ball interior (faint fill) -->')
+    # --- Layer 1: interior purity field (green shell -> pale core) ---
+    parts.append('\n\n  <!-- Ball interior: purity field -->')
     parts.append(
         f'\n  <circle cx="{CX}" cy="{CY}" r="{R}" '
-        f'fill="{SPHERE_FILL}" fill-opacity="{SPHERE_FILL_OPACITY}" stroke="none"/>'
+        f'fill="url(#purity)" stroke="none"/>'
     )
 
     # --- Layer 2: back wireframe (dashed, hidden hemisphere) ---
@@ -265,26 +274,30 @@ def build_svg():
     parts.append('\n\n  <!-- State markers -->')
     north = project((0.0, 0.0, 1.0))
     south = project((0.0, 0.0, -1.0))
+    # The poles are pure states: green.
     for (sx, sy, _) in (north, south):
         parts.append(
-            f'\n  <circle cx="{sx:.2f}" cy="{sy:.2f}" r="5" fill="{OUTLINE}"/>'
+            f'\n  <circle cx="{sx:.2f}" cy="{sy:.2f}" r="5.5" fill="{GREEN}"/>'
         )
-    # Centre: maximally mixed state, same red accent as p_0.
+    # Centre: the maximally mixed state I/2, a faint hollow ring.
     parts.append(
-        f'\n  <circle cx="{CX}" cy="{CY}" r="6.5" fill="{ACCENT}"/>'
+        f'\n  <circle cx="{CX}" cy="{CY}" r="7.5" '
+        f'fill="#f7faf8" fill-opacity="0.55" stroke="{MIXED_RING}" '
+        f'stroke-width="1.6" stroke-opacity="0.6"/>'
     )
 
     # --- Layer 6: labels ---
     parts.append('\n\n  <!-- Labels -->')
 
-    def ket(sx, sy, text, dx, dy, anchor="middle"):
+    def ket(sx, sy, text, dx, dy, anchor="middle", fill=OUTLINE):
         return (
             f'\n  <text x="{sx + dx:.2f}" y="{sy + dy:.2f}" text-anchor="{anchor}" '
-            f'font-size="{KET_SIZE}" font-style="italic" fill="{OUTLINE}">{text}</text>'
+            f'font-size="{KET_SIZE}" font-style="italic" fill="{fill}">{text}</text>'
         )
 
-    parts.append(ket(*north[:2], "|0\u27e9", -20, -10, anchor="end"))
-    parts.append(ket(*south[:2], "|1\u27e9", 0, 34, anchor="middle"))
+    # Pole kets are pure states: green, matching their dots.
+    parts.append(ket(*north[:2], "|0\u27e9", -20, -10, anchor="end", fill=GREEN))
+    parts.append(ket(*south[:2], "|1\u27e9", 0, 34, anchor="middle", fill=GREEN))
 
     # Axis labels at the arrow tips.
     xl = project((AXIS_LABEL_EXT, 0.0, 0.0))
@@ -303,10 +316,10 @@ def build_svg():
         f'font-size="{AXIS_LABEL_SIZE}" font-style="italic" fill="{OUTLINE}">z</text>'
     )
 
-    # Centre label.
+    # Centre label, de-emphasised like the ring.
     parts.append(
         f'\n  <text x="{CX + 14:.2f}" y="{CY - 2:.2f}" text-anchor="start" '
-        f'font-size="{CENTER_LABEL_SIZE}" fill="{OUTLINE}">{CENTER_LABEL}</text>'
+        f'font-size="{CENTER_LABEL_SIZE}" fill="{MIXED_RING}">{CENTER_LABEL}</text>'
     )
 
     parts.append('\n</svg>\n')
