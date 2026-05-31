@@ -1,7 +1,7 @@
 # Figure 2: square-root trajectories on the simplex
 
-**Status:** static figure done; interactive layer planned (next step).
-Wired into the post as `#fig-root-d3`, referenced as `@fig-root-d3`.
+**Status:** done, interactive. Wired into the post as `#fig-root-d3`,
+referenced as `@fig-root-d3`.
 
 ## What it shows
 
@@ -46,13 +46,12 @@ arrow rides along that edge.
 |------|------|
 | `trajectories_figure.py` | generator; geometry and palette as constants at the top. Computes the trajectory points directly from `T` (via `apply_T` and `barycentric_to_canvas`), so nothing in the picture is hand-placed |
 | `simplex-root-d3.svg` | the generated static SVG (checked in) |
+| `interactive.qmd` | the partial the post includes: scoped `<style>`, the inlined SVG, the readout, and the `<script>` for the click-to-trace layer |
 | `README.md` | this file |
 
-The static figure is currently embedded in `index.qmd` as a plain image
-(`![...](figures/fig2-simplex-root/simplex-root-d3.svg){#fig-root-d3}`).
-When the interactive layer is added it will become a `::: {#fig-root-d3}`
-figure div including an `interactive.qmd` partial, the same pattern as
-Figures 1 and 3.
+The post includes the figure as a `::: {#fig-root-d3}` figure div with
+`{{< include figures/fig2-simplex-root/interactive.qmd >}}`, the same
+pattern as Figures 1 and 3.
 
 ## Geometry (single source of truth)
 
@@ -80,16 +79,23 @@ interactive layer.
 - The matrix `T` is a constant too; change it and every point in the
   figure follows, because the trajectories are computed, not hand-placed.
 
-## Planned interactive layer
+## Interactive layer
 
-Click a point inside the simplex to drop a starting distribution `rho0`
-(soft orange, distinct shape), and show `T rho0` and `T^2 rho0` with
-orange arrows, plus a readout of the three probability vectors. The three
-default trajectories stay visible at all times; the user trajectory is
-additive. The JS does one matrix multiply twice and reuses the
-barycentric conversion. Same progressive-enhancement pattern as the other
-interactive figures (static SVG baseline, no-JS fallback).
+Clicking inside the simplex drops a starting distribution `rho0` as a
+soft-orange **square** (distinct from the round structural dots), then
+shows `S rho0` and `S^2 rho0` as orange dots joined by orange arrows, and
+a readout of the three probability vectors `rho0`, `S rho0`, `S^2 rho0`.
+The second image always lands on `p0`, which the reader can verify for
+any point they pick. On desktop a faint orange dot previews where a click
+would land. The three baked default trajectories stay visible at all
+times; the user trajectory is purely additive and clears on a click
+outside the triangle.
 
-Out of scope for the figure itself: drawing the line through
-`q_a, q_b, p0` (the prose mentions it as a "did you notice"), alternative
-roots, and animation.
+The script reads the vertices from the polygon (single source of truth)
+and holds the root `S` as a constant that must stay in sync with the
+generator's `T`. It is plain JS, no libraries. With JS off, the static
+figure with its three default trajectories renders unchanged.
+
+Out of scope (kept that way): drawing the line through `q_a, q_b, p0`
+(the prose can mention it as a "did you notice"), alternative roots, and
+animation.
