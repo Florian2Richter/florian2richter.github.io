@@ -221,15 +221,12 @@ not earlier." How large can $k$ be?
 
 The answer is sharp: $k \leq d - 1$.
 
-The proof is a piece of standard linear algebra. The Jordan
-decomposition of $S$ pins down what its $k$-th power can look like,
-and the constraint that $S^k$ equals the rank-one matrix $P$ leaves
-exactly the room you'd expect. The geometric picture is simpler. The
-simplex is $(d - 1)$-dimensional. Each application of $S$ can collapse
-at most one of those independent dimensions of variance without
-overshooting and erasing the whole thing prematurely. After $d - 1$
-collapses there is nothing left for the next step to do, and you have
-arrived at $P$.[^classical-bound-proof]
+The reason is structural. The map $P$ has rank one: it crushes the
+entire $(d - 1)$-dimensional space of traceless deviations from the
+uniform distribution down to zero. For $S^k$ to do that, $S$ itself must
+carry a *nilpotent* part on that traceless space, and a nilpotent
+operator on a $(d - 1)$-dimensional space takes at most $d - 1$ steps to
+reach zero. That is the bound.[^classical-bound-proof]
 
 [^classical-bound-proof]: TODO: cite the Jordan-block argument for
 the classical case (Section 2.5 / 3.1.3 of the thesis, or a standard
@@ -352,10 +349,12 @@ to take roots of.
 Here is where that quadratic shows up where it counts. Ask the same
 question as in the classical case: how large can $k$ be, if a channel
 $S$ satisfies $S^k = P$ but no smaller power does? The argument has the
-same skeleton. The channel acts linearly on the space the states live
-in, the completely depolarising channel crushes that whole space to a
-point, and each application of $S$ can retire at most one dimension
-without overshooting. Only now the space is $(d^2 - 1)$-dimensional, so
+same skeleton. The quantum CDC is again a rank-one map: it crushes the
+entire space of traceless operators, the directions away from the
+maximally mixed state, down to zero. Any $S$ powering to it must carry a
+*nilpotent* part on that space, and a single nilpotent block on a space
+of dimension $D$ takes at most $D$ steps to wind down. Only now
+$D = d^2 - 1$ rather than $d - 1$, so
 $$
 k \;\leq\; d^2 - 1.
 $$
@@ -656,14 +655,13 @@ vanish at only one point, and the reason is the second ingredient.
 
 So we need $\lambda$ to vanish somewhere on the orbit, and we would like
 it to vanish as rarely as possible, ideally just once. Here the channel
-pushes back. The amplitudes $\lambda$ are not ours to set freely. They
-have to come from an honest quantum channel, and that demand, complete
-positivity, leaves a fingerprint.
+pushes back. The amplitudes $\lambda$ are not ours to set freely, and the
+constraint comes in two layers.
 
-The fingerprint is a symmetry. Being a quantum channel, $T$ sends
-Hermitian operators to Hermitian operators, since the density matrices
-it acts on are Hermitian. Tracing what that requires of the amplitudes
-gives a clean relation between the label $\eta$ and its negative:
+The first layer is a symmetry. A quantum channel $T$ sends Hermitian
+operators to Hermitian operators, since the density matrices it acts on
+are Hermitian. Tracing what that requires of the amplitudes gives a clean
+relation between the label $\eta$ and its negative:
 $$
 \lambda(-\eta) = \overline{\lambda(\eta)}.
 $$
@@ -673,11 +671,20 @@ amplitude at its mirror image always have the same size. In particular,
 **if $\lambda$ vanishes at $\eta$, it must vanish at $-\eta$ as well.**
 The zeros come in mirror pairs.
 
+The second layer is stronger, and we will lean on it shortly. A channel
+is not merely required to preserve Hermiticity; it must be *completely
+positive*. That places a further positivity condition on a matrix built
+from the values of $\lambda$, one the mirror-pair symmetry alone does not
+guarantee. We will come back to it once we have seen what the mirror
+pairing already forces.
+
 ```{=html}
 <details class="aside">
-<summary>Where $\lambda(-\eta) = \overline{\lambda(\eta)}$ comes from</summary>
+<summary>The Hermiticity argument</summary>
 ```
 
+This relation comes from $T$ preserving Hermiticity, a property shared by
+every quantum channel but in itself weaker than full complete positivity.
 A Weyl operator is not Hermitian, but its adjoint is another Weyl
 operator: $\mathbf{w}(\eta)^\dagger = \mathbf{w}(-\eta)$, up to the same
 phase convention we have been ignoring. A channel obeys
@@ -692,28 +699,50 @@ match and the coefficients must agree: $\lambda(-\eta) = \overline{\lambda(\eta)
 </details>
 ```
 
-Now put the two ingredients together. On the grand cycle, the mirror map
-$\eta \mapsto -\eta$ has a tidy meaning: it is exactly the halfway point.
-Multiplying a label by $-1$ is the same as stepping $h$ around half the
-cycle, $(d^2 - 1)/2$ steps. (For this halving to make sense we need
-$-1 \neq 1$, that is, $d$ an odd prime, which we assume from here.) So
-the two zeros of $\lambda$, forced to be mirror images, sit at opposite
-poles of the cycle, cutting it into two equal arcs of length
-$(d^2 - 1)/2$.
+Now put the two ingredients together, and here is something worth
+pausing on. The mirror-pair constraint pairs every nonzero label $\eta$
+with its negative $-\eta$, and for odd prime $d$ those are always
+distinct points of the plane. The grand cycle has length $d^2 - 1$, an
+even number, and the mirror map $\eta \mapsto -\eta$ sends you exactly
+halfway around it. The two paired zeros sit at opposite poles of the
+cycle, cutting it into two equal arcs of length $(d^2 - 1)/2$.
+
+What about $d = 2$? At $d = 2$ arithmetic is modulo $2$, so $-1 = 1$, and
+every label is its own mirror. The pairing constraint collapses: it no
+longer forces a second zero anywhere. A single vanishing of $\lambda$ on
+the three-element cycle is enough, and the longest possible delay is the
+full cycle length, $3$. That is exactly the general quantum bound
+$d^2 - 1 = 3$.
+
+So the qubit is not an awkward edge case. It is the one case where
+Clifford channels already saturate the full quantum bound, because the
+symmetry tax that costs a factor of $2$ for larger $d$ does not apply at
+$d = 2$. The factor-of-two gap between Clifford and general opens up at
+$d = 3$ and stays open from then on.
 
 ![**Figure 4.** The grand orbit of $h$ for $d = 3$: the eight nonzero
 labels arranged in the cycle
-$(1,0) \to (0,1) \to \cdots \to (1,1) \to (1,0)$. Complete positivity
-forces the zeros of $\lambda$ into a mirror pair (here $(1,0)$ and its
+$(1,0) \to (0,1) \to \cdots \to (1,1) \to (1,0)$. The mirror symmetry
+forces the zeros of $\lambda$ into a pair (here $(1,0)$ and its
 antipode $(2,0)$), splitting the cycle into two arcs of four steps
 each.](figures/orbit-d3.svg){#fig-orbit}
 
 And that settles it. Whichever point you start from, you reach one of
 the two zeros within half a turn of the cycle. The longest you can be
-made to wait is the length of one arc, $(d^2 - 1)/2$ steps. Choose
-$\lambda$ to vanish on exactly one mirror pair and to be a suitable
-nonzero size everywhere else (which keeps the channel completely
-positive), and you have built a Clifford channel that erases in exactly
+made to wait is the length of one arc, $(d^2 - 1)/2$ steps.
+
+One technical point remains, and I would rather flag it than slip past.
+Choosing where $\lambda$ vanishes is not the same as proving that such a
+$\lambda$ comes from a genuinely completely positive channel. This is the
+second layer from a moment ago: complete positivity asks a certain matrix
+assembled from the values of $\lambda$ to be positive semidefinite, and
+the mirror pairing alone does not deliver it. It can be met, though. Keep
+the nonzero amplitudes modest away from the paired zeros and the channel
+stays completely positive, so suitable $\lambda$ do exist; we simply do
+not get free run of the whole half-cycle. The thesis works the positivity
+criterion out in full (§5.2.1).
+
+With that secured, we have built a Clifford channel that erases in exactly
 $$
 k = \frac{d^2 - 1}{2}
 $$
@@ -733,13 +762,17 @@ completely depolarising channel, into equal steps?
 
 - Classically, with a bistochastic copier: $d - 1$ steps.
 - With a general quantum channel: $d^2 - 1$ steps.
-- With a Clifford channel, the stripped-down two-piece kind:
-  $\dfrac{d^2 - 1}{2}$ steps.
+- With a Clifford channel: $d^2 - 1$ at $d = 2$, dropping to
+  $\dfrac{d^2 - 1}{2}$ for $d$ an odd prime.
 
-For a qutrit those numbers are $2$, $8$, and $4$. The Clifford copier,
-carrying almost no information about itself, lands at $4$: within a
-factor of two of the full quantum power of $8$, and already twice the
-classical $2$.
+For a qubit ($d = 2$): $1$ classically, $3$ generally, $3$ with Clifford
+channels. The qubit is the case where the Clifford toolbox is already the
+full toolbox.
+
+For a qutrit ($d = 3$): $2$ classically, $8$ generally, $4$ with Clifford
+channels. Here the gap opens. The Clifford copier, carrying almost no
+information about itself, lands at $4$: within a factor of two of the
+full quantum power of $8$, and already twice the classical $2$.
 
 That is the part worth carrying away. When we restricted from all
 quantum channels down to Clifford channels, we threw away almost all the
@@ -755,7 +788,7 @@ root is as long as the longest orbit of $h$, and a well-chosen $h$ runs
 through all $d^2 - 1$ labels at once. The only thing the quantum
 machinery buys you over this finite-field skeleton is the factor of two,
 and even that is not channel richness: it is the one symmetry,
-$\lambda(-\eta) = \overline{\lambda(\eta)}$, that complete positivity
+$\lambda(-\eta) = \overline{\lambda(\eta)}$, that Hermiticity preservation
 stamps on the amplitudes and nothing more.
 
 A question that began with photocopiers and density matrices turns out
