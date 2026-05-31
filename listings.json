@@ -3,6 +3,7 @@
     "listing": "/index.html",
     "items": [
       "/posts/clifford-roots/figures/fig1-state-space/interactive.html",
+      "/posts/clifford-roots/figures/fig2-simplex-root/interactive.html",
       "/posts/clifford-roots/figures/fig3-bloch-ball/interactive.html"
     ]
   }

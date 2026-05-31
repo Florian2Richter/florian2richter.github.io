@@ -1,10 +1,17 @@
 [
   {
-    "objectID": "posts/clifford-roots/figures/fig1-state-space/interactive.html",
-    "href": "posts/clifford-roots/figures/fig1-state-space/interactive.html",
+    "objectID": "posts/clifford-roots/figures/fig2-simplex-root/interactive.html",
+    "href": "posts/clifford-roots/figures/fig2-simplex-root/interactive.html",
     "title": "Florian's Blog",
     "section": "",
-    "text": "Interactive probability simplex over three outcomes. Click inside the triangle to read off the probability distribution (p1, p2, p3) for that point, computed from barycentric coordinates relative to the three vertices e1, e2, e3.\n\n\n  \n    \n      \n    \n  \n  \n  \n  \n  \n\n  \n  \n\n  \n  \n    \n    \n    \n  \n\n  \n  \n  \n  \n\n  \n  \n  \n  \n\n  \n  e₁\n  (1, 0, 0)\n  e₂\n  (0, 1, 0)\n  e₃\n  (0, 0, 1)\n\n  \n  \n  p₀\n  (⅓, ⅓, ⅓)\n\n\n  \n    \n      Sampled distribution (p₁, p₂, p₃)\n      click inside the triangle\n    \n    \n      \n        p₁\n        \n        —\n      \n      \n        p₂\n        \n        —\n      \n      \n        p₃\n        \n        —"
+    "text": "Interactive square-root trajectories on the probability simplex. Three default trajectories are shown: the pure states e1, e2, e3 each reach the uniform distribution in two steps, with e1 and e2 merging at the same intermediate point. Click inside the triangle to trace your own starting distribution and read off its two images under the root S.\n\n\n  \n    \n      \n    \n    \n      \n    \n  \n\n  \n  \n\n  \n  \n    \n    \n    \n  \n\n  \n  \n  \n  \n\n  \n  \n  \n\n  \n  \n  \n\n  \n  \n  \n  \n\n  \n  \n\n  \n  e₁\n  (1, 0, 0)\n  e₂\n  (0, 1, 0)\n  e₃\n  (0, 0, 1)\n\n  \n  qa\n  qb\n\n  \n  p₀\n  (⅓, ⅓, ⅓)\n\n\n  \n    \n      Your trajectory under S\n      click inside the triangle\n    \n    \n      ρ₀—\n      S ρ₀—\n      S² ρ₀—"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I am Florian Richter, an AI Evangelist with a background in quantum information. This blog is where I write up ideas from quantum information theory at the level of detail I’d want to read myself.\nFor collaboration inquiries, write to florian2richter@gmail.com."
   },
   {
     "objectID": "index.html",
@@ -14,11 +21,11 @@
     "text": "No matching items"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "posts/clifford-roots/figures/fig1-state-space/interactive.html",
+    "href": "posts/clifford-roots/figures/fig1-state-space/interactive.html",
+    "title": "Florian's Blog",
     "section": "",
-    "text": "I am Florian Richter, an AI Evangelist with a background in quantum information. This blog is where I write up ideas from quantum information theory at the level of detail I’d want to read myself.\nFor collaboration inquiries, write to florian2richter@gmail.com."
+    "text": "Interactive probability simplex over three outcomes. Click inside the triangle to read off the probability distribution (p1, p2, p3) for that point, computed from barycentric coordinates relative to the three vertices e1, e2, e3.\n\n\n  \n    \n      \n    \n  \n  \n  \n  \n  \n\n  \n  \n\n  \n  \n    \n    \n    \n  \n\n  \n  \n  \n  \n\n  \n  \n  \n  \n\n  \n  e₁\n  (1, 0, 0)\n  e₂\n  (0, 1, 0)\n  e₃\n  (0, 0, 1)\n\n  \n  \n  p₀\n  (⅓, ⅓, ⅓)\n\n\n  \n    \n      Sampled distribution (p₁, p₂, p₃)\n      click inside the triangle\n    \n    \n      \n        p₁\n        \n        —\n      \n      \n        p₂\n        \n        —\n      \n      \n        p₃\n        \n        —"
   },
   {
     "objectID": "posts/clifford-roots/figures/fig3-bloch-ball/interactive.html",
