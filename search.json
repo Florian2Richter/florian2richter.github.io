@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "posts/clifford-roots/figures/fig1-state-space/interactive.html",
+    "href": "posts/clifford-roots/figures/fig1-state-space/interactive.html",
+    "title": "Florian's Blog",
+    "section": "",
+    "text": "Interactive probability simplex over three outcomes. Click inside the triangle to read off the probability distribution (p1, p2, p3) for that point, computed from barycentric coordinates relative to the three vertices e1, e2, e3.\n\n\n  \n    \n      \n    \n  \n  \n  \n  \n  \n\n  \n  \n\n  \n  \n    \n    \n    \n  \n\n  \n  \n  \n  \n\n  \n  \n  \n  \n\n  \n  e₁\n  (1, 0, 0)\n  e₂\n  (0, 1, 0)\n  e₃\n  (0, 0, 1)\n\n  \n  \n  p₀\n  (⅓, ⅓, ⅓)\n\n\n  \n    \n      Sampled distribution (p₁, p₂, p₃)\n      click inside the triangle\n    \n    \n      \n        p₁\n        \n        —\n      \n      \n        p₂\n        \n        —\n      \n      \n        p₃\n        \n        —"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Florian’s Blog",
@@ -12,5 +19,12 @@
     "title": "About",
     "section": "",
     "text": "I am Florian Richter, an AI Evangelist with a background in quantum information. This blog is where I write up ideas from quantum information theory at the level of detail I’d want to read myself.\nFor collaboration inquiries, write to florian2richter@gmail.com."
+  },
+  {
+    "objectID": "posts/clifford-roots/figures/fig3-bloch-ball/interactive.html",
+    "href": "posts/clifford-roots/figures/fig3-bloch-ball/interactive.html",
+    "title": "Florian's Blog",
+    "section": "",
+    "text": "Interactive Bloch ball, the state space of a single qubit. Click the front surface of the ball to choose a pure state, then use the Purity slider to move it inward toward the maximally mixed state at the centre. The readout shows the Bloch vector, the density matrix, and its eigenvalues.\n\n\n  \n    \n      \n    \n  \n\n  \n  \n\n  \n  \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n  \n\n  \n  \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n  \n\n  \n  \n\n  \n  \n  \n  \n\n  \n  \n  \n  \n\n  \n  |0⟩\n  |1⟩\n  x\n  y\n  z\n  I/2\n\n\n  \n    \n      Bloch vector (rₓ, rᵉ, rᵢ)\n      click the front of the ball\n    \n    \n      Purity\n      \n      r = —\n    \n    \n      ρ = ½(I + r·σ) =\n      \n        —\n        —\n        —\n        —"
   }
 ]
