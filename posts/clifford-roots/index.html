@@ -500,7 +500,16 @@ S^k = P \quad \text{and} \quad S^r \ne P \text{ for any } r &lt; k.
 <p>Now peel off the part of <span class="math inline">S</span> that is not already <span class="math inline">P</span>. Set <span class="math inline">N = S - P</span>. The two absorption facts give <span class="math inline">PN = NP = 0</span>, so <span class="math inline">P</span> and <span class="math inline">N</span> never interfere, and the binomial expansion collapses to <span class="math display">
 S^k = (P + N)^k = P + N^k.
 </span> So <span class="math inline">S^k = P</span> exactly when <span class="math inline">N^k = 0</span>. And <span class="math inline">N</span> is nilpotent on the right space: it kills the uniform direction (<span class="math inline">Nu = Su - Pu = u - u = 0</span>) and sends everything else into the <span class="math inline">(d-1)</span>-dimensional space of traceless vectors.</p>
-<p>A nilpotent operator is governed by its Jordan form, a stack of blocks each of which powers to zero in exactly its own size. The largest block that fits in <span class="math inline">d - 1</span> dimensions has size <span class="math inline">d - 1</span>, so the smallest <span class="math inline">k</span> with <span class="math inline">N^k = 0</span> is at most <span class="math inline">d - 1</span>. That is the bound, and it is tight: take <span class="math inline">N</span> to be a single Jordan block of size <span class="math inline">d - 1</span>, and (after checking <span class="math inline">P + N</span> stays bistochastic) you have a root of order exactly <span class="math inline">d - 1</span>.</p>
+<p>A nilpotent operator is governed by its Jordan form, a stack of blocks each of which powers to zero in exactly its own size. The largest one that fits in <span class="math inline">d - 1</span> dimensions is the single <span class="math inline">(d-1) \times (d-1)</span> block with ones on the superdiagonal, <span class="math display">
+N \;\cong\;
+\begin{pmatrix}
+0 &amp; 1 &amp; &amp; &amp; \\
+&amp; 0 &amp; 1 &amp; &amp; \\
+&amp; &amp; \ddots &amp; \ddots &amp; \\
+&amp; &amp; &amp; 0 &amp; 1 \\
+&amp; &amp; &amp; &amp; 0
+\end{pmatrix}.
+</span> Each power pushes that diagonal of ones one step toward the corner, so <span class="math inline">N^{d-1} = 0</span> while <span class="math inline">N^{d-2} \neq 0</span>. The smallest <span class="math inline">k</span> with <span class="math inline">N^k = 0</span> is therefore at most <span class="math inline">d - 1</span>, which is the bound. It is tight: this very block, as long as <span class="math inline">P + N</span> stays bistochastic, gives a root of order exactly <span class="math inline">d - 1</span>.</p>
 </details>
 <p>For <span class="math inline">d = 2</span> the bound says <span class="math inline">k = 1</span>, which is to say there are no non-trivial roots. The two-state CDC can only be split into one step, itself. Total erasure of one classical bit is a one-shot affair.</p>
 <p>For <span class="math inline">d = 3</span> the bound is <span class="math inline">k = 2</span>. A square root of the bistochastic <span class="math inline">3 \times 3</span> CDC exists, and it acts on the simplex by funnelling every point along a two-step trajectory to the centre (<a href="#fig-root-d3" class="quarto-xref">Figure&nbsp;2</a>).</p>
