@@ -20,13 +20,14 @@ Each finished figure folder contains, by convention:
 
 | file | what it is |
 |------|------------|
-| `README.md` | what the figure shows, how to build and modify it, how it is wired in |
+| `README.md` | the single self-contained doc: what the figure shows, the design knobs and constraints, how to build and modify it, how it is wired in |
 | `*_figure.py` | the generator: emits the **static** SVG, all geometry as constants at the top |
 | `*.svg` | the generated static SVG (the artifact that ships and survives with JS off) |
 | `interactive.qmd` | the partial the post includes: a single `{=html}` block with the inlined SVG plus a progressive-enhancement readout and `<script>` |
-| `instructions.md` | the original task spec for the interactive layer |
-| `continuation.md` | the original context / handover notes |
-| `reference-*.html` | the original interactive fragment as delivered, kept for provenance |
+
+The original task specs and handover notes have been summarised into each
+figure's `README.md`, so the folder carries only the working pipeline plus
+its one doc.
 
 ## The pattern: progressive enhancement
 

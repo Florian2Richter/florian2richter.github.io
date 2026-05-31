@@ -32,9 +32,9 @@ axis.
 | `state_space_figure.py` | generator for the static SVG; all geometry (canvas, vertices, axis endpoints) is in named constants at the top |
 | `state_space.svg` | the generated static SVG (checked in) |
 | `interactive.qmd` | the partial the post includes: scoped `<style>`, the inlined SVG, the readout panel, and the `<script>` |
-| `instructions.md` | original task spec for the interactive layer |
-| `continuation.md` | original handover / context notes |
-| `reference-interactive.html` | the interactive fragment exactly as delivered (provenance) |
+
+This README is the single self-contained doc for the figure; the useful
+content of the original task spec and handover notes is folded in below.
 
 ## How geometry stays in sync
 
@@ -57,8 +57,25 @@ ordering is the only coupling between the Python and the JS.
   edits as long as the polygon vertices stay in `e1, e2, e3` order.
 - **Readout styling:** the scoped `.simplex-interactive` CSS lives in the
   `<style>` block at the top of `interactive.qmd`.
-- **Marker colour / readout placement:** see the "two design choices"
-  section of `instructions.md`.
+- **Marker colour:** the user-placed marker is teal (`#1d9e75` fill,
+  `#0f6e56` stroke) to set it apart from the structural red `p0` dot; to
+  reuse the red, change the two marker circle fills/strokes in the script.
+- **Readout placement:** the readout sits below the figure (consistent at
+  all widths). To place it beside the figure on wide screens, wrap the SVG
+  and `.si-readout` in a flex/grid container with a responsive breakpoint.
 
 After any change, re-render the post and confirm the figure and its
 `@fig-simplex-d3` reference. No edit to `index.qmd` is needed.
+
+## Design constraints (from the original spec)
+
+- The interactive layer is **purely additive**: with JS disabled the
+  reader must see the unaltered static triangle and a quiet, empty
+  readout. Nothing may make the figure depend on JS to appear.
+- Do **not** switch the embedding to `fetch()` the SVG at runtime: a
+  failed or disabled fetch would leave no figure at all. The SVG is
+  inlined for exactly this reason.
+- The static SVG is navy strokes on a transparent background, intended
+  for a light page. The site theme (`cosmo`) is light, so this is fine;
+  if a dark mode is ever added, verify legibility rather than recolouring
+  the SVG (it is the shipping static artifact).

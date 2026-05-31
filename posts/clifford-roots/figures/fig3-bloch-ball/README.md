@@ -37,9 +37,9 @@ shows placeholders, and the slider is disabled.
 | `bloch_ball_figure.py` | generator for the static SVG; geometry, viewing angles, and wireframe density are constants at the top. Emits `data-*` projection attributes on the `<svg>` tag |
 | `bloch_ball.svg` | the generated static SVG (checked in) |
 | `interactive.qmd` | the partial the post includes: scoped `<style>`, the inlined SVG, the readout (with the purity slider and the 2x2 density-matrix grid), and the `<script>` |
-| `instructions.md` | original task spec for the interactive layer |
-| `continuation.md` | original handover / context notes |
-| `reference-interactive-CORRUPTED.html` | the interactive fragment as originally delivered; see the note below |
+
+This README is the single self-contained doc for the figure; the useful
+content of the original task spec and handover notes is folded in below.
 
 ## How geometry stays in sync
 
@@ -54,11 +54,10 @@ retuning of the angles.
 
 ## Note: this figure was reconstructed
 
-The originally delivered `figure3-interactive.html` (kept here as
-`reference-interactive-CORRUPTED.html`) arrived corrupted: its `<style>`
-block and its `.bloch-interactive` wrapper were missing, and the header
-comment had swallowed the `<svg>` opening tag. The figure was rebuilt
-from the parts that were intact plus the generator:
+The originally delivered `figure3-interactive.html` arrived corrupted:
+its `<style>` block and its `.bloch-interactive` wrapper were missing,
+and the header comment had swallowed the `<svg>` opening tag. The figure
+was rebuilt from the parts that were intact plus the generator:
 
 - the **SVG** was regenerated verbatim from `bloch_ball_figure.py`;
 - the **readout HTML** and the **`<script>`** were taken unchanged from
@@ -82,10 +81,32 @@ author's original design.
   `interactive.qmd`, replacing the old inline SVG. Keep the opening
   `<svg>` tag as emitted; it carries the `data-*` attributes the JS
   reads. The `<script>` needs no edits.
-- **Readout styling / depth-cue strength / marker colour:** the scoped
-  `.bloch-interactive` CSS and the depth-cue constants
-  (`0.4 + 0.6*t`, `0.78 + 0.22*t`) are in `interactive.qmd`; see the
-  "two design defaults" section of `instructions.md`.
+- **Readout styling:** the scoped `.bloch-interactive` CSS lives in the
+  `<style>` block at the top of `interactive.qmd`.
+- **Depth-cue strength:** as purity goes 1 to 0, the marker opacity runs
+  `1.0 -> 0.4` and its scale `1.0 -> 0.78` (the `0.4 + 0.6*t`,
+  `0.78 + 0.22*t`, and halo-opacity `t` lines in the script's `render()`).
+  The marker never fully vanishes, so the maximally mixed state stays
+  visible at the centre. Dial these if the centre feels too faint or the
+  shrink too strong.
+- **Marker colour:** the user marker is teal to contrast with the red
+  `I/2` centre dot; change the two marker circle fills/strokes to reuse
+  the red.
 
 After any change, re-render the post and confirm the figure and its
 `@fig-bloch` reference. No edit to `index.qmd` is needed.
+
+## Design constraints (from the original spec)
+
+- The interactive layer is **purely additive**: with JS disabled the
+  reader sees the unaltered static Bloch ball, a placeholder readout, and
+  a disabled slider. Nothing may make the figure depend on JS to appear.
+- Do **not** switch the embedding to `fetch()` the SVG: a failed or
+  disabled fetch would leave no figure at all. The SVG is inlined.
+- Do **not** have the JS redraw the wireframe. The wireframe, axes,
+  poles, and labels are all in the baked SVG; the script only *adds* a
+  faint radius guide, a hover-preview dot, and the marker, and updates
+  the readout.
+- Clicks map only to the camera-facing (front) hemisphere, the visible
+  surface. Interior (mixed) states are reached via the purity slider
+  scaling the chosen surface direction inward, not by clicking.
