@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 620" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a3550"/>
+    </marker>
+  </defs>
+  <!-- Coordinate axes -->
+  <line x1="310" y1="430" x2="95" y2="530"
+        stroke="#1a3550" stroke-width="1.8"
+        marker-end="url(#arrow)"/>
+  <line x1="310" y1="430" x2="590" y2="430"
+        stroke="#1a3550" stroke-width="1.8"
+        marker-end="url(#arrow)"/>
+  <line x1="310" y1="430" x2="310" y2="75"
+        stroke="#1a3550" stroke-width="1.8"
+        marker-end="url(#arrow)"/>
+
+  <!-- Simplex (triangular face) -->
+  <polygon points="140,510 540,430 310,130"
+           fill="#a8c5d8" fill-opacity="0.55"
+           stroke="#1a3550" stroke-width="2.2"
+           stroke-linejoin="round"/>
+
+  <!-- Medians from each vertex to opposite edge midpoint -->
+  <g stroke="#1a3550" stroke-width="0.9" stroke-opacity="0.22" stroke-dasharray="4,5">
+    <line x1="140" y1="510" x2="425.0" y2="280.0"/>
+    <line x1="540" y1="430" x2="225.0" y2="320.0"/>
+    <line x1="310" y1="130" x2="340.0" y2="470.0"/>
+  </g>
+
+  <!-- Unit tick marks on the axes at the simplex vertices -->
+  <line x1="143.0" y1="516.3" x2="137.0" y2="503.7" stroke="#1a3550" stroke-width="1.6"/>
+  <line x1="540.0" y1="423.0" x2="540.0" y2="437.0" stroke="#1a3550" stroke-width="1.6"/>
+  <line x1="303.0" y1="130.0" x2="317.0" y2="130.0" stroke="#1a3550" stroke-width="1.6"/>
+
+  <!-- Vertex dots -->
+  <circle cx="140" cy="510" r="5.5" fill="#1a3550"/>
+  <circle cx="540" cy="430" r="5.5" fill="#1a3550"/>
+  <circle cx="310" cy="130" r="5.5" fill="#1a3550"/>
+
+  <!-- Vertex labels and their probability vectors -->
+  <text x="124" y="538" text-anchor="end" font-size="22" font-style="italic" fill="#1a3550">e₁</text>
+  <text x="124" y="558" text-anchor="end" font-size="14" fill="#3a5a72">(1, 0, 0)</text>
+  <text x="562" y="438" text-anchor="start" font-size="22" font-style="italic" fill="#1a3550">e₂</text>
+  <text x="562" y="458" text-anchor="start" font-size="14" fill="#3a5a72">(0, 1, 0)</text>
+  <text x="288" y="122" text-anchor="end" font-size="22" font-style="italic" fill="#1a3550">e₃</text>
+  <text x="288" y="142" text-anchor="end" font-size="14" fill="#3a5a72">(0, 0, 1)</text>
+
+  <!-- Centroid p_0 -->
+  <circle cx="330.0" cy="356.6666666666667" r="6.5" fill="#c0392b"/>
+  <text x="344.0" y="354.6666666666667" font-size="21" font-style="italic" fill="#1a3550">p₀</text>
+  <text x="344.0" y="374.6666666666667" font-size="13" fill="#3a5a72">(⅓, ⅓, ⅓)</text>
+</svg>
