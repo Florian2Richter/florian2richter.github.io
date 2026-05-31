@@ -95,16 +95,42 @@ The voice target is **Matuschak and Nielsen's
 
 ## Current state
 
-- **Drafted:** sections 1 (hook) and 2 (classical setup).
-- **Skeleton + TODOs:** sections 3 to 9.
-- **No figures yet.** Two figure placeholders in section 2
-  (`figures/simplex-d3.svg`, `figures/simplex-root-d3.svg`) point at
-  files that don't exist.
-- **Citation TODOs:** mixing-channels footnote in the hook (Burgarth
-  et al. / Sanz et al. / Wolf lecture notes are candidates, to
-  verify), and the classical-bound footnote in section 2.
-- **`draft: true`** is set on the post frontmatter, so it does not
-  yet appear in the blog index.
+- **Drafted:** all nine sections (1 through 9). Full first draft,
+  awaiting Florian's revision pass.
+- **Inline expandable asides** (`<details class="aside">`, styled in
+  `styles.css`) hide the heavier derivations: the linearity argument,
+  the row-sum computation, the $d^2-1$ parameter count, the explicit
+  Weyl operators / why $d$ is prime, primitive polynomials, and the
+  $\lambda(-\eta)=\overline{\lambda(\eta)}$ derivation. Claim stays in
+  the text, derivation one click away. Click-to-expand, not hover
+  (hover fails on touch and can't hold display math).
+- **No figures yet.** Four placeholders point at files that don't
+  exist: `figures/simplex-d3.svg`, `figures/simplex-root-d3.svg`
+  (section 2), `figures/bloch-ball.svg` (section 3),
+  `figures/orbit-d3.svg` (section 7, the eight-point $d=3$ cycle).
+- **Citation TODOs:** mixing-channels footnote in the hook (candidates
+  to verify), classical-bound footnote (section 2), the general
+  $d^2-1$ construction (section 9, working title only), and confirm
+  the exact thesis title + add a PDF link (section 9). The channels
+  footnote in section 3 (Nielsen & Chuang ch. 8, Wolf notes) is a real
+  citation.
+- **Worked example thread:** $d=3$ (qutrit) runs through sections 6-8.
+  Primitive polynomial $x^2+x+2$, companion matrix $h=\binom{0\ 1}{1\ 2}$,
+  the explicit 8-cycle, mirror-pair zeros at $(1,0)/(2,0)$, root of
+  order 4. The three bounds for $d=3$ are 2 / 4 / 8.
+- **`draft: true`** is set on the post frontmatter. With
+  `draft-mode: unlinked` in `_quarto.yml`, the post renders in full at
+  its direct URL but stays out of the blog index, feed, and search.
+  Flip to `draft: false` to publish.
+
+## Preview server gotcha
+
+Do NOT run `quarto render` while `quarto preview` is live: they fight
+over the `.quarto` cache and wedge the preview's file watcher, which
+shows up as "missing chapters" (stale page). Let the preview server do
+the rendering; if it goes stale, kill it (the child process is a
+`deno`, find it with `ss -ltnp | grep <port>` and `kill -9` the pid)
+and restart `quarto preview`.
 
 ## Branches
 

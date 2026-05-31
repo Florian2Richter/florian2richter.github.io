@@ -1,8 +1,13 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "index.qmd"
+    - "about.qmd"
+    - "posts/**/*.qmd"
 
 website:
+  draft-mode: unlinked
   title: "Florian's Blog"
   description: "Notes on quantum information, Clifford channels, and the corners of math that make them tick."
   site-url: "https://florian2richter.github.io"
@@ -31,6 +36,6 @@ format:
     toc: true
     toc-depth: 3
     code-fold: false
-    html-math-method: mathjax
+    html-math-method: katex
     fig-cap-location: bottom
     link-external-newwindow: true

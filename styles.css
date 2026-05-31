@@ -10,7 +10,53 @@ figcaption,
   color: #555;
 }
 
-/* MathJax display equations: a touch more breathing room */
-mjx-container[display="true"] {
+/* KaTeX display equations: a touch more breathing room */
+.katex-display {
   margin: 1.2em 0 !important;
+}
+
+/* Inline expandable asides: a claim stays in the text, the
+   justification hides behind a clickable summary that reads like a
+   link. No callout box; just a soft left border when opened. */
+details.aside {
+  margin: 1em 0;
+}
+
+details.aside > summary {
+  cursor: pointer;
+  display: inline-block;
+  color: #2a6fb3;
+  font-size: 0.95em;
+  list-style: none;          /* hide the default disclosure triangle */
+  border-bottom: 1px dotted #2a6fb3;
+  width: fit-content;
+}
+
+details.aside > summary::-webkit-details-marker {
+  display: none;             /* Safari/Chrome triangle */
+}
+
+details.aside > summary::before {
+  content: "▸ ";
+  font-size: 0.8em;
+  border-bottom: none;
+}
+
+details.aside[open] > summary {
+  margin-bottom: 0.4em;
+  color: #555;
+  border-bottom-color: transparent;
+}
+
+details.aside[open] > summary::before {
+  content: "▾ ";
+}
+
+details.aside[open] {
+  border-left: 2px solid #e2e2e2;
+  padding-left: 1em;
+}
+
+details.aside > summary:hover {
+  color: #1a4f85;
 }

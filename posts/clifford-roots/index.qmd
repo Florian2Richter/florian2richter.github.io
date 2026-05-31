@@ -73,11 +73,10 @@ classical case, where everything is ordinary probability theory.
 Pick a small number of distinct states that your image can be in. Say
 there are three: black, grey, and white. Then "the image" at any
 moment is described by a probability distribution over these three
-states. Maybe right now the image is definitely white,
-$p = (0, 0, 1)$. Maybe after some processing it has drifted to
-$p = (0.4, 0.5, 0.1)$, meaning the image is 40% likely black, 50%
-grey, 10% white, with the uncertainty representing whatever noise has
-crept in.
+states. Maybe right now the image is definitely white, which we write
+as $(0, 0, 1)$. Maybe after some processing it has drifted to
+$(0.4, 0.5, 0.1)$: 40% likely black, 50% grey, 10% white, the
+uncertainty standing in for whatever noise has crept in.
 
 The set of all such probability distributions over $d$ states is a
 familiar geometric object: a $(d - 1)$-dimensional simplex. For
@@ -89,21 +88,107 @@ distribution (totally unsure, every colour equally likely).
 Vertices are the pure states; the centre is the uniform
 distribution.](figures/simplex-d3.svg){#fig-simplex-d3}
 
-A copy operation takes one probability distribution and returns
-another. The mathematical object that does this is a *stochastic
-matrix*: a $d \times d$ matrix $S$ whose columns are themselves
-probability distributions. Column $j$ tells you "if the input is
-definitely state $j$, here is the probability distribution of the
-output." And $S$ acts on a general distribution $p$ by matrix
-multiplication: $Sp$ is the output distribution.
+A copy operation takes one probability distribution as input and
+returns another. Before we write down what kind of object such an
+operation is, it is worth asking what we want to insist on.
 
-Two facts about stochastic matrices are worth pinning down before we
-keep going. First, $S^k$ describes what happens if you apply $S$ to
-its own output $k$ times in a row, so the question of finite roots is
-going to be a question about powers of matrices. Second, the entries
-of $S^k$ stay non-negative and the columns still sum to one, so no
-matter how many times you copy, the result is still a stochastic
-matrix and still maps the simplex to the simplex. Nothing escapes.
+The first thing is *linearity*. The copier $S$ has to be a linear
+map: if you feed it a coin-flip mixture of two inputs, the output has
+to be the same coin-flip mixture of the two separate outputs. Anything
+else would let the copier react to information beyond what the input
+distribution actually contains, which is a contradiction in terms.
+
+```{=html}
+<details class="aside">
+<summary>Why must mixtures behave this way?</summary>
+```
+
+Suppose you decide your input on the flip of a coin: with probability
+$\alpha$ you start from distribution $p$, and with probability
+$1 - \alpha$ you start from $q$. The total input, before you flip the
+coin, is the mixture $\alpha p + (1 - \alpha) q$.
+
+Apply the copier $S$. You can describe what comes out in two ways. From
+inside the experiment, the output is "$S(p)$ with probability $\alpha$,
+$S(q)$ otherwise," which is the distribution
+$\alpha S(p) + (1 - \alpha) S(q)$. From outside, ignoring the coin flip,
+you simply fed the copier a single mixture, so the output is
+$S(\alpha p + (1 - \alpha) q)$.
+
+These two descriptions had better agree:
+$$
+S\bigl(\alpha p + (1 - \alpha) q\bigr) \;=\; \alpha S(p) + (1 - \alpha) S(q).
+$$
+If they disagreed, "the input is a probability distribution" would stop
+meaning what we want it to mean. So $S$ is linear.
+
+```{=html}
+</details>
+```
+
+And a linear map is just a matrix. So from here on our copier is a
+matrix, which we will call $S$, and applying it to a distribution is
+ordinary matrix multiplication.
+
+That already pins down what the entries of $S$ can look like. Feed in a
+pure state, all the probability on one entry, and the output is just one
+column of $S$. For that column to be a probability distribution in its
+own right, its entries must be non-negative and sum to one:
+$$
+S_{ij} \geq 0, \qquad \sum_i S_{ij} = 1.
+$$
+The same holds for every column, and linearity then takes care of every
+mixture in between. A matrix of this kind, non-negative entries with
+every column summing to one, is called a *stochastic matrix*: exactly
+the linear maps that send probability distributions to probability
+distributions.
+
+There is one more restriction we will impose, and it turns out to
+be the most interesting one in retrospect. We will only consider
+copiers that leave the *uniform distribution* untouched: the flat
+distribution that puts equal weight on every state has to come back
+out exactly as it went in.
+
+Why? The uniform distribution represents *no information* about the
+state of the image: every outcome equally likely. A copier that maps
+"no information" to "some information" would be generating knowledge
+out of nothing, which is the opposite of what an erasure process
+ought to do. For a process whose job is to lose information, the
+uniform distribution is a natural fixed point to leave alone. (In
+the quantum upgrade later in the post, the analogous restriction is
+more than just natural, it is the standard convention. For now,
+take it as a sensible thing to ask for.)
+
+This small demand has a tidy consequence. We already know the columns
+of $S$ sum to one. Insisting that the uniform distribution survives
+forces the *rows* to sum to one as well. A stochastic matrix with that
+extra symmetry is called *bistochastic*, and from here on "copier" will
+mean "bistochastic matrix."
+
+```{=html}
+<details class="aside">
+<summary>The one-line computation</summary>
+```
+
+Write $u = (1/d, \ldots, 1/d)$ for the uniform distribution and ask for
+$Su = u$. Reading off entry $i$ of the output,
+$$
+(Su)_i \;=\; \sum_j S_{ij} \cdot \frac{1}{d}
+\;=\; \frac{1}{d} \sum_j S_{ij}
+\;\overset{!}{=}\; \frac{1}{d},
+$$
+which is exactly $\sum_j S_{ij} = 1$ for every row $i$.
+
+```{=html}
+</details>
+```
+
+One small fact worth pinning down before we go further: the product
+of two bistochastic matrices is bistochastic, which you can verify
+directly from the row and column sum conditions. So $S^k$ stays
+bistochastic for any $k$, and the question of finite roots is going
+to be a question about powers of matrices that stay safely inside
+our chosen class.
 
 Now we can say precisely what "total erasure" means. The most
 depolarising copier you can write down is the one whose every column
@@ -120,17 +205,14 @@ $$
 
 Apply $P$ to anything and you get the uniform distribution back. All
 information about the input has been thrown away in a single step.
-Apply $P$ again and nothing changes; the simplex has been crushed to a
-single point, the centre, and $P$ just keeps mapping it there.
-
-This $P$ is the *completely depolarising channel*, or CDC. (More
-precisely it is the *bistochastic* CDC, the one that preserves the
-uniform distribution. There are other CDCs that crush the simplex to
-some other fixed point. For the rest of this post, "CDC" will always
-mean the bistochastic one.)
+Apply $P$ again and nothing changes: the simplex has been crushed to
+a single point, the centre, and $P$ just keeps mapping it there.
+This $P$ is bistochastic by inspection (every row sums to one as
+well), and it is the *completely depolarising channel* in dimension
+$d$, or CDC for short.
 
 With $P$ pinned down we can ask the post's question, precisely. A
-*$k$-th root* of $P$ is a stochastic matrix $S$ such that
+*$k$-th root* of $P$ is a bistochastic matrix $S$ such that
 $$
 S^k = P \quad \text{and} \quad S^r \ne P \text{ for any } r < k.
 $$
@@ -176,106 +258,543 @@ ourselves leave classical probability behind.
 <!-- =================================================================== -->
 ## The quantum upgrade {#sec-quantum}
 
-If qubits, gates, and the $|0\rangle, |1\rangle$ notation aren't
-already part of your mental furniture, the gentlest on-ramp I know of
-is Matuschak and Nielsen's
+If qubits and the $|0\rangle, |1\rangle$ notation aren't already part
+of your mental furniture, the gentlest on-ramp I know of is Matuschak
+and Nielsen's
 [Quantum Computing for the Very Curious](https://quantum.country/qcvc).
 Read it first, or just keep going and chase the link when something
-looks unfamiliar.
+looks unfamiliar. We will lean on it rather than rebuild it.
 
-<!-- TODO:
-  - Mixed states, density matrices. Bloch ball for the qubit case.
-  - Quantum channels (CPTP maps): light touch, cite Stinespring/Kraus
-    rather than develop.
-  - The completely depolarizing channel: everything mapped to the maximally
-    mixed state. Bloch ball collapses to its centre. [FIGURE]
-  - The bound jumps from $d - 1$ to $d^2 - 1$, via the Jordan-block
-    argument on a $d^2 \times d^2$ representation matrix.
-  - The puzzle: can $d^2 - 1$ actually be *achieved*? It's an upper bound
-    from a structural argument, the existence question is separate.
--->
+Everything so far was a rehearsal. The real question is about quantum
+information, and a quantum state carries more than a probability
+distribution does. More in a way we can count, and the count turns out
+to be the whole plot of this section.
+
+Go back to the smallest example. A classical bit is a probability
+distribution over two outcomes: one number between zero and one, with
+the rest left over. Those states form a line segment. One dimension of
+freedom, the two definite bits at its ends and the coin-flip state in
+the middle.
+
+A quantum bit, a *qubit*, has more room than that line. Its state is no
+longer a list of probabilities but a small matrix, called a *density
+matrix*. You do not need its inner workings here, only its shape: the
+states of a single qubit fill a solid ball in three dimensions, the
+*Bloch ball*. The definite states, the quantum versions of "this bit is
+certainly $0$," sit on the surface. Blends of them sit inside. At the
+dead centre is the state of total ignorance, the quantum coin flip.
+
+![**Figure 3.** The Bloch ball: the state space of a single qubit. Pure
+states live on the surface, mixed states inside, and the maximally
+mixed state sits at the centre. Compare the classical bit, whose states
+fill only a line segment.](figures/bloch-ball.svg){#fig-bloch}
+
+Notice what happened to the dimension. The classical bit lived on a
+line, one dimension. The qubit lives in a ball, *three*. That is no
+accident, and the pattern is the point. A quantum state in dimension
+$d$ is a $d \times d$ density matrix: Hermitian, with non-negative
+eigenvalues, and trace one. Count the real numbers it takes to pin one
+down and you get $d^2 - 1$.
+
+```{=html}
+<details class="aside">
+<summary>Where $d^2 - 1$ comes from</summary>
+```
+
+A $d \times d$ Hermitian matrix is fixed by $d^2$ real numbers: $d$
+real numbers on the diagonal, plus the entries above the diagonal,
+each complex and so worth two reals, with everything below the diagonal
+forced by Hermiticity. The off-diagonal count is $2 \cdot \tfrac{d(d-1)}{2} = d(d-1)$,
+and $d + d(d-1) = d^2$. Fixing the trace to one removes a single degree
+of freedom, leaving $d^2 - 1$.
+
+```{=html}
+</details>
+```
+
+So the quantum state space is $(d^2 - 1)$-dimensional, against the
+classical simplex's $d - 1$. For a single bit, three against one. The
+freedom grew *quadratically*, and every result in this post is a shadow
+of that one fact.
+
+The rest of the cast carries over almost unchanged. A quantum copier is
+a *channel*: a linear map that turns density matrices into density
+matrices. It has to be linear for exactly the reason it was classically,
+that a coin-flip mixture of inputs must come out as the same coin-flip
+mixture of outputs. There is one extra demand with no classical echo,
+called *complete positivity*, which insists the map keeps sending valid
+states to valid states even when it acts on only part of a larger
+entangled system. Channels are well understood objects with a clean
+structure theory.[^channels] For us they are simply the right notion of
+"physically allowed operation," and we will not pry them open.
+
+[^channels]: For the structure theory of quantum channels, including
+the Kraus decomposition and the Stinespring dilation, the standard
+reference is Nielsen and Chuang, *Quantum Computation and Quantum
+Information*, chapter 8. Michael Wolf's lecture notes *Quantum Channels
+and Operations: Guided Tour* are a more focused modern treatment.
+
+We make the same restriction we made classically. Out of all channels
+we keep the ones that leave the state of total ignorance untouched.
+Classically that was the uniform distribution. Here it is the *maximally
+mixed state*, the centre of the Bloch ball, written $I/d$ with $I$ the
+identity matrix. A channel that fixes it invents no information from
+nothing and secretly prefers no state to any other, which is the least
+we should ask of a process whose only job is to forget. (Such channels
+have a name, *unital*, but the name matters less than the picture.)
+
+Total erasure is the same idea as before, too. The *completely
+depolarising channel* sends every input, no exceptions, to the maximally
+mixed state. The whole Bloch ball collapses to its centre point in a
+single step. This is the quantum CDC, and it is the operator we now want
+to take roots of.
+
+Here is where that quadratic shows up where it counts. Ask the same
+question as in the classical case: how large can $k$ be, if a channel
+$S$ satisfies $S^k = P$ but no smaller power does? The argument has the
+same skeleton. The channel acts linearly on the space the states live
+in, the completely depolarising channel crushes that whole space to a
+point, and each application of $S$ can retire at most one dimension
+without overshooting. Only now the space is $(d^2 - 1)$-dimensional, so
+$$
+k \;\leq\; d^2 - 1.
+$$
+
+Set $d = 2$. The classical bound was $k \leq 1$: a single bit could not
+be erased in more than one step. The quantum bound is $k \leq 3$. Three
+gentle steps to forget one qubit, where one classical bit allowed only
+the abrupt single step. The room to subdivide erasure grew, and it grew
+quadratically.
+
+One honest caveat before we move on. That $d^2 - 1$ is an *upper* bound,
+and it came from a structural argument that does not, by itself, build
+anything. Whether some channel actually attains it, erasing in exactly
+$d^2 - 1$ steps and no fewer, is a separate and harder question. It is
+also the question the rest of this post is really about. We will
+approach it from an unlikely direction: not by ransacking the enormous
+space of all channels, but by tying our hands almost completely and
+seeing how close we can still get.
 
 <!-- =================================================================== -->
 ## Clifford channels as the playground {#sec-clifford}
 
-<!-- TODO:
-  - Restrict to prime $d$ so that $\mathbb{F}_d$ is a field.
-    Brief sidebar: what is $\mathbb{F}_d$? (just-in-time).
-  - Weyl operators $\mathbf{w}(\eta)$, $\eta \in \mathbb{F}_d^2$.
-    Generalised Pauli operators. Projective representation.
-  - The covariance property motivating the "Clifford" name.
-  - Definition: a Clifford channel is one with
-    $T[\mathbf{w}(\eta)] = \lambda(\eta)\, \mathbf{w}(h(\eta))$,
-    parametrised by $h \in GL(2, \mathbb{F}_d)$ and
-    $\lambda: \mathbb{F}_d^2 \to \mathbb{C}$.
-  - "Two pieces of data" — emphasise how *little* freedom this is compared
-    to a full $d^2 \times d^2$ Choi matrix.
--->
+We promised to tie our hands. The way to do it is to stop treating
+channels as arbitrary maps and start viewing them through one
+particular, highly structured *basis* of operations. Once the basis is
+in place, the channels we want will almost name themselves.
+
+Begin, as always, with the qubit, where the basis is already famous.
+Every $2 \times 2$ matrix is a combination of four: the identity $I$ and
+the three *Pauli matrices* $X$, $Y$, $Z$. Here $X$ is a bit flip,
+swapping $|0\rangle$ and $|1\rangle$; $Z$ is a phase flip; and $Y$ is
+what you get by doing both. Because these four span every $2 \times 2$
+matrix, a qubit channel is fixed entirely by what it does to them. The
+Paulis are a coordinate system for quantum operations.
+
+The same coordinate system exists in every dimension, and it grows out
+of two basic moves. Fix $d$ levels, $|0\rangle$ through $|d-1\rangle$.
+The first move is a *shift*: bump every level up by one,
+$|j\rangle \to |j+1\rangle$, wrapping around at the top. The second is a
+*phase kick*: multiply level $j$ by a root of unity that depends on $j$.
+The shift generalises the bit flip $X$, the phase kick generalises $Z$.
+
+Combine these two moves in all possible amounts and you get $d^2$
+operators, one for each pair of exponents. We label them by that pair.
+Write $\eta = (a, b)$, with $a$ counting shifts and $b$ counting phase
+kicks, and call the resulting operator $\mathbf{w}(\eta)$, a *Weyl
+operator*. There are exactly $d^2$ of them, and like the four Paulis
+they form a basis: every $d \times d$ matrix is some combination of Weyl
+operators. This is the coordinate system we will use for the rest of the
+post.
+
+From here on we take $d$ to be a *prime*. The reason is in the aside,
+but the short version is that the arguments ahead need to divide by the
+labels, not merely add them, and division behaves only when $d$ is
+prime. The labels then live in a genuine two-dimensional plane,
+$\mathbb{F}_d^2$.
+
+```{=html}
+<details class="aside">
+<summary>The operators explicitly, and why $d$ must be prime</summary>
+```
+
+Write $\omega = e^{2\pi i / d}$. The two moves are the *shift* and
+*clock* operators,
+$$
+X|j\rangle = |j + 1 \bmod d\rangle, \qquad Z|j\rangle = \omega^{\,j}|j\rangle,
+$$
+and a general Weyl operator is a product $\mathbf{w}(a,b) \sim X^a Z^b$,
+fixed up to a phase convention we will not need. The exponents $a$ and
+$b$ live modulo $d$: shift $d$ times and you are back where you started.
+
+In the bookkeeping ahead we will need to *divide* by these exponents,
+not just add and multiply them, and division modulo $d$ works cleanly
+only when $d$ is prime. So we take $d$ prime. The integers modulo a
+prime form a *field*, written $\mathbb{F}_d$: a number system with
+addition, subtraction, multiplication, and division all behaving as you
+expect, just with finitely many elements. The labels then live in the
+plane $\mathbb{F}_d^2$, and $h$ below will be ordinary linear algebra
+over that field.
+
+```{=html}
+</details>
+```
+
+One feature lifts the Weyl operators above being merely a basis.
+Multiply two of them and you get a third, up to a phase:
+$$
+\mathbf{w}(\eta)\,\mathbf{w}(\xi) = (\text{phase}) \cdot \mathbf{w}(\eta + \xi).
+$$
+The labels simply add. The leftover phase is the toll for working with
+matrices rather than plain vectors, and it is why this assignment is
+called a *projective* representation of the group of labels. We will
+never need the phase's exact form, only that the labels add.
+
+One label stands apart. The label $\eta = 0$ is the identity operator
+itself, the "trace direction" that every copier we allow has to leave
+untouched. The other $d^2 - 1$ labels are the directions that can
+actually be forgotten. That number should look familiar: it is exactly
+the $d^2 - 1$ dimensions of the quantum state space we counted on the
+Bloch ball. The Weyl labels are those dimensions, relabelled.
+
+Now we can say which channels are tame. Apply a general channel to a
+Weyl operator and you get back some sprawling mixture of all $d^2$ of
+them. A *Clifford channel* refuses the sprawl. It sends each Weyl
+operator to a single other Weyl operator, rescaled:
+$$
+T[\mathbf{w}(\eta)] = \lambda(\eta)\,\mathbf{w}(h(\eta)).
+$$
+Two pieces of data, and nothing else.
+
+The first piece is $h$. It says where each label goes: the operator
+labelled $\eta$ lands on the one labelled $h(\eta)$. This $h$ is a
+linear map on the label plane, an invertible $2 \times 2$ matrix over
+$\mathbb{F}_d$, an element of $GL(2, \mathbb{F}_d)$. All it does is
+shuffle the coordinate system among itself.
+
+The second piece is $\lambda$. It pins a number $\lambda(\eta)$ to each
+label, the factor by which that coordinate is stretched or shrunk. This
+is where forgetting will live. A $\lambda$ smaller than one in magnitude
+damps a coordinate; a $\lambda$ equal to zero erases it outright.
+
+The name is borrowed. The *Clifford group* is the set of quantum gates
+that map Paulis to Paulis under conjugation, the well-behaved gates at
+the centre of quantum error correction. Clifford channels are their
+noisy, irreversible cousins: maps that still respect the Weyl coordinate
+system even as they leak and forget.
+
+It is worth dwelling on how little data this is. A general channel in
+dimension $d$ is described by its Choi matrix, an object of size
+$d^2 \times d^2$ carrying on the order of $d^4$ free numbers. A Clifford
+channel is a $2 \times 2$ matrix over $\mathbb{F}_d$ together with a list
+of $d^2$ numbers. We have thrown away almost all the freedom. The whole
+wager of this post is that what survives is still enough.
+
+And here is the move that makes the wager pay. We want to know what a
+copier does when it runs many times over, which means iterating $T$. For
+a general channel, iteration is a fog: mixtures of mixtures, with no
+visible structure to grab. For a Clifford channel, watch what happens to
+a single Weyl operator when we apply $T$ again, and again. That is the
+next section.
 
 <!-- =================================================================== -->
 ## The reduction (the pivot) {#sec-reduction}
 
-<!-- TODO: This is the "wait, what just happened?" moment — give it air.
-  - Compute $T^n[\mathbf{w}(\eta)]$:
-    $\prod_{k=0}^{n-1} \lambda(h^k(\eta)) \, \mathbf{w}(h^n(\eta))$.
-  - The action on Weyl labels is just $h^n$ — a linear map on
-    $\mathbb{F}_d^2$ — and the accumulated phase is a product of $\lambda$
-    values along the orbit.
-  - Conclusion: the question "is $T$ a $k$-th root of the CDC?" reduces to
-    a question about (a) the order of $h$ and (b) where $\lambda$
-    vanishes along orbits.
-  - The channel question has become a question about finite-dimensional
-    linear algebra over $\mathbb{F}_d$.
--->
+We left off promising to iterate. So let us iterate, and watch.
+
+Apply $T$ to a single Weyl operator. By definition it comes back
+rescaled and relabelled:
+$$
+T[\mathbf{w}(\eta)] = \lambda(\eta)\,\mathbf{w}(h(\eta)).
+$$
+Now apply $T$ again. The output is itself a Weyl operator, so $T$ knows
+exactly what to do with it:
+$$
+T^2[\mathbf{w}(\eta)] = \lambda(\eta)\,T[\mathbf{w}(h(\eta))]
+= \lambda(\eta)\,\lambda(h(\eta))\,\mathbf{w}(h^2(\eta)).
+$$
+Apply it $n$ times and the pattern is plain:
+$$
+T^n[\mathbf{w}(\eta)] = \Biggl(\prod_{j=0}^{n-1} \lambda\bigl(h^j(\eta)\bigr)\Biggr)\,\mathbf{w}\bigl(h^n(\eta)\bigr).
+$$
+
+Sit with that for a moment, because the fog has lifted completely.
+
+Iterating the channel did two clean, separate things. The label moved,
+$\eta \to h(\eta) \to h^2(\eta) \to \cdots$, a single point hopping
+around the plane $\mathbb{F}_d^2$ under repeated application of the one
+matrix $h$. And an amplitude piled up, a running product of $\lambda$
+values, one factor collected at each label the point lands on.
+
+That sequence of labels, $\eta, h(\eta), h^2(\eta), \ldots$, is the
+*orbit* of $\eta$ under $h$. The entire life of the channel, run any
+number of times, is bookkept by two finite-field facts: how the orbit
+travels, and what $\lambda$ does along it. The infinite-dimensional
+machinery of quantum channels has collapsed into a point hopping around
+a plane of $d^2$ labels, multiplying numbers as it goes.
+
+Now recall what we are chasing. The completely depolarising channel $P$
+erases everything: it leaves the identity $\mathbf{w}(0)$ alone and
+annihilates every other Weyl operator,
+$$
+P[\mathbf{w}(\eta)] = 0 \quad \text{for every } \eta \neq 0.
+$$
+That is just "every state goes to the maximally mixed state," written in
+the Weyl coordinate system. The identity label takes care of itself:
+$\lambda(0) = 1$ because the channel preserves the trace, so
+$\mathbf{w}(0)$ is fixed at every step. All the action is on the
+$d^2 - 1$ nonzero labels.
+
+So asking for $T^k = P$ is asking for the accumulated amplitude to be
+*zero* on every nonzero label after exactly $k$ steps:
+$$
+\prod_{j=0}^{k-1} \lambda\bigl(h^j(\eta)\bigr) = 0
+\qquad \text{for every } \eta \neq 0.
+$$
+A product of numbers is zero exactly when one of its factors is. So the
+condition says something you can picture: travelling along the orbit of
+any nonzero $\eta$, within the first $k$ steps the point must pass
+through at least one label where $\lambda$ vanishes. And $k$ has to be
+the *smallest* such number, since we want the erasure to land at step
+$k$ and not a step sooner. Push $k$ as high as it will go while still
+erasing every orbit, and you have found the longest root.
+
+This is the pivot of the whole post, so let me state it with no quantum
+mechanics in the sentence at all. We want a point that, started anywhere
+nonzero and moved repeatedly by $h$, takes as long as possible to first
+land on a label where $\lambda$ vanishes. Two things govern that delay,
+and they are independent:
+
+1. **How long the orbits are.** If $h$ carries a point through many
+   distinct labels before it repeats, there is more room to postpone the
+   first vanishing. This is a question about the matrix $h$ by itself:
+   its *order*, and how it cuts the $d^2 - 1$ nonzero labels into orbits.
+   That is the next section.
+
+2. **Where $\lambda$ is allowed to vanish.** We need $\lambda$ to hit
+   zero at least once on every orbit, but as late as possible. And
+   $\lambda$ is not free to vanish wherever it pleases: a constraint
+   inherited from complete positivity forces its zeros to come in pairs,
+   and that pairing is exactly what costs us a factor of two. That is the
+   section after.
+
+Solve those two and the bound drops out. The astonishing part, already
+half in view, is that neither question mentions a quantum channel any
+more. From here on we are doing linear algebra over a finite field.
 
 <!-- =================================================================== -->
 ## Ingredient 1: the order of $h$ {#sec-ingredient-h}
 
-<!-- TODO:
-  - What's the maximum order of an element of $GL(2, \mathbb{F}_d)$?
-  - Answer: $d^2 - 1$, achieved by the companion matrix of a primitive
-    polynomial of degree 2 over $\mathbb{F}_d$.
-  - Sidebar (at moment of need): primitive polynomials, brief intuition
-    about extension fields $\mathbb{F}_{d^2}$.
-  - Worked example: $d = 3$, exhibit a specific $h$ of order $8 = 3^2 - 1$.
--->
+The first ingredient is the easy one to state. We want the point to
+visit as many labels as possible before it starts repeating, so we want
+the orbits of $h$ to be long. How long can they get?
+
+There are $d^2 - 1$ nonzero labels in all, so no orbit can be longer
+than that. The happy fact is that the maximum is reached. There exist
+matrices $h$ in $GL(2, \mathbb{F}_d)$ whose single orbit sweeps through
+*every* nonzero label before returning home: one grand cycle of length
+$d^2 - 1$, visiting all of $\mathbb{F}_d^2 \setminus \{0\}$. Such an $h$
+acts *transitively* on the nonzero labels.
+
+Where do these maximal matrices come from? From a second field hiding
+inside the first. The plane $\mathbb{F}_d^2$ is two-dimensional over
+$\mathbb{F}_d$, and it happens to also *be* a larger field, the field
+$\mathbb{F}_{d^2}$ with $d^2$ elements. In any finite field the nonzero
+elements, multiplied together, form a single cycle: there is a
+*generator* whose powers run through every nonzero element exactly once.
+Multiplication by that generator is an $\mathbb{F}_d$-linear map on the
+plane, and as a matrix it is our maximal $h$.
+
+```{=html}
+<details class="aside">
+<summary>Primitive polynomials, and why the order is exactly $d^2 - 1$</summary>
+```
+
+A *primitive polynomial* of degree two over $\mathbb{F}_d$ is an
+irreducible quadratic whose root generates the multiplicative group of
+$\mathbb{F}_{d^2}$. Call that root $g$. Its powers
+$g, g^2, g^3, \ldots$ cycle through all $d^2 - 1$ nonzero elements of
+$\mathbb{F}_{d^2}$ before $g^{\,d^2 - 1} = 1$ brings them back, so $g$
+has multiplicative order exactly $d^2 - 1$.
+
+Viewing $\mathbb{F}_{d^2}$ as the plane $\mathbb{F}_d^2$, multiplication
+by $g$ is a linear map, and in a basis it is the *companion matrix* of
+the primitive polynomial. It inherits the order $d^2 - 1$, and that is
+the largest order any element of $GL(2, \mathbb{F}_d)$ can have. (Every
+other kind of element, the diagonalisable ones and the single-eigenvalue
+ones, tops out lower; the irreducible "Singer" elements like this one are
+the champions.)
+
+```{=html}
+</details>
+```
+
+It pays to see one. Take $d = 3$, so we are working modulo $3$ and the
+plane has $3^2 - 1 = 8$ nonzero points. The polynomial $x^2 + x + 2$ is
+primitive over $\mathbb{F}_3$, and its companion matrix is
+$$
+h = \begin{pmatrix} 0 & 1 \\ 1 & 2 \end{pmatrix}.
+$$
+Start at the label $(1,0)$ and apply $h$ over and over, doing all the
+arithmetic modulo $3$:
+$$
+(1,0) \to (0,1) \to (1,2) \to (2,2) \to (2,0) \to (0,2) \to (2,1) \to (1,1) \to (1,0).
+$$
+Eight steps, eight distinct labels, every nonzero point of the plane
+visited exactly once, and then home. This $h$ has order $8 = 3^2 - 1$,
+the most a $2 \times 2$ matrix over $\mathbb{F}_3$ can manage. One orbit,
+as long as the plane allows.
+
+If $\lambda$ could vanish at just a single point of this cycle, we would
+be done, and we would reach the full quantum bound: a point starting one
+step past the lone zero would have to travel all $d^2 - 1$ steps to come
+back to it. That would be a root of order $d^2 - 1$. But $\lambda$ cannot
+vanish at only one point, and the reason is the second ingredient.
 
 <!-- =================================================================== -->
 ## Ingredient 2: orbits and where $\lambda$ vanishes {#sec-ingredient-lambda}
 
-<!-- TODO:
-  - A max-order $h$ acts transitively on $\mathbb{F}_d^2 \setminus \{0\}$
-    — one big orbit of size $d^2 - 1$.
-  - But $\lambda$ has a symmetry forcing it to vanish in inverse pairs
-    (the $\lambda(\xi) = \overline{\lambda(-\xi)}$ relation, traced back to
-    complete positivity).
-  - So we need $\lambda$ vanishing on at least one $\pm$-pair inside the
-    big orbit — and that's enough.
-  - Conclusion: a Clifford root of order $\frac{d^2 - 1}{2}$ exists.
-  - [FIGURE] Show the orbit on $\mathbb{F}_d^2$ with the vanishing pair
-    marked.
--->
+So we need $\lambda$ to vanish somewhere on the orbit, and we would like
+it to vanish as rarely as possible, ideally just once. Here the channel
+pushes back. The amplitudes $\lambda$ are not ours to set freely. They
+have to come from an honest quantum channel, and that demand, complete
+positivity, leaves a fingerprint.
+
+The fingerprint is a symmetry. Being a quantum channel, $T$ sends
+Hermitian operators to Hermitian operators, since the density matrices
+it acts on are Hermitian. Tracing what that requires of the amplitudes
+gives a clean relation between the label $\eta$ and its negative:
+$$
+\lambda(-\eta) = \overline{\lambda(\eta)}.
+$$
+Take absolute values and the consequence is stark:
+$|\lambda(-\eta)| = |\lambda(\eta)|$. The amplitude at a label and the
+amplitude at its mirror image always have the same size. In particular,
+**if $\lambda$ vanishes at $\eta$, it must vanish at $-\eta$ as well.**
+The zeros come in mirror pairs.
+
+```{=html}
+<details class="aside">
+<summary>Where $\lambda(-\eta) = \overline{\lambda(\eta)}$ comes from</summary>
+```
+
+A Weyl operator is not Hermitian, but its adjoint is another Weyl
+operator: $\mathbf{w}(\eta)^\dagger = \mathbf{w}(-\eta)$, up to the same
+phase convention we have been ignoring. A channel obeys
+$T[A^\dagger] = T[A]^\dagger$, because it must turn Hermitian inputs into
+Hermitian outputs. Apply this to $A = \mathbf{w}(\eta)$. On one side,
+$T[\mathbf{w}(\eta)^\dagger] = T[\mathbf{w}(-\eta)] = \lambda(-\eta)\,\mathbf{w}(h(-\eta))$.
+On the other, $T[\mathbf{w}(\eta)]^\dagger = \overline{\lambda(\eta)}\,\mathbf{w}(h(\eta))^\dagger = \overline{\lambda(\eta)}\,\mathbf{w}(-h(\eta))$.
+Since $h$ is linear, $h(-\eta) = -h(\eta)$, so the two Weyl operators
+match and the coefficients must agree: $\lambda(-\eta) = \overline{\lambda(\eta)}$.
+
+```{=html}
+</details>
+```
+
+Now put the two ingredients together. On the grand cycle, the mirror map
+$\eta \mapsto -\eta$ has a tidy meaning: it is exactly the halfway point.
+Multiplying a label by $-1$ is the same as stepping $h$ around half the
+cycle, $(d^2 - 1)/2$ steps. (For this halving to make sense we need
+$-1 \neq 1$, that is, $d$ an odd prime, which we assume from here.) So
+the two zeros of $\lambda$, forced to be mirror images, sit at opposite
+poles of the cycle, cutting it into two equal arcs of length
+$(d^2 - 1)/2$.
+
+![**Figure 4.** The grand orbit of $h$ for $d = 3$: the eight nonzero
+labels arranged in the cycle
+$(1,0) \to (0,1) \to \cdots \to (1,1) \to (1,0)$. Complete positivity
+forces the zeros of $\lambda$ into a mirror pair (here $(1,0)$ and its
+antipode $(2,0)$), splitting the cycle into two arcs of four steps
+each.](figures/orbit-d3.svg){#fig-orbit}
+
+And that settles it. Whichever point you start from, you reach one of
+the two zeros within half a turn of the cycle. The longest you can be
+made to wait is the length of one arc, $(d^2 - 1)/2$ steps. Choose
+$\lambda$ to vanish on exactly one mirror pair and to be a suitable
+nonzero size everywhere else (which keeps the channel completely
+positive), and you have built a Clifford channel that erases in exactly
+$$
+k = \frac{d^2 - 1}{2}
+$$
+steps and no fewer. A Clifford root of the completely depolarising
+channel of that order exists.
+
+For our qutrit, $d = 3$, that is a root of order $4$: four gentle steps
+to erase a qutrit using nothing but the two-piece Clifford data. The
+mirror pair of zeros sits at $(1,0)$ and $(2,0)$ in the cycle above, and
+every other label is at most four steps from one of them.
 
 <!-- =================================================================== -->
 ## Punchline {#sec-punchline}
 
-<!-- TODO: A short section. The headline:
-  The "room" in the divisibility problem doesn't live in the richness of
-  the channel class. It lives in the orbit structure of a single linear
-  map on $\mathbb{F}_d^2$. Clifford channels — a vastly more constrained
-  class — get within a factor of 2 of the general $d^2 - 1$ bound, and the
-  reason is a counting argument about finite-field orbits.
--->
+Line up the three bounds. How finely can you divide total erasure, the
+completely depolarising channel, into equal steps?
+
+- Classically, with a bistochastic copier: $d - 1$ steps.
+- With a general quantum channel: $d^2 - 1$ steps.
+- With a Clifford channel, the stripped-down two-piece kind:
+  $\dfrac{d^2 - 1}{2}$ steps.
+
+For a qutrit those numbers are $2$, $8$, and $4$. The Clifford copier,
+carrying almost no information about itself, lands at $4$: within a
+factor of two of the full quantum power of $8$, and already twice the
+classical $2$.
+
+That is the part worth carrying away. When we restricted from all
+quantum channels down to Clifford channels, we threw away almost all the
+freedom. A general channel needs of order $d^4$ numbers to describe; a
+Clifford channel needs a $2 \times 2$ matrix over $\mathbb{F}_d$ and a
+short list of amplitudes. You might have guessed the bound would
+collapse most of the way back to the classical $d - 1$. It barely moved.
+
+The reason is that the room to subdivide erasure never lived in the
+richness of the channel in the first place. It lived in the orbit
+structure of a single linear map on a small finite plane. The longest
+root is as long as the longest orbit of $h$, and a well-chosen $h$ runs
+through all $d^2 - 1$ labels at once. The only thing the quantum
+machinery buys you over this finite-field skeleton is the factor of two,
+and even that is not channel richness: it is the one symmetry,
+$\lambda(-\eta) = \overline{\lambda(\eta)}$, that complete positivity
+stamps on the amplitudes and nothing more.
+
+A question that began with photocopiers and density matrices turns out
+to be answered, almost entirely, by asking how long a point can wander
+in the plane $\mathbb{F}_d^2$ before it is forced to step on a marked
+square. That is the unreasonable beauty promised at the top.
 
 <!-- =================================================================== -->
 ## What's next {#sec-closing}
 
-<!-- TODO:
-  - The factor-of-2 gap is closed by a general construction (perturbation
-    of the Jordan block) covered in the paper
-    *How long can it take for a quantum channel to forget everything?*
-  - Note that the Clifford story didn't make it into the paper because the
-    general result subsumes it — but it's the cleanest place to *see* the
-    finite-field representation theory at work.
-  - Link to thesis / paper.
--->
+One loose thread remains: the factor of two. Is $(d^2 - 1)/2$ the end of
+the story, or just the end of the *Clifford* story? It is only the
+Clifford story. The full quantum bound $d^2 - 1$ really can be reached,
+by a channel that gives up the tidy Weyl structure we leaned on. Instead
+of asking a single matrix $h$ to do all the work, one builds the root
+directly at the level of the channel's representation, nudging a Jordan
+block into exactly the shape the bound allows. That construction does
+not care about mirror pairs, so the factor of two disappears, and the
+gap to $d^2 - 1$ closes.[^general-construction]
+
+That more general result subsumes the Clifford one, which is why the
+Clifford construction does not appear in the final paper. I wanted to
+write it up anyway, because it is the cleanest place I know to actually
+*see* the finite-field representation theory at work. In the general
+construction the orbit structure is buried inside linear algebra over
+$\mathbb{C}$. Here it sits on the surface: a point hopping around a plane
+of $d^2$ labels, a matrix of order $d^2 - 1$, and a single symmetry that
+costs a factor of two. The whole argument fits in the palm of your hand,
+and you can check the $d = 3$ case by stepping around an eight-point
+cycle with a pencil.
+
+The full development, including the classical and general quantum bounds
+and the Clifford channels above, is in my diploma thesis.[^thesis]
+
+[^general-construction]: TODO: fill in the exact citation for the general
+$d^2 - 1$ construction (working title *How long can it take for a quantum
+channel to forget everything?*), once the published reference is settled.
+
+[^thesis]: Florian Richter, *Roots of the completely depolarising
+channel* (diploma thesis), Leibniz Universität Hannover, 2010. Chapter 5
+covers the Clifford channels discussed here. TODO: confirm the exact
+thesis title and add a direct link to the PDF in the repository.
