@@ -233,11 +233,40 @@ entire $(d - 1)$-dimensional space of traceless deviations from the
 uniform distribution down to zero. For $S^k$ to do that, $S$ itself must
 carry a *nilpotent* part on that traceless space, and a nilpotent
 operator on a $(d - 1)$-dimensional space takes at most $d - 1$ steps to
-reach zero. That is the bound.[^classical-bound-proof]
+reach zero. That is the bound.
 
-[^classical-bound-proof]: TODO: cite the Jordan-block argument for
-the classical case (Section 2.5 / 3.1.3 of the thesis, or a standard
-reference on roots of stochastic matrices).
+```{=html}
+<details class="aside">
+<summary>The Jordan-block argument</summary>
+```
+
+Two facts make the powers of $S$ easy to control. First, $P$ is
+idempotent, $P^2 = P$. Second, $P$ absorbs $S$ from either side:
+$SP = P$ because $S$ fixes the uniform distribution, and $PS = P$
+because the columns of $S$ sum to one.
+
+Now peel off the part of $S$ that is not already $P$. Set $N = S - P$.
+The two absorption facts give $PN = NP = 0$, so $P$ and $N$ never
+interfere, and the binomial expansion collapses to
+$$
+S^k = (P + N)^k = P + N^k.
+$$
+So $S^k = P$ exactly when $N^k = 0$. And $N$ is nilpotent on the right
+space: it kills the uniform direction ($Nu = Su - Pu = u - u = 0$) and
+sends everything else into the $(d-1)$-dimensional space of traceless
+vectors.
+
+A nilpotent operator is governed by its Jordan form, a stack of blocks
+each of which powers to zero in exactly its own size. The largest block
+that fits in $d - 1$ dimensions has size $d - 1$, so the smallest $k$
+with $N^k = 0$ is at most $d - 1$. That is the bound, and it is tight:
+take $N$ to be a single Jordan block of size $d - 1$, and (after
+checking $P + N$ stays bistochastic) you have a root of order exactly
+$d - 1$.
+
+```{=html}
+</details>
+```
 
 For $d = 2$ the bound says $k = 1$, which is to say there are no
 non-trivial roots. The two-state CDC can only be split into one step,
