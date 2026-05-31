@@ -132,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<!-- Interactive Figure 3: the Bloch ball (qubit state space). The static SVG is regenerated verbatim from bloch_ball_figure.py (figures/bloch_ball.svg); the readout panel and <script> are a purely additive progressive-enhancement layer (JS off => the unaltered static figure). The script reads the projection geometry from the svg data-* attributes. NOTE: the original export of this fragment dropped its <style> block and .bloch-interactive wrapper; both were reconstructed here, the CSS modeled on the Figure 1 readout. Regenerate with: python figures/bloch_ball_figure.py -->
+<!-- Interactive Figure 3: Bloch ball (purity field). Static SVG regenerated from bloch_ball_figure.py; readout + script are additive (JS off => static figure). The marker shifts green->pale with purity as it sinks toward the centre. -->
 <style>
 .bloch-interactive{max-width:520px;margin:1.25rem auto;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
 .bloch-interactive svg{width:100%;height:auto;display:block;cursor:crosshair;}
@@ -143,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
 .bloch-interactive .bl-vec.is-set{color:#1a3550;}
 .bloch-interactive .bl-slider-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
 .bloch-interactive .bl-slabel{font-size:13px;color:#3a5a72;min-width:42px;}
-.bloch-interactive .bl-slider-row input[type=range]{flex:1;accent-color:#1d9e75;cursor:pointer;}
+.bloch-interactive .bl-slider-row input[type=range]{flex:1;accent-color:#1f7a50;cursor:pointer;}
 .bloch-interactive .bl-slider-row input[type=range]:disabled{cursor:default;opacity:0.45;}
 .bloch-interactive .bl-rval{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;color:#1a3550;min-width:62px;text-align:right;}
 .bloch-interactive .bl-rho{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
@@ -156,17 +156,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 <div class="bloch-interactive">
-  <p class="bl-vh">Interactive Bloch ball, the state space of a single qubit. Click the front surface of the ball to choose a pure state, then use the Purity slider to move it inward toward the maximally mixed state at the centre. The readout shows the Bloch vector, the density matrix, and its eigenvalues.</p>
+  <p class="bl-vh">Interactive Bloch ball, the qubit state space, coloured by purity: green on the pure surface, fading to a pale core at the maximally mixed state. Click the front surface to choose a pure state, then use the Purity slider to move it inward toward the centre. The readout shows the Bloch vector, the density matrix, and its eigenvalues.</p>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 640 640" font-family="Georgia, 'Times New Roman', serif" role="img" aria-label="Bloch ball: the qubit state space" data-cx="320" data-cy="332" data-r="210" data-alpha-deg="35" data-elev-deg="20">
   <defs>
     <marker id="arrow" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="8" markerheight="8" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a3550"></path>
     </marker>
+    <radialgradient id="purity" cx="320" cy="332" r="210" gradientunits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#e4eeea" stop-opacity="0.12"></stop>
+      <stop offset="60%" stop-color="#6fae8e" stop-opacity="0.26"></stop>
+      <stop offset="100%" stop-color="#1f7a50" stop-opacity="0.5"></stop>
+    </radialgradient>
   </defs>
 
-  <!-- Ball interior (faint fill) -->
-  <circle cx="320.0" cy="332.0" r="210.0" fill="#a8c5d8" fill-opacity="0.12" stroke="none"></circle>
+  <!-- Ball interior: purity field -->
+  <circle cx="320.0" cy="332.0" r="210.0" fill="url(#purity)" stroke="none"></circle>
 
   <!-- Latitude circles -->
   <g>
@@ -211,20 +216,20 @@ ul.task-list li input[type="checkbox"] {
   <line x1="320.00" y1="529.34" x2="320.00" y2="99.14" stroke="#1a3550" stroke-width="1.8" marker-end="url(#arrow)"></line>
 
   <!-- State markers -->
-  <circle cx="320.00" cy="134.66" r="5" fill="#1a3550"></circle>
-  <circle cx="320.00" cy="529.34" r="5" fill="#1a3550"></circle>
-  <circle cx="320.0" cy="332.0" r="6.5" fill="#c0392b"></circle>
+  <circle cx="320.00" cy="134.66" r="5.5" fill="#1f7a50"></circle>
+  <circle cx="320.00" cy="529.34" r="5.5" fill="#1f7a50"></circle>
+  <circle cx="320.0" cy="332.0" r="7.5" fill="#f7faf8" fill-opacity="0.55" stroke="#5f7d70" stroke-width="1.6" stroke-opacity="0.6"></circle>
 
   <!-- Labels -->
-  <text x="300.00" y="124.66" text-anchor="end" font-size="21" font-style="italic" fill="#1a3550">|0⟩</text>
-  <text x="320.00" y="563.34" text-anchor="middle" font-size="21" font-style="italic" fill="#1a3550">|1⟩</text>
+  <text x="300.00" y="124.66" text-anchor="end" font-size="21" font-style="italic" fill="#1f7a50">|0⟩</text>
+  <text x="320.00" y="563.34" text-anchor="middle" font-size="21" font-style="italic" fill="#1f7a50">|1⟩</text>
   <text x="564.27" y="396.50" text-anchor="middle" font-size="20" font-style="italic" fill="#1a3550">x</text>
   <text x="144.96" y="421.55" text-anchor="end" font-size="20" font-style="italic" fill="#1a3550">y</text>
   <text x="328.00" y="71.52" text-anchor="start" font-size="20" font-style="italic" fill="#1a3550">z</text>
-  <text x="334.00" y="330.00" text-anchor="start" font-size="20" fill="#1a3550">I/2</text>
+  <text x="334.00" y="330.00" text-anchor="start" font-size="20" fill="#5f7d70">I/2</text>
 </svg>
 
-  <div class="bl-readout">
+<div class="bl-readout">
     <div class="bl-head">
       <span class="bl-head-label">Bloch vector (rₓ, rᵉ, rᵢ)</span>
       <span class="bl-vec" data-bl="vec">click the front of the ball</span>
@@ -259,17 +264,22 @@ ul.task-list li input[type="checkbox"] {
 
     var NS = 'http://www.w3.org/2000/svg';
     function mk(t, a) { var e = document.createElementNS(NS, t); for (var key in a) e.setAttribute(key, a[key]); return e; }
+    function purityColour(r) {
+      var t = Math.max(0, Math.min(1, r * r));   // normalised purity = r^2
+      function L(a, b) { return Math.round(a + t * (b - a)); }
+      return 'rgb(' + L(228,31) + ',' + L(238,122) + ',' + L(233,80) + ')';
+    }
 
     // Additive overlay elements (the static SVG is never modified).
     var guide = mk('line', { stroke: '#1d9e75', 'stroke-width': '1.5', 'stroke-opacity': '0.5', 'stroke-dasharray': '2,4', 'pointer-events': 'none', opacity: '0' });
     guide.setAttribute('x1', CX); guide.setAttribute('y1', CY);
     svg.appendChild(guide);
     var hover = mk('g', { 'pointer-events': 'none', opacity: '0' });
-    hover.appendChild(mk('circle', { r: 6, fill: '#1d9e75', 'fill-opacity': '0.5' }));
+    hover.appendChild(mk('circle', { r: 6, fill: '#1f7a50', 'fill-opacity': '0.5' }));
     svg.appendChild(hover);
     var marker = mk('g', { 'pointer-events': 'none', opacity: '0' });
     var haloC = mk('circle', { r: 7.5, fill: '#ffffff' });
-    var ringC = mk('circle', { r: 6.5, fill: '#1d9e75', stroke: '#0f6e56', 'stroke-width': '1.5' });
+    var ringC = mk('circle', { r: 6.5, fill: '#1f7a50', stroke: '#0f5538', 'stroke-width': '1.5' });
     marker.appendChild(haloC); marker.appendChild(ringC);
     svg.appendChild(marker);
 
@@ -319,6 +329,7 @@ ul.task-list li input[type="checkbox"] {
       }
       slider.disabled = false;
       var t = rVal;
+      ringC.setAttribute('fill', purityColour(rVal));
       // Affine projection => interior point r*n projects to the lerp of centre and click.
       var mx = CX + t * (clickPt[0] - CX), my = CY + t * (clickPt[1] - CY);
       var s = 0.78 + 0.22 * t;                       // shrink with depth
