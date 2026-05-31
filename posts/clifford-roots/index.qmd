@@ -257,12 +257,24 @@ sends everything else into the $(d-1)$-dimensional space of traceless
 vectors.
 
 A nilpotent operator is governed by its Jordan form, a stack of blocks
-each of which powers to zero in exactly its own size. The largest block
-that fits in $d - 1$ dimensions has size $d - 1$, so the smallest $k$
-with $N^k = 0$ is at most $d - 1$. That is the bound, and it is tight:
-take $N$ to be a single Jordan block of size $d - 1$, and (after
-checking $P + N$ stays bistochastic) you have a root of order exactly
-$d - 1$.
+each of which powers to zero in exactly its own size. The largest one
+that fits in $d - 1$ dimensions is the single $(d-1) \times (d-1)$ block
+with ones on the superdiagonal,
+$$
+N \;\cong\;
+\begin{pmatrix}
+0 & 1 & & & \\
+ & 0 & 1 & & \\
+ & & \ddots & \ddots & \\
+ & & & 0 & 1 \\
+ & & & & 0
+\end{pmatrix}.
+$$
+Each power pushes that diagonal of ones one step toward the corner, so
+$N^{d-1} = 0$ while $N^{d-2} \neq 0$. The smallest $k$ with $N^k = 0$ is
+therefore at most $d - 1$, which is the bound. It is tight: this very
+block, as long as $P + N$ stays bistochastic, gives a root of order
+exactly $d - 1$.
 
 ```{=html}
 </details>
