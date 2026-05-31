@@ -1,0 +1,211 @@
+```{=html}
+<!-- Interactive Figure 1: the classical state space (2-simplex over three
+     outcomes). The static SVG is inlined exactly as state_space_figure.py
+     emits it (figures/state_space.svg), with only role/aria-label added.
+     The readout panel and <script> are a purely additive progressive-
+     enhancement layer: with JavaScript disabled the reader sees the
+     unaltered static figure and an empty readout. The script reads the
+     three vertices from the polygon (single source of truth, e1,e2,e3
+     order) and maps a clicked point to its (p1,p2,p3) via barycentrics. -->
+<style>
+.simplex-interactive{max-width:520px;margin:1.25rem auto;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.simplex-interactive svg{width:100%;height:auto;display:block;cursor:crosshair;}
+.simplex-interactive .si-readout{margin-top:1rem;padding:0.9rem 1.1rem;background:#f4f6f8;border:1px solid #e2e8ee;border-radius:10px;}
+.simplex-interactive .si-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+.simplex-interactive .si-head-label{font-size:13px;color:#3a5a72;}
+.simplex-interactive .si-vec{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:15px;color:#9aa9b5;}
+.simplex-interactive .si-vec.is-set{color:#1a3550;}
+.simplex-interactive .si-rows{display:flex;flex-direction:column;gap:10px;}
+.simplex-interactive .si-row{display:grid;grid-template-columns:28px 1fr 52px;align-items:center;gap:10px;}
+.simplex-interactive .si-key{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;color:#3a5a72;}
+.simplex-interactive .si-track{height:10px;background:#e2e8ee;border-radius:999px;overflow:hidden;display:block;}
+.simplex-interactive .si-fill{display:block;height:100%;width:0%;background:#1d9e75;border-radius:999px;transition:width .08s linear;}
+.simplex-interactive .si-val{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;text-align:right;color:#1a3550;}
+.simplex-interactive .si-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+</style>
+
+<div class="simplex-interactive">
+  <p class="si-vh">Interactive probability simplex over three outcomes. Click inside the triangle to read off the probability distribution (p1, p2, p3) for that point, computed from barycentric coordinates relative to the three vertices e1, e2, e3.</p>
+
+<svg role="img" aria-label="Probability simplex over three outcomes" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 620" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a3550"/>
+    </marker>
+  </defs>
+  <!-- Coordinate axes -->
+  <line x1="310" y1="430" x2="95" y2="530"
+        stroke="#1a3550" stroke-width="1.8"
+        marker-end="url(#arrow)"/>
+  <line x1="310" y1="430" x2="590" y2="430"
+        stroke="#1a3550" stroke-width="1.8"
+        marker-end="url(#arrow)"/>
+  <line x1="310" y1="430" x2="310" y2="75"
+        stroke="#1a3550" stroke-width="1.8"
+        marker-end="url(#arrow)"/>
+
+  <!-- Simplex (triangular face) -->
+  <polygon points="140,510 540,430 310,130"
+           fill="#a8c5d8" fill-opacity="0.55"
+           stroke="#1a3550" stroke-width="2.2"
+           stroke-linejoin="round"/>
+
+  <!-- Medians from each vertex to opposite edge midpoint -->
+  <g stroke="#1a3550" stroke-width="0.9" stroke-opacity="0.22" stroke-dasharray="4,5">
+    <line x1="140" y1="510" x2="425.0" y2="280.0"/>
+    <line x1="540" y1="430" x2="225.0" y2="320.0"/>
+    <line x1="310" y1="130" x2="340.0" y2="470.0"/>
+  </g>
+
+  <!-- Unit tick marks on the axes at the simplex vertices -->
+  <line x1="143.0" y1="516.3" x2="137.0" y2="503.7" stroke="#1a3550" stroke-width="1.6"/>
+  <line x1="540.0" y1="423.0" x2="540.0" y2="437.0" stroke="#1a3550" stroke-width="1.6"/>
+  <line x1="303.0" y1="130.0" x2="317.0" y2="130.0" stroke="#1a3550" stroke-width="1.6"/>
+
+  <!-- Vertex dots -->
+  <circle cx="140" cy="510" r="5.5" fill="#1a3550"/>
+  <circle cx="540" cy="430" r="5.5" fill="#1a3550"/>
+  <circle cx="310" cy="130" r="5.5" fill="#1a3550"/>
+
+  <!-- Vertex labels and their probability vectors -->
+  <text x="154" y="544" text-anchor="start" font-size="22" font-style="italic" fill="#1a3550">e₁</text>
+  <text x="154" y="564" text-anchor="start" font-size="14" fill="#3a5a72">(1, 0, 0)</text>
+  <text x="558" y="464" text-anchor="start" font-size="22" font-style="italic" fill="#1a3550">e₂</text>
+  <text x="558" y="484" text-anchor="start" font-size="14" fill="#3a5a72">(0, 1, 0)</text>
+  <text x="288" y="122" text-anchor="end" font-size="22" font-style="italic" fill="#1a3550">e₃</text>
+  <text x="288" y="142" text-anchor="end" font-size="14" fill="#3a5a72">(0, 0, 1)</text>
+
+  <!-- Centroid p_0 -->
+  <circle cx="330.0" cy="356.6666666666667" r="6.5" fill="#c0392b"/>
+  <text x="344.0" y="354.6666666666667" font-size="21" font-style="italic" fill="#1a3550">p₀</text>
+  <text x="344.0" y="374.6666666666667" font-size="13" fill="#3a5a72">(⅓, ⅓, ⅓)</text>
+</svg>
+
+  <div class="si-readout">
+    <div class="si-head">
+      <span class="si-head-label">Sampled distribution (p₁, p₂, p₃)</span>
+      <span class="si-vec" data-si="vec">click inside the triangle</span>
+    </div>
+    <div class="si-rows">
+      <div class="si-row">
+        <span class="si-key">p₁</span>
+        <span class="si-track"><span class="si-fill" data-si="fill"></span></span>
+        <span class="si-val" data-si="val">—</span>
+      </div>
+      <div class="si-row">
+        <span class="si-key">p₂</span>
+        <span class="si-track"><span class="si-fill" data-si="fill"></span></span>
+        <span class="si-val" data-si="val">—</span>
+      </div>
+      <div class="si-row">
+        <span class="si-key">p₃</span>
+        <span class="si-track"><span class="si-fill" data-si="fill"></span></span>
+        <span class="si-val" data-si="val">—</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  function setup(root) {
+    var svg = root.querySelector('svg');
+    if (!svg) return;
+    var poly = svg.querySelector('polygon');
+    if (!poly) return;
+
+    var pts = poly.getAttribute('points').trim().split(/\s+/).map(function (p) {
+      var c = p.split(',');
+      return { x: parseFloat(c[0]), y: parseFloat(c[1]) };
+    });
+    if (pts.length < 3) return;
+    var V1 = pts[0], V2 = pts[1], V3 = pts[2]; // polygon order: e1, e2, e3
+
+    var det = (V2.y - V3.y) * (V1.x - V3.x) + (V3.x - V2.x) * (V1.y - V3.y);
+    function bary(px, py) {
+      var b1 = ((V2.y - V3.y) * (px - V3.x) + (V3.x - V2.x) * (py - V3.y)) / det;
+      var b2 = ((V3.y - V1.y) * (px - V3.x) + (V1.x - V3.x) * (py - V3.y)) / det;
+      return [b1, b2, 1 - b1 - b2];
+    }
+    function toSvg(evt) {
+      var pt = svg.createSVGPoint();
+      pt.x = evt.clientX; pt.y = evt.clientY;
+      var m = svg.getScreenCTM();
+      if (!m) return null;
+      return pt.matrixTransform(m.inverse());
+    }
+
+    var NS = 'http://www.w3.org/2000/svg';
+    function el(tag, attrs) {
+      var e = document.createElementNS(NS, tag);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    var hover = el('g', { 'pointer-events': 'none', opacity: '0' });
+    hover.appendChild(el('circle', { r: 7, fill: '#ffffff' }));
+    hover.appendChild(el('circle', { r: 5, fill: '#1d9e75', 'fill-opacity': '0.5' }));
+    svg.appendChild(hover);
+
+    var marker = el('g', { 'pointer-events': 'none', opacity: '0' });
+    marker.appendChild(el('circle', { r: 8.5, fill: '#ffffff' }));
+    marker.appendChild(el('circle', { r: 6.5, fill: '#1d9e75', stroke: '#0f6e56', 'stroke-width': '1.5' }));
+    svg.appendChild(marker);
+
+    var EPS = -1e-6;
+    function inside(b) { return b[0] >= EPS && b[1] >= EPS && b[2] >= EPS; }
+
+    var vecEl = root.querySelector('[data-si="vec"]');
+    var fills = root.querySelectorAll('[data-si="fill"]');
+    var vals = root.querySelectorAll('[data-si="val"]');
+
+    function fmt(x) { return (Math.round(x * 100) / 100).toFixed(2); }
+    function pct(x) { return Math.max(0, Math.min(100, Math.round(x * 100))); }
+
+    function setReadout(b) {
+      vecEl.textContent = '(' + fmt(b[0]) + ', ' + fmt(b[1]) + ', ' + fmt(b[2]) + ')';
+      vecEl.classList.add('is-set');
+      for (var i = 0; i < 3; i++) { fills[i].style.width = pct(b[i]) + '%'; vals[i].textContent = pct(b[i]) + '%'; }
+    }
+    function clearReadout() {
+      vecEl.textContent = 'click inside the triangle';
+      vecEl.classList.remove('is-set');
+      for (var i = 0; i < 3; i++) { fills[i].style.width = '0%'; vals[i].textContent = '—'; }
+    }
+
+    svg.addEventListener('pointermove', function (e) {
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      var loc = toSvg(e); if (!loc) return;
+      var b = bary(loc.x, loc.y);
+      if (inside(b)) {
+        hover.setAttribute('transform', 'translate(' + loc.x + ',' + loc.y + ')');
+        hover.setAttribute('opacity', '1');
+      } else {
+        hover.setAttribute('opacity', '0');
+      }
+    });
+    svg.addEventListener('pointerleave', function () { hover.setAttribute('opacity', '0'); });
+    svg.addEventListener('click', function (e) {
+      var loc = toSvg(e); if (!loc) return;
+      var b = bary(loc.x, loc.y);
+      if (inside(b)) {
+        marker.setAttribute('transform', 'translate(' + loc.x + ',' + loc.y + ')');
+        marker.setAttribute('opacity', '1');
+        setReadout(b);
+      } else {
+        marker.setAttribute('opacity', '0');
+        clearReadout();
+      }
+    });
+  }
+
+  function init() {
+    var roots = document.querySelectorAll('.simplex-interactive');
+    for (var i = 0; i < roots.length; i++) setup(roots[i]);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+```

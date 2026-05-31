@@ -1,0 +1,64 @@
+# Figure 1: the classical state space (2-simplex)
+
+**Status:** done, interactive. Wired into the post as `#fig-simplex-d3`,
+referenced in the prose as `@fig-simplex-d3`.
+
+## What it shows
+
+The classical state space for a three-outcome system: the probability
+2-simplex drawn as a triangular face sitting inside the positive octant
+of R^3. Three coordinate axes from the origin, the triangle spanning the
+three unit basis vectors `e1, e2, e3` (the pure states), faint dashed
+medians hinting at the barycentric structure, and the uniform
+distribution `p0 = (1/3, 1/3, 1/3)` marked in red at the centroid.
+
+## The interaction
+
+Clicking inside the triangle places a teal marker and reads off the
+probability distribution `(p1, p2, p3)` for that point, computed from
+barycentric coordinates relative to the three vertices. Three live bars
+show the components. On desktop, hovering shows a faint preview marker. A
+click outside the triangle clears the marker. With JavaScript off, the
+static triangle renders unchanged and the readout shows placeholder text.
+
+Quick checks: the centroid reads `(0.33, 0.33, 0.33)`; a vertex reads
+`1.00` on its own axis; a point on an edge reads `0` on the opposite
+axis.
+
+## Files
+
+| file | role |
+|------|------|
+| `state_space_figure.py` | generator for the static SVG; all geometry (canvas, vertices, axis endpoints) is in named constants at the top |
+| `state_space.svg` | the generated static SVG (checked in) |
+| `interactive.qmd` | the partial the post includes: scoped `<style>`, the inlined SVG, the readout panel, and the `<script>` |
+| `instructions.md` | original task spec for the interactive layer |
+| `continuation.md` | original handover / context notes |
+| `reference-interactive.html` | the interactive fragment exactly as delivered (provenance) |
+
+## How geometry stays in sync
+
+The `<script>` does not hard-code any vertex coordinates. It reads the
+three vertex pixel positions from the SVG `<polygon points="...">`
+attribute at load time, in `e1, e2, e3` order, and maps them to outcomes
+1, 2, 3. The generator emits the polygon vertices in that order, so that
+ordering is the only coupling between the Python and the JS.
+
+## To modify
+
+- **Geometry / palette / labels:** edit the constants at the top of
+  `state_space_figure.py`, then regenerate:
+  ```bash
+  python state_space_figure.py state_space.svg
+  ```
+  Then re-copy the new SVG body (from `<svg ...>` through `</svg>`) into
+  `interactive.qmd`, replacing the old inline SVG. Keep the `role` and
+  `aria-label` attributes on the opening `<svg>` tag. The JS needs no
+  edits as long as the polygon vertices stay in `e1, e2, e3` order.
+- **Readout styling:** the scoped `.simplex-interactive` CSS lives in the
+  `<style>` block at the top of `interactive.qmd`.
+- **Marker colour / readout placement:** see the "two design choices"
+  section of `instructions.md`.
+
+After any change, re-render the post and confirm the figure and its
+`@fig-simplex-d3` reference. No edit to `index.qmd` is needed.
