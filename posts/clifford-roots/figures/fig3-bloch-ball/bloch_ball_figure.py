@@ -281,12 +281,10 @@ def build_svg():
         parts.append(
             f'\n  <circle cx="{sx:.2f}" cy="{sy:.2f}" r="5.5" fill="{PURE}"/>'
         )
-    # Centre: the maximally mixed state I/2, a faint hollow ring.
-    parts.append(
-        f'\n  <circle cx="{CX}" cy="{CY}" r="7.5" '
-        f'fill="{CENTER}" fill-opacity="0.7" stroke="{MIXED_RING}" '
-        f'stroke-width="1.6" stroke-opacity="0.85"/>'
-    )
+    # Centre: the maximally mixed state I/2, a solid fully-visible marker
+    # (matches Figures 1, 2 and 4).
+    parts.append(f'\n  <circle cx="{CX}" cy="{CY}" r="9" fill="{CENTER}"/>')
+    parts.append(f'\n  <circle cx="{CX}" cy="{CY}" r="6" fill="{AXIS}"/>')
 
     # --- Layer 6: labels ---
     parts.append('\n\n  <!-- Labels -->')
@@ -318,10 +316,10 @@ def build_svg():
         f'font-size="{AXIS_LABEL_SIZE}" font-style="italic" fill="{AXIS}">z</text>'
     )
 
-    # Centre label, de-emphasised like the ring.
+    # Centre label, full strength.
     parts.append(
-        f'\n  <text x="{CX + 14:.2f}" y="{CY - 2:.2f}" text-anchor="start" '
-        f'font-size="{CENTER_LABEL_SIZE}" fill="{MIXED_RING}">{CENTER_LABEL}</text>'
+        f'\n  <text x="{CX + 16:.2f}" y="{CY - 2:.2f}" text-anchor="start" '
+        f'font-size="{CENTER_LABEL_SIZE}" fill="{AXIS}">{CENTER_LABEL}</text>'
     )
 
     parts.append('\n</svg>\n')

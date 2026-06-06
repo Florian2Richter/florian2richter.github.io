@@ -61,10 +61,22 @@ cross-referenced from the prose with `@fig-...`. Read
 
 | # | id | folder | state |
 |---|----|--------|-------|
-| 1 | `fig-simplex-d3` | `fig1-state-space` | **done, interactive** |
+| 1 | `fig-simplex-d3` | `fig1-state-space` | **done, static** (interaction moved to Fig 2) |
 | 2 | `fig-root-d3` | `fig2-simplex-root` | **done, interactive** |
-| 3 | `fig-bloch` | `fig3-bloch-ball` | **done, interactive** |
-| 4 | `fig-orbit` | `fig4-orbit-cycle` | **PLANNED** (broken-image placeholder; README sketches it) |
+| 3 | `fig-bloch` | `fig3-bloch-ball` | **done, static** (interaction moved to Fig 4) |
+| 4 | `fig-bloch-root` | `fig3b-bloch-root` | **done, interactive** (click-to-trace qubit root orbits to I/2) |
+| 5 | `fig-orbit` | `fig4-orbit-cycle` | **PLANNED** (broken-image placeholder; README sketches it) |
+
+Figure numbers are auto-assigned by order of appearance, so the orbit
+cycle is now Figure 5. Figure 4 (`fig-bloch-root`) sits in "The quantum
+upgrade" section, right after Figure 3.
+
+The two chapters now run in parallel: the **state space is a static
+sketch** (Fig 1 simplex, Fig 3 Bloch ball) and the **root trajectories
+are interactive** (Fig 2 simplex, Fig 4 Bloch ball). The maximally mixed
+state is the same solid marker in all four. Fig 4's root is the maximal
+qubit root from the thesis (eq. 4.19), acting on the Bloch vector as
+`(r1,r2,r3) -> (r2/2, r3/2, 0)` (`S^3 = 0`, a cube root of the CDC).
 
 Each done folder has: a Python generator (`*_figure.py`), the generated
 `*.svg`, the `interactive.qmd` partial the post includes, and a
@@ -160,7 +172,8 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 
 ## Open TODOs
 
-1. **Figure 4 (orbit cycle).** Not built. See
+1. **Figure 5 (orbit cycle).** Not built (folder `fig4-orbit-cycle`,
+   id `fig-orbit`; it renders as Figure 5 now). See
    `figures/fig4-orbit-cycle/README.md`: the `d=3` orbit of
    `h = [[0,1],[1,2]]` over `F_3` (companion of `x^2+x+2`), the 8-cycle
    `(1,0)->(0,1)->(1,2)->(2,2)->(2,0)->(0,2)->(2,1)->(1,1)->(1,0)`, with

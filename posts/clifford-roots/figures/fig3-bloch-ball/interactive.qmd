@@ -1,31 +1,16 @@
 ```{=html}
-<!-- Interactive Figure 3: Bloch ball (purity field). Static SVG regenerated from bloch_ball_figure.py; readout + script are additive (JS off => static figure). The marker shifts green->pale with purity as it sinks toward the centre. -->
+<!-- Figure 3: Bloch ball (qubit state space). Static SVG inlined verbatim from bloch_ball_figure.py. No interactivity: the interaction lives in Figure 4 (the root trajectories), mirroring Figures 1 and 2. -->
 <style>
-.bloch-interactive{max-width:520px;margin:1.25rem auto;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
-.bloch-interactive svg{width:100%;height:auto;display:block;cursor:crosshair;}
-.bloch-interactive .bl-readout{margin-top:1rem;padding:0.9rem 1.1rem;background:#f4f6f8;border:1px solid #e2e8ee;border-radius:10px;}
-.bloch-interactive .bl-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
-.bloch-interactive .bl-head-label{font-size:13px;color:#3a5a72;}
-.bloch-interactive .bl-vec{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:15px;color:#9aa9b5;}
-.bloch-interactive .bl-vec.is-set{color:#1a3550;}
-.bloch-interactive .bl-slider-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
-.bloch-interactive .bl-slabel{font-size:13px;color:#3a5a72;min-width:42px;}
-.bloch-interactive .bl-slider-row input[type=range]{flex:1;accent-color:#1565c0;cursor:pointer;}
-.bloch-interactive .bl-slider-row input[type=range]:disabled{cursor:default;opacity:0.45;}
-.bloch-interactive .bl-rval{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;color:#1a3550;min-width:62px;text-align:right;}
-.bloch-interactive .bl-rho{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
-.bloch-interactive .bl-rho-label{font-size:14px;color:#3a5a72;}
-.bloch-interactive .bl-mat{display:grid;grid-template-columns:auto auto;gap:4px 16px;padding:6px 12px;border-left:2px solid #cdd8e2;border-right:2px solid #cdd8e2;}
-.bloch-interactive .bl-cell{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:12.5px;color:#1a3550;text-align:center;white-space:nowrap;}
-.bloch-interactive .bl-cell.empty{color:#9aa9b5;}
-.bloch-interactive .bl-eig{font-size:12.5px;color:#3a5a72;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;}
-.bloch-interactive .bl-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+.bloch-static{max-width:520px;margin:1.25rem auto;}
+.bloch-static svg{width:100%;height:auto;display:block;}
+.bloch-static .bl-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
 </style>
 
-<div class="bloch-interactive">
-  <p class="bl-vh">Interactive Bloch ball, the qubit state space, coloured by purity: green on the pure surface, fading to a pale core at the maximally mixed state. Click the front surface to choose a pure state, then use the Purity slider to move it inward toward the centre. The readout shows the Bloch vector, the density matrix, and its eigenvalues.</p>
+<div class="bloch-static">
+  <p class="bl-vh">The Bloch ball, the state space of a single qubit, coloured by purity: blue-teal on the pure surface, fading to a soft blue-grey core at the maximally mixed state I/2 marked at the centre.</p>
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" font-family="Georgia, 'Times New Roman', serif" role="img" aria-label="Bloch ball: the qubit state space" data-cx="320" data-cy="332" data-r="210" data-alpha-deg="35" data-elev-deg="20">
+<svg role="img" aria-label="Bloch ball: the qubit state space" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" font-family="Georgia, 'Times New Roman', serif">
+
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
             markerWidth="8" markerHeight="8" orient="auto-start-reverse">
@@ -87,7 +72,8 @@
   <!-- State markers -->
   <circle cx="320.00" cy="134.66" r="5.5" fill="#2d6f8f"/>
   <circle cx="320.00" cy="529.34" r="5.5" fill="#2d6f8f"/>
-  <circle cx="320.0" cy="332.0" r="7.5" fill="#f5f7f8" fill-opacity="0.7" stroke="#5e7886" stroke-width="1.6" stroke-opacity="0.85"/>
+  <circle cx="320.0" cy="332.0" r="9" fill="#f5f7f8"/>
+  <circle cx="320.0" cy="332.0" r="6" fill="#233746"/>
 
   <!-- Labels -->
   <text x="300.00" y="124.66" text-anchor="end" font-size="21" font-style="italic" fill="#233746">|0⟩</text>
@@ -95,149 +81,7 @@
   <text x="564.27" y="396.50" text-anchor="middle" font-size="20" font-style="italic" fill="#233746">x</text>
   <text x="144.96" y="421.55" text-anchor="end" font-size="20" font-style="italic" fill="#233746">y</text>
   <text x="328.00" y="71.52" text-anchor="start" font-size="20" font-style="italic" fill="#233746">z</text>
-  <text x="334.00" y="330.00" text-anchor="start" font-size="20" fill="#5e7886">I/2</text>
+  <text x="336.00" y="330.00" text-anchor="start" font-size="20" fill="#233746">I/2</text>
 </svg>
-
-<div class="bl-readout">
-    <div class="bl-head">
-      <span class="bl-head-label">Bloch vector (r&#8339;, r&#7497;, r&#7522;)</span>
-      <span class="bl-vec" data-bl="vec">click the front of the ball</span>
-    </div>
-    <div class="bl-slider-row">
-      <span class="bl-slabel">Purity</span>
-      <input type="range" min="0" max="1" step="0.01" value="1" data-bl="purity" disabled aria-label="Purity: distance from centre, 1 is a pure state, 0 is maximally mixed"/>
-      <span class="bl-rval" data-bl="rval">r = &#8212;</span>
-    </div>
-    <div class="bl-rho">
-      <span class="bl-rho-label">&#961; = &#189;(I + r&#183;&#963;) =</span>
-      <span class="bl-mat">
-        <span class="bl-cell empty" data-bl="m00">&#8212;</span>
-        <span class="bl-cell empty" data-bl="m01">&#8212;</span>
-        <span class="bl-cell empty" data-bl="m10">&#8212;</span>
-        <span class="bl-cell empty" data-bl="m11">&#8212;</span>
-      </span>
-      <span class="bl-eig" data-bl="eig"></span>
-    </div>
-  </div>
 </div>
-
-<script>
-(function () {
-  function setup(root) {
-    var svg = root.querySelector('svg');
-    if (!svg) return;
-    var CX = parseFloat(svg.dataset.cx), CY = parseFloat(svg.dataset.cy), R = parseFloat(svg.dataset.r);
-    var A = parseFloat(svg.dataset.alphaDeg) * Math.PI / 180;
-    var E = parseFloat(svg.dataset.elevDeg) * Math.PI / 180;
-    var cA = Math.cos(A), sA = Math.sin(A), cE = Math.cos(E), sE = Math.sin(E);
-
-    var NS = 'http://www.w3.org/2000/svg';
-    function mk(t, a) { var e = document.createElementNS(NS, t); for (var key in a) e.setAttribute(key, a[key]); return e; }
-    function purityColour(r) {
-      var t = Math.max(0, Math.min(1, r * r));   // normalised purity = r^2
-      function L(a, b) { return Math.round(a + t * (b - a)); }
-      return 'rgb(' + L(228,31) + ',' + L(238,122) + ',' + L(233,80) + ')';
-    }
-
-    // Additive overlay elements (the static SVG is never modified).
-    var guide = mk('line', { stroke: '#1d9e75', 'stroke-width': '1.5', 'stroke-opacity': '0.5', 'stroke-dasharray': '2,4', 'pointer-events': 'none', opacity: '0' });
-    guide.setAttribute('x1', CX); guide.setAttribute('y1', CY);
-    svg.appendChild(guide);
-    var hover = mk('g', { 'pointer-events': 'none', opacity: '0' });
-    hover.appendChild(mk('circle', { r: 6, fill: '#1565c0', 'fill-opacity': '0.5' }));
-    svg.appendChild(hover);
-    var marker = mk('g', { 'pointer-events': 'none', opacity: '0' });
-    var haloC = mk('circle', { r: 7.5, fill: '#ffffff' });
-    var ringC = mk('circle', { r: 6.5, fill: '#1565c0', stroke: '#0d3f8f', 'stroke-width': '1.5' });
-    marker.appendChild(haloC); marker.appendChild(ringC);
-    svg.appendChild(marker);
-
-    function toSvg(evt) {
-      var pt = svg.createSVGPoint(); pt.x = evt.clientX; pt.y = evt.clientY;
-      var m = svg.getScreenCTM(); if (!m) return null;
-      var l = pt.matrixTransform(m.inverse()); return [l.x, l.y];
-    }
-    // Inverse projection: screen point -> front-hemisphere unit Bloch vector.
-    function invert(sx, sy) {
-      var er = (sx - CX) / R, eu = (CY - sy) / R, s = er * er + eu * eu;
-      if (s > 1) return null;                 // outside the disc
-      var ev = Math.sqrt(1 - s);              // front (camera-facing) root
-      var z = cE * eu + sE * ev;
-      var w = -sE * eu + cE * ev;
-      var x = cA * er + sA * w;
-      var y = -sA * er + cA * w;
-      return [x, y, z];
-    }
-
-    var slider = root.querySelector('[data-bl="purity"]');
-    var rvalEl = root.querySelector('[data-bl="rval"]');
-    var vec = root.querySelector('[data-bl="vec"]');
-    var eig = root.querySelector('[data-bl="eig"]');
-    var cells = {
-      m00: root.querySelector('[data-bl="m00"]'), m01: root.querySelector('[data-bl="m01"]'),
-      m10: root.querySelector('[data-bl="m10"]'), m11: root.querySelector('[data-bl="m11"]')
-    };
-
-    function fv(v) { var n = Math.round(v * 100) / 100; if (n === 0) n = 0; return (n < 0 ? '\u2212' : '') + Math.abs(n).toFixed(2); }
-    function cfx(re, im) {
-      var r = Math.round(re * 100) / 100; if (r === 0) r = 0;
-      var i = Math.round(im * 100) / 100; var sgn = i < 0 ? '\u2212' : '+';
-      return (r < 0 ? '\u2212' : '') + Math.abs(r).toFixed(2) + ' ' + sgn + ' ' + Math.abs(i).toFixed(2) + 'i';
-    }
-
-    var dir = null, clickPt = null, rVal = 1;
-
-    function render() {
-      if (!dir) {
-        marker.setAttribute('opacity', '0'); guide.setAttribute('opacity', '0');
-        slider.disabled = true; rvalEl.textContent = 'r = \u2014';
-        vec.textContent = 'click the front of the ball'; vec.classList.remove('is-set');
-        for (var key in cells) { cells[key].textContent = '\u2014'; cells[key].classList.add('empty'); }
-        eig.textContent = '';
-        return;
-      }
-      slider.disabled = false;
-      var t = rVal;
-      // Affine projection => interior point r*n projects to the lerp of centre and click.
-      var mx = CX + t * (clickPt[0] - CX), my = CY + t * (clickPt[1] - CY);
-      var s = 0.78 + 0.22 * t;                       // shrink with depth
-      marker.setAttribute('transform', 'translate(' + mx + ',' + my + ') scale(' + s.toFixed(3) + ')');
-      marker.setAttribute('opacity', (0.4 + 0.6 * t).toFixed(3));  // dim with depth
-      haloC.setAttribute('opacity', t.toFixed(3));                 // halo fades as it sinks in
-      guide.setAttribute('x2', clickPt[0]); guide.setAttribute('y2', clickPt[1]); guide.setAttribute('opacity', '1');
-      var x = t * dir[0], y = t * dir[1], z = t * dir[2];
-      vec.textContent = '(' + fv(x) + ', ' + fv(y) + ', ' + fv(z) + ')'; vec.classList.add('is-set');
-      rvalEl.textContent = 'r = ' + t.toFixed(2);
-      cells.m00.textContent = fv((1 + z) / 2); cells.m11.textContent = fv((1 - z) / 2);
-      cells.m01.textContent = cfx(x / 2, -y / 2); cells.m10.textContent = cfx(x / 2, y / 2);
-      for (var key2 in cells) cells[key2].classList.remove('empty');
-      eig.textContent = 'eigenvalues  ' + fv((1 + t) / 2) + ',  ' + fv((1 - t) / 2);
-    }
-
-    svg.addEventListener('pointermove', function (e) {
-      if (e.pointerType && e.pointerType !== 'mouse') return;   // desktop hover preview only
-      var loc = toSvg(e); if (!loc) return;
-      if (invert(loc[0], loc[1])) { hover.setAttribute('transform', 'translate(' + loc[0] + ',' + loc[1] + ')'); hover.setAttribute('opacity', '1'); }
-      else { hover.setAttribute('opacity', '0'); }
-    });
-    svg.addEventListener('pointerleave', function () { hover.setAttribute('opacity', '0'); });
-    svg.addEventListener('click', function (e) {
-      var loc = toSvg(e); if (!loc) return;
-      var inv = invert(loc[0], loc[1]);
-      if (inv) { dir = inv; clickPt = loc; rVal = 1; slider.value = 1; }   // new pure state, reset purity
-      else { dir = null; clickPt = null; rVal = 1; slider.value = 1; }     // outside the disc clears
-      render();
-    });
-    slider.addEventListener('input', function () { if (!dir) return; rVal = parseFloat(slider.value); render(); });
-
-    render();
-  }
-  function init() {
-    var roots = document.querySelectorAll('.bloch-interactive');
-    for (var i = 0; i < roots.length; i++) setup(roots[i]);
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
-})();
-</script>
 ```
