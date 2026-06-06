@@ -132,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<!-- Interactive Figure 4: Bloch-ball root trajectories. Static SVG inlined verbatim from bloch_root_figure.py; the readout + script are additive (JS off => static figure with its three default orbits). Click-to-trace mirrors Figure 2. -->
+<!-- Interactive Figure 4: Bloch-ball root trajectories. Static SVG inlined verbatim from bloch_root_figure.py; the readout + Purity slider + script are additive (JS off => static figure with its three default orbits). Click-to-trace + slider mirror Figures 2 and 3. -->
 <style>
 .bloch-root-interactive{max-width:520px;margin:1.25rem auto;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
 .bloch-root-interactive svg{width:100%;height:auto;display:block;cursor:crosshair;}
@@ -141,6 +141,11 @@ ul.task-list li input[type="checkbox"] {
 .bloch-root-interactive .bl-head-label{font-size:13px;color:#3a5a72;}
 .bloch-root-interactive .bl-hint{font-size:13px;color:#9aa9b5;}
 .bloch-root-interactive .bl-hint.is-set{color:#1565c0;}
+.bloch-root-interactive .bl-slider-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.bloch-root-interactive .bl-slabel{font-size:13px;color:#3a5a72;min-width:42px;}
+.bloch-root-interactive .bl-slider-row input[type=range]{flex:1;accent-color:#1565c0;cursor:pointer;}
+.bloch-root-interactive .bl-slider-row input[type=range]:disabled{cursor:default;opacity:0.45;}
+.bloch-root-interactive .bl-rval{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;color:#1a3550;min-width:62px;text-align:right;}
 .bloch-root-interactive .bl-rows{display:flex;flex-direction:column;gap:9px;}
 .bloch-root-interactive .bl-row{display:grid;grid-template-columns:62px 1fr;align-items:baseline;gap:12px;}
 .bloch-root-interactive .bl-key{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;color:#3a5a72;}
@@ -150,7 +155,7 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 <div class="bloch-root-interactive">
-  <p class="bl-vh">Interactive Bloch ball: the maximal qubit root S driving states to the maximally mixed centre I/2 in stages. Three default orbits are shown (the z-pole takes three steps, the y-axis two, the x-axis one). Click the front of the ball to pick a pure state and trace its own trajectory to I/2 under repeated S.</p>
+  <p class="bl-vh">Interactive Bloch ball: the maximal qubit root S driving states to the maximally mixed centre I/2 in stages. Three default orbits are shown (the z-pole takes three steps, the y-axis two, the x-axis one). Click the front of the ball to pick a direction, use the Purity slider to set how mixed the starting state is, and trace its own trajectory to I/2 under repeated S.</p>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 640 640" font-family="Georgia, 'Times New Roman', serif" role="img" aria-label="The maximal qubit root S driving Bloch vectors to the centre in stages" data-cx="320" data-cy="332" data-r="210" data-alpha-deg="35" data-elev-deg="20">
 
@@ -235,9 +240,9 @@ ul.task-list li input[type="checkbox"] {
   <circle cx="320.00" cy="134.66" r="7.0" fill="#2d6f8f" stroke="#0d3f8f" stroke-width="1.4"></circle>
   </g>
 
-  <!-- Maximally mixed state I/2 (solid marker) -->
-  <circle cx="320.0" cy="332.0" r="9" fill="#f5f7f8"></circle>
-  <circle cx="320.0" cy="332.0" r="6" fill="#233746"></circle>
+  <!-- Maximally mixed state I/2 (recessed, depth-cued) -->
+  <circle cx="320.0" cy="332.0" r="8.5" fill="#f5f7f8" fill-opacity="0.5"></circle>
+  <circle cx="320.0" cy="332.0" r="5.5" fill="#5e7886" fill-opacity="0.85"></circle>
 
   <!-- Labels -->
   <text x="300.00" y="124.66" text-anchor="end" font-size="21" font-style="italic" fill="#233746">|0⟩</text>
@@ -245,13 +250,18 @@ ul.task-list li input[type="checkbox"] {
   <text x="564.27" y="396.50" text-anchor="middle" font-size="20" font-style="italic" fill="#233746">x</text>
   <text x="144.96" y="421.55" text-anchor="end" font-size="20" font-style="italic" fill="#233746">y</text>
   <text x="328.00" y="71.52" text-anchor="start" font-size="20" font-style="italic" fill="#233746">z</text>
-  <text x="336.00" y="330.00" text-anchor="start" font-size="20" fill="#233746">I/2</text>
+  <text x="334.00" y="330.00" text-anchor="start" font-size="20" fill="#5e7886">I/2</text>
 </svg>
 
   <div class="bl-readout">
     <div class="bl-head">
       <span class="bl-head-label">Sampled trajectory (Bloch vectors)</span>
       <span class="bl-hint" data-bl="hint">click the front of the ball</span>
+    </div>
+    <div class="bl-slider-row">
+      <span class="bl-slabel">Purity</span>
+      <input type="range" min="0" max="1" step="0.01" value="1" data-bl="purity" aria-label="Purity of the starting state" disabled="">
+      <span class="bl-rval" data-bl="rval">r = —</span>
     </div>
     <div class="bl-rows">
       <div class="bl-row"><span class="bl-key">r₀</span><span class="bl-vec" data-bl="v0">—</span></div>
@@ -282,7 +292,7 @@ ul.task-list li input[type="checkbox"] {
       var v = R * (z * cE - w * sE);
       return [CX + u, CY - v];
     }
-    // Inverse projection: screen -> front-hemisphere unit Bloch vector (pure state).
+    // Inverse projection: screen -> front-hemisphere unit Bloch vector (a pure direction).
     function invert(sx, sy) {
       var er = (sx - CX) / R, eu = (CY - sy) / R, s = er * er + eu * eu;
       if (s > 1) return null;
@@ -312,13 +322,19 @@ ul.task-list li input[type="checkbox"] {
     svg.appendChild(layer);
     function clearLayer() { while (layer.firstChild) layer.removeChild(layer.firstChild); }
 
+    var slider = root.querySelector('[data-bl="purity"]');
+    var rvalEl = root.querySelector('[data-bl="rval"]');
     var hint = root.querySelector('[data-bl="hint"]');
     var vEls = [root.querySelector('[data-bl="v0"]'), root.querySelector('[data-bl="v1"]'), root.querySelector('[data-bl="v2"]'), root.querySelector('[data-bl="v3"]')];
     function fv(x) { var n = Math.round(x * 100) / 100; if (n === 0) n = 0; return (n < 0 ? '−' : '') + Math.abs(n).toFixed(2); }
     function fvec(r) { return '(' + fv(r[0]) + ', ' + fv(r[1]) + ', ' + fv(r[2]) + ')'; }
 
+    var dir = null, rVal = 1;   // dir: clicked unit direction; rVal: purity (radius)
+
     function reset() {
+      dir = null; rVal = 1;
       clearLayer(); setDefaults(true);
+      slider.disabled = true; slider.value = 1; rvalEl.textContent = 'r = —';
       hint.textContent = 'click the front of the ball'; hint.classList.remove('is-set');
       for (var i = 0; i < 4; i++) { vEls[i].textContent = '—'; vEls[i].classList.remove('is-set'); }
     }
@@ -327,11 +343,14 @@ ul.task-list li input[type="checkbox"] {
     function dist2(a, b) { var dx = a[0]-b[0], dy = a[1]-b[1]; return Math.sqrt(dx*dx + dy*dy); }
     function shorten(a, b, ts, te) { var dx = b[0]-a[0], dy = b[1]-a[1], L = Math.sqrt(dx*dx+dy*dy); if (L < ts+te+1e-6) return [a, b]; var ux = dx/L, uy = dy/L; return [[a[0]+ts*ux, a[1]+ts*uy], [b[0]-te*ux, b[1]-te*uy]]; }
 
-    function show(r0) {
-      clearLayer(); setDefaults(false);
+    // Recompute and redraw the whole trajectory for the current dir + purity.
+    function update() {
+      if (!dir) return;
+      var r0 = [rVal * dir[0], rVal * dir[1], rVal * dir[2]];
       var r1 = applyS(r0), r2 = applyS(r1), r3 = applyS(r2);
       var traj = [r0, r1, r2, r3];
       var proj = traj.map(project);
+      clearLayer(); setDefaults(false);
       for (var i = 0; i < 3; i++) {
         if (dist2(proj[i], proj[i+1]) < 1.0) continue;       // skip degenerate/zero-length steps
         var s = shorten(proj[i], proj[i+1], 8, 9);
@@ -344,7 +363,8 @@ ul.task-list li input[type="checkbox"] {
       var sq = 9;   // r0: a user-placed square (shape marks "yours", as in Figure 2)
       layer.appendChild(el('rect', { x: proj[0][0]-sq/2, y: proj[0][1]-sq/2, width: sq, height: sq, fill: '#1565c0', stroke: '#0d3f8f', 'stroke-width': '1.5' }));
       for (var k = 0; k < 4; k++) { vEls[k].textContent = fvec(traj[k]); vEls[k].classList.add('is-set'); }
-      hint.textContent = 'steps to I/2'; hint.classList.add('is-set');
+      rvalEl.textContent = 'r = ' + rVal.toFixed(2);
+      hint.textContent = rVal < 1e-9 ? 'already at I/2' : 'steps to I/2'; hint.classList.add('is-set');
     }
 
     svg.addEventListener('pointermove', function (e) {
@@ -356,9 +376,11 @@ ul.task-list li input[type="checkbox"] {
     svg.addEventListener('pointerleave', function () { hover.setAttribute('opacity', '0'); });
     svg.addEventListener('click', function (e) {
       var loc = toSvg(e); if (!loc) return;
-      var r0 = invert(loc[0], loc[1]);
-      if (r0) show(r0); else reset();
+      var n = invert(loc[0], loc[1]);
+      if (n) { dir = n; rVal = 1; slider.disabled = false; slider.value = 1; update(); }   // new pure direction, reset purity
+      else reset();                                                                          // click outside the disc clears
     });
+    slider.addEventListener('input', function () { if (!dir) return; rVal = parseFloat(slider.value); update(); });
 
     reset();
   }
