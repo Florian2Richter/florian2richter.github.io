@@ -989,7 +989,7 @@ window.Quarto = {
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-simplex-d3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: The classical state space for three outcomes: the probability simplex sitting inside the positive octant, with the pure states at the vertices and the uniform distribution <span class="math inline">p_0 = (\tfrac13, \tfrac13, \tfrac13)</span> marked at the centre. The fill encodes purity, saturated at the pure corners and fading toward the maximally mixed centre. (You can sample the distribution at any point yourself in the next figure.)
+Figure&nbsp;1: The classical state space for three outcomes: the probability simplex sitting inside the positive octant, with the pure states at the vertices and the uniform distribution <span class="math inline">p_0 = (\tfrac13, \tfrac13, \tfrac13)</span> marked at the centre. The fill encodes purity, saturated at the pure corners and fading toward the maximally mixed centre.
 </figcaption>
 </figure>
 </div>
@@ -1063,7 +1063,7 @@ N \;\cong\;
 .trajectory-interactive .tr-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
 .trajectory-interactive .tr-head-label{font-size:13px;color:#3a5a72;}
 .trajectory-interactive .tr-hint{font-size:13px;color:#9aa9b5;}
-.trajectory-interactive .tr-hint.is-set{color:#bf6f30;}
+.trajectory-interactive .tr-hint.is-set{color:#1565c0;}
 .trajectory-interactive .tr-rows{display:flex;flex-direction:column;gap:9px;}
 .trajectory-interactive .tr-row{display:grid;grid-template-columns:62px 1fr;align-items:baseline;gap:12px;}
 .trajectory-interactive .tr-key{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;color:#3a5a72;}
@@ -1076,6 +1076,7 @@ N \;\cong\;
   <p class="tr-vh">Interactive square-root trajectories on the probability simplex, coloured by purity. Three default trajectories are shown: e1, e2, e3 each reach the maximally mixed centre in two steps, with e1 and e2 merging. Click inside the triangle to trace your own starting distribution and read off its two images under S.</p>
 
 <svg role="img" aria-label="Square-root trajectories on the probability simplex, coloured by purity" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 640 620" font-family="Georgia, 'Times New Roman', serif">
+
   <defs>
     <marker id="arrowG" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#829aa6"></path>
@@ -1772,26 +1773,31 @@ N \;\cong\;
     <line x1="310.0" y1="130.0" x2="340.0" y2="470.0"></line>
   </g>
 
+  <!-- Default trajectories: arrows (toggled off on click) -->
+  <g class="default-traj">
   <!-- Step-1 arrows: two converge at q_a -->
   <line x1="147.3" y1="501.7" x2="254.7" y2="379.8" stroke="#829aa6" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arrowG)"></line>
   <line x1="529.2" y1="427.7" x2="276.0" y2="372.8" stroke="#829aa6" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arrowG)"></line>
   <line x1="316.7" y1="138.7" x2="455.4" y2="319.7" stroke="#829aa6" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arrowG)"></line>
-
   <!-- Step-2 arrows: only two leave -->
   <line x1="274.1" y1="367.8" x2="317.3" y2="359.2" stroke="#829aa6" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arrowG)"></line>
   <line x1="452.5" y1="332.2" x2="342.7" y2="354.1" stroke="#829aa6" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arrowG)"></line>
+  </g>
 
-  <!-- Intermediate points (purity-coloured) -->
+  <!-- Intermediate points (purity-coloured, toggled off on click) -->
+  <g class="default-traj">
   <circle cx="263.3" cy="370.0" r="7.0" fill="#c8dbe2" stroke="#1c4a60" stroke-width="1.3"></circle>
   <circle cx="463.3" cy="330.0" r="5.5" fill="#9ebecc" stroke="#1c4a60" stroke-width="1.3"></circle>
+  </g>
 
   <!-- Starting points e1, e2, e3 (pure, green) -->
   <circle cx="140.0" cy="510.0" r="6.0" fill="#2d6f8f"></circle>
   <circle cx="540.0" cy="430.0" r="6.0" fill="#2d6f8f"></circle>
   <circle cx="310.0" cy="130.0" r="6.0" fill="#2d6f8f"></circle>
 
-  <!-- Maximally mixed state p0 (faint ring) -->
-  <circle cx="330.0" cy="356.7" r="7.5" fill="#f5f7f8" fill-opacity="0.7" stroke="#5e7886" stroke-width="1.6" stroke-opacity="0.85"></circle>
+  <!-- Maximally mixed state p0 (solid marker, fully visible) -->
+  <circle cx="330.0" cy="356.7" r="9" fill="#f5f7f8"></circle>
+  <circle cx="330.0" cy="356.7" r="6" fill="#233746"></circle>
 
   <!-- Vertex labels (green) + vectors (muted) -->
   <text x="132.0" y="536.0" text-anchor="end" font-size="21" font-style="italic" fill="#233746">e₁</text>
@@ -1801,13 +1807,15 @@ N \;\cong\;
   <text x="310.0" y="102.0" text-anchor="middle" font-size="21" font-style="italic" fill="#233746">e₃</text>
   <text x="310.0" y="120.0" text-anchor="middle" font-size="13" fill="#829aa6">(0, 0, 1)</text>
 
-  <!-- Intermediate labels (muted) -->
-  <text x="261.3" y="357.0" text-anchor="middle" font-size="15" font-style="italic" fill="#829aa6">q<tspan baseline-shift="sub" font-size="0.72em" font-style="italic">a</tspan></text>
-  <text x="475.3" y="335.0" text-anchor="start" font-size="15" font-style="italic" fill="#829aa6">q<tspan baseline-shift="sub" font-size="0.72em" font-style="italic">b</tspan></text>
+  <!-- Intermediate labels = images under S (toggled off on click) -->
+  <g class="default-traj">
+  <text x="263.3" y="356.0" text-anchor="middle" font-size="15" fill="#829aa6"><tspan font-style="italic">Se</tspan>₁ = <tspan font-style="italic">Se</tspan>₂</text>
+  <text x="475.3" y="335.0" text-anchor="start" font-size="15" fill="#829aa6"><tspan font-style="italic">Se</tspan>₃</text>
+  </g>
 
-  <!-- p0 label (de-emphasised) -->
-  <text x="343.0" y="352.7" text-anchor="start" font-size="21" font-style="italic" fill="#5e7886">p₀</text>
-  <text x="343.0" y="370.7" text-anchor="start" font-size="13" fill="#5e7886">(⅓, ⅓, ⅓)</text>
+  <!-- p0 label (full strength) -->
+  <text x="346.0" y="352.7" text-anchor="start" font-size="21" font-style="italic" fill="#233746">p₀</text>
+  <text x="346.0" y="370.7" text-anchor="start" font-size="13" fill="#233746">(⅓, ⅓, ⅓)</text>
 </svg>
 
   <div class="tr-readout">
@@ -1860,32 +1868,37 @@ N \;\cong\;
     var NS = 'http://www.w3.org/2000/svg';
     function el(t, a) { var e = document.createElementNS(NS, t); for (var k in a) e.setAttribute(k, a[k]); return e; }
     // reuse the static SVG's grey arrowhead (id arrowG)
-    var hover = el('circle', { r: 5, fill: '#bf6f30', 'fill-opacity': '0.35', 'pointer-events': 'none', opacity: '0' });
+    var hover = el('circle', { r: 5, fill: '#1565c0', 'fill-opacity': '0.35', 'pointer-events': 'none', opacity: '0' });
     svg.appendChild(hover);
     var layer = el('g', { 'pointer-events': 'none' });
     svg.appendChild(layer);
     var amk = el('marker', { id: 'arrowO', viewBox: '0 0 10 10', refX: '9', refY: '5', markerWidth: '7', markerHeight: '7', orient: 'auto-start-reverse' });
-    amk.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#bf6f30' }));
+    amk.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#1565c0' }));
     (svg.querySelector('defs') || svg.appendChild(el('defs', {}))).appendChild(amk);
 
     function shorten(a, b, ts, te) { var dx = b[0]-a[0], dy = b[1]-a[1], L = Math.sqrt(dx*dx+dy*dy); if (L < ts+te+1e-6) return [a,b]; var ux = dx/L, uy = dy/L; return [[a[0]+ts*ux, a[1]+ts*uy], [b[0]-te*ux, b[1]-te*uy]]; }
-    function arrow(a, b) { var s = shorten(a, b, 11, 12); return el('line', { x1: s[0][0], y1: s[0][1], x2: s[1][0], y2: s[1][1], stroke: '#bf6f30', 'stroke-width': '2', 'stroke-linecap': 'round', 'marker-end': 'url(#arrowO)' }); }
+    function arrow(a, b) { var s = shorten(a, b, 11, 12); return el('line', { x1: s[0][0], y1: s[0][1], x2: s[1][0], y2: s[1][1], stroke: '#1565c0', 'stroke-width': '2', 'stroke-linecap': 'round', 'marker-end': 'url(#arrowO)' }); }
 
     var hint = root.querySelector('[data-tr="hint"]');
     var vEls = [root.querySelector('[data-tr="v0"]'), root.querySelector('[data-tr="v1"]'), root.querySelector('[data-tr="v2"]')];
     function fmt(p) { function f(x){ var n = Math.round(x*100)/100; if (n === 0) n = 0; return n.toFixed(2); } return '(' + f(p[0]) + ', ' + f(p[1]) + ', ' + f(p[2]) + ')'; }
     function clearLayer() { while (layer.firstChild) layer.removeChild(layer.firstChild); }
-    function reset() { clearLayer(); hint.textContent = 'click inside the triangle'; hint.classList.remove('is-set'); for (var i = 0; i < 3; i++) { vEls[i].textContent = '—'; vEls[i].classList.remove('is-set'); } }
+    // The three baked pure-state trajectories live in <g class="default-traj">;
+    // hide them once the reader picks a point, restore them on a click outside.
+    var defaults = svg.querySelectorAll('.default-traj');
+    function setDefaults(on) { for (var i = 0; i < defaults.length; i++) defaults[i].style.display = on ? '' : 'none'; }
+    function reset() { clearLayer(); setDefaults(true); hint.textContent = 'click inside the triangle'; hint.classList.remove('is-set'); for (var i = 0; i < 3; i++) { vEls[i].textContent = '—'; vEls[i].classList.remove('is-set'); } }
     function show(b, c0) {
       clearLayer();
+      setDefaults(false);
       var s1 = applyS(b), s2 = applyS(s1);
       var c1 = toCanvas(s1), c2 = toCanvas(s2);
       layer.appendChild(arrow(c0, c1));
       layer.appendChild(arrow(c1, c2));
-      layer.appendChild(el('circle', { cx: c1[0], cy: c1[1], r: 5.5, fill: '#bf6f30', stroke: '#8a4f1f', 'stroke-width': '1.3' }));
-      layer.appendChild(el('circle', { cx: c2[0], cy: c2[1], r: 5, fill: '#bf6f30', stroke: '#8a4f1f', 'stroke-width': '1.3' }));
+      layer.appendChild(el('circle', { cx: c1[0], cy: c1[1], r: 5.5, fill: '#1565c0', stroke: '#0d3f8f', 'stroke-width': '1.3' }));
+      layer.appendChild(el('circle', { cx: c2[0], cy: c2[1], r: 5, fill: '#1565c0', stroke: '#0d3f8f', 'stroke-width': '1.3' }));
       var sq = 9;   // rho0: a user-placed square (shape, not colour, marks "yours")
-      layer.appendChild(el('rect', { x: c0[0]-sq/2, y: c0[1]-sq/2, width: sq, height: sq, fill: '#bf6f30', stroke: '#8a4f1f', 'stroke-width': '1.5' }));
+      layer.appendChild(el('rect', { x: c0[0]-sq/2, y: c0[1]-sq/2, width: sq, height: sq, fill: '#1565c0', stroke: '#0d3f8f', 'stroke-width': '1.5' }));
       var vals = [b, s1, s2];
       for (var i = 0; i < 3; i++) { vEls[i].textContent = fmt(vals[i]); vEls[i].classList.add('is-set'); }
       hint.textContent = 'two steps to p₀'; hint.classList.add('is-set');
@@ -1932,7 +1945,7 @@ Figure&nbsp;2: One square root <span class="math inline">S</span> of the <span c
 .bloch-interactive .bl-vec.is-set{color:#1a3550;}
 .bloch-interactive .bl-slider-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
 .bloch-interactive .bl-slabel{font-size:13px;color:#3a5a72;min-width:42px;}
-.bloch-interactive .bl-slider-row input[type=range]{flex:1;accent-color:#bf6f30;cursor:pointer;}
+.bloch-interactive .bl-slider-row input[type=range]{flex:1;accent-color:#1565c0;cursor:pointer;}
 .bloch-interactive .bl-slider-row input[type=range]:disabled{cursor:default;opacity:0.45;}
 .bloch-interactive .bl-rval{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;color:#1a3550;min-width:62px;text-align:right;}
 .bloch-interactive .bl-rho{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
@@ -2064,11 +2077,11 @@ Figure&nbsp;2: One square root <span class="math inline">S</span> of the <span c
     guide.setAttribute('x1', CX); guide.setAttribute('y1', CY);
     svg.appendChild(guide);
     var hover = mk('g', { 'pointer-events': 'none', opacity: '0' });
-    hover.appendChild(mk('circle', { r: 6, fill: '#bf6f30', 'fill-opacity': '0.5' }));
+    hover.appendChild(mk('circle', { r: 6, fill: '#1565c0', 'fill-opacity': '0.5' }));
     svg.appendChild(hover);
     var marker = mk('g', { 'pointer-events': 'none', opacity: '0' });
     var haloC = mk('circle', { r: 7.5, fill: '#ffffff' });
-    var ringC = mk('circle', { r: 6.5, fill: '#bf6f30', stroke: '#8a4f1f', 'stroke-width': '1.5' });
+    var ringC = mk('circle', { r: 6.5, fill: '#1565c0', stroke: '#0d3f8f', 'stroke-width': '1.5' });
     marker.appendChild(haloC); marker.appendChild(ringC);
     svg.appendChild(marker);
 

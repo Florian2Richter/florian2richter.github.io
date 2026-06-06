@@ -143,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
 .bloch-interactive .bl-vec.is-set{color:#1a3550;}
 .bloch-interactive .bl-slider-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
 .bloch-interactive .bl-slabel{font-size:13px;color:#3a5a72;min-width:42px;}
-.bloch-interactive .bl-slider-row input[type=range]{flex:1;accent-color:#bf6f30;cursor:pointer;}
+.bloch-interactive .bl-slider-row input[type=range]{flex:1;accent-color:#1565c0;cursor:pointer;}
 .bloch-interactive .bl-slider-row input[type=range]:disabled{cursor:default;opacity:0.45;}
 .bloch-interactive .bl-rval{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;color:#1a3550;min-width:62px;text-align:right;}
 .bloch-interactive .bl-rho{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
@@ -275,11 +275,11 @@ ul.task-list li input[type="checkbox"] {
     guide.setAttribute('x1', CX); guide.setAttribute('y1', CY);
     svg.appendChild(guide);
     var hover = mk('g', { 'pointer-events': 'none', opacity: '0' });
-    hover.appendChild(mk('circle', { r: 6, fill: '#bf6f30', 'fill-opacity': '0.5' }));
+    hover.appendChild(mk('circle', { r: 6, fill: '#1565c0', 'fill-opacity': '0.5' }));
     svg.appendChild(hover);
     var marker = mk('g', { 'pointer-events': 'none', opacity: '0' });
     var haloC = mk('circle', { r: 7.5, fill: '#ffffff' });
-    var ringC = mk('circle', { r: 6.5, fill: '#bf6f30', stroke: '#8a4f1f', 'stroke-width': '1.5' });
+    var ringC = mk('circle', { r: 6.5, fill: '#1565c0', stroke: '#0d3f8f', 'stroke-width': '1.5' });
     marker.appendChild(haloC); marker.appendChild(ringC);
     svg.appendChild(marker);
 
