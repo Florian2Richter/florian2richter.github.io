@@ -48,9 +48,16 @@ the figure is self-contained.
 - **Arrows** carry the dynamics. The two ordinary orbits are neutral
   grey (`ARROW_GREY #829aa6`), as the baked default trajectories in
   Figure 2. The **hero z-pole orbit is strong blue** (`HERO_BLUE
-  #1565c0`, dark `#0d3f8f` stroke / start dot), thicker and full
-  opacity, because it takes all three steps and so realises the order-3
-  bound. The hero start `|0>` is drawn slightly larger.
+  #1565c0`, dark `#0d3f8f` stroke / start dot), thicker, because it takes
+  all three steps and so realises the order-3 bound. The hero start `|0>`
+  is drawn slightly larger.
+- **Depth fade.** Both arrows and points lose opacity as the orbit sinks
+  toward `I/2`: opacity follows the Bloch-vector magnitude (`depth_op` for
+  arrows, `dot_op` for points, which fade a touch more), so the orbit dims
+  as it spirals into the centre. The interactive trajectory uses the same
+  rule, and the user-placed start circle additionally fades its halo and
+  dims (`0.4 + 0.6 r`) as the Purity slider sinks it inward, the depth cue
+  of the original Bloch figure. Surface start states stay crisp.
 - **Centre `I/2`** is depth-cued (it sits inside the ball): a muted
   blue-grey dot (`MIXED_RING #5e7886`), a little transparent, with a soft
   halo and muted label, matching Figure 3. The flat 2D figures (1, 2)
@@ -75,10 +82,13 @@ the orthographic projection onto the camera-facing hemisphere, the same
 then sets how mixed the starting state is: `r0 = r * n`, from the surface
 (`r = 1`, pure) inward toward `I/2` (`r = 0`). The orbit
 `r0 -> S r0 -> S^2 r0 -> 0` is **recomputed in real time** as the slider
-moves (`update()` rebuilds the whole overlay): a blue square at `r0`,
-blue dots at the (purity-coloured) intermediate points, blue arrows
-between them, and a readout of the four Bloch vectors and `r`. The final
-point is `0`, which lands on the `I/2` marker, so no dot is drawn there.
+moves (`update()` rebuilds the whole overlay): a blue circle at `r0` (a
+white halo plus a blue ring), blue dots at the (purity-coloured)
+intermediate points, blue arrows between them, and a readout of the four
+Bloch vectors and `r`. As purity drops the start circle **sinks into the
+ball**: its halo fades and the whole marker dims (`opacity = 0.4 + 0.6 r`),
+exactly the depth cue of the original Bloch figure. The final point is
+`0`, which lands on the `I/2` marker, so no dot is drawn there.
 On a click the three baked default orbits (the `default-traj` groups)
 vanish and only the reader's orbit is shown; a click outside the disc
 restores them and disables the slider. On desktop a faint blue dot

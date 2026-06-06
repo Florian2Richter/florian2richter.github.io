@@ -285,15 +285,27 @@ def build_svg():
     traj_y = [(0.0, 1.0, 0.0), (0.5, 0.0, 0.0), (0.0, 0.0, 0.0)]
     traj_x = [(1.0, 0.0, 0.0), (0.0, 0.0, 0.0)]
 
-    def draw_arrows(traj, colour, width, opacity, marker):
+    # Trajectory elements fade as they sink toward the centre I/2: opacity
+    # follows the Bloch-vector magnitude, so the orbit dims as it spirals in.
+    def mag(r):
+        return (r[0] ** 2 + r[1] ** 2 + r[2] ** 2) ** 0.5
+
+    def depth_op(m):
+        return round(0.30 + 0.60 * min(1.0, m), 3)      # arrows
+
+    def dot_op(m):
+        return round(0.22 + 0.63 * min(1.0, m), 3)      # points fade a touch more
+
+    def draw_arrows(traj, colour, width, marker):
         out = []
         for a, b in zip(traj, traj[1:]):
             pa = project(a)[:2]
             pb = project(b)[:2]
             s, e = shorten2d(pa, pb, DOT_START + 2.0, DOT_MID + 4.0)
+            op = depth_op((mag(a) + mag(b)) / 2)
             out.append(f'\n  <line x1="{s[0]:.2f}" y1="{s[1]:.2f}" '
                        f'x2="{e[0]:.2f}" y2="{e[1]:.2f}" stroke="{colour}" '
-                       f'stroke-width="{width}" stroke-opacity="{opacity}" '
+                       f'stroke-width="{width}" stroke-opacity="{op}" '
                        f'stroke-linecap="round" marker-end="url(#{marker})"/>')
         return "".join(out)
 
@@ -304,7 +316,9 @@ def build_svg():
             sx, sy, _ = project(p)
             out.append(f'\n  <circle cx="{sx:.2f}" cy="{sy:.2f}" '
                        f'r="{DOT_MID}" fill="{purity_colour(p)}" '
-                       f'stroke="{DARK_DOT}" stroke-width="1.2"/>')
+                       f'fill-opacity="{dot_op(mag(p))}" '
+                       f'stroke="{DARK_DOT}" stroke-width="1.2" '
+                       f'stroke-opacity="{dot_op(mag(p))}"/>')
         return "".join(out)
 
     # The three default (pure axis-state) orbits live in a toggleable group:
@@ -314,13 +328,13 @@ def build_svg():
     parts.append('\n  <g class="default-traj">')
 
     parts.append('\n  <!-- Secondary orbits (grey): y- and x-axis states -->')
-    parts.append(draw_arrows(traj_y, ARROW_GREY, ARROW_W, SEC_OPACITY, "arrowG"))
-    parts.append(draw_arrows(traj_x, ARROW_GREY, ARROW_W, SEC_OPACITY, "arrowG"))
+    parts.append(draw_arrows(traj_y, ARROW_GREY, ARROW_W, "arrowG"))
+    parts.append(draw_arrows(traj_x, ARROW_GREY, ARROW_W, "arrowG"))
     parts.append(draw_dots(traj_y))
     parts.append(draw_dots(traj_x))
 
     parts.append('\n  <!-- Hero orbit (blue): the z-pole takes all three steps -->')
-    parts.append(draw_arrows(traj_hero, HERO_BLUE, HERO_ARROW_W, 1.0, "arrowB"))
+    parts.append(draw_arrows(traj_hero, HERO_BLUE, HERO_ARROW_W, "arrowB"))
     parts.append(draw_dots(traj_hero))
 
     # Start states (pure, on the surface).
