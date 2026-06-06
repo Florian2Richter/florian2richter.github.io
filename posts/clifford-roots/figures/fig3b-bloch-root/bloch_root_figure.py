@@ -303,9 +303,11 @@ def build_svg():
             pb = project(b)[:2]
             s, e = shorten2d(pa, pb, DOT_START + 2.0, DOT_MID + 4.0)
             op = depth_op((mag(a) + mag(b)) / 2)
+            # Use group `opacity`, not stroke-opacity: the latter fades the
+            # line but NOT the arrowhead (a marker painted with its own fill).
             out.append(f'\n  <line x1="{s[0]:.2f}" y1="{s[1]:.2f}" '
                        f'x2="{e[0]:.2f}" y2="{e[1]:.2f}" stroke="{colour}" '
-                       f'stroke-width="{width}" stroke-opacity="{op}" '
+                       f'stroke-width="{width}" opacity="{op}" '
                        f'stroke-linecap="round" marker-end="url(#{marker})"/>')
         return "".join(out)
 
