@@ -183,11 +183,16 @@ curl -s -H "Authorization: Bearer $TOKEN" \
    `(1,0)->(0,1)->(1,2)->(2,2)->(2,0)->(0,2)->(2,1)->(1,1)->(1,0)`, with
    the mirror-pair zeros `(1,0)`/`(2,0)` at the poles. Model the build on
    `fig2`. Own colour scheme (not purity).
-2. **Citations.** Hook "mixing channels" footnote (TODO); the `§9`
-   general-construction paper (working title only); confirm the exact
-   thesis title (the `§9` footnote currently guesses "Roots of the
-   completely depolarising channel"). The thesis PDF is at
-   `reference/Diplomarbeit_Florian.pdf` (use `pdftotext`).
+2. **Citations.** Footnote policy: for now cite only real, published
+   third-party work; no footnotes pointing at Florian's own thesis or
+   forthcoming paper. Done: the `§9` general-construction footnote and the
+   end-of-post thesis-citation footnote were removed (the prose still
+   mentions "the final paper" and "my diploma thesis" narratively, just
+   without a citation); the memory-channels footnote now cites only
+   Kretschmann & Werner (2005). Remaining TODO: the hook "mixing
+   channels" footnote (`[^mixing-ref]`) is still a TODO listing candidate
+   third-party refs; pick one. The `[^channels]` footnote (Nielsen &
+   Chuang, Wolf) is a real citation and stays.
 3. **Colour fine-tuning.** Florian said "we adjust the colouring later."
    Retune as above. He also wants the centre to never be pure white
    (already handled, but tune to taste).

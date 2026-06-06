@@ -52,41 +52,27 @@ al. 2010 on the quantum Wielandt inequality), or Michael Wolf's
 *Quantum Channels & Operations: Guided Tour* lecture notes for a more
 pedagogical entry point.
 
-There is a concrete place this exact question turns up. Picture a
-quantum device you use over and over: a gate in a processor, a link
-down a fibre. The convenient assumption is that each use is independent
-of the last: the device has no memory, and what it does to your tenth
-input has nothing to do with your ninth. Real hardware is rarely so
-obliging. A device can carry something from one use to the next (a
-lingering excitation, a drifting field, a stray correlation), so that
-what it does now depends on its history. The standard way to model this
-is to give the device a private side-system, a *memory*, that it reads
-from and writes to on every use and that you never see directly.
+There's a second way to picture the same question, and it's the one
+that makes the problem feel physical. A quantum device you use over and
+over (a logic gate, a link down a fibre) need not treat each use
+independently: it can carry a private *memory* from one use to the next,
+a lingering excitation or stray correlation that makes what it does now
+lean on its history. Such a device is *forgetful* when the influence of
+how that memory started eventually washes out (the asymptotic case from
+a moment ago), and *strictly forgetful* when the washout is *exact*,
+every trace of the initial memory provably gone after some finite number
+of uses. Not small, gone.
 
-Once a device has memory, a natural worry follows: does the influence
-of how the memory *started* ever go away? A device whose memory keeps
-mattering forever is a nuisance: your very first input could leave a
-fingerprint on every output far down the line. A device is called
-*forgetful* when that fingerprint fades: run it long enough and the
-initial memory stops affecting what comes out. Most well-behaved noisy
-devices forget in exactly this gradual, asymptotic way.
+And with no separate input to track, a device that becomes strictly
+forgetful after exactly $k$ uses is nothing but a $k$-th root of
+complete erasure.[^memory-channels] To ask how finely we can divide
+erasure is to ask how long a finite quantum memory can survive before it
+is forced to forget exactly, and the largest $k$ is the deepest such
+memory a device of this kind can hold.
 
-The sharp version is to demand that forgetting happen *exactly*, after
-a finite number of uses. Call a device *strictly forgetful* if there is
-some $k$ for which, after $k$ uses, every trace of the starting memory
-is provably gone: not small, gone. And here is the connection that
-drives this whole post: a device that is strictly forgetful after
-exactly $k$ uses, with no separate input to track, is precisely a
-$k$-th root of complete erasure.[^memory-channels] "How finely can you
-subdivide erasure?" and "how long can a quantum memory persist before
-it is wiped exactly clean?" are the same question, and the largest $k$
-is the deepest such memory a device of this kind can hold.
-
-[^memory-channels]: The framework of quantum channels with memory is
-due to Kretschmann and Werner (2005). The strictly-forgetful
-refinement, and the identification of a strictly forgetful channel with
-no input as a root of the completely depolarising channel, is developed
-in the thesis (§6.2.2).
+[^memory-channels]: The framework of quantum channels with memory is due
+to D. Kretschmann and R. F. Werner, "Quantum channels with memory,"
+*Phys. Rev. A* **72**, 062323 (2005); arXiv:quant-ph/0502106.
 
 That largest $k$ is where this post lives, and it has different answers
 in different settings. If the copier has to behave like a classical
@@ -926,7 +912,7 @@ of asking a single matrix $h$ to do all the work, one builds the root
 directly at the level of the channel's representation, nudging a Jordan
 block into exactly the shape the bound allows. That construction does
 not care about mirror pairs, so the factor of two disappears, and the
-gap to $d^2 - 1$ closes.[^general-construction]
+gap to $d^2 - 1$ closes.
 
 That more general result subsumes the Clifford one, which is why the
 Clifford construction does not appear in the final paper. I wanted to
@@ -940,13 +926,4 @@ and you can check the $d = 3$ case by stepping around an eight-point
 cycle with a pencil.
 
 The full development, including the classical and general quantum bounds
-and the Clifford channels above, is in my diploma thesis.[^thesis]
-
-[^general-construction]: TODO: fill in the exact citation for the general
-$d^2 - 1$ construction (working title *How long can it take for a quantum
-channel to forget everything?*), once the published reference is settled.
-
-[^thesis]: Florian Richter, *Roots of the completely depolarising
-channel* (diploma thesis), Leibniz Universität Hannover, 2010. Chapter 5
-covers the Clifford channels discussed here. TODO: confirm the exact
-thesis title and add a direct link to the PDF in the repository.
+and the Clifford channels above, is in my diploma thesis.
