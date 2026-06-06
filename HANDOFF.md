@@ -79,9 +79,10 @@ The background **field encodes purity**: blue-teal `PURE #2d6f8f` (pure)
 fading to soft blue-grey `MIXED #d6e5ea` (maximally mixed, a tinted
 centre, never white). Structure: axes/labels `AXIS #233746`, grid lines
 `GRID #829aa6`, centre marker a light `CENTER #f5f7f8` ring with a
-visible outline. The **interactive sampled state** the reader places is a
-fixed contrasting **amber `STATE #bf6f30`** (Figure 2's whole user
-trajectory is amber; the placed point is a square).
+visible outline. The **interactive sampled state** the reader places (and
+every moving object) is a **strong blue `STATE #1565c0`** (dark-blue
+`#0d3f8f` stroke); in Figure 2 the whole user trajectory is this blue and
+the placed point is a square.
 
 To retune colours: edit `PURE_RGB` / `MIXED_RGB` in the generators (and
 the Bloch radial-gradient stops in `bloch_ball_figure.py`), then mirror

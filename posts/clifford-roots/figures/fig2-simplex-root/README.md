@@ -30,10 +30,16 @@ e3 -> q_b -> p0
 - Intermediate points `q_a, q_b` are coloured by their own purity. `q_a`
   is already quite mixed, so it reads pale; `q_b` a little more blue-teal. `q_a`
   is drawn slightly larger because two trajectories arrive there.
+  These are internal code names; in the figure the points are labelled as
+  their images under the root `S`. `q_b = S e3` is shown as **`Se₃`**, and
+  the merge point `q_a = S e1 = S e2` is shown as the equality
+  **`Se₁ = Se₂`** (the cleanest way to name a point two pure states share).
 - All arrows are **neutral grey** (three step-1, two converging on `q_a`;
   two step-2). Colour is reserved for purity, so the arrows carry only
   the dynamics; the dots draining blue-teal to blue-grey carry the erasure.
-- The uniform distribution `p0` is a faint hollow ring at the centre.
+- The uniform distribution `p0` is a solid, fully opaque marker at the
+  centre (white halo + dark `OUTLINE` dot), matching Figure 1, with its
+  `(1/3, 1/3, 1/3)` coordinates labelled at full strength.
 
 **The merge at `q_a` is the headline:** three step-1 arrows arrive but
 only two step-2 arrows leave, so the figure shows information being lost
@@ -71,8 +77,9 @@ Blue-grey scheme shared with Figure 1: `AXIS #233746` labels, `GRID
 #829aa6` grid lines, blue-teal `PURE #2d6f8f` (pure) fading to blue-grey
 `MIXED #d6e5ea` (maximally mixed). Mixed dots get a dark blue-teal
 `#1c4a60` outline. Default-trajectory arrows are neutral grey. The user
-trajectory is the contrasting amber `STATE #bf6f30`, with the placed point
-also set apart by **shape** (a square).
+trajectory (every moving object) is a strong blue `STATE #1565c0`
+(dark-blue `#0d3f8f` stroke), with the placed point also set apart by
+**shape** (a square).
 
 ## To modify
 
@@ -88,19 +95,26 @@ also set apart by **shape** (a square).
 
 Clicking inside the simplex drops a starting distribution `rho0` as a
 **square** (distinct in shape from the round structural dots), coloured
-by its purity, then shows `S rho0` and `S^2 rho0` as amber dots
-joined by amber arrows, and a readout of the three probability vectors
+by its purity, then shows `S rho0` and `S^2 rho0` as blue dots
+joined by blue arrows, and a readout of the three probability vectors
 `rho0`, `S rho0`, `S^2 rho0`. The second image always lands on `p0`,
 which the reader can verify for any point they pick. On desktop a faint
-amber dot previews where a click would land. The three baked default
-trajectories stay visible at all
-times; the user trajectory is purely additive and clears on a click
-outside the triangle.
+blue dot previews where a click would land.
+
+The figure starts by showing the three baked pure-state trajectories.
+**On a click, those three default trajectories vanish** and only the
+reader's chosen trajectory is drawn; a click outside the triangle
+restores the defaults. The toggle works by hiding every
+`<g class="default-traj">` group (the step arrows, the `q_a`/`q_b` dots,
+and their labels) via `display:none`, set by `setDefaults()` in the
+script. The `p0` marker and the `e1/e2/e3` vertex dots are outside those
+groups, so they stay put.
 
 The script reads the vertices from the polygon (single source of truth)
 and holds the root `S` as a constant that must stay in sync with the
 generator's `T`. It is plain JS, no libraries. With JS off, the static
-figure with its three default trajectories renders unchanged.
+figure with its three default trajectories renders unchanged (the
+`default-traj` groups are only hidden by script, never by default).
 
 Out of scope (kept that way): drawing the line through `q_a, q_b, p0`
 (the prose can mention it as a "did you notice"), alternative roots, and

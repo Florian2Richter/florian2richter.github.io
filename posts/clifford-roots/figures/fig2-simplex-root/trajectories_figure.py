@@ -207,10 +207,15 @@ def build_svg():
                 f'stroke-width="{ARROW_W}" stroke-linecap="round" '
                 f'marker-end="url(#arrowG)"/>')
 
-    parts.append('\n\n  <!-- Step-1 arrows: two converge at q_a -->')
+    # The three default (pure-state) trajectories live in a toggleable
+    # group: the interactive layer hides them once the reader picks a point.
+    parts.append('\n\n  <!-- Default trajectories: arrows (toggled off on click) -->')
+    parts.append('\n  <g class="default-traj">')
+    parts.append('\n  <!-- Step-1 arrows: two converge at q_a -->')
     parts.append(arrow(cV1, cQA)); parts.append(arrow(cV2, cQA)); parts.append(arrow(cV3, cQB))
-    parts.append('\n\n  <!-- Step-2 arrows: only two leave -->')
+    parts.append('\n  <!-- Step-2 arrows: only two leave -->')
     parts.append(arrow(cQA, cP0)); parts.append(arrow(cQB, cP0))
+    parts.append('\n  </g>')
 
     # --- Dots, coloured by purity ---
     def dot(c, r, p, stroke=True):
@@ -218,17 +223,18 @@ def build_svg():
         st = f' stroke="{DARK_DOT}" stroke-width="1.3"' if stroke else ''
         return f'\n  <circle cx="{c[0]:.1f}" cy="{c[1]:.1f}" r="{r}" fill="{col}"{st}/>'
 
-    parts.append('\n\n  <!-- Intermediate points (purity-coloured) -->')
+    parts.append('\n\n  <!-- Intermediate points (purity-coloured, toggled off on click) -->')
+    parts.append('\n  <g class="default-traj">')
     parts.append(dot(cQA, DOT_QA, qa))   # q_a: most mixed, reads pale
     parts.append(dot(cQB, DOT_QB, qb))
+    parts.append('\n  </g>')
     parts.append('\n\n  <!-- Starting points e1, e2, e3 (pure, green) -->')
     for c, e in ((cV1, e1), (cV2, e2), (cV3, e3)):
         parts.append(dot(c, DOT_START, e, stroke=False))
 
-    parts.append('\n\n  <!-- Maximally mixed state p0 (faint ring) -->')
-    parts.append(f'\n  <circle cx="{cP0[0]:.1f}" cy="{cP0[1]:.1f}" r="{RING_P0}" '
-                 f'fill="{CENTER}" fill-opacity="0.7" stroke="{MIXED_RING}" '
-                 f'stroke-width="1.6" stroke-opacity="0.85"/>')
+    parts.append('\n\n  <!-- Maximally mixed state p0 (solid marker, fully visible) -->')
+    parts.append(f'\n  <circle cx="{cP0[0]:.1f}" cy="{cP0[1]:.1f}" r="9" fill="{CENTER}"/>')
+    parts.append(f'\n  <circle cx="{cP0[0]:.1f}" cy="{cP0[1]:.1f}" r="6" fill="{OUTLINE}"/>')
 
     # --- Labels ---
     green = purity_colour(1.0)
@@ -246,19 +252,23 @@ def build_svg():
     parts.append(text(cV3[0], cV3[1] - 28, "e₃", LABEL_SIZE, OUTLINE,"middle", True))
     parts.append(text(cV3[0], cV3[1] - 10, "(0, 0, 1)", VECTOR_LABEL_SIZE, MUTED, "middle"))
 
-    def qlabel(x, y, sub, anchor):
+    # The intermediate points ARE the images of the pure states under the
+    # root S. q_b = S e3; q_a is where e1 and e2 land together, so it is
+    # labelled by the equality S e1 = S e2 (the merge is the headline).
+    def slabel(x, y, content, anchor):
         return (f'\n  <text x="{x:.1f}" y="{y:.1f}" text-anchor="{anchor}" '
-                f'font-size="{Q_LABEL_SIZE}" font-style="italic" fill="{MUTED}">'
-                f'q<tspan baseline-shift="sub" font-size="0.72em"'
-                f' font-style="italic">{sub}</tspan></text>')
+                f'font-size="{Q_LABEL_SIZE}" fill="{MUTED}">{content}</text>')
 
-    parts.append('\n\n  <!-- Intermediate labels (muted) -->')
-    parts.append(qlabel(cQA[0] - 2, cQA[1] - 13, "a", "middle"))
-    parts.append(qlabel(cQB[0] + 12, cQB[1] + 5, "b", "start"))
+    SE = '<tspan font-style="italic">Se</tspan>'
+    parts.append('\n\n  <!-- Intermediate labels = images under S (toggled off on click) -->')
+    parts.append('\n  <g class="default-traj">')
+    parts.append(slabel(cQA[0], cQA[1] - 14, f'{SE}₁ = {SE}₂', "middle"))
+    parts.append(slabel(cQB[0] + 12, cQB[1] + 5, f'{SE}₃', "start"))
+    parts.append('\n  </g>')
 
-    parts.append('\n\n  <!-- p0 label (de-emphasised) -->')
-    parts.append(text(cP0[0] + 13, cP0[1] - 4, "p₀", LABEL_SIZE, MIXED_RING, "start", True))
-    parts.append(text(cP0[0] + 13, cP0[1] + 14, "(⅓, ⅓, ⅓)", VECTOR_LABEL_SIZE, MIXED_RING, "start"))
+    parts.append('\n\n  <!-- p0 label (full strength) -->')
+    parts.append(text(cP0[0] + 16, cP0[1] - 4, "p₀", LABEL_SIZE, OUTLINE, "start", True))
+    parts.append(text(cP0[0] + 16, cP0[1] + 14, "(⅓, ⅓, ⅓)", VECTOR_LABEL_SIZE, OUTLINE, "start"))
 
     parts.append('\n</svg>\n')
     return "".join(parts)

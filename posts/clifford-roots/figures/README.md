@@ -75,10 +75,10 @@ language in 3D. The blue-grey scientific palette:
 - centre marker fill: `CENTER #f5f7f8`, with a visible blue-grey outline
 
 The **current sampled state** (the interactive marker the reader places)
-is a contrasting muted **amber `#bf6f30`**, so it pops against the blue
-field. In Figure 2 the whole user trajectory is amber; the placed point
-is also set apart by **shape** (a square). The static default
-trajectories there use neutral-grey arrows.
+and any moving object are a **strong blue `#1565c0`** (dark-blue
+`#0d3f8f` stroke). In Figure 2 the whole user trajectory is this blue;
+the placed point is also set apart by **shape** (a square). The static
+default trajectories there use neutral-grey arrows.
 
 Figure 4 (the orbit cycle) is the label plane `F_d^2`, not a state
 space, so purity does not apply there; it uses its own scheme.

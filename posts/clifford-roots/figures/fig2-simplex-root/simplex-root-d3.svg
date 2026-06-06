@@ -697,26 +697,31 @@
     <line x1="310.0" y1="130.0" x2="340.0" y2="470.0"/>
   </g>
 
+  <!-- Default trajectories: arrows (toggled off on click) -->
+  <g class="default-traj">
   <!-- Step-1 arrows: two converge at q_a -->
   <line x1="147.3" y1="501.7" x2="254.7" y2="379.8" stroke="#829aa6" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arrowG)"/>
   <line x1="529.2" y1="427.7" x2="276.0" y2="372.8" stroke="#829aa6" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arrowG)"/>
   <line x1="316.7" y1="138.7" x2="455.4" y2="319.7" stroke="#829aa6" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arrowG)"/>
-
   <!-- Step-2 arrows: only two leave -->
   <line x1="274.1" y1="367.8" x2="317.3" y2="359.2" stroke="#829aa6" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arrowG)"/>
   <line x1="452.5" y1="332.2" x2="342.7" y2="354.1" stroke="#829aa6" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arrowG)"/>
+  </g>
 
-  <!-- Intermediate points (purity-coloured) -->
+  <!-- Intermediate points (purity-coloured, toggled off on click) -->
+  <g class="default-traj">
   <circle cx="263.3" cy="370.0" r="7.0" fill="#c8dbe2" stroke="#1c4a60" stroke-width="1.3"/>
   <circle cx="463.3" cy="330.0" r="5.5" fill="#9ebecc" stroke="#1c4a60" stroke-width="1.3"/>
+  </g>
 
   <!-- Starting points e1, e2, e3 (pure, green) -->
   <circle cx="140.0" cy="510.0" r="6.0" fill="#2d6f8f"/>
   <circle cx="540.0" cy="430.0" r="6.0" fill="#2d6f8f"/>
   <circle cx="310.0" cy="130.0" r="6.0" fill="#2d6f8f"/>
 
-  <!-- Maximally mixed state p0 (faint ring) -->
-  <circle cx="330.0" cy="356.7" r="7.5" fill="#f5f7f8" fill-opacity="0.7" stroke="#5e7886" stroke-width="1.6" stroke-opacity="0.85"/>
+  <!-- Maximally mixed state p0 (solid marker, fully visible) -->
+  <circle cx="330.0" cy="356.7" r="9" fill="#f5f7f8"/>
+  <circle cx="330.0" cy="356.7" r="6" fill="#233746"/>
 
   <!-- Vertex labels (green) + vectors (muted) -->
   <text x="132.0" y="536.0" text-anchor="end" font-size="21" font-style="italic" fill="#233746">e₁</text>
@@ -726,11 +731,13 @@
   <text x="310.0" y="102.0" text-anchor="middle" font-size="21" font-style="italic" fill="#233746">e₃</text>
   <text x="310.0" y="120.0" text-anchor="middle" font-size="13" fill="#829aa6">(0, 0, 1)</text>
 
-  <!-- Intermediate labels (muted) -->
-  <text x="261.3" y="357.0" text-anchor="middle" font-size="15" font-style="italic" fill="#829aa6">q<tspan baseline-shift="sub" font-size="0.72em" font-style="italic">a</tspan></text>
-  <text x="475.3" y="335.0" text-anchor="start" font-size="15" font-style="italic" fill="#829aa6">q<tspan baseline-shift="sub" font-size="0.72em" font-style="italic">b</tspan></text>
+  <!-- Intermediate labels = images under S (toggled off on click) -->
+  <g class="default-traj">
+  <text x="263.3" y="356.0" text-anchor="middle" font-size="15" fill="#829aa6"><tspan font-style="italic">Se</tspan>₁ = <tspan font-style="italic">Se</tspan>₂</text>
+  <text x="475.3" y="335.0" text-anchor="start" font-size="15" fill="#829aa6"><tspan font-style="italic">Se</tspan>₃</text>
+  </g>
 
-  <!-- p0 label (de-emphasised) -->
-  <text x="343.0" y="352.7" text-anchor="start" font-size="21" font-style="italic" fill="#5e7886">p₀</text>
-  <text x="343.0" y="370.7" text-anchor="start" font-size="13" fill="#5e7886">(⅓, ⅓, ⅓)</text>
+  <!-- p0 label (full strength) -->
+  <text x="346.0" y="352.7" text-anchor="start" font-size="21" font-style="italic" fill="#233746">p₀</text>
+  <text x="346.0" y="370.7" text-anchor="start" font-size="13" fill="#233746">(⅓, ⅓, ⅓)</text>
 </svg>

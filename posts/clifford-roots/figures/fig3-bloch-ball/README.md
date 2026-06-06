@@ -95,9 +95,10 @@ author's original design.
   The marker never fully vanishes, so the maximally mixed state stays
   visible at the centre. Dial these if the centre feels too faint or the
   shrink too strong.
-- **Marker colour:** the placed marker is a fixed contrasting amber
-  (`STATE #bf6f30`), so it pops against the blue field. The interior
-  gradient stops are in the generator's `defs`.
+- **Marker colour:** the placed marker is a fixed strong blue
+  (`STATE #1565c0`, dark-blue `#0d3f8f` stroke), matching the moving
+  objects in Figure 2. The interior gradient stops are in the
+  generator's `defs`.
 
 After any change, re-render the post and confirm the figure and its
 `@fig-bloch` reference. No edit to `index.qmd` is needed.

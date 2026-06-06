@@ -57,25 +57,23 @@ ordering is the only coupling between the Python and the JS.
   ```
   Then re-copy the new SVG body (from `<svg ...>` through `</svg>`) into
   `interactive.qmd`, replacing the old inline SVG. Keep the `role` and
-  `aria-label` attributes on the opening `<svg>` tag. The JS needs no
-  edits as long as the polygon vertices stay in `e1, e2, e3` order.
-- **Readout styling:** the scoped `.simplex-interactive` CSS lives in the
+  `aria-label` attributes on the opening `<svg>` tag. (This figure is
+  static, so there is no script to keep in sync.)
+- **Container styling:** the scoped `.simplex-static` CSS lives in the
   `<style>` block at the top of `interactive.qmd`.
 - **Palette:** the blue-grey field endpoints are `PURE_RGB` / `MIXED_RGB`
-  in `state_space_figure.py`, mirrored in the script's `purityColour`
-  helper. The placed marker is the fixed amber `STATE #bf6f30`.
-- **Readout placement:** the readout sits below the figure (consistent at
-  all widths). To place it beside the figure on wide screens, wrap the SVG
-  and `.si-readout` in a flex/grid container with a responsive breakpoint.
+  in `state_space_figure.py`. The `p0` marker is a `CENTER #f5f7f8` halo
+  over a dark `OUTLINE #233746` dot, with its labels in the same
+  `OUTLINE`.
 
 After any change, re-render the post and confirm the figure and its
 `@fig-simplex-d3` reference. No edit to `index.qmd` is needed.
 
 ## Design constraints (from the original spec)
 
-- The interactive layer is **purely additive**: with JS disabled the
-  reader must see the unaltered static triangle and a quiet, empty
-  readout. Nothing may make the figure depend on JS to appear.
+- The figure is **static**: the SVG is the whole figure, no JS required.
+  (The click-to-sample layer that used to live here was removed; the
+  interaction is in Figure 2.)
 - Do **not** switch the embedding to `fetch()` the SVG at runtime: a
   failed or disabled fetch would leave no figure at all. The SVG is
   inlined for exactly this reason.
