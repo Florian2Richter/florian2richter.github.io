@@ -90,8 +90,10 @@ the uniform distribution (totally unsure, every colour equally likely).
 
 The classical state space for three outcomes: the probability simplex
 sitting inside the positive octant, with the pure states at the vertices
-and the uniform distribution $p_0$ at the centre. Click inside the
-triangle to sample the distribution at any point.
+and the uniform distribution $p_0 = (\tfrac13, \tfrac13, \tfrac13)$
+marked at the centre. The fill encodes purity, saturated at the pure
+corners and fading toward the maximally mixed centre. (You can sample
+the distribution at any point yourself in the next figure.)
 
 :::
 

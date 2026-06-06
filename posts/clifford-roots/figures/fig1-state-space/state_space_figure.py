@@ -12,8 +12,8 @@ probability sum_i p_i^2, which runs from 1/d at the uniform distribution
 field: green and saturated at the three pure corners, fading to a pale
 glow at the maximally mixed centre. This is the classical analogue of
 tr(rho^2) for a qubit, so the same visual language carries over to the
-Bloch ball. The maximally mixed state p0 is drawn as a faint hollow
-ring: de-emphasised, but locatable.
+Bloch ball. The maximally mixed state p0 is drawn as a solid, fully
+visible marker with its coordinates labelled at full strength.
 
 Usage:
     python state_space_figure.py [output.svg]
@@ -223,12 +223,13 @@ def build_svg():
     for vx, vy in VERTICES:
         parts.append(f'\n  <circle cx="{vx}" cy="{vy}" r="6" fill="{green}"/>')
 
-    # --- Layer 7: maximally mixed state p0 (faint hollow ring) ---
-    parts.append('\n\n  <!-- Maximally mixed state p0 (faint ring) -->')
+    # --- Layer 7: maximally mixed state p0 (solid marker, fully visible) ---
+    parts.append('\n\n  <!-- Maximally mixed state p0 (solid marker) -->')
     parts.append(
-        f'\n  <circle cx="{P0[0]}" cy="{P0[1]}" r="7.5" '
-        f'fill="{CENTER}" fill-opacity="0.7" '
-        f'stroke="{MIXED_RING}" stroke-width="1.6" stroke-opacity="0.85"/>'
+        f'\n  <circle cx="{P0[0]}" cy="{P0[1]}" r="9" fill="{CENTER}"/>'
+    )
+    parts.append(
+        f'\n  <circle cx="{P0[0]}" cy="{P0[1]}" r="6" fill="{OUTLINE}"/>'
     )
 
     # --- Layer 8: labels ---
@@ -249,14 +250,14 @@ def build_svg():
             f'font-size="{VECTOR_LABEL_SIZE}" fill="{MUTED}">{vec}</text>'
         )
 
-    parts.append('\n\n  <!-- p0 label (de-emphasised) -->')
+    parts.append('\n\n  <!-- p0 label (full strength) -->')
     parts.append(
-        f'\n  <text x="{P0[0] + 14}" y="{P0[1] - 2}" '
-        f'font-size="21" font-style="italic" fill="{MIXED_RING}">p₀</text>'
+        f'\n  <text x="{P0[0] + 16}" y="{P0[1] - 2}" '
+        f'font-size="21" font-style="italic" fill="{OUTLINE}">p₀</text>'
     )
     parts.append(
-        f'\n  <text x="{P0[0] + 14}" y="{P0[1] + 18}" '
-        f'font-size="13" fill="{MIXED_RING}">(⅓, ⅓, ⅓)</text>'
+        f'\n  <text x="{P0[0] + 16}" y="{P0[1] + 18}" '
+        f'font-size="13" fill="{OUTLINE}">(⅓, ⅓, ⅓)</text>'
     )
 
     parts.append('\n</svg>\n')

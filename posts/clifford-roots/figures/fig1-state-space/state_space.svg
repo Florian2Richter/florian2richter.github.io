@@ -717,8 +717,9 @@
   <circle cx="540" cy="430" r="6" fill="#2d6f8f"/>
   <circle cx="310" cy="130" r="6" fill="#2d6f8f"/>
 
-  <!-- Maximally mixed state p0 (faint ring) -->
-  <circle cx="330.0" cy="356.6666666666667" r="7.5" fill="#f5f7f8" fill-opacity="0.7" stroke="#5e7886" stroke-width="1.6" stroke-opacity="0.85"/>
+  <!-- Maximally mixed state p0 (solid marker) -->
+  <circle cx="330.0" cy="356.6666666666667" r="9" fill="#f5f7f8"/>
+  <circle cx="330.0" cy="356.6666666666667" r="6" fill="#233746"/>
 
   <!-- Vertex labels (green) + probability vectors (muted) -->
   <text x="124" y="538" text-anchor="end" font-size="22" font-style="italic" fill="#233746">e₁</text>
@@ -728,7 +729,7 @@
   <text x="288" y="122" text-anchor="end" font-size="22" font-style="italic" fill="#233746">e₃</text>
   <text x="288" y="142" text-anchor="end" font-size="14" fill="#829aa6">(0, 0, 1)</text>
 
-  <!-- p0 label (de-emphasised) -->
-  <text x="344.0" y="354.6666666666667" font-size="21" font-style="italic" fill="#5e7886">p₀</text>
-  <text x="344.0" y="374.6666666666667" font-size="13" fill="#5e7886">(⅓, ⅓, ⅓)</text>
+  <!-- p0 label (full strength) -->
+  <text x="346.0" y="354.6666666666667" font-size="21" font-style="italic" fill="#233746">p₀</text>
+  <text x="346.0" y="374.6666666666667" font-size="13" fill="#233746">(⅓, ⅓, ⅓)</text>
 </svg>

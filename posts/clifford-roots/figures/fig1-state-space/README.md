@@ -1,7 +1,9 @@
 # Figure 1: the classical state space (2-simplex)
 
-**Status:** done, interactive. Wired into the post as `#fig-simplex-d3`,
-referenced in the prose as `@fig-simplex-d3`.
+**Status:** done, static. Wired into the post as `#fig-simplex-d3`,
+referenced in the prose as `@fig-simplex-d3`. (The click-to-sample
+interaction was removed from this figure and lives in Figure 2; Figure 1
+shows the static simplex with `p0` marked.)
 
 ## What it shows
 
@@ -15,21 +17,17 @@ distribution `p0 = (1/3, 1/3, 1/3)` at the centroid.
 **Colour encodes purity** (see the figures `README.md` for the shared
 scheme): the simplex is filled with the purity field `sum_i p_i^2`,
 blue-teal and saturated at the three pure corners, fading to a soft blue-grey glow at
-the maximally mixed centre. `p0` is drawn as a faint hollow ring,
-de-emphasised but locatable.
+the maximally mixed centre. `p0` is drawn as a solid, fully opaque
+marker (white halo + dark `OUTLINE` dot) with its `p0` label and
+`(1/3, 1/3, 1/3)` coordinates at full strength.
 
-## The interaction
+## No interaction (static figure)
 
-Clicking inside the triangle places a contrasting amber marker and
-reads off the probability distribution `(p1, p2, p3)` for that point,
-computed from barycentric coordinates relative to the three vertices.
-On desktop, hovering shows a faint preview marker. A click outside the
-triangle clears the marker. With JavaScript off, the
-static triangle renders unchanged and the readout shows placeholder text.
-
-Quick checks: the centroid reads `(0.33, 0.33, 0.33)`; a vertex reads
-`1.00` on its own axis; a point on an edge reads `0` on the opposite
-axis.
+This figure is static. The click-to-sample interaction (place a marker,
+read off `(p1, p2, p3)` from barycentric coordinates) was moved to
+Figure 2, so there is no readout panel and no `<script>` here. The
+partial is the inlined SVG only; with or without JavaScript the reader
+sees the same static triangle.
 
 ## Files
 
@@ -37,7 +35,7 @@ axis.
 |------|------|
 | `state_space_figure.py` | generator for the static SVG; all geometry (canvas, vertices, axis endpoints) is in named constants at the top |
 | `state_space.svg` | the generated static SVG (checked in) |
-| `interactive.qmd` | the partial the post includes: scoped `<style>`, the inlined SVG, the readout panel, and the `<script>` |
+| `interactive.qmd` | the partial the post includes: scoped `<style>` plus the inlined static SVG (no readout, no script) |
 
 This README is the single self-contained doc for the figure; the useful
 content of the original task spec and handover notes is folded in below.
