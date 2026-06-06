@@ -74,9 +74,13 @@ upgrade" section, right after Figure 3.
 The two chapters now run in parallel: the **state space is a static
 sketch** (Fig 1 simplex, Fig 3 Bloch ball) and the **root trajectories
 are interactive** (Fig 2 simplex, Fig 4 Bloch ball). The maximally mixed
-state is the same solid marker in all four. Fig 4's root is the maximal
-qubit root from the thesis (eq. 4.19), acting on the Bloch vector as
-`(r1,r2,r3) -> (r2/2, r3/2, 0)` (`S^3 = 0`, a cube root of the CDC).
+state is a solid marker in the flat 2D figures (1, 2) and a recessed,
+depth-cued grey marker in the two 3D Bloch balls (3, 4), hinting that it
+sits inside the sphere. Fig 4's root is the maximal qubit root from the
+thesis (eq. 4.19), acting on the Bloch vector as
+`(r1,r2,r3) -> (r2/2, r3/2, 0)` (`S^3 = 0`, a cube root of the CDC); the
+interactive layer adds a Purity slider that recomputes the orbit live for
+mixed-state starts.
 
 Each done folder has: a Python generator (`*_figure.py`), the generated
 `*.svg`, the `interactive.qmd` partial the post includes, and a

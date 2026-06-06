@@ -281,10 +281,13 @@ def build_svg():
         parts.append(
             f'\n  <circle cx="{sx:.2f}" cy="{sy:.2f}" r="5.5" fill="{PURE}"/>'
         )
-    # Centre: the maximally mixed state I/2, a solid fully-visible marker
-    # (matches Figures 1, 2 and 4).
-    parts.append(f'\n  <circle cx="{CX}" cy="{CY}" r="9" fill="{CENTER}"/>')
-    parts.append(f'\n  <circle cx="{CX}" cy="{CY}" r="6" fill="{AXIS}"/>')
+    # Centre: the maximally mixed state I/2. It sits INSIDE the ball, so it
+    # is depth-cued: a muted blue-grey dot, a little transparent, recessed
+    # rather than a bold foreground marker, hinting that it is in the middle.
+    parts.append(f'\n  <circle cx="{CX}" cy="{CY}" r="8.5" fill="{CENTER}" '
+                 f'fill-opacity="0.5"/>')
+    parts.append(f'\n  <circle cx="{CX}" cy="{CY}" r="5.5" fill="{MIXED_RING}" '
+                 f'fill-opacity="0.85"/>')
 
     # --- Layer 6: labels ---
     parts.append('\n\n  <!-- Labels -->')
@@ -316,10 +319,10 @@ def build_svg():
         f'font-size="{AXIS_LABEL_SIZE}" font-style="italic" fill="{AXIS}">z</text>'
     )
 
-    # Centre label, full strength.
+    # Centre label, muted to match the recessed marker.
     parts.append(
-        f'\n  <text x="{CX + 16:.2f}" y="{CY - 2:.2f}" text-anchor="start" '
-        f'font-size="{CENTER_LABEL_SIZE}" fill="{AXIS}">{CENTER_LABEL}</text>'
+        f'\n  <text x="{CX + 14:.2f}" y="{CY - 2:.2f}" text-anchor="start" '
+        f'font-size="{CENTER_LABEL_SIZE}" fill="{MIXED_RING}">{CENTER_LABEL}</text>'
     )
 
     parts.append('\n</svg>\n')

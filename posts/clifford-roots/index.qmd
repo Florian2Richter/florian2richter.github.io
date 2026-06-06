@@ -477,8 +477,9 @@ the classical square root in @fig-root-d3, erasure happens in stages:
 each step both shrinks the vector and rotates it onto the next axis.
 Directions already in the channel's kernel (here the $x$-axis) collapse
 sooner; the slowest direction sets the order. Three default orbits are
-shown; click the front of the ball to trace your own starting state's
-path to $I/2$.
+shown; click the front of the ball to pick a direction, use the Purity
+slider to set how mixed the starting state is, and trace its own path to
+$I/2$.
 
 :::
 

@@ -72,8 +72,8 @@
   <!-- State markers -->
   <circle cx="320.00" cy="134.66" r="5.5" fill="#2d6f8f"/>
   <circle cx="320.00" cy="529.34" r="5.5" fill="#2d6f8f"/>
-  <circle cx="320.0" cy="332.0" r="9" fill="#f5f7f8"/>
-  <circle cx="320.0" cy="332.0" r="6" fill="#233746"/>
+  <circle cx="320.0" cy="332.0" r="8.5" fill="#f5f7f8" fill-opacity="0.5"/>
+  <circle cx="320.0" cy="332.0" r="5.5" fill="#5e7886" fill-opacity="0.85"/>
 
   <!-- Labels -->
   <text x="300.00" y="124.66" text-anchor="end" font-size="21" font-style="italic" fill="#233746">|0⟩</text>
@@ -81,7 +81,7 @@
   <text x="564.27" y="396.50" text-anchor="middle" font-size="20" font-style="italic" fill="#233746">x</text>
   <text x="144.96" y="421.55" text-anchor="end" font-size="20" font-style="italic" fill="#233746">y</text>
   <text x="328.00" y="71.52" text-anchor="start" font-size="20" font-style="italic" fill="#233746">z</text>
-  <text x="336.00" y="330.00" text-anchor="start" font-size="20" fill="#233746">I/2</text>
+  <text x="334.00" y="330.00" text-anchor="start" font-size="20" fill="#5e7886">I/2</text>
 </svg>
 </div>
 ```

@@ -51,8 +51,11 @@ the figure is self-contained.
   #1565c0`, dark `#0d3f8f` stroke / start dot), thicker and full
   opacity, because it takes all three steps and so realises the order-3
   bound. The hero start `|0>` is drawn slightly larger.
-- **Centre `I/2`** is the solid, fully visible marker used in Figures 1,
-  2 and 3 (white halo + dark `AXIS #233746` dot, full-strength label).
+- **Centre `I/2`** is depth-cued (it sits inside the ball): a muted
+  blue-grey dot (`MIXED_RING #5e7886`), a little transparent, with a soft
+  halo and muted label, matching Figure 3. The flat 2D figures (1, 2)
+  keep their solid centre marker; the two Bloch balls (3, 4) use this
+  recessed one.
 
 ## Files
 
@@ -65,17 +68,21 @@ the figure is self-contained.
 
 ## Interactive layer
 
-Mirrors Figure 2. Clicking the **front face** of the ball picks a pure
-starting state `r0` (inverting the orthographic projection onto the
-camera-facing hemisphere, the same `invert()` as the old Figure 3), then
-draws its orbit `r0 -> S r0 -> S^2 r0 -> 0` under the root: a blue square
-at `r0`, blue dots at the (purity-coloured) intermediate points, blue
-arrows between them, and a readout of the four Bloch vectors. The final
+Mirrors Figure 2, plus a purity slider like the old Figure 3. Clicking
+the **front face** of the ball picks a pure *direction* `n` (inverting
+the orthographic projection onto the camera-facing hemisphere, the same
+`invert()` as the old Figure 3). The **Purity** slider `r` in `[0, 1]`
+then sets how mixed the starting state is: `r0 = r * n`, from the surface
+(`r = 1`, pure) inward toward `I/2` (`r = 0`). The orbit
+`r0 -> S r0 -> S^2 r0 -> 0` is **recomputed in real time** as the slider
+moves (`update()` rebuilds the whole overlay): a blue square at `r0`,
+blue dots at the (purity-coloured) intermediate points, blue arrows
+between them, and a readout of the four Bloch vectors and `r`. The final
 point is `0`, which lands on the `I/2` marker, so no dot is drawn there.
 On a click the three baked default orbits (the `default-traj` groups)
 vanish and only the reader's orbit is shown; a click outside the disc
-restores them. On desktop a faint blue dot previews where a click would
-land.
+restores them and disables the slider. On desktop a faint blue dot
+previews where a click would land.
 
 The script reads the projection from the `<svg>` `data-*` attributes
 (single source of truth) and holds the root `S` as `applyS(r) =

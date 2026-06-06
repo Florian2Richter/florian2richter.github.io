@@ -47,6 +47,7 @@ OUTLINE = "#829aa6"      # wireframe / grid lines (muted blue-grey)
 PURE = "#2d6f8f"         # silhouette boundary + poles (blue-teal)
 AXIS = "#233746"         # axes + text labels (dark blue-grey)
 MIXED = "#d6e5ea"        # gradient centre (soft blue-grey)
+MIXED_RING = "#5e7886"   # the recessed I/2 dot (muted blue-grey)
 CENTER = "#f5f7f8"       # centre marker fill
 
 # Purity field endpoints (lerp low -> high), as in Figures 1 and 2.
@@ -334,10 +335,13 @@ def build_svg():
 
     parts.append('\n  </g>')
 
-    # --- Centre: maximally mixed state I/2 (solid marker, matches Figs 1/2) ---
-    parts.append('\n\n  <!-- Maximally mixed state I/2 (solid marker) -->')
-    parts.append(f'\n  <circle cx="{CX}" cy="{CY}" r="9" fill="{CENTER}"/>')
-    parts.append(f'\n  <circle cx="{CX}" cy="{CY}" r="6" fill="{AXIS}"/>')
+    # --- Centre: maximally mixed state I/2, depth-cued (it sits inside the
+    # ball): a muted blue-grey dot, a little transparent, recessed. ---
+    parts.append('\n\n  <!-- Maximally mixed state I/2 (recessed, depth-cued) -->')
+    parts.append(f'\n  <circle cx="{CX}" cy="{CY}" r="8.5" fill="{CENTER}" '
+                 f'fill-opacity="0.5"/>')
+    parts.append(f'\n  <circle cx="{CX}" cy="{CY}" r="5.5" fill="{MIXED_RING}" '
+                 f'fill-opacity="0.85"/>')
 
     # --- Labels ---
     parts.append('\n\n  <!-- Labels -->')
@@ -365,9 +369,9 @@ def build_svg():
                  f'text-anchor="start" font-size="{AXIS_LABEL_SIZE}" '
                  f'font-style="italic" fill="{AXIS}">z</text>')
 
-    parts.append(f'\n  <text x="{CX + 16:.2f}" y="{CY - 2:.2f}" '
+    parts.append(f'\n  <text x="{CX + 14:.2f}" y="{CY - 2:.2f}" '
                  f'text-anchor="start" font-size="{CENTER_LABEL_SIZE}" '
-                 f'fill="{AXIS}">{CENTER_LABEL}</text>')
+                 f'fill="{MIXED_RING}">{CENTER_LABEL}</text>')
 
     parts.append('\n</svg>\n')
     return "".join(parts)

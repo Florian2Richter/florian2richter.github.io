@@ -20,10 +20,13 @@ wires dashed.
 `README.md`). The quantum purity `tr(rho^2) = (1 + r^2)/2` runs from 1/2
 at the centre to 1 on the surface, so the ball is a blue-teal shell
 fading to a soft blue-grey core (the "inside the sphere" depth), and the
-poles `|0>`, `|1>` are blue-teal. The maximally mixed state `I/2` is the
-solid, fully visible marker used in Figures 1, 2 and 4 (white halo + dark
-`AXIS #233746` dot, full-strength label), not the faint ring it used to
-be. The wireframe and axes stay navy.
+poles `|0>`, `|1>` are blue-teal. The maximally mixed state `I/2` sits
+*inside* the ball, so it is drawn **depth-cued**: a muted blue-grey dot
+(`MIXED_RING #5e7886`), a little transparent, with a soft halo and a
+muted label, so it reads as recessed in the middle rather than as a bold
+foreground marker. (The flat 2D figures, 1 and 2, keep their solid
+centre marker; the two Bloch balls, 3 and 4, use this recessed one.) The
+wireframe and axes stay navy.
 
 ## No interaction (static figure)
 
