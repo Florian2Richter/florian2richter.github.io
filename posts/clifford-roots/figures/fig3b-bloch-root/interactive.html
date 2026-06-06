@@ -224,16 +224,16 @@ ul.task-list li input[type="checkbox"] {
   <!-- Default orbits (toggled off on click) -->
   <g class="default-traj">
   <!-- Secondary orbits (grey): y- and x-axis states -->
-  <line x1="207.42" y1="389.38" x2="397.16" y2="354.24" stroke="#829aa6" stroke-width="2.0" stroke-opacity="0.85" stroke-linecap="round" marker-end="url(#arrowG)"></line>
-  <line x1="398.23" y1="350.74" x2="328.75" y2="334.10" stroke="#829aa6" stroke-width="2.0" stroke-opacity="0.85" stroke-linecap="round" marker-end="url(#arrowG)"></line>
-  <line x1="484.24" y1="371.33" x2="328.75" y2="334.10" stroke="#829aa6" stroke-width="2.0" stroke-opacity="0.85" stroke-linecap="round" marker-end="url(#arrowG)"></line>
-  <circle cx="406.01" cy="352.60" r="5.0" fill="#acc8d3" stroke="#1c4a60" stroke-width="1.2"></circle>
+  <line x1="207.42" y1="389.38" x2="397.16" y2="354.24" stroke="#829aa6" stroke-width="2.0" stroke-opacity="0.75" stroke-linecap="round" marker-end="url(#arrowG)"></line>
+  <line x1="398.23" y1="350.74" x2="328.75" y2="334.10" stroke="#829aa6" stroke-width="2.0" stroke-opacity="0.45" stroke-linecap="round" marker-end="url(#arrowG)"></line>
+  <line x1="484.24" y1="371.33" x2="328.75" y2="334.10" stroke="#829aa6" stroke-width="2.0" stroke-opacity="0.6" stroke-linecap="round" marker-end="url(#arrowG)"></line>
+  <circle cx="406.01" cy="352.60" r="5.0" fill="#acc8d3" fill-opacity="0.535" stroke="#1c4a60" stroke-width="1.2" stroke-opacity="0.535"></circle>
   <!-- Hero orbit (blue): the z-pole takes all three steps -->
-  <line x1="317.95" y1="142.40" x2="262.08" y2="352.72" stroke="#1565c0" stroke-width="2.7" stroke-opacity="1.0" stroke-linecap="round" marker-end="url(#arrowB)"></line>
-  <line x1="267.64" y1="359.96" x2="354.16" y2="343.94" stroke="#1565c0" stroke-width="2.7" stroke-opacity="1.0" stroke-linecap="round" marker-end="url(#arrowB)"></line>
-  <line x1="355.23" y1="340.44" x2="328.75" y2="334.10" stroke="#1565c0" stroke-width="2.7" stroke-opacity="1.0" stroke-linecap="round" marker-end="url(#arrowB)"></line>
-  <circle cx="259.77" cy="361.42" r="5.0" fill="#acc8d3" stroke="#1c4a60" stroke-width="1.2"></circle>
-  <circle cx="363.01" cy="342.30" r="5.0" fill="#cbdee4" stroke="#1c4a60" stroke-width="1.2"></circle>
+  <line x1="317.95" y1="142.40" x2="262.08" y2="352.72" stroke="#1565c0" stroke-width="2.7" stroke-opacity="0.75" stroke-linecap="round" marker-end="url(#arrowB)"></line>
+  <line x1="267.64" y1="359.96" x2="354.16" y2="343.94" stroke="#1565c0" stroke-width="2.7" stroke-opacity="0.525" stroke-linecap="round" marker-end="url(#arrowB)"></line>
+  <line x1="355.23" y1="340.44" x2="328.75" y2="334.10" stroke="#1565c0" stroke-width="2.7" stroke-opacity="0.375" stroke-linecap="round" marker-end="url(#arrowB)"></line>
+  <circle cx="259.77" cy="361.42" r="5.0" fill="#acc8d3" fill-opacity="0.535" stroke="#1c4a60" stroke-width="1.2" stroke-opacity="0.535"></circle>
+  <circle cx="363.01" cy="342.30" r="5.0" fill="#cbdee4" fill-opacity="0.378" stroke="#1c4a60" stroke-width="1.2" stroke-opacity="0.378"></circle>
   <!-- Start states (pure) -->
   <circle cx="492.02" cy="373.20" r="6.0" fill="#2d6f8f" stroke="#1c4a60" stroke-width="1.4"></circle>
   <circle cx="199.55" cy="390.83" r="6.0" fill="#2d6f8f" stroke="#1c4a60" stroke-width="1.4"></circle>
@@ -350,18 +350,28 @@ ul.task-list li input[type="checkbox"] {
       var r1 = applyS(r0), r2 = applyS(r1), r3 = applyS(r2);
       var traj = [r0, r1, r2, r3];
       var proj = traj.map(project);
+      var mag = function (r) { return Math.sqrt(r[0]*r[0] + r[1]*r[1] + r[2]*r[2]); };
+      // Trajectory elements fade as they sink toward I/2: opacity follows the
+      // Bloch-vector magnitude. Points lose a touch more than the arrows.
+      var arrowOp = function (m) { return (0.30 + 0.60 * Math.min(1, m)).toFixed(3); };
+      var dotOp = function (m) { return (0.22 + 0.63 * Math.min(1, m)).toFixed(3); };
       clearLayer(); setDefaults(false);
       for (var i = 0; i < 3; i++) {
         if (dist2(proj[i], proj[i+1]) < 1.0) continue;       // skip degenerate/zero-length steps
         var s = shorten(proj[i], proj[i+1], 8, 9);
-        layer.appendChild(el('line', { x1: s[0][0], y1: s[0][1], x2: s[1][0], y2: s[1][1], stroke: '#1565c0', 'stroke-width': '2.6', 'stroke-linecap': 'round', 'marker-end': 'url(#arrowU)' }));
+        layer.appendChild(el('line', { x1: s[0][0], y1: s[0][1], x2: s[1][0], y2: s[1][1], stroke: '#1565c0', 'stroke-width': '2.6', 'stroke-opacity': arrowOp((mag(traj[i]) + mag(traj[i+1])) / 2), 'stroke-linecap': 'round', 'marker-end': 'url(#arrowU)' }));
       }
       for (var j = 1; j < 4; j++) {
         if (near0(traj[j])) continue;                        // the final 0 lands on the I/2 marker
-        layer.appendChild(el('circle', { cx: proj[j][0], cy: proj[j][1], r: 5, fill: purityColour(traj[j]), stroke: '#0d3f8f', 'stroke-width': '1.3' }));
+        layer.appendChild(el('circle', { cx: proj[j][0], cy: proj[j][1], r: 5, fill: purityColour(traj[j]), 'fill-opacity': dotOp(mag(traj[j])), stroke: '#0d3f8f', 'stroke-width': '1.3', 'stroke-opacity': dotOp(mag(traj[j])) }));
       }
-      var sq = 9;   // r0: a user-placed square (shape marks "yours", as in Figure 2)
-      layer.appendChild(el('rect', { x: proj[0][0]-sq/2, y: proj[0][1]-sq/2, width: sq, height: sq, fill: '#1565c0', stroke: '#0d3f8f', 'stroke-width': '1.5' }));
+      // r0: a user-placed circle that sinks into the ball as purity drops.
+      // Like the original Bloch figure: the halo fades and the whole marker
+      // dims (opacity 0.4 + 0.6 r) as the state moves inward toward I/2.
+      var mk = el('g', { opacity: (0.4 + 0.6 * rVal).toFixed(3) });
+      mk.appendChild(el('circle', { cx: proj[0][0], cy: proj[0][1], r: 8, fill: '#ffffff', opacity: rVal.toFixed(3) }));
+      mk.appendChild(el('circle', { cx: proj[0][0], cy: proj[0][1], r: 6.5, fill: '#1565c0', stroke: '#0d3f8f', 'stroke-width': '1.5' }));
+      layer.appendChild(mk);
       for (var k = 0; k < 4; k++) { vEls[k].textContent = fvec(traj[k]); vEls[k].classList.add('is-set'); }
       rvalEl.textContent = 'r = ' + rVal.toFixed(2);
       hint.textContent = rVal < 1e-9 ? 'already at I/2' : 'steps to I/2'; hint.classList.add('is-set');
