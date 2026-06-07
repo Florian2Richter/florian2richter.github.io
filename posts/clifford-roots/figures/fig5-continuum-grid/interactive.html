@@ -132,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<!-- Figure 5: continuum vs. finite grid. Static SVG inlined verbatim from continuum_grid_figure.py. No interactivity: it is a conceptual sketch (the state-space continuum on the left, the finite Weyl-label plane on the right). The mini Bloch ball uses the same purity-gradient fill and latitude/longitude wireframe as Figures 3 and 4 (its gradient id is "purity-cg" to avoid colliding with the other inlined Bloch SVGs). The identity (0,0) is a grey dot with a grey (0,0) caption on both sides. -->
+<!-- Figure 5: continuum vs. finite grid. Static SVG inlined verbatim from continuum_grid_figure.py. No interactivity: it is a conceptual sketch (the state-space continuum on the left, the finite label plane on the right). The mini Bloch ball uses the same purity-gradient fill and latitude/longitude wireframe as Figures 3 and 4 (its gradient id is "purity-cg" to avoid colliding with the other inlined Bloch SVGs). The identity (0,0) is a grey dot with a grey (0,0) caption on both sides. The right panel says "labels" (not "Weyl labels") because the figure appears before Weyl operators are introduced. -->
 <style>
 .continuum-grid{max-width:680px;margin:1.25rem auto;}
 .continuum-grid svg{width:100%;height:auto;display:block;}
@@ -140,9 +140,9 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 <div class="continuum-grid">
-  <p class="cg-vh">Two panels. On the left, a Bloch ball, the continuum of qubit states, shaded by purity with a latitude and longitude wireframe, carrying three coloured coordinate axes: X = (1,0) toward the lower left, Y = (1,1) to the right, Z = (0,1) upward, and a grey identity dot labelled (0,0) at the centre. On the right, the finite plane of Weyl labels: four points, the identity (0,0) drawn as a grey dot matching the ball centre, and the three nonzero points (1,0), (0,1), (1,1) in the matching axis colours, cycled by an example homomorphism h.</p>
+  <p class="cg-vh">Two panels. On the left, a Bloch ball, the continuum of qubit states, shaded by purity with a latitude and longitude wireframe, carrying three coloured coordinate axes: X = (1,0) toward the lower left, Y = (1,1) to the right, Z = (0,1) upward, and a grey identity dot labelled (0,0) at the centre. On the right, the finite plane of labels: four points, the identity (0,0) drawn as a grey dot matching the ball centre, and the three nonzero points (1,0), (0,1), (1,1) in the matching axis colours, cycled by an example homomorphism h.</p>
 
-<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 680 300" font-family="Georgia, 'Times New Roman', serif" role="img" aria-label="Left: the continuum of qubit states with three coloured Bloch axes. Right: the finite plane of Weyl labels, four points, with the identity fixed and the other three permuted by h.">
+<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 680 300" font-family="Georgia, 'Times New Roman', serif" role="img" aria-label="Left: the continuum of qubit states with three coloured Bloch axes. Right: the finite plane of labels, four points, with the identity fixed and the other three permuted by h.">
   <defs>
     <marker id="arrowX" viewbox="0 0 10 10" refx="8.5" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2d6f8f"></path></marker>
     <marker id="arrowZ" viewbox="0 0 10 10" refx="8.5" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#6f5499"></path></marker>
@@ -214,7 +214,7 @@ ul.task-list li input[type="checkbox"] {
   <text x="572.00" y="248.00" text-anchor="start" font-size="15" fill="#2d6f8f">(1,0)</text>
   <text x="428.00" y="100.00" text-anchor="end" font-size="15" fill="#6f5499">(0,1)</text>
   <text x="572.00" y="100.00" text-anchor="start" font-size="15" fill="#c25b4e">(1,1)</text>
-  <text x="500.00" y="282.00" text-anchor="middle" font-size="15" fill="#233746" font-style="italic">Weyl labels: a finite grid</text>
+  <text x="500.00" y="282.00" text-anchor="middle" font-size="15" fill="#233746" font-style="italic">labels: a finite grid</text>
 
   <!-- faint divider between the two panels -->
   <line x1="350.0" y1="40" x2="350.0" y2="258" stroke="#829aa6" stroke-width="1" stroke-dasharray="3,4" stroke-opacity="0.35"></line>
