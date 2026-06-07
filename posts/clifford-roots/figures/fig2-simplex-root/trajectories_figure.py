@@ -47,6 +47,12 @@ VERTEX_E2 = (540.0, 430.0)
 VERTEX_E3 = (310.0, 130.0)
 VERTICES = (VERTEX_E1, VERTEX_E2, VERTEX_E3)
 
+# Coordinate axes (positive octant of R^3), IDENTICAL to Figure 1.
+ORIGIN = (310.0, 430.0)
+AXIS_E1_END = (95.0, 530.0)
+AXIS_E2_END = (590.0, 430.0)
+AXIS_E3_END = (310.0, 75.0)
+
 # The root. T^2 = P.
 T = [
     [1.0 / 2, 1.0 / 2, 0.0],
@@ -148,6 +154,10 @@ def build_svg():
 
     parts.append(f'''
   <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="{OUTLINE}"/>
+    </marker>
     <marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5"
             markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="{ARROW_GREY}"/>
@@ -160,6 +170,15 @@ def build_svg():
     p0 = apply_T(qa)
     cV1, cV2, cV3 = (barycentric_to_canvas(e) for e in (e1, e2, e3))
     cQA, cQB, cP0 = (barycentric_to_canvas(p) for p in (qa, qb, p0))
+
+    # --- Coordinate axes behind the simplex (matches Figure 1) ---
+    parts.append('\n\n  <!-- Coordinate axes -->')
+    for end in (AXIS_E1_END, AXIS_E2_END, AXIS_E3_END):
+        parts.append(
+            f'\n  <line x1="{ORIGIN[0]}" y1="{ORIGIN[1]}" '
+            f'x2="{end[0]}" y2="{end[1]}" stroke="{OUTLINE}" '
+            f'stroke-width="1.8" marker-end="url(#arrow)"/>'
+        )
 
     # --- Purity field (triangular mesh) ---
     parts.append('\n\n  <!-- Purity field -->')

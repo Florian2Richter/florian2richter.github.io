@@ -67,9 +67,12 @@ pattern as Figures 1 and 3.
 
 The simplex vertices are identical to Figure 1's
 (`(140,510)/(540,430)/(310,130)`), so the two figures register exactly.
-Every point is placed by `barycentric_to_canvas(p) = p1*V1 + p2*V2 +
-p3*V3`. The script computes `q_a, q_b, p0` by applying `T`, so the
-picture stays correct if `T` is ever changed.
+The three coordinate axes (from `ORIGIN (310,430)` out to `AXIS_E*_END`,
+dark arrowheads behind the purity field) are also copied from Figure 1,
+so the positive-octant embedding matches. Every point is placed by
+`barycentric_to_canvas(p) = p1*V1 + p2*V2 + p3*V3`. The script computes
+`q_a, q_b, p0` by applying `T`, so the picture stays correct if `T` is
+ever changed.
 
 ## Colour scheme
 
