@@ -494,6 +494,15 @@ what you get by doing both. Because these four span every $2 \times 2$
 matrix, a qubit channel is fixed entirely by what it does to them. The
 Paulis are a coordinate system for quantum operations.
 
+Why this family, and not just any small corner of channel space? Because
+it is the corner quantum information already cares about. The Pauli
+operators, and the operations that respect them, are the world of
+stabilizer codes and fault-tolerant computing, and the depolarising
+channel is the canonical model of noise in precisely that world. So
+asking how the most destructive such channel comes apart, while staying
+inside the operations that respect the Pauli structure, is asking the
+question on home turf, not in an arbitrary toy class.
+
 The same coordinate system exists in every dimension, and it grows out
 of two basic moves. Fix $d$ levels, $|0\rangle$ through $|d-1\rangle$.
 The first move is a *shift*: bump every level up by one,
@@ -509,6 +518,33 @@ operator*. There are exactly $d^2$ of them, and like the four Paulis
 they form a basis: every $d \times d$ matrix is some combination of Weyl
 operators. This is the coordinate system we will use for the rest of the
 post.
+
+Geometrically the restriction has a vivid shape. A general qubit channel
+can deform the Bloch ball into an ellipsoid sitting at any angle, mixing
+the three axes freely. A Pauli-respecting channel is far more
+disciplined: it may stretch the $X$, $Y$ and $Z$ directions, shrink
+them, even flatten one to nothing, and it may swap them for one another,
+but it can never *tilt* them off the coordinate frame. Take the
+stretching away and all that's left of "where each direction goes" is a
+relabelling of the axes. And there are only finitely many axes to
+relabel. So beneath the continuum of states sits a finite combinatorial
+object: a map on the grid of Weyl labels, three nonzero points for the
+qubit (the $X$, $Y$, $Z$ axes) plus the identity at the origin, which
+every copier fixes. That finite grid, not the continuous ball, is the
+real arena.
+
+::: {#fig-clifford-grid}
+
+{{< include figures/fig5-continuum-grid/interactive.qmd >}}
+
+A general channel deforms the continuum on the left into an ellipsoid at
+any angle. A Clifford channel may stretch or swap the three coloured
+axes but never tilt them, so all its "where each direction goes" freedom
+is the map $h$ on the four points at right. The origin $(0,0)$ is the
+identity every copier fixes; the other three are the Bloch axes,
+relabelled. For the qubit, $h$ is just a permutation of them.
+
+:::
 
 From here on we take $d$ to be a *prime*. The reason is in the aside,
 but the short version is that the arguments ahead need to divide by the

@@ -65,11 +65,14 @@ cross-referenced from the prose with `@fig-...`. Read
 | 2 | `fig-root-d3` | `fig2-simplex-root` | **done, interactive** |
 | 3 | `fig-bloch` | `fig3-bloch-ball` | **done, static** (interaction moved to Fig 4) |
 | 4 | `fig-bloch-root` | `fig3b-bloch-root` | **done, interactive** (click-to-trace qubit root orbits to I/2) |
-| 5 | `fig-orbit` | `fig4-orbit-cycle` | **PLANNED** (broken-image placeholder; README sketches it) |
+| 5 | `fig-clifford-grid` | `fig5-continuum-grid` | **done, static** (continuum Bloch ball vs. finite Weyl-label plane, with `h` as a 3-cycle) |
+| 6 | `fig-orbit` | `fig4-orbit-cycle` | **PLANNED** (broken-image placeholder; README sketches it) |
 
-Figure numbers are auto-assigned by order of appearance, so the orbit
-cycle is now Figure 5. Figure 4 (`fig-bloch-root`) sits in "The quantum
-upgrade" section, right after Figure 3.
+Figure numbers are auto-assigned by order of appearance. Figure 5
+(`fig-clifford-grid`) sits in "Clifford channels as the playground",
+after the second motivation paragraph; the orbit cycle is now Figure 6.
+Figure 4 (`fig-bloch-root`) sits in "The quantum upgrade" section, right
+after Figure 3.
 
 The two chapters now run in parallel: the **state space is a static
 sketch** (Fig 1 simplex, Fig 3 Bloch ball) and the **root trajectories
