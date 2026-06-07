@@ -240,7 +240,7 @@ def build_svg():
         f'viewBox="0 0 {width} {height}" '
         f'font-family="{FONT_FAMILY}" '
         f'role="img" aria-label="Left: the continuum of qubit states with three '
-        f'coloured Bloch axes. Right: the finite plane of Weyl labels, four points, '
+        f'coloured Bloch axes. Right: the finite plane of labels, four points, '
         f'with the identity fixed and the other three permuted by h.">'
     )
 
@@ -366,8 +366,9 @@ def build_svg():
     parts.append(text(P01[0] - 12, P01[1] - 10, "(0,1)", LABEL_SIZE, PURPLE, anchor="end"))
     parts.append(text(P11[0] + 12, P11[1] - 10, "(1,1)", LABEL_SIZE, CORAL, anchor="start"))
 
-    # Sub-label.
-    parts.append(text(SUB_RIGHT[0], SUB_RIGHT[1], "Weyl labels: a finite grid",
+    # Sub-label. ("labels", not "Weyl labels": the figure appears in the post
+    # before the Weyl operators are introduced.)
+    parts.append(text(SUB_RIGHT[0], SUB_RIGHT[1], "labels: a finite grid",
                       SUB_SIZE, AXIS, anchor="middle", italic=True))
 
     # ----- Panel divider (faint) -----

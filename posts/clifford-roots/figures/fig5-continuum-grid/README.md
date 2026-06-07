@@ -32,8 +32,9 @@ right place to work: a Clifford channel's structural core is a map on
   colour of its matching Bloch axis. Three curved arrows show one
   example homomorphism `h` as the 3-cycle
   `(1,0) -> (0,1) -> (1,1) -> (1,0)`, bowed outward from the centroid so
-  the origin is visibly left untouched. Sub-label: *Weyl labels: a
-  finite grid*.
+  the origin is visibly left untouched. Sub-label: *labels: a finite
+  grid* (just "labels", not "Weyl labels": in the post the figure now
+  appears before the Weyl operators are introduced).
 
 **The point of the figure is the colour correspondence:** each axis on
 the left is the same colour as its matching point on the right
