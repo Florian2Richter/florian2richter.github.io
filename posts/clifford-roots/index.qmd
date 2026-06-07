@@ -599,6 +599,17 @@ outright. In the qubit picture $h$ was the permutation of the three axes
 and $\lambda$ their rescaling; nothing has changed but the number of
 axes.
 
+To make this concrete, the relabelling drawn back in the figure is the
+matrix
+$$
+h = \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pmatrix} \quad \text{over } \mathbb{F}_2,
+$$
+cycling $(1,0) \to (0,1) \to (1,1) \to (1,0)$ through the three nonzero
+labels and fixing $(0,0)$. There every amplitude is $\lambda(\eta) = 1$,
+so the channel merely shuffles the axes and forgets nothing: a reversible
+relabelling. Forgetting begins only when some amplitude drops below one,
+which is what the coming sections are about.
+
 It is worth pausing on how little data this is. A general channel in
 dimension $d$ is described by its Choi matrix, an object of size
 $d^2 \times d^2$ carrying on the order of $d^4$ free numbers, all of them
