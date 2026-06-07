@@ -544,22 +544,68 @@ permutation of the other three.
 
 :::
 
-The qubit was special only in being easy to draw. In every dimension the
-same picture holds, with more directions to track. The four Paulis grow
-into a family of $d^2$ *Weyl operators* $\mathbf{w}(\eta)$, labelled by a
-two-dimensional phase space: the plane $\mathbb{F}_d^2$ of pairs
-$\eta = (a,b)$ taken over the integers modulo a *prime* $d$. They still
-form a basis of all $d \times d$ matrices, so a channel is still fixed by
-what it does to them; the labels still *add* when two Weyl operators are
-multiplied; and one label still stands apart, $\eta = 0$, the identity,
-the trace direction every channel in our class must leave untouched. The
-other $d^2 - 1$ labels are the directions that can genuinely be
-forgotten, exactly the $d^2 - 1$ dimensions we counted on the Bloch ball,
-reappearing now as the nonzero points of a finite plane. Taking $d$ prime
-is what turns that plane into a *field*, a number system where one can
-divide as well as add and subtract; we will not need division until
-later, but it is the whole reason for the choice. The explicit
-construction is one fold away.
+Now it is time for some notation, so that we can see the full range of our
+map. To each Pauli, and to the identity, we attach a two-component vector,
+its *address* in a small phase space:
+$$
+I \mapsto (0,0), \qquad X \mapsto (1,0), \qquad Z \mapsto (0,1), \qquad Y \mapsto (1,1).
+$$
+Read the first entry as "is there a flip?" and the second as "is there a
+phase?": $X$ flips, $Z$ adds a phase, and $Y$ does both at once.
+
+Identify the Paulis with these vectors and a small surprise falls out.
+Adding two vectors, with the entries taken modulo $2$, does exactly what
+multiplying the corresponding Paulis does. Multiply $X$ by $Z$ and, up to
+an overall phase, you get $Y$; add $(1,0)$ and $(0,1)$ and you get
+$(1,1)$, the very same address. A dictionary like this, in which
+multiplying the operators is mirrored by adding their addresses, is what
+mathematicians call a *representation*. The clumsy matrix products have
+quietly turned into vector addition over the *finite field* $\mathbb{F}_2$,
+the two-element number system in which $1 + 1$ wraps back to $0$.
+
+Now look again at what the relabelling $h$ is allowed to do. It carries
+each vector to another, the arrows in the figure, and there is really only
+one rule it has to obey. Because multiplying Paulis is adding their
+vectors, $h$ must respect that addition: it has to be a *linear* map. A
+linear map of two-component vectors is a $2 \times 2$ matrix over
+$\mathbb{F}_2$, and an invertible one, since two distinct axes can never be
+folded onto the same place.
+
+How many such maps are there? For the qubit, exactly six. An invertible
+$2 \times 2$ matrix over $\mathbb{F}_2$ is free to send the three nonzero
+vectors to the three nonzero vectors in any order whatever, so the
+relabellings are precisely the $3! = 6$ permutations of the $X$, $Z$, $Y$
+axes. The one drawn in the figure is the three-cycle
+$(1,0) \to (0,1) \to (1,1) \to (1,0)$, which as a matrix is
+$$
+h = \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pmatrix} \qquad \text{over } \mathbb{F}_2 .
+$$
+
+
+The qubit was special only in being easy to draw, its four Paulis sitting
+at the corners of one little square. Every higher dimension tells the same
+story with more dots. For a system of $d$ levels the Paulis become $d^2$
+operators, the *Weyl operators* $\mathbf{w}(\eta)$, and their two-bit
+addresses grow into two full coordinates $\eta = (a,b)$, each now running
+over $0, 1, \ldots, d - 1$ rather than just $0$ and $1$. They still form a
+basis of all $d \times d$ matrices, so a channel is still fixed by what it
+does to them, and multiplying two of them still adds their addresses, only
+now modulo $d$. The addresses no longer fill a square but a $d \times d$
+grid, the plane we will write $\mathbb{F}_d^2$, and $h$ is again a linear
+map of that grid: a $2 \times 2$ matrix, now with entries taken modulo
+$d$.
+
+One address still stands apart. The origin $(0,0)$ is the identity, the
+trace direction every channel in our class must leave untouched, exactly
+as it was for the qubit. That leaves $d^2 - 1$ nonzero addresses, the
+directions that can genuinely be forgotten, and they are precisely the
+$d^2 - 1$ dimensions we counted on the Bloch ball, come back as the
+nonzero points of a finite grid. Back at $d = 2$ those two bits already
+formed a field; for larger $d$ the grid stays a field only when $d$ is
+*prime*, a number system in which you can divide as well as add, subtract
+and multiply. We will not need division until later, once $h$ starts
+carrying points around the grid, but it is the whole reason for insisting
+$d$ is prime. The explicit construction is one fold away.
 
 ```{=html}
 <details class="aside">
