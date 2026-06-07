@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig3-bloch-ball/interactive.html</loc>
-    <lastmod>2026-06-06T17:48:07.092Z</lastmod>
-  </url>
-  <url>
-    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig1-state-space/interactive.html</loc>
-    <lastmod>2026-06-06T17:48:07.090Z</lastmod>
-  </url>
-  <url>
-    <loc>https://florian2richter.github.io/index.html</loc>
-    <lastmod>2026-06-06T17:48:07.090Z</lastmod>
-  </url>
-  <url>
-    <loc>https://florian2richter.github.io/about.html</loc>
-    <lastmod>2026-06-06T17:48:07.090Z</lastmod>
+    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig3b-bloch-root/interactive.html</loc>
+    <lastmod>2026-06-07T09:41:16.104Z</lastmod>
   </url>
   <url>
     <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig2-simplex-root/interactive.html</loc>
-    <lastmod>2026-06-06T17:48:07.091Z</lastmod>
+    <lastmod>2026-06-07T09:41:16.102Z</lastmod>
   </url>
   <url>
-    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig3b-bloch-root/interactive.html</loc>
-    <lastmod>2026-06-06T17:48:07.092Z</lastmod>
+    <loc>https://florian2richter.github.io/about.html</loc>
+    <lastmod>2026-06-07T09:41:16.100Z</lastmod>
+  </url>
+  <url>
+    <loc>https://florian2richter.github.io/index.html</loc>
+    <lastmod>2026-06-07T09:41:16.100Z</lastmod>
+  </url>
+  <url>
+    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig1-state-space/interactive.html</loc>
+    <lastmod>2026-06-07T09:41:16.101Z</lastmod>
+  </url>
+  <url>
+    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig3-bloch-ball/interactive.html</loc>
+    <lastmod>2026-06-07T09:41:16.103Z</lastmod>
+  </url>
+  <url>
+    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig5-continuum-grid/interactive.html</loc>
+    <lastmod>2026-06-07T09:41:16.104Z</lastmod>
   </url>
 </urlset>
