@@ -301,10 +301,13 @@ def build_svg():
     parts.append(axis_line(Y_TIP, CORAL, "arrowY"))
     parts.append(axis_line(X_TIP, TEAL, "arrowX"))
 
-    # Grey identity dot at the centre (no inline label; caption explains it).
+    # Grey identity dot at the centre, with a grey (0,0) caption matching the
+    # identity point on the right panel. Placed lower-right of the dot, the
+    # one quadrant no axis runs through.
     parts.append(
         f'\n  <circle cx="{LCX}" cy="{LCY}" r="5" fill="{GREY}"/>'
     )
+    parts.append(text(LCX + 9, LCY + 19, "(0,0)", LABEL_SIZE, GREY, anchor="start"))
 
     # Axis double-labels (Pauli name italic, Weyl label plain), at the tips.
     parts.append(text(Z_TIP[0], Z_TIP[1] - 12,

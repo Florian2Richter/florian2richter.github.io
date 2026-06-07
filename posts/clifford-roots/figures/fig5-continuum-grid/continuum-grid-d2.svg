@@ -49,6 +49,7 @@
   <line x1="170.00" y1="150.00" x2="268.00" y2="140.00" stroke="#c25b4e" stroke-width="2.4" stroke-linecap="round" marker-end="url(#arrowY)"/>
   <line x1="170.00" y1="150.00" x2="96.00" y2="212.00" stroke="#2d6f8f" stroke-width="2.4" stroke-linecap="round" marker-end="url(#arrowX)"/>
   <circle cx="170.0" cy="150.0" r="5" fill="#7d8a91"/>
+  <text x="179.00" y="169.00" text-anchor="start" font-size="15" fill="#7d8a91">(0,0)</text>
   <text x="170.00" y="52.00" text-anchor="middle" font-size="15" fill="#6f5499"><tspan font-style="italic">Z</tspan> = (0,1)</text>
   <text x="278.00" y="141.00" text-anchor="start" font-size="15" fill="#c25b4e"><tspan font-style="italic">Y</tspan> = (1,1)</text>
   <text x="88.00" y="226.00" text-anchor="end" font-size="15" fill="#2d6f8f"><tspan font-style="italic">X</tspan> = (1,0)</text>

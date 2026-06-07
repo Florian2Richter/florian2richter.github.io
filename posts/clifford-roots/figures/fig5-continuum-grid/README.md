@@ -18,9 +18,10 @@ right place to work: a Clifford channel's structural core is a map on
   centre, each
   double-labelled with its Pauli name and its Weyl label: `X = (1,0)`
   (teal, lower-left, toward the viewer), `Z = (0,1)` (purple, up),
-  `Y = (1,1)` (coral, right). A grey identity dot sits at the centre
-  (no inline label; the caption explains it). Sub-label: *qubit states:
-  a continuum*.
+  `Y = (1,1)` (coral, right). A grey identity dot sits at the centre,
+  with a grey `(0,0)` caption (lower-right of the dot, the one quadrant
+  no axis runs through) matching the identity point on the right panel.
+  Sub-label: *qubit states: a continuum*.
 - **Right panel: the finite grid.** The label plane $\mathbb{F}_2^2$:
   four points on faint coordinate guides through the origin. The
   identity `(0,0)` is a grey dot, matching the grey identity dot at the

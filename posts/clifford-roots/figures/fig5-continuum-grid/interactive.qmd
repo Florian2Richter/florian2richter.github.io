@@ -1,5 +1,5 @@
 ```{=html}
-<!-- Figure 5: continuum vs. finite grid. Static SVG inlined verbatim from continuum_grid_figure.py. No interactivity: it is a conceptual sketch (the state-space continuum on the left, the finite Weyl-label plane on the right). The mini Bloch ball uses the same purity-gradient fill and latitude/longitude wireframe as Figures 3 and 4 (its gradient id is "purity-cg" to avoid colliding with the other inlined Bloch SVGs). The identity (0,0) is a grey dot on both sides. -->
+<!-- Figure 5: continuum vs. finite grid. Static SVG inlined verbatim from continuum_grid_figure.py. No interactivity: it is a conceptual sketch (the state-space continuum on the left, the finite Weyl-label plane on the right). The mini Bloch ball uses the same purity-gradient fill and latitude/longitude wireframe as Figures 3 and 4 (its gradient id is "purity-cg" to avoid colliding with the other inlined Bloch SVGs). The identity (0,0) is a grey dot with a grey (0,0) caption on both sides. -->
 <style>
 .continuum-grid{max-width:680px;margin:1.25rem auto;}
 .continuum-grid svg{width:100%;height:auto;display:block;}
@@ -7,7 +7,7 @@
 </style>
 
 <div class="continuum-grid">
-  <p class="cg-vh">Two panels. On the left, a Bloch ball, the continuum of qubit states, shaded by purity with a latitude and longitude wireframe, carrying three coloured coordinate axes: X = (1,0) toward the lower left, Y = (1,1) to the right, Z = (0,1) upward, and a grey identity dot at the centre. On the right, the finite plane of Weyl labels: four points, the identity (0,0) drawn as a grey dot matching the ball centre, and the three nonzero points (1,0), (0,1), (1,1) in the matching axis colours, cycled by an example homomorphism h.</p>
+  <p class="cg-vh">Two panels. On the left, a Bloch ball, the continuum of qubit states, shaded by purity with a latitude and longitude wireframe, carrying three coloured coordinate axes: X = (1,0) toward the lower left, Y = (1,1) to the right, Z = (0,1) upward, and a grey identity dot labelled (0,0) at the centre. On the right, the finite plane of Weyl labels: four points, the identity (0,0) drawn as a grey dot matching the ball centre, and the three nonzero points (1,0), (0,1), (1,1) in the matching axis colours, cycled by an example homomorphism h.</p>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" font-family="Georgia, 'Times New Roman', serif" role="img" aria-label="Left: the continuum of qubit states with three coloured Bloch axes. Right: the finite plane of Weyl labels, four points, with the identity fixed and the other three permuted by h.">
   <defs>
@@ -59,6 +59,7 @@
   <line x1="170.00" y1="150.00" x2="268.00" y2="140.00" stroke="#c25b4e" stroke-width="2.4" stroke-linecap="round" marker-end="url(#arrowY)"/>
   <line x1="170.00" y1="150.00" x2="96.00" y2="212.00" stroke="#2d6f8f" stroke-width="2.4" stroke-linecap="round" marker-end="url(#arrowX)"/>
   <circle cx="170.0" cy="150.0" r="5" fill="#7d8a91"/>
+  <text x="179.00" y="169.00" text-anchor="start" font-size="15" fill="#7d8a91">(0,0)</text>
   <text x="170.00" y="52.00" text-anchor="middle" font-size="15" fill="#6f5499"><tspan font-style="italic">Z</tspan> = (0,1)</text>
   <text x="278.00" y="141.00" text-anchor="start" font-size="15" fill="#c25b4e"><tspan font-style="italic">Y</tspan> = (1,1)</text>
   <text x="88.00" y="226.00" text-anchor="end" font-size="15" fill="#2d6f8f"><tspan font-style="italic">X</tspan> = (1,0)</text>
