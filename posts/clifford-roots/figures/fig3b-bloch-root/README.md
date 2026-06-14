@@ -7,6 +7,17 @@ space). This is the quantum counterpart of Figure 2 (the classical
 square-root trajectories): both are the *interactive* root-trajectory
 figures, while Figures 1 and 3 are the static state-space sketches.
 
+> **Planned (next figure to build):** convert this into an *animation*
+> of the qubit root, the way Figure 2 was turned into the classical
+> square-root collapse animation. The Bloch ball should play once on
+> scroll (and replay on tap): a cloud of Bloch vectors driven by `S` to
+> the centre `I/2` in stages, each step shrinking and rotating the cloud
+> onto the next axis until it collapses, with `prefers-reduced-motion`
+> and JS-off falling back to a static labelled figure. Keep the existing
+> click-to-pick-a-direction interaction if it composes cleanly; Florian
+> liked the interactive state-space pick. Mirror Figure 2's structure
+> (skeleton SVG generator + animation script in `interactive.qmd`).
+
 ## What it shows
 
 The quantum analogue of Figure 2: the maximal qubit root `S` driving
