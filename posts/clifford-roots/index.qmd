@@ -281,12 +281,27 @@ not earlier." How large can $k$ be?
 
 The answer is sharp: $k \leq d - 1$.
 
-The reason is structural. The map $P$ has rank one: it crushes the
-entire $(d - 1)$-dimensional space of traceless deviations from the
-uniform distribution down to zero. For $S^k$ to do that, $S$ itself must
-carry a *nilpotent* part on that traceless space, and a nilpotent
-operator on a $(d - 1)$-dimensional space takes at most $d - 1$ steps to
-reach zero. That is the bound.
+The reason is structural, and worth unpacking. Set aside the single
+grey direction that $S$ holds fixed and look at everything else: the
+deviations away from the grey centre, the ways probability can be tilted
+from one outcome toward another. A probability vector and the uniform
+one both sum to one, so any difference between them sums to zero, and
+these sum-to-zero deviations fill a space of dimension $d - 1$, one less
+than the $d$ outcomes. Total erasure means wiping out every one of them.
+That is what $P$ does in a single step: it sends this whole
+$(d-1)$-dimensional space to zero.
+
+Now ask what $S$ has to look like to achieve that same annihilation only
+after $k$ steps, never sooner. On the grey direction $S$ does nothing.
+On the $(d-1)$-dimensional space of deviations it must be *nilpotent*: a
+map that is not itself zero, but that becomes zero once applied enough
+times, like a wind-down that loses a little on every turn until nothing
+is left. The catch is that a nilpotent map on a space of dimension
+$d - 1$ runs out of room quickly. Each application collapses at least
+one more dimension, so after at most $d - 1$ steps everything is gone,
+and it cannot be stretched longer. That is the bound. (In the quantum
+upgrade these sum-to-zero deviations become the *traceless* operators,
+the same idea in matrix language.)
 
 ```{=html}
 <details class="aside">
@@ -306,7 +321,7 @@ S^k = (P + N)^k = P + N^k.
 $$
 So $S^k = P$ exactly when $N^k = 0$. And $N$ is nilpotent on the right
 space: it kills the uniform direction ($Nu = Su - Pu = u - u = 0$) and
-sends everything else into the $(d-1)$-dimensional space of traceless
+sends everything else into the $(d-1)$-dimensional space of sum-to-zero
 vectors.
 
 A nilpotent operator is governed by its Jordan form, a stack of blocks
