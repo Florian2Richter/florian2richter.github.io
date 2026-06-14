@@ -440,24 +440,36 @@ ourselves leave classical probability behind.
 ## The quantum upgrade {#sec-quantum}
 
 Everything so far was a rehearsal. The real question is about quantum
-information, and a quantum state carries more than a probability
-distribution does. More in a way we can count, and the count turns out
-to be the whole plot of this section.
+information, and a quantum state carries more than a *classical*
+probability distribution does. More in a way we can count, and the count
+turns out to be the whole plot of this section.
 
-Go back to the smallest example. A classical bit is a probability
-distribution over two outcomes: one number between zero and one, with
-the rest left over. Those states form a line segment. One dimension of
-freedom, the two definite bits at its ends and the coin-flip state in
-the middle.
+Go back to the smallest example. A classical bit is one number: how a
+coin is weighted between its two outcomes, $0$ and $1$. Picture that
+number as a position on a line segment. The two ends are the only
+*certain* states, "definitely $0$" and "definitely $1$"; every point
+between is a blend, more or less uncertain, with the fair coin sitting at
+the dead centre. One number, one dimension of freedom.
 
-A quantum bit, a *qubit*,[^qcvc] has more room than that line. Its state is no
-longer a list of probabilities but a small matrix, called a *density
-matrix*. You do not need its inner workings here, only its shape: the
-states of a single qubit fill a solid ball in three dimensions, the
-*Bloch ball* (@fig-bloch). The definite states, the quantum versions of
-"this bit is certainly $0$," sit on the surface. Blends of them sit
-inside. At the dead centre is the state of total ignorance, the quantum
-coin flip.
+A quantum bit, a *qubit*, has more room, and the cleanest way to see how
+much more is to ask what its *certain* states are. (Quantum mechanics
+also allows genuine superpositions, the $\alpha\,|0\rangle + \beta\,|1\rangle$
+of the amplitude picture,[^qcvc] but for a story about forgetting we want
+the geometry of states, not the algebra of amplitudes.) Classically there
+were exactly two certain states, the two ends of the line. A qubit has
+infinitely many: it can be perfectly definite about many different,
+mutually incompatible questions, not only "is it $0$ or $1$?". Those
+certain states no longer sit at two points. They fill the entire
+*surface of a ball*.
+
+That ball is the qubit's state space, the *Bloch ball* (@fig-bloch).
+Think of a state as an arrow inside it: the *direction* says which
+certain state it leans toward, and the *length* says how certain it is.
+Arrows that reach the surface are the certain, *pure* states; shorter
+arrows are blurrier mixtures; the zero-length arrow at the dead centre is
+total ignorance, the quantum coin flip. The object that bookkeeps this
+arrow is a small matrix, the *density matrix*, but you need only its
+shape here, not its inner workings.
 
 [^qcvc]: We meet qubits, density matrices, and channels here at the
 level of pictures, not bra-ket algebra, so you can follow along cold. If
