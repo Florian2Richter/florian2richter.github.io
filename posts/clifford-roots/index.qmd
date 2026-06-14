@@ -92,19 +92,36 @@ turns out, if you sit with it, to be unreasonably beautiful.
 Let's make the photocopier mathematically precise. We start with the
 classical case, where everything is ordinary probability theory.
 
-Pick a small number of distinct states that your image can be in. Say
-there are three: black, grey, and white. Then "the image" at any
-moment is described by a probability distribution over these three
-states. Maybe right now the image is definitely white, which we write
-as $(0, 0, 1)$. Maybe after some processing it has drifted to
-$(0.4, 0.5, 0.1)$: 40% likely black, 50% grey, 10% white, the
-uncertainty standing in for whatever noise has crept in.
+Pick a small number of distinct states your image can be in. Say
+three, and to keep them vivid, call them red, green, and blue. At any
+moment a pixel of the image need not be one definite colour. Noise has
+crept in, and the honest description is a list of how likely each
+colour is. Right now it might be definitely red. After a few passes
+through the copier, it might be 40% red, 50% green, 10% blue.
 
-The set of all such probability distributions over $d$ states is a
-familiar geometric object: a $(d - 1)$-dimensional simplex
-(@fig-simplex-d3). For $d = 3$ it is a triangle. The corners are the
-pure states (definitely this colour, no uncertainty), and the centre is
-the uniform distribution (totally unsure, every colour equally likely).
+We write that list as a vector. Definitely red is $(1, 0, 0)$; the
+blurred state is $(0.4, 0.5, 0.1)$, read in the order red, green, blue.
+Two rules turn a list of numbers into a probability distribution, and
+we lean on both later. The entries cannot be negative, since a
+probability below zero is meaningless. And they must sum to one, since
+the pixel is certainly *some* colour. Every classical state we write
+obeys these two rules, and nothing else counts.
+
+Now picture all the lawful states at once. With three colours a state
+is three numbers summing to one, so fixing any two pins the third: only
+two are free. Two free numbers trace out a flat, two-dimensional shape,
+and that shape is a triangle. Its three corners are the sure things,
+one per colour: $(1,0,0)$ is definitely red, $(0,1,0)$ definitely
+green, $(0,0,1)$ definitely blue. Walk along an edge joining two
+corners and the third colour stays impossible while the other two trade
+off. Drift inward and all three grow likelier together, until at the
+dead centre you reach $(\tfrac13, \tfrac13, \tfrac13)$: an even wash of
+red, green, and blue with no colour favoured, the state that could have
+come from anything. That even wash is exactly the grey noise from the
+start of this post, the worn-out photocopy written as a vector, and
+pushing every corner toward it is the whole job of an erasing copier.
+The triangle has a name, the *simplex*, and for $d$ states it becomes
+the $(d-1)$-dimensional version of the same idea (@fig-simplex-d3).
 
 ::: {#fig-simplex-d3}
 
