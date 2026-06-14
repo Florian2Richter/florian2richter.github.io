@@ -31,9 +31,12 @@ in `posts/<slug>/figures/` (see the README in
 
 ## Audience and voice
 
-The Clifford post is written for **a stranger from Hacker News learning
-the math from scratch**, not a colleague reading in one sitting.
-Pedagogy wins over brevity; length is a result, not a target. A
+The Clifford post is written for **an undergraduate in physics, math,
+or engineering**, not a colleague reading in one sitting. That is the
+"very curious" reader Quantum Country addresses: comfortable with
+linear algebra and probability, but meeting quantum channels, Weyl
+operators, and finite fields here for the first time. Pedagogy wins
+over brevity; length is a result, not a target. A
 two-post split at the reduction (section 5) is on the table if the
 single post grows past about 7000 words.
 

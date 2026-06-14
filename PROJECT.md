@@ -44,9 +44,12 @@ Specifically:
 
 ## Audience
 
-The reader is comfortable with the basics: matrices, vectors,
-eigenvalues, probability distributions. They've worked with these
-objects before and aren't fazed by an equation involving them.
+The reader is an undergraduate in physics, math, or engineering: the
+"very curious" reader Quantum Country addresses. They are comfortable
+with the basics, matrices, vectors, eigenvalues, probability
+distributions, having worked with these objects before, and aren't
+fazed by an equation involving them. They are not yet specialists:
+quantum channels, Weyl operators, and finite fields are new to them.
 
 What we *briefly introduce* in the post itself:
 
@@ -55,7 +58,7 @@ What we *briefly introduce* in the post itself:
 - **Quantum channels (CPTP maps).** Just enough to make the
   depolarizing channel and Clifford channels well-defined. We do not
   develop the full Heisenberg/Schrödinger duality, Stinespring, or
-  Kraus theory — we cite them and move on.
+  Kraus theory; we cite them and move on.
 
 Anyone who has done Quantum Country and has standard mathematical
 fluency can read this post.
