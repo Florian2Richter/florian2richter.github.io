@@ -6,14 +6,17 @@ a 2D face sitting inside the positive octant of R^3. Three coordinate
 axes from the origin show the embedding; the triangular face spans the
 three unit basis vectors.
 
-Colour encodes PURITY. A distribution's purity is the collision
-probability sum_i p_i^2, which runs from 1/d at the uniform distribution
-(maximally mixed) to 1 at a pure state. We fill the simplex with this
-field: green and saturated at the three pure corners, fading to a pale
-glow at the maximally mixed centre. This is the classical analogue of
-tr(rho^2) for a qubit, so the same visual language carries over to the
-Bloch ball. The maximally mixed state p0 is drawn as a solid, fully
-visible marker with its coordinates labelled at full strength.
+Colour does two jobs here. The simplex fill encodes PURITY: a
+distribution's purity is the collision probability sum_i p_i^2, which
+runs from 1/d at the uniform distribution (maximally mixed) to 1 at a
+pure state. We fill the simplex with this field, blue-teal and saturated
+at the corners, fading to a pale glow at the maximally mixed centre. On
+top of that, the three pure-state corners are marked in their own
+identity colours, red, green, and blue, so the reader sees three
+distinct pure colours (e1 red, e2 green, e3 blue) blending toward the
+grey maximally mixed state p0 at the centre. That grey centre is the
+"grey noise" the post opens with. p0 is drawn as a solid, fully visible
+grey marker with its coordinates labelled at full strength.
 
 Usage:
     python state_space_figure.py [output.svg]
@@ -58,7 +61,12 @@ PURE = "#2d6f8f"               # boundary + pure-state dots (blue-teal)
 PURE_RGB = (45, 111, 143)      # field high end (pure)
 MIXED_RGB = (214, 229, 234)    # field low end (maximally mixed, soft blue-grey)
 MIXED_RING = "#5e7886"         # the faint ring at p0
-CENTER = "#f5f7f8"             # centre marker fill
+CENTER = "#f5f7f8"             # centre marker halo
+GREY_CENTER = "#8a8f94"        # centre marker dot (neutral grey, the "grey noise")
+
+# Identity colours for the three pure-state corners (e1, e2, e3).
+# Distinct from the purity field; these say *which* pure state, not how pure.
+CORNER_COLOURS = ("#cc3b3b", "#2e9e5b", "#3b6fb0")  # e1 red, e2 green, e3 blue
 
 SIMPLEX_FILL_OPACITY = 0.9
 MESH_N = 26                    # triangular subdivisions of the purity field
@@ -157,7 +165,7 @@ def build_svg():
         )
 
     # --- Layer 2: the purity field (triangular mesh) ---
-    parts.append('\n\n  <!-- Purity field: green at the pure corners, '
+    parts.append('\n\n  <!-- Purity field: blue-teal at the pure corners, '
                  'pale at the maximally mixed centre -->')
     parts.append('\n  <g stroke-linejoin="round">')
     n = MESH_N
@@ -217,33 +225,32 @@ def build_svg():
             f'stroke="{OUTLINE}" stroke-width="{TICK_STROKE_W}"/>'
         )
 
-    # --- Layer 6: pure-state dots (green) ---
-    green = purity_colour(1.0)
-    parts.append('\n\n  <!-- Pure states (green) -->')
-    for vx, vy in VERTICES:
-        parts.append(f'\n  <circle cx="{vx}" cy="{vy}" r="6" fill="{green}"/>')
+    # --- Layer 6: pure-state dots (identity colours: red, green, blue) ---
+    parts.append('\n\n  <!-- Pure states (identity colours: e1 red, e2 green, e3 blue) -->')
+    for (vx, vy), colour in zip(VERTICES, CORNER_COLOURS):
+        parts.append(f'\n  <circle cx="{vx}" cy="{vy}" r="6" fill="{colour}"/>')
 
-    # --- Layer 7: maximally mixed state p0 (solid marker, fully visible) ---
-    parts.append('\n\n  <!-- Maximally mixed state p0 (solid marker) -->')
+    # --- Layer 7: maximally mixed state p0 (solid grey marker, fully visible) ---
+    parts.append('\n\n  <!-- Maximally mixed state p0 (solid grey marker) -->')
     parts.append(
         f'\n  <circle cx="{P0[0]}" cy="{P0[1]}" r="9" fill="{CENTER}"/>'
     )
     parts.append(
-        f'\n  <circle cx="{P0[0]}" cy="{P0[1]}" r="6" fill="{OUTLINE}"/>'
+        f'\n  <circle cx="{P0[0]}" cy="{P0[1]}" r="6" fill="{GREY_CENTER}"/>'
     )
 
     # --- Layer 8: labels ---
-    parts.append('\n\n  <!-- Vertex labels (green) + probability vectors (muted) -->')
+    parts.append('\n\n  <!-- Vertex labels (identity colours) + probability vectors (muted) -->')
     label_specs = [
-        (VERTEX_E1, 'e₁', '(1, 0, 0)', (-16, 28), (-16, 48), 'end'),
-        (VERTEX_E2, 'e₂', '(0, 1, 0)', (22, 8), (22, 28), 'start'),
-        (VERTEX_E3, 'e₃', '(0, 0, 1)', (-22, -8), (-22, 12), 'end'),
+        (VERTEX_E1, 'e₁', '(1, 0, 0)', (-16, 28), (-16, 48), 'end', CORNER_COLOURS[0]),
+        (VERTEX_E2, 'e₂', '(0, 1, 0)', (22, 8), (22, 28), 'start', CORNER_COLOURS[1]),
+        (VERTEX_E3, 'e₃', '(0, 0, 1)', (-22, -8), (-22, 12), 'end', CORNER_COLOURS[2]),
     ]
-    for (vx, vy), label, vec, (lx, ly), (vox, voy), anchor in label_specs:
+    for (vx, vy), label, vec, (lx, ly), (vox, voy), anchor, colour in label_specs:
         parts.append(
             f'\n  <text x="{vx + lx}" y="{vy + ly}" text-anchor="{anchor}" '
             f'font-size="{LABEL_SIZE}" font-style="italic" '
-            f'fill="{OUTLINE}">{label}</text>'
+            f'fill="{colour}">{label}</text>'
         )
         parts.append(
             f'\n  <text x="{vx + vox}" y="{vy + voy}" text-anchor="{anchor}" '

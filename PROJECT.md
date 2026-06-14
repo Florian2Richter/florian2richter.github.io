@@ -1,5 +1,11 @@
 # Blog Post Project: Finite Roots of the Depolarizing Channel
 
+> **Status: frozen brief.** This is the original project brief, kept
+> for the result, the angle, and the source material. For how to work,
+> voice, the post's structure, hard rules, and current state, see
+> `CLAUDE.md`, which is authoritative and kept current. Where the two
+> overlap, `CLAUDE.md` wins.
+
 This document is the shared context for writing a technical blog post.
 The post is based on unpublished work from my 2010 diploma thesis at
 Leibniz Universität Hannover under Prof. R. F. Werner. The thesis is
@@ -11,8 +17,8 @@ construction in Chapter 6 subsumed it.
 
 ## The angle
 
-The result worth telling: Clifford channels — a highly structured,
-low-parameter class of quantum channels — can divide the completely
+The result worth telling: Clifford channels, a highly structured,
+low-parameter class of quantum channels, can divide the completely
 depolarizing channel into as many discrete steps as the *general*
 quantum machinery allows (asymptotically). The Clifford bound is
 $\frac{d^2-1}{2}$; the general bound is $d^2 - 1$. So the toy model
@@ -37,16 +43,19 @@ The post links to Andy Matuschak and Michael Nielsen's
 for readers who need qubits, gates, and circuits before starting.
 Specifically:
 
-- ["Quantum computing for the very curious"](https://quantum.country/qcvc)
-  — the main essay, covering qubits, single- and multi-qubit gates.
-- ["How quantum teleportation works"](https://quantum.country/teleportation)
-  — useful but optional.
+- ["Quantum computing for the very curious"](https://quantum.country/qcvc):
+  the main essay, covering qubits, single- and multi-qubit gates.
+- ["How quantum teleportation works"](https://quantum.country/teleportation):
+  useful but optional.
 
 ## Audience
 
-The reader is comfortable with the basics: matrices, vectors,
-eigenvalues, probability distributions. They've worked with these
-objects before and aren't fazed by an equation involving them.
+The reader is an undergraduate in physics, math, or engineering: the
+"very curious" reader Quantum Country addresses. They are comfortable
+with the basics, matrices, vectors, eigenvalues, probability
+distributions, having worked with these objects before, and aren't
+fazed by an equation involving them. They are not yet specialists:
+quantum channels, Weyl operators, and finite fields are new to them.
 
 What we *briefly introduce* in the post itself:
 
@@ -55,7 +64,7 @@ What we *briefly introduce* in the post itself:
 - **Quantum channels (CPTP maps).** Just enough to make the
   depolarizing channel and Clifford channels well-defined. We do not
   develop the full Heisenberg/Schrödinger duality, Stinespring, or
-  Kraus theory — we cite them and move on.
+  Kraus theory; we cite them and move on.
 
 Anyone who has done Quantum Country and has standard mathematical
 fluency can read this post.
@@ -72,60 +81,16 @@ What we do NOT assume:
 
 Working title: **How finely can you divide a depolarizing channel?**
 
-1. **Hook + classical depolarization.** Stochastic process collapsing
-   the simplex to a point. The divisibility question $S^k = P$.
-   Classical bound $d - 1$. Concrete: build a square root of the 3D
-   bistochastic CDC and visualise its trajectories.
-
-2. **Quantum upgrade.** Density matrices, channels, the Bloch ball
-   collapsing to its centre. The bound jumps to $d^2 - 1$ via Jordan.
-   State the puzzle: can it actually be achieved?
-
-3. **Clifford channels as the playground.** Weyl operators, projective
-   representation structure, Clifford channel definition as
-   $T(W(\eta)) = \lambda(\eta) W(h(\eta))$. Two pieces of data.
-
-4. **The reduction.** Concatenation $T^n$ acts on Weyl labels by $h^n$
-   and multiplies by a product of $\lambda$'s along the orbit. Channel
-   question becomes a question about a linear map on $\mathbb{F}_d^2$.
-
-5. **The two ingredients.**
-   - Group order of $h \in GL(2, \mathbb{F}_d)$. Max order $d^2 - 1$
-     via companion matrix of a primitive polynomial. Sidebar on why
-     primitive polynomials exist (extension fields).
-   - Single orbit covers everything. Max-order $h$ acts transitively
-     on $\mathbb{F}_d^2 \setminus \{0\}$. With $\lambda$ vanishing on
-     a single inverse pair, this gives the bound $\frac{d^2 - 1}{2}$.
-
-6. **Punchline.** The orbit structure on the phase space is where the
-   room lives, not the richness of the channel class.
-
-7. **Closing.** Pointer to the published paper for the general
-   construction (perturbation of the Jordan block). Note that the
-   Clifford story didn't make it in because the general result
-   subsumes it — but it's the cleanest place to *see* what's going on.
+The early seven-point sketch that once lived here is superseded. See
+the **"Structural plan for the Clifford post"** in `CLAUDE.md` for the
+authoritative section-by-section outline (nine sections, matching the
+actual draft), and its **"Current state"** for what is drafted.
 
 ## Voice and style
 
-Imitate Michael Nielsen's expository voice from Quantum Country.
-The hallmarks:
-
-- Short sentences, short paragraphs
-- Concrete before abstract — show a specific matrix doing a specific
-  thing before naming the category
-- Explicit signposting: "Let's work through an example," "Here's the
-  surprising thing," "It's worth pausing here"
-- Conversational about confusion: "This seems strange. Why should it
-  be true?" then answers
-- Italics for emphasis, sparingly, on the conceptually-loaded word
-- Formulas integrated into prose, not displayed in isolation when
-  inline works
-- First-person plural for the math journey, first-person singular
-  sparingly for personal asides ("I find this surprising because...")
-
-Avoid thesis-prose patterns: "Furthermore," "We observe that," "In
-what follows," "It turns out that" used as crutch. If we catch
-ourselves writing in that register, rewrite.
+See the **"Audience and voice"** section of `CLAUDE.md`, which is
+authoritative. In short: imitate Matuschak and Nielsen's expository
+voice from Quantum Country, and avoid thesis-prose crutches.
 
 ## Technical setup
 
@@ -147,21 +112,17 @@ infrastructure is:
 
 Key paths once scaffolded:
 
-- `posts/clifford-roots/index.qmd` — this post
-- `posts/clifford-roots/figures/` — Python scripts and generated SVGs
-- `reference/Diplomarbeit_Florian.pdf` — the thesis (gitignored)
-- `_quarto.yml` — site config
-- `.github/workflows/publish.yml` — deployment
-
-**Open infrastructure question:** the existing
-`florian2richter.github.io` repo may have content from an earlier
-unfinished project. First task is to inspect it and decide whether
-to add to it, archive it, or start fresh.
+- `posts/clifford-roots/index.qmd`, this post
+- `posts/clifford-roots/figures/`, Python scripts and generated SVGs
+- `reference/Diplomarbeit_Florian.pdf`, the thesis (gitignored)
+- `_quarto.yml`, site config
+- `.github/workflows/publish.yml`, deployment
 
 ## Open questions / things to decide later
 
-- **Length target.** Current aim: 3500-4500 words. May need a split
-  into two posts if it grows past 5000.
+- **Length target.** Governed by `CLAUDE.md` (Quantum-Country depth is
+  the aim; a two-post split only if it grows well past about 12000 to
+  15000 words).
 - **Whether to include code snippets.** Maybe a small Python block
   showing the matrix multiplication $T \cdot T = P$ for the
   3×3 case, for hands-on readers. Quarto can execute these live at
@@ -171,8 +132,6 @@ to add to it, archive it, or start fresh.
 - **A possible sidebar on the sampling-the-simplex question** (uniform
   sampling on the simplex, why naive normalisation fails). It's a
   nice mathematical aside that fits the post's spirit but adds length.
-- **Integration with existing `florian2richter.github.io` content.**
-  Add to it, archive and replace, or co-exist?
 
 ## What NOT to do
 

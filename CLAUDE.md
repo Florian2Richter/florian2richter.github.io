@@ -12,8 +12,12 @@ post on Clifford channels as finite roots of the depolarizing channel.
 - **Math rendering** is MathJax (Quarto default).
 - **The current post in progress** is `posts/clifford-roots/index.qmd`,
   working title *"How finely can you divide a depolarizing channel?"*.
-- **`PROJECT.md`** at the repo root has the original project brief:
-  the result being explained, the structure, the source material.
+- **`PROJECT.md`** at the repo root is the original project brief:
+  the result being explained, the angle, the source material, and what
+  not to do. It is a frozen snapshot from the start of the project.
+  This file, `CLAUDE.md`, is the authoritative living source for how to
+  work, voice, structure, hard rules, and current state. Where the two
+  overlap, `CLAUDE.md` wins.
 - **`reference/Diplomarbeit_Florian.pdf`** is the source thesis
   (Florian Richter, Diploma Thesis, Hannover 2010). Chapter 5 is the
   primary source for the post.
@@ -31,11 +35,15 @@ in `posts/<slug>/figures/` (see the README in
 
 ## Audience and voice
 
-The Clifford post is written for **a stranger from Hacker News learning
-the math from scratch**, not a colleague reading in one sitting.
-Pedagogy wins over brevity; length is a result, not a target. A
-two-post split at the reduction (section 5) is on the table if the
-single post grows past about 7000 words.
+The Clifford post is written for **an undergraduate in physics, math,
+or engineering**, not a colleague reading in one sitting. That is the
+"very curious" reader Quantum Country addresses: comfortable with
+linear algebra and probability, but meeting quantum channels, Weyl
+operators, and finite fields here for the first time. Pedagogy wins
+over brevity; length is a result, not a target, and the depth and
+worked-example density of Quantum Country is the model to aim for. A
+two-post split at the reduction (section 5) is on the table only if
+the single post grows well past about 12000 to 15000 words.
 
 The voice target is **Matuschak and Nielsen's
 [Quantum Country](https://quantum.country/qcvc)**. Specifically:
@@ -53,6 +61,10 @@ The voice target is **Matuschak and Nielsen's
   isolation.
 - Story-first openings; no math in the hook of a section.
 
+Avoid thesis-prose crutches: "Furthermore," "We observe that," "In
+what follows," "It turns out that." If a paragraph starts reading like
+a textbook chapter, rewrite it.
+
 ## Hard rules
 
 - **NO EM-DASHES.** Never. Use commas, colons, parentheses,
@@ -65,6 +77,27 @@ The voice target is **Matuschak and Nielsen's
   the prose. If a question has its own literature (e.g. characterising
   channels that converge to a fixed point in the infinite limit), say
   so and point at it.
+
+## Expandable asides (math derivations)
+
+These are the click-to-expand `<details class="aside">` blocks, a
+different thing from the inline parenthetical asides in the Hard rules
+above. The rule:
+
+- An aside holds a self-contained mathematical derivation or proof:
+  the "why this is true" behind a claim. The claim always stays in the
+  main text; only its justification moves into the aside.
+- Reaching for one should feel natural. Whenever the math deserves a
+  fuller, more rigorous treatment than the narrative itself needs, it
+  belongs in an aside, not in the main thread.
+- Worked examples that build intuition stay in the main flowing text,
+  Quantum Country style. Asides are for proofs and derivations, not
+  for the illustrative examples that carry the pedagogy.
+- Asides do not count toward the post's target length. The length
+  budget (the split threshold above) is measured on the visible
+  main-text prose; asides are optional depth layered on top.
+- Click-to-expand, not hover (hover fails on touch and cannot hold
+  display math).
 
 ## Structural plan for the Clifford post
 

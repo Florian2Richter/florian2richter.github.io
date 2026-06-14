@@ -92,29 +92,47 @@ turns out, if you sit with it, to be unreasonably beautiful.
 Let's make the photocopier mathematically precise. We start with the
 classical case, where everything is ordinary probability theory.
 
-Pick a small number of distinct states that your image can be in. Say
-there are three: black, grey, and white. Then "the image" at any
-moment is described by a probability distribution over these three
-states. Maybe right now the image is definitely white, which we write
-as $(0, 0, 1)$. Maybe after some processing it has drifted to
-$(0.4, 0.5, 0.1)$: 40% likely black, 50% grey, 10% white, the
-uncertainty standing in for whatever noise has crept in.
+Pick a small number of distinct states your image can be in. Say
+three, and to keep them vivid, call them red, green, and blue. At any
+moment a pixel of the image need not be one definite colour. Noise has
+crept in, and the honest description is a list of how likely each
+colour is. Right now it might be definitely red. After a few passes
+through the copier, it might be 40% red, 50% green, 10% blue.
 
-The set of all such probability distributions over $d$ states is a
-familiar geometric object: a $(d - 1)$-dimensional simplex
-(@fig-simplex-d3). For $d = 3$ it is a triangle. The corners are the
-pure states (definitely this colour, no uncertainty), and the centre is
-the uniform distribution (totally unsure, every colour equally likely).
+We write that list as a vector. Definitely red is $(1, 0, 0)$; the
+blurred state is $(0.4, 0.5, 0.1)$, read in the order red, green, blue.
+Two rules turn a list of numbers into a probability distribution, and
+we lean on both later. The entries cannot be negative, since a
+probability below zero is meaningless. And they must sum to one, since
+the pixel is certainly *some* colour. Every classical state we write
+obeys these two rules, and nothing else counts.
+
+Now picture all the lawful states at once. With three colours a state
+is three numbers summing to one, so fixing any two pins the third: only
+two are free. Two free numbers trace out a flat, two-dimensional shape,
+and that shape is a triangle. Its three corners are the sure things,
+one per colour: $(1,0,0)$ is definitely red, $(0,1,0)$ definitely
+green, $(0,0,1)$ definitely blue. Walk along an edge joining two
+corners and the third colour stays impossible while the other two trade
+off. Drift inward and all three grow likelier together, until at the
+dead centre you reach $(\tfrac13, \tfrac13, \tfrac13)$: an even wash of
+red, green, and blue with no colour favoured, the state that could have
+come from anything. That even wash is exactly the grey noise from the
+start of this post, the worn-out photocopy written as a vector, and
+pushing every corner toward it is the whole job of an erasing copier.
+The triangle has a name, the *simplex*, and for $d$ states it becomes
+the $(d-1)$-dimensional version of the same idea (@fig-simplex-d3).
 
 ::: {#fig-simplex-d3}
 
 {{< include figures/fig1-state-space/interactive.qmd >}}
 
 The classical state space for three outcomes: the probability simplex
-sitting inside the positive octant, with the pure states at the vertices
-and the uniform distribution $p_0 = (\tfrac13, \tfrac13, \tfrac13)$
-marked at the centre. The fill encodes purity, saturated at the pure
-corners and fading toward the maximally mixed centre.
+sitting inside the positive octant. Its three pure states sit at the
+vertices, marked in red, green, and blue, and the uniform distribution
+$p_0 = (\tfrac13, \tfrac13, \tfrac13)$ is the grey point at the centre,
+an even wash of all three. The fill separately encodes purity, saturated
+at the pure corners and fading toward the maximally mixed centre.
 
 :::
 
@@ -156,14 +174,23 @@ meaning what we want it to mean. So $S$ is linear.
 </details>
 ```
 
-And a linear map is just a matrix. So from here on our copier is a
-matrix, which we will call $S$, and applying it to a distribution is
-ordinary matrix multiplication.
+A linear map of vectors is exactly a matrix, so from here on our copier
+is a matrix, which we will call $S$, and applying it to a distribution
+is ordinary matrix-times-vector multiplication.
 
-That already pins down what the entries of $S$ can look like. Feed in a
-pure state, all the probability on one entry, and the output is just one
-column of $S$. For that column to be a probability distribution in its
-own right, its entries must be non-negative and sum to one:
+It is worth seeing what that does to our three corners, because it pins
+down the whole matrix. Feed in pure red, the vector $(1, 0, 0)$.
+Multiplying $S$ by a vector that is all zeros except for a single one
+just reads off the matching column, so the output is the first column of
+$S$: whatever $S$ does to red lives there. Pure green $(0, 1, 0)$ picks
+out the second column, pure blue $(0, 0, 1)$ the third. The three
+columns of $S$ are therefore nothing but the images of the three pure
+states, the three places the corners are sent, and once those are fixed
+linearity supplies every blend in between.
+
+That already constrains the entries. Each column is the image of a pure
+state, and that image has to be a legal state in its own right: its
+entries non-negative and summing to one,
 $$
 S_{ij} \geq 0, \qquad \sum_i S_{ij} = 1.
 $$
@@ -175,19 +202,22 @@ distributions.
 
 There is one more restriction we will impose, and it turns out to
 be the most interesting one in retrospect. We will only consider
-copiers that leave the *uniform distribution* untouched: the flat
-distribution that puts equal weight on every state has to come back
-out exactly as it went in.
+copiers that leave the *uniform distribution* untouched, the grey
+centre of the triangle from a moment ago: the flat distribution that
+puts equal weight on every state has to come back out exactly as it
+went in.
 
 Why? The uniform distribution represents *no information* about the
-state of the image: every outcome equally likely. A copier that maps
-"no information" to "some information" would be generating knowledge
-out of nothing, which is the opposite of what an erasure process
-ought to do. For a process whose job is to lose information, the
-uniform distribution is a natural fixed point to leave alone. (In
-the quantum upgrade later in the post, the analogous restriction is
-more than just natural, it is the standard convention. For now,
-take it as a sensible thing to ask for.)
+state of the image: every outcome equally likely. It is also the
+destination. The grey centre is exactly where an erasing copier is
+trying to send everything, so a process whose job is to forget should
+come to rest there once it arrives, not stir the grey back into a
+sharper image. A copier that instead turned "no information" into "some
+information" would be generating knowledge out of nothing, and leaving
+the grey centre fixed is the natural way to forbid that. (In the
+quantum upgrade later in the post, the analogous restriction is more
+than just natural, it is the standard convention. For now, take it as a
+sensible thing to ask for.)
 
 This small demand has a tidy consequence. We already know the columns
 of $S$ sum to one. Insisting that the uniform distribution survives
@@ -249,40 +279,109 @@ $$
 The second condition is just "the erasure really happens at step $k$,
 not earlier." How large can $k$ be?
 
-The answer is sharp: $k \leq d - 1$.
+The smallest case settles itself. A two-state bistochastic matrix has a
+single free number, $S = \begin{pmatrix} 1-a & a \\ a & 1-a \end{pmatrix}$,
+and $P$ is the case $a = \tfrac12$. Its one direction away from the grey
+centre, $v = (1,-1)$, is merely rescaled, $Sv = (1-2a)\,v$, so $S^k$
+scales it by $(1-2a)^k$. Asking $S^k = P$ forces $(1-2a)^k = 0$, and a
+number powers to zero only if it was already zero. So $a = \tfrac12$ and
+$S = P$ from the start: one classical bit has no genuine root, $k = 1$,
+erasure in a single shot.
 
-The reason is structural. The map $P$ has rank one: it crushes the
-entire $(d - 1)$-dimensional space of traceless deviations from the
-uniform distribution down to zero. For $S^k$ to do that, $S$ itself must
-carry a *nilpotent* part on that traceless space, and a nilpotent
-operator on a $(d - 1)$-dimensional space takes at most $d - 1$ steps to
-reach zero. That is the bound.
+Three states are the first with room to spare, and the clean way to find
+that room is to stop guessing whole matrices and split off the part that
+does the forgetting. Every copier in our class fixes the grey centre, so
+write
+$$
+S = P + N,
+$$
+with $P$ the completely depolarising channel and $N$ whatever is left
+over. Two facts about $P$ make this split pay off. It is idempotent,
+$P^2 = P$, and it absorbs $N$ from both sides, $PN = NP = 0$ (the columns
+of $N$ sum to zero because those of $S$ and $P$ both sum to one, and its
+rows sum to zero because $S$ fixes the uniform state). Square $S$ and the
+cross terms vanish:
+$$
+S^2 = (P + N)^2 = P^2 + PN + NP + N^2 = P + N^2.
+$$
+The question has collapsed. $S^2 = P$ holds exactly when $N^2 = 0$. We no
+longer need a square root of $P$; we need a single nonzero $N$ that
+squares to zero and keeps $P + N$ a legal copier.
+
+So solve $N^2 = 0$ directly. The condition is stricter than it looks. If
+$N$ squares to zero it can have rank at most one, which means it is a
+single outer product,
+$$
+N = u\,v^{\mathsf T},
+$$
+and then all three demands become conditions on the two vectors alone:
+$$
+N^2 = 0 \iff v^{\mathsf T} u = 0, \qquad
+\textstyle\sum_i u_i = 0, \qquad
+\textstyle\sum_j v_j = 0,
+$$
+the last two being the vanishing column and row sums. In words: take any
+two vectors that are orthogonal and that each sum to zero. That is the
+whole recipe.
 
 ```{=html}
 <details class="aside">
-<summary>The Jordan-block argument</summary>
+<summary>Why $N^2 = 0$ forces rank one</summary>
 ```
 
-Two facts make the powers of $S$ easy to control. First, $P$ is
-idempotent, $P^2 = P$. Second, $P$ absorbs $S$ from either side:
-$SP = P$ because $S$ fixes the uniform distribution, and $PS = P$
-because the columns of $S$ sum to one.
+If $N^2 = 0$ then $N$ sends everything into its own kernel: for any $x$,
+$N(Nx) = 0$, so $\operatorname{im} N \subseteq \ker N$. Their dimensions
+add to the full size, $\operatorname{rank} N + \dim \ker N = d$, so
+$\operatorname{rank} N \le \dim \ker N = d - \operatorname{rank} N$, which
+gives $2\operatorname{rank} N \le d$. For $d = 3$ that forces
+$\operatorname{rank} N \le 1$, a single outer product $u\,v^{\mathsf T}$.
 
-Now peel off the part of $S$ that is not already $P$. Set $N = S - P$.
-The two absorption facts give $PN = NP = 0$, so $P$ and $N$ never
-interfere, and the binomial expansion collapses to
-$$
-S^k = (P + N)^k = P + N^k.
-$$
-So $S^k = P$ exactly when $N^k = 0$. And $N$ is nilpotent on the right
-space: it kills the uniform direction ($Nu = Su - Pu = u - u = 0$) and
-sends everything else into the $(d-1)$-dimensional space of traceless
-vectors.
+```{=html}
+</details>
+```
 
-A nilpotent operator is governed by its Jordan form, a stack of blocks
-each of which powers to zero in exactly its own size. The largest one
-that fits in $d - 1$ dimensions is the single $(d-1) \times (d-1)$ block
-with ones on the superdiagonal,
+The simplest such pair is small and concrete:
+$$
+u = (1, -1, 0), \qquad v = (1, 1, -2),
+$$
+orthogonal, each summing to zero. Their outer product, scaled by
+$\tfrac16$ so that $P + N$ stays non-negative, is
+$$
+N = \frac{1}{6}\begin{pmatrix} 1 & 1 & -2 \\ -1 & -1 & 2 \\ 0 & 0 & 0 \end{pmatrix},
+$$
+and adding it to $P$ gives an honest copier,
+$$
+S = P + N = \begin{pmatrix} 1/2 & 1/2 & 0 \\ 1/6 & 1/6 & 2/3 \\ 1/3 & 1/3 & 1/3 \end{pmatrix},
+$$
+non-negative, with every row and column summing to one. By construction
+$S^2 = P + N^2 = P$ while $S \ne P$, so this $S$ is a genuine square root
+of total erasure: a copier that erases a three-state image in two equal
+steps rather than one, funnelling every point along a two-step path to
+the grey centre (@fig-root-d3). Up to relabelling the three states it is
+the only such root, which is why the same matrix appears in the figure.
+
+That same split hands us the general bound for free. For any $S = P + N$
+in our class the cross terms always die, so $S^k = P + N^k$, and
+$S^k = P$ exactly when $N^k = 0$. Erasing in exactly $k$ steps is nothing
+more than $N$ being nilpotent of order $k$, and a nilpotent map on the
+$(d-1)$-dimensional space of deviations from the grey centre runs out of
+room after at most $d - 1$ steps. So the bound is
+$$
+k \le d - 1,
+$$
+already reached at $d = 3$ by the matrix above. (In the quantum upgrade
+these deviations become the *traceless* operators, the same idea in
+matrix language.)
+
+```{=html}
+<details class="aside">
+<summary>Why the bound is reached in every dimension</summary>
+```
+
+A nilpotent $N$ is governed by its Jordan form, a stack of blocks each of
+which powers to zero in exactly its own size. The largest block that fits
+on the $(d-1)$-dimensional space of deviations is a single
+$(d-1) \times (d-1)$ block with ones on the superdiagonal,
 $$
 N \;\cong\;
 \begin{pmatrix}
@@ -294,37 +393,28 @@ N \;\cong\;
 \end{pmatrix}.
 $$
 Each power pushes that diagonal of ones one step toward the corner, so
-$N^{d-1} = 0$ while $N^{d-2} \neq 0$. The smallest $k$ with $N^k = 0$ is
-therefore at most $d - 1$, which is the bound. It is tight: this very
-block, as long as $P + N$ stays bistochastic, gives a root of order
-exactly $d - 1$.
+$N^{d-1} = 0$ while $N^{d-2} \neq 0$. As long as $P + N$ can be kept
+bistochastic, this very block gives a root of order exactly $d - 1$.
 
 ```{=html}
 </details>
 ```
-
-For $d = 2$ the bound says $k = 1$, which is to say there are no
-non-trivial roots. The two-state CDC can only be split into one step,
-itself. Total erasure of one classical bit is a one-shot affair.
-
-For $d = 3$ the bound is $k = 2$. A square root of the bistochastic
-$3 \times 3$ CDC exists, and it acts on the simplex by funnelling
-every point along a two-step trajectory to the centre (@fig-root-d3).
 
 ::: {#fig-root-d3}
 
 {{< include figures/fig2-simplex-root/interactive.qmd >}}
 
 One square root $S$ of the $d = 3$ bistochastic CDC (others exist),
-visualised on the simplex. Colour tracks purity: green at the pure
-corners, fading to the pale maximally mixed centre. Each pure state
-reaches the uniform distribution $p_0$ in two steps, one application of
-$S$ to an intermediate point, a second to the centre, since $S^2 = P$,
-and you can watch the colour drain from green toward pale as it goes. The
-merge is the point. Both $e_1$ and $e_2$ land on the same intermediate
-point $Se_1 = Se_2$, so three arrows arrive at step one but only two
-leave at step two. Information is erased in a stage. Click anywhere
-inside the triangle to trace your own starting distribution.
+visualised on the simplex. The three pure corners carry their identity
+colours, red, green, and blue; the fill tracks purity, fading to the
+pale, grey maximally mixed centre. Each pure state reaches the uniform
+distribution $p_0$ in two steps, one application of $S$ to an
+intermediate point, a second to the centre, since $S^2 = P$, and you can
+watch each colour drain toward the grey centre as it goes. The merge is
+the point. Both $e_1$ and $e_2$ land on the same intermediate point
+$Se_1 = Se_2$, so three arrows arrive at step one but only two leave at
+step two. Information is erased in a stage. Click anywhere inside the
+triangle to trace your own starting distribution.
 
 :::
 

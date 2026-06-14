@@ -17,12 +17,15 @@ so the picture is mathematically transparent.
     e2 -> q_a -> p0        (e1 and e2 MERGE at q_a)
     e3 -> q_b -> p0
 
-Colour encodes PURITY, the same language as Figure 1: green and
-saturated at the pure corners, fading to a pale glow at the maximally
-mixed centre p0. So the state dots literally drain from green toward
-faded as the channel erases information. The arrows are neutral grey
-(they carry the dynamics; colour is reserved for purity). q_a, the
-merge, is the most mixed of the intermediate points and reads pale.
+Colour does two jobs, the same scheme as Figure 1. The simplex fill
+encodes PURITY (blue-teal and saturated at the pure corners, fading to a
+pale glow at the maximally mixed centre p0). The three starting corners
+e1, e2, e3 carry their own identity colours, red, green, and blue, and
+the intermediate points q_a, q_b are coloured by their purity, so they
+read pale as the channel mixes them toward the grey centre. The arrows
+are neutral grey (they carry the dynamics; colour carries identity and
+purity). q_a, the merge, is the most mixed intermediate point and reads
+palest.
 
 Usage:
     python trajectories_figure.py [output.svg]
@@ -69,8 +72,14 @@ PURE_RGB = (45, 111, 143)  # field high end (pure)
 MIXED_RGB = (214, 229, 234)  # field low end (maximally mixed, soft blue-grey)
 DARK_DOT = "#1c4a60"       # dot outlines, so pale (mixed) dots stay visible
 MIXED_RING = "#5e7886"     # the faint ring at p0
-CENTER = "#f5f7f8"         # centre marker fill
+CENTER = "#f5f7f8"         # centre marker halo
+GREY_CENTER = "#8a8f94"    # centre marker dot (neutral grey, the "grey noise")
 ARROW_GREY = "#829aa6"
+
+# Identity colours for the three pure-state corners (e1, e2, e3),
+# shared with Figure 1. These say *which* pure state, not how pure;
+# the q_a/q_b intermediate dots stay purity-coloured.
+CORNER_COLOURS = ("#cc3b3b", "#2e9e5b", "#3b6fb0")  # e1 red, e2 green, e3 blue
 
 FONT_FAMILY = "Georgia, 'Times New Roman', serif"
 
@@ -247,28 +256,26 @@ def build_svg():
     parts.append(dot(cQA, DOT_QA, qa))   # q_a: most mixed, reads pale
     parts.append(dot(cQB, DOT_QB, qb))
     parts.append('\n  </g>')
-    parts.append('\n\n  <!-- Starting points e1, e2, e3 (pure, green) -->')
-    for c, e in ((cV1, e1), (cV2, e2), (cV3, e3)):
-        parts.append(dot(c, DOT_START, e, stroke=False))
+    parts.append('\n\n  <!-- Starting points e1, e2, e3 (identity colours: red, green, blue) -->')
+    for c, colour in ((cV1, CORNER_COLOURS[0]), (cV2, CORNER_COLOURS[1]), (cV3, CORNER_COLOURS[2])):
+        parts.append(f'\n  <circle cx="{c[0]:.1f}" cy="{c[1]:.1f}" r="{DOT_START}" fill="{colour}"/>')
 
-    parts.append('\n\n  <!-- Maximally mixed state p0 (solid marker, fully visible) -->')
+    parts.append('\n\n  <!-- Maximally mixed state p0 (solid grey marker, fully visible) -->')
     parts.append(f'\n  <circle cx="{cP0[0]:.1f}" cy="{cP0[1]:.1f}" r="9" fill="{CENTER}"/>')
-    parts.append(f'\n  <circle cx="{cP0[0]:.1f}" cy="{cP0[1]:.1f}" r="6" fill="{OUTLINE}"/>')
+    parts.append(f'\n  <circle cx="{cP0[0]:.1f}" cy="{cP0[1]:.1f}" r="6" fill="{GREY_CENTER}"/>')
 
     # --- Labels ---
-    green = purity_colour(1.0)
-
     def text(x, y, s, size, fill, anchor="start", italic=False):
         st = ' font-style="italic"' if italic else ''
         return (f'\n  <text x="{x:.1f}" y="{y:.1f}" text-anchor="{anchor}" '
                 f'font-size="{size}"{st} fill="{fill}">{s}</text>')
 
-    parts.append('\n\n  <!-- Vertex labels (green) + vectors (muted) -->')
-    parts.append(text(cV1[0] - 8, cV1[1] + 26, "e₁", LABEL_SIZE, OUTLINE,"end", True))
+    parts.append('\n\n  <!-- Vertex labels (identity colours) + vectors (muted) -->')
+    parts.append(text(cV1[0] - 8, cV1[1] + 26, "e₁", LABEL_SIZE, CORNER_COLOURS[0],"end", True))
     parts.append(text(cV1[0] - 8, cV1[1] + 44, "(1, 0, 0)", VECTOR_LABEL_SIZE, MUTED, "end"))
-    parts.append(text(cV2[0] + 16, cV2[1] + 8, "e₂", LABEL_SIZE, OUTLINE,"start", True))
+    parts.append(text(cV2[0] + 16, cV2[1] + 8, "e₂", LABEL_SIZE, CORNER_COLOURS[1],"start", True))
     parts.append(text(cV2[0] + 16, cV2[1] + 26, "(0, 1, 0)", VECTOR_LABEL_SIZE, MUTED, "start"))
-    parts.append(text(cV3[0], cV3[1] - 28, "e₃", LABEL_SIZE, OUTLINE,"middle", True))
+    parts.append(text(cV3[0], cV3[1] - 28, "e₃", LABEL_SIZE, CORNER_COLOURS[2],"middle", True))
     parts.append(text(cV3[0], cV3[1] - 10, "(0, 0, 1)", VECTOR_LABEL_SIZE, MUTED, "middle"))
 
     # The intermediate points ARE the images of the pure states under the
