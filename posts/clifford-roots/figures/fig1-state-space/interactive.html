@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-bdcf9f228812a391150f682473b0a4b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-18ab93377f3033567ca77937b5de9070.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -142,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="simplex-static">
   <p class="si-vh">Probability simplex over three outcomes, coloured by purity (blue-teal at the pure corners, fading to a soft blue-grey centre at the maximally mixed distribution p0, which is marked and labelled at the centroid).</p>
 
-  <svg role="img" aria-label="Probability simplex over three outcomes, coloured by purity, with the maximally mixed state p0 marked at the centre" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 640 620" font-family="Georgia, 'Times New Roman', serif">
+  <svg role="img" aria-label="Probability simplex over three outcomes; the three pure-state corners are coloured red, green, and blue, the fill encodes purity, and the grey maximally mixed state p0 is marked at the centre" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 640 620" font-family="Georgia, 'Times New Roman', serif">
     <defs>
       <marker id="arrow" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="8" markerheight="8" orient="auto-start-reverse">
         <path d="M 0 0 L 10 5 L 0 10 z" fill="#233746"></path>
@@ -152,8 +152,8 @@ ul.task-list li input[type="checkbox"] {
     <line x1="310" y1="430" x2="95" y2="530" stroke="#233746" stroke-width="1.8" marker-end="url(#arrow)"></line>
     <line x1="310" y1="430" x2="590" y2="430" stroke="#233746" stroke-width="1.8" marker-end="url(#arrow)"></line>
     <line x1="310" y1="430" x2="310" y2="75" stroke="#233746" stroke-width="1.8" marker-end="url(#arrow)"></line>
-
-    <!-- Purity field: green at the pure corners, pale at the maximally mixed centre -->
+  
+    <!-- Purity field: blue-teal at the pure corners, pale at the maximally mixed centre -->
     <g stroke-linejoin="round">
       <polygon points="310.00,130.00 303.46,144.62 318.85,141.54" fill="#3a7896" fill-opacity="0.9" stroke="#3a7896" stroke-width="0.6" stroke-opacity="0.9"></polygon>
       <polygon points="303.46,144.62 318.85,141.54 312.31,156.15" fill="#46809c" fill-opacity="0.9" stroke="#46809c" stroke-width="0.6" stroke-opacity="0.9"></polygon>
@@ -832,39 +832,39 @@ ul.task-list li input[type="checkbox"] {
       <polygon points="161.92,492.31 155.38,506.92 170.77,503.85" fill="#4c84a0" fill-opacity="0.9" stroke="#4c84a0" stroke-width="0.6" stroke-opacity="0.9"></polygon>
       <polygon points="146.54,495.38 140.00,510.00 155.38,506.92" fill="#3a7896" fill-opacity="0.9" stroke="#3a7896" stroke-width="0.6" stroke-opacity="0.9"></polygon>
     </g>
-
+  
     <!-- Simplex outline -->
     <polygon points="140,510 540,430 310,130" fill="none" stroke="#2d6f8f" stroke-width="2.2" stroke-linejoin="round"></polygon>
-
+  
     <!-- Medians -->
     <g stroke="#829aa6" stroke-width="0.9" stroke-opacity="0.22" stroke-dasharray="4,5">
       <line x1="140" y1="510" x2="425.0" y2="280.0"></line>
       <line x1="540" y1="430" x2="225.0" y2="320.0"></line>
       <line x1="310" y1="130" x2="340.0" y2="470.0"></line>
     </g>
-
+  
     <!-- Unit tick marks -->
     <line x1="143.0" y1="516.3" x2="137.0" y2="503.7" stroke="#233746" stroke-width="1.6"></line>
     <line x1="540.0" y1="423.0" x2="540.0" y2="437.0" stroke="#233746" stroke-width="1.6"></line>
     <line x1="303.0" y1="130.0" x2="317.0" y2="130.0" stroke="#233746" stroke-width="1.6"></line>
-
-    <!-- Pure states (green) -->
-    <circle cx="140" cy="510" r="6" fill="#2d6f8f"></circle>
-    <circle cx="540" cy="430" r="6" fill="#2d6f8f"></circle>
-    <circle cx="310" cy="130" r="6" fill="#2d6f8f"></circle>
-
-    <!-- Maximally mixed state p0 (solid marker) -->
+  
+    <!-- Pure states (identity colours: e1 red, e2 green, e3 blue) -->
+    <circle cx="140" cy="510" r="6" fill="#cc3b3b"></circle>
+    <circle cx="540" cy="430" r="6" fill="#2e9e5b"></circle>
+    <circle cx="310" cy="130" r="6" fill="#3b6fb0"></circle>
+  
+    <!-- Maximally mixed state p0 (solid grey marker) -->
     <circle cx="330.0" cy="356.6666666666667" r="9" fill="#f5f7f8"></circle>
-    <circle cx="330.0" cy="356.6666666666667" r="6" fill="#233746"></circle>
-
-    <!-- Vertex labels (green) + probability vectors (muted) -->
-    <text x="124" y="538" text-anchor="end" font-size="22" font-style="italic" fill="#233746">e₁</text>
+    <circle cx="330.0" cy="356.6666666666667" r="6" fill="#8a8f94"></circle>
+  
+    <!-- Vertex labels (identity colours) + probability vectors (muted) -->
+    <text x="124" y="538" text-anchor="end" font-size="22" font-style="italic" fill="#cc3b3b">e₁</text>
     <text x="124" y="558" text-anchor="end" font-size="14" fill="#829aa6">(1, 0, 0)</text>
-    <text x="562" y="438" text-anchor="start" font-size="22" font-style="italic" fill="#233746">e₂</text>
+    <text x="562" y="438" text-anchor="start" font-size="22" font-style="italic" fill="#2e9e5b">e₂</text>
     <text x="562" y="458" text-anchor="start" font-size="14" fill="#829aa6">(0, 1, 0)</text>
-    <text x="288" y="122" text-anchor="end" font-size="22" font-style="italic" fill="#233746">e₃</text>
+    <text x="288" y="122" text-anchor="end" font-size="22" font-style="italic" fill="#3b6fb0">e₃</text>
     <text x="288" y="142" text-anchor="end" font-size="14" fill="#829aa6">(0, 0, 1)</text>
-
+  
     <!-- p0 label (full strength) -->
     <text x="346.0" y="354.6666666666667" font-size="21" font-style="italic" fill="#233746">p₀</text>
     <text x="346.0" y="374.6666666666667" font-size="13" fill="#233746">(⅓, ⅓, ⅓)</text>

@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-bdcf9f228812a391150f682473b0a4b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-18ab93377f3033567ca77937b5de9070.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -246,8 +246,9 @@ window.Quarto = {
 <section id="sec-classical" class="level2">
 <h2 class="anchored" data-anchor-id="sec-classical">The classical setup</h2>
 <p>Let’s make the photocopier mathematically precise. We start with the classical case, where everything is ordinary probability theory.</p>
-<p>Pick a small number of distinct states that your image can be in. Say there are three: black, grey, and white. Then “the image” at any moment is described by a probability distribution over these three states. Maybe right now the image is definitely white, which we write as <span class="math inline">(0, 0, 1)</span>. Maybe after some processing it has drifted to <span class="math inline">(0.4, 0.5, 0.1)</span>: 40% likely black, 50% grey, 10% white, the uncertainty standing in for whatever noise has crept in.</p>
-<p>The set of all such probability distributions over <span class="math inline">d</span> states is a familiar geometric object: a <span class="math inline">(d - 1)</span>-dimensional simplex (<a href="#fig-simplex-d3" class="quarto-xref">Figure&nbsp;1</a>). For <span class="math inline">d = 3</span> it is a triangle. The corners are the pure states (definitely this colour, no uncertainty), and the centre is the uniform distribution (totally unsure, every colour equally likely).</p>
+<p>Pick a small number of distinct states your image can be in. Say three, and to keep them vivid, call them red, green, and blue. At any moment a pixel of the image need not be one definite colour. Noise has crept in, and the honest description is a list of how likely each colour is. Right now it might be definitely red. After a few passes through the copier, it might be 40% red, 50% green, 10% blue.</p>
+<p>We write that list as a vector. Definitely red is <span class="math inline">(1, 0, 0)</span>; the blurred state is <span class="math inline">(0.4, 0.5, 0.1)</span>, read in the order red, green, blue. Two rules turn a list of numbers into a probability distribution, and we lean on both later. The entries cannot be negative, since a probability below zero is meaningless. And they must sum to one, since the pixel is certainly <em>some</em> colour. Every classical state we write obeys these two rules, and nothing else counts.</p>
+<p>Now picture all the lawful states at once. With three colours a state is three numbers summing to one, so fixing any two pins the third: only two are free. Two free numbers trace out a flat, two-dimensional shape, and that shape is a triangle. Its three corners are the sure things, one per colour: <span class="math inline">(1,0,0)</span> is definitely red, <span class="math inline">(0,1,0)</span> definitely green, <span class="math inline">(0,0,1)</span> definitely blue. Walk along an edge joining two corners and the third colour stays impossible while the other two trade off. Drift inward and all three grow likelier together, until at the dead centre you reach <span class="math inline">(\tfrac13, \tfrac13, \tfrac13)</span>: an even wash of red, green, and blue with no colour favoured, the state that could have come from anything. That even wash is exactly the grey noise from the start of this post, the worn-out photocopy written as a vector, and pushing every corner toward it is the whole job of an erasing copier. The triangle has a name, the <em>simplex</em>, and for <span class="math inline">d</span> states it becomes the <span class="math inline">(d-1)</span>-dimensional version of the same idea (<a href="#fig-simplex-d3" class="quarto-xref">Figure&nbsp;1</a>).</p>
 <div id="fig-simplex-d3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-simplex-d3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -261,7 +262,7 @@ window.Quarto = {
 <div class="simplex-static">
   <p class="si-vh">Probability simplex over three outcomes, coloured by purity (blue-teal at the pure corners, fading to a soft blue-grey centre at the maximally mixed distribution p0, which is marked and labelled at the centroid).</p>
 
-  <svg role="img" aria-label="Probability simplex over three outcomes, coloured by purity, with the maximally mixed state p0 marked at the centre" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 640 620" font-family="Georgia, 'Times New Roman', serif">
+  <svg role="img" aria-label="Probability simplex over three outcomes; the three pure-state corners are coloured red, green, and blue, the fill encodes purity, and the grey maximally mixed state p0 is marked at the centre" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 640 620" font-family="Georgia, 'Times New Roman', serif">
     <defs>
       <marker id="arrow" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="8" markerheight="8" orient="auto-start-reverse">
         <path d="M 0 0 L 10 5 L 0 10 z" fill="#233746"></path>
@@ -271,8 +272,8 @@ window.Quarto = {
     <line x1="310" y1="430" x2="95" y2="530" stroke="#233746" stroke-width="1.8" marker-end="url(#arrow)"></line>
     <line x1="310" y1="430" x2="590" y2="430" stroke="#233746" stroke-width="1.8" marker-end="url(#arrow)"></line>
     <line x1="310" y1="430" x2="310" y2="75" stroke="#233746" stroke-width="1.8" marker-end="url(#arrow)"></line>
-
-    <!-- Purity field: green at the pure corners, pale at the maximally mixed centre -->
+  
+    <!-- Purity field: blue-teal at the pure corners, pale at the maximally mixed centre -->
     <g stroke-linejoin="round">
       <polygon points="310.00,130.00 303.46,144.62 318.85,141.54" fill="#3a7896" fill-opacity="0.9" stroke="#3a7896" stroke-width="0.6" stroke-opacity="0.9"></polygon>
       <polygon points="303.46,144.62 318.85,141.54 312.31,156.15" fill="#46809c" fill-opacity="0.9" stroke="#46809c" stroke-width="0.6" stroke-opacity="0.9"></polygon>
@@ -951,39 +952,39 @@ window.Quarto = {
       <polygon points="161.92,492.31 155.38,506.92 170.77,503.85" fill="#4c84a0" fill-opacity="0.9" stroke="#4c84a0" stroke-width="0.6" stroke-opacity="0.9"></polygon>
       <polygon points="146.54,495.38 140.00,510.00 155.38,506.92" fill="#3a7896" fill-opacity="0.9" stroke="#3a7896" stroke-width="0.6" stroke-opacity="0.9"></polygon>
     </g>
-
+  
     <!-- Simplex outline -->
     <polygon points="140,510 540,430 310,130" fill="none" stroke="#2d6f8f" stroke-width="2.2" stroke-linejoin="round"></polygon>
-
+  
     <!-- Medians -->
     <g stroke="#829aa6" stroke-width="0.9" stroke-opacity="0.22" stroke-dasharray="4,5">
       <line x1="140" y1="510" x2="425.0" y2="280.0"></line>
       <line x1="540" y1="430" x2="225.0" y2="320.0"></line>
       <line x1="310" y1="130" x2="340.0" y2="470.0"></line>
     </g>
-
+  
     <!-- Unit tick marks -->
     <line x1="143.0" y1="516.3" x2="137.0" y2="503.7" stroke="#233746" stroke-width="1.6"></line>
     <line x1="540.0" y1="423.0" x2="540.0" y2="437.0" stroke="#233746" stroke-width="1.6"></line>
     <line x1="303.0" y1="130.0" x2="317.0" y2="130.0" stroke="#233746" stroke-width="1.6"></line>
-
-    <!-- Pure states (green) -->
-    <circle cx="140" cy="510" r="6" fill="#2d6f8f"></circle>
-    <circle cx="540" cy="430" r="6" fill="#2d6f8f"></circle>
-    <circle cx="310" cy="130" r="6" fill="#2d6f8f"></circle>
-
-    <!-- Maximally mixed state p0 (solid marker) -->
+  
+    <!-- Pure states (identity colours: e1 red, e2 green, e3 blue) -->
+    <circle cx="140" cy="510" r="6" fill="#cc3b3b"></circle>
+    <circle cx="540" cy="430" r="6" fill="#2e9e5b"></circle>
+    <circle cx="310" cy="130" r="6" fill="#3b6fb0"></circle>
+  
+    <!-- Maximally mixed state p0 (solid grey marker) -->
     <circle cx="330.0" cy="356.6666666666667" r="9" fill="#f5f7f8"></circle>
-    <circle cx="330.0" cy="356.6666666666667" r="6" fill="#233746"></circle>
-
-    <!-- Vertex labels (green) + probability vectors (muted) -->
-    <text x="124" y="538" text-anchor="end" font-size="22" font-style="italic" fill="#233746">e₁</text>
+    <circle cx="330.0" cy="356.6666666666667" r="6" fill="#8a8f94"></circle>
+  
+    <!-- Vertex labels (identity colours) + probability vectors (muted) -->
+    <text x="124" y="538" text-anchor="end" font-size="22" font-style="italic" fill="#cc3b3b">e₁</text>
     <text x="124" y="558" text-anchor="end" font-size="14" fill="#829aa6">(1, 0, 0)</text>
-    <text x="562" y="438" text-anchor="start" font-size="22" font-style="italic" fill="#233746">e₂</text>
+    <text x="562" y="438" text-anchor="start" font-size="22" font-style="italic" fill="#2e9e5b">e₂</text>
     <text x="562" y="458" text-anchor="start" font-size="14" fill="#829aa6">(0, 1, 0)</text>
-    <text x="288" y="122" text-anchor="end" font-size="22" font-style="italic" fill="#233746">e₃</text>
+    <text x="288" y="122" text-anchor="end" font-size="22" font-style="italic" fill="#3b6fb0">e₃</text>
     <text x="288" y="142" text-anchor="end" font-size="14" fill="#829aa6">(0, 0, 1)</text>
-
+  
     <!-- p0 label (full strength) -->
     <text x="346.0" y="354.6666666666667" font-size="21" font-style="italic" fill="#233746">p₀</text>
     <text x="346.0" y="374.6666666666667" font-size="13" fill="#233746">(⅓, ⅓, ⅓)</text>
@@ -991,7 +992,7 @@ window.Quarto = {
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-simplex-d3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: The classical state space for three outcomes: the probability simplex sitting inside the positive octant, with the pure states at the vertices and the uniform distribution <span class="math inline">p_0 = (\tfrac13, \tfrac13, \tfrac13)</span> marked at the centre. The fill encodes purity, saturated at the pure corners and fading toward the maximally mixed centre.
+Figure&nbsp;1: The classical state space for three outcomes: the probability simplex sitting inside the positive octant. Its three pure states sit at the vertices, marked in red, green, and blue, and the uniform distribution <span class="math inline">p_0 = (\tfrac13, \tfrac13, \tfrac13)</span> is the grey point at the centre, an even wash of all three. The fill separately encodes purity, saturated at the pure corners and fading toward the maximally mixed centre.
 </figcaption>
 </figure>
 </div>
@@ -1005,12 +1006,13 @@ Figure&nbsp;1: The classical state space for three outcomes: the probability sim
 S\bigl(\alpha p + (1 - \alpha) q\bigr) \;=\; \alpha S(p) + (1 - \alpha) S(q).
 </span> If they disagreed, “the input is a probability distribution” would stop meaning what we want it to mean. So <span class="math inline">S</span> is linear.</p>
 </details>
-<p>And a linear map is just a matrix. So from here on our copier is a matrix, which we will call <span class="math inline">S</span>, and applying it to a distribution is ordinary matrix multiplication.</p>
-<p>That already pins down what the entries of <span class="math inline">S</span> can look like. Feed in a pure state, all the probability on one entry, and the output is just one column of <span class="math inline">S</span>. For that column to be a probability distribution in its own right, its entries must be non-negative and sum to one: <span class="math display">
+<p>A linear map of vectors is exactly a matrix, so from here on our copier is a matrix, which we will call <span class="math inline">S</span>, and applying it to a distribution is ordinary matrix-times-vector multiplication.</p>
+<p>It is worth seeing what that does to our three corners, because it pins down the whole matrix. Feed in pure red, the vector <span class="math inline">(1, 0, 0)</span>. Multiplying <span class="math inline">S</span> by a vector that is all zeros except for a single one just reads off the matching column, so the output is the first column of <span class="math inline">S</span>: whatever <span class="math inline">S</span> does to red lives there. Pure green <span class="math inline">(0, 1, 0)</span> picks out the second column, pure blue <span class="math inline">(0, 0, 1)</span> the third. The three columns of <span class="math inline">S</span> are therefore nothing but the images of the three pure states, the three places the corners are sent, and once those are fixed linearity supplies every blend in between.</p>
+<p>That already constrains the entries. Each column is the image of a pure state, and that image has to be a legal state in its own right: its entries non-negative and summing to one, <span class="math display">
 S_{ij} \geq 0, \qquad \sum_i S_{ij} = 1.
 </span> The same holds for every column, and linearity then takes care of every mixture in between. A matrix of this kind, non-negative entries with every column summing to one, is called a <em>stochastic matrix</em>: exactly the linear maps that send probability distributions to probability distributions.</p>
-<p>There is one more restriction we will impose, and it turns out to be the most interesting one in retrospect. We will only consider copiers that leave the <em>uniform distribution</em> untouched: the flat distribution that puts equal weight on every state has to come back out exactly as it went in.</p>
-<p>Why? The uniform distribution represents <em>no information</em> about the state of the image: every outcome equally likely. A copier that maps “no information” to “some information” would be generating knowledge out of nothing, which is the opposite of what an erasure process ought to do. For a process whose job is to lose information, the uniform distribution is a natural fixed point to leave alone. (In the quantum upgrade later in the post, the analogous restriction is more than just natural, it is the standard convention. For now, take it as a sensible thing to ask for.)</p>
+<p>There is one more restriction we will impose, and it turns out to be the most interesting one in retrospect. We will only consider copiers that leave the <em>uniform distribution</em> untouched, the grey centre of the triangle from a moment ago: the flat distribution that puts equal weight on every state has to come back out exactly as it went in.</p>
+<p>Why? The uniform distribution represents <em>no information</em> about the state of the image: every outcome equally likely. It is also the destination. The grey centre is exactly where an erasing copier is trying to send everything, so a process whose job is to forget should come to rest there once it arrives, not stir the grey back into a sharper image. A copier that instead turned “no information” into “some information” would be generating knowledge out of nothing, and leaving the grey centre fixed is the natural way to forbid that. (In the quantum upgrade later in the post, the analogous restriction is more than just natural, it is the standard convention. For now, take it as a sensible thing to ask for.)</p>
 <p>This small demand has a tidy consequence. We already know the columns of <span class="math inline">S</span> sum to one. Insisting that the uniform distribution survives forces the <em>rows</em> to sum to one as well. A stochastic matrix with that extra symmetry is called <em>bistochastic</em>, and from here on “copier” will mean “bistochastic matrix.”</p>
 <details class="aside">
 <summary>The one-line computation</summary>
@@ -1033,15 +1035,36 @@ P = \frac{1}{d}\begin{pmatrix}
 <p>With <span class="math inline">P</span> pinned down we can ask the post’s question, precisely. A <em><span class="math inline">k</span>-th root</em> of <span class="math inline">P</span> is a bistochastic matrix <span class="math inline">S</span> such that <span class="math display">
 S^k = P \quad \text{and} \quad S^r \ne P \text{ for any } r &lt; k.
 </span> The second condition is just “the erasure really happens at step <span class="math inline">k</span>, not earlier.” How large can <span class="math inline">k</span> be?</p>
-<p>The answer is sharp: <span class="math inline">k \leq d - 1</span>.</p>
-<p>The reason is structural. The map <span class="math inline">P</span> has rank one: it crushes the entire <span class="math inline">(d - 1)</span>-dimensional space of traceless deviations from the uniform distribution down to zero. For <span class="math inline">S^k</span> to do that, <span class="math inline">S</span> itself must carry a <em>nilpotent</em> part on that traceless space, and a nilpotent operator on a <span class="math inline">(d - 1)</span>-dimensional space takes at most <span class="math inline">d - 1</span> steps to reach zero. That is the bound.</p>
+<p>The smallest case settles itself. A two-state bistochastic matrix has a single free number, <span class="math inline">S = \begin{pmatrix} 1-a &amp; a \\ a &amp; 1-a \end{pmatrix}</span>, and <span class="math inline">P</span> is the case <span class="math inline">a = \tfrac12</span>. Its one direction away from the grey centre, <span class="math inline">v = (1,-1)</span>, is merely rescaled, <span class="math inline">Sv = (1-2a)\,v</span>, so <span class="math inline">S^k</span> scales it by <span class="math inline">(1-2a)^k</span>. Asking <span class="math inline">S^k = P</span> forces <span class="math inline">(1-2a)^k = 0</span>, and a number powers to zero only if it was already zero. So <span class="math inline">a = \tfrac12</span> and <span class="math inline">S = P</span> from the start: one classical bit has no genuine root, <span class="math inline">k = 1</span>, erasure in a single shot.</p>
+<p>Three states are the first with room to spare, and the clean way to find that room is to stop guessing whole matrices and split off the part that does the forgetting. Every copier in our class fixes the grey centre, so write <span class="math display">
+S = P + N,
+</span> with <span class="math inline">P</span> the completely depolarising channel and <span class="math inline">N</span> whatever is left over. Two facts about <span class="math inline">P</span> make this split pay off. It is idempotent, <span class="math inline">P^2 = P</span>, and it absorbs <span class="math inline">N</span> from both sides, <span class="math inline">PN = NP = 0</span> (the columns of <span class="math inline">N</span> sum to zero because those of <span class="math inline">S</span> and <span class="math inline">P</span> both sum to one, and its rows sum to zero because <span class="math inline">S</span> fixes the uniform state). Square <span class="math inline">S</span> and the cross terms vanish: <span class="math display">
+S^2 = (P + N)^2 = P^2 + PN + NP + N^2 = P + N^2.
+</span> The question has collapsed. <span class="math inline">S^2 = P</span> holds exactly when <span class="math inline">N^2 = 0</span>. We no longer need a square root of <span class="math inline">P</span>; we need a single nonzero <span class="math inline">N</span> that squares to zero and keeps <span class="math inline">P + N</span> a legal copier.</p>
+<p>So solve <span class="math inline">N^2 = 0</span> directly. The condition is stricter than it looks. If <span class="math inline">N</span> squares to zero it can have rank at most one, which means it is a single outer product, <span class="math display">
+N = u\,v^{\mathsf T},
+</span> and then all three demands become conditions on the two vectors alone: <span class="math display">
+N^2 = 0 \iff v^{\mathsf T} u = 0, \qquad
+\textstyle\sum_i u_i = 0, \qquad
+\textstyle\sum_j v_j = 0,
+</span> the last two being the vanishing column and row sums. In words: take any two vectors that are orthogonal and that each sum to zero. That is the whole recipe.</p>
 <details class="aside">
-<summary>The Jordan-block argument</summary>
-<p>Two facts make the powers of <span class="math inline">S</span> easy to control. First, <span class="math inline">P</span> is idempotent, <span class="math inline">P^2 = P</span>. Second, <span class="math inline">P</span> absorbs <span class="math inline">S</span> from either side: <span class="math inline">SP = P</span> because <span class="math inline">S</span> fixes the uniform distribution, and <span class="math inline">PS = P</span> because the columns of <span class="math inline">S</span> sum to one.</p>
-<p>Now peel off the part of <span class="math inline">S</span> that is not already <span class="math inline">P</span>. Set <span class="math inline">N = S - P</span>. The two absorption facts give <span class="math inline">PN = NP = 0</span>, so <span class="math inline">P</span> and <span class="math inline">N</span> never interfere, and the binomial expansion collapses to <span class="math display">
-S^k = (P + N)^k = P + N^k.
-</span> So <span class="math inline">S^k = P</span> exactly when <span class="math inline">N^k = 0</span>. And <span class="math inline">N</span> is nilpotent on the right space: it kills the uniform direction (<span class="math inline">Nu = Su - Pu = u - u = 0</span>) and sends everything else into the <span class="math inline">(d-1)</span>-dimensional space of traceless vectors.</p>
-<p>A nilpotent operator is governed by its Jordan form, a stack of blocks each of which powers to zero in exactly its own size. The largest one that fits in <span class="math inline">d - 1</span> dimensions is the single <span class="math inline">(d-1) \times (d-1)</span> block with ones on the superdiagonal, <span class="math display">
+<summary>Why $N^2 = 0$ forces rank one</summary>
+<p>If <span class="math inline">N^2 = 0</span> then <span class="math inline">N</span> sends everything into its own kernel: for any <span class="math inline">x</span>, <span class="math inline">N(Nx) = 0</span>, so <span class="math inline">\operatorname{im} N \subseteq \ker N</span>. Their dimensions add to the full size, <span class="math inline">\operatorname{rank} N + \dim \ker N = d</span>, so <span class="math inline">\operatorname{rank} N \le \dim \ker N = d - \operatorname{rank} N</span>, which gives <span class="math inline">2\operatorname{rank} N \le d</span>. For <span class="math inline">d = 3</span> that forces <span class="math inline">\operatorname{rank} N \le 1</span>, a single outer product <span class="math inline">u\,v^{\mathsf T}</span>.</p>
+</details>
+<p>The simplest such pair is small and concrete: <span class="math display">
+u = (1, -1, 0), \qquad v = (1, 1, -2),
+</span> orthogonal, each summing to zero. Their outer product, scaled by <span class="math inline">\tfrac16</span> so that <span class="math inline">P + N</span> stays non-negative, is <span class="math display">
+N = \frac{1}{6}\begin{pmatrix} 1 &amp; 1 &amp; -2 \\ -1 &amp; -1 &amp; 2 \\ 0 &amp; 0 &amp; 0 \end{pmatrix},
+</span> and adding it to <span class="math inline">P</span> gives an honest copier, <span class="math display">
+S = P + N = \begin{pmatrix} 1/2 &amp; 1/2 &amp; 0 \\ 1/6 &amp; 1/6 &amp; 2/3 \\ 1/3 &amp; 1/3 &amp; 1/3 \end{pmatrix},
+</span> non-negative, with every row and column summing to one. By construction <span class="math inline">S^2 = P + N^2 = P</span> while <span class="math inline">S \ne P</span>, so this <span class="math inline">S</span> is a genuine square root of total erasure: a copier that erases a three-state image in two equal steps rather than one, funnelling every point along a two-step path to the grey centre (<a href="#fig-root-d3" class="quarto-xref">Figure&nbsp;2</a>). Up to relabelling the three states it is the only such root, which is why the same matrix appears in the figure.</p>
+<p>That same split hands us the general bound for free. For any <span class="math inline">S = P + N</span> in our class the cross terms always die, so <span class="math inline">S^k = P + N^k</span>, and <span class="math inline">S^k = P</span> exactly when <span class="math inline">N^k = 0</span>. Erasing in exactly <span class="math inline">k</span> steps is nothing more than <span class="math inline">N</span> being nilpotent of order <span class="math inline">k</span>, and a nilpotent map on the <span class="math inline">(d-1)</span>-dimensional space of deviations from the grey centre runs out of room after at most <span class="math inline">d - 1</span> steps. So the bound is <span class="math display">
+k \le d - 1,
+</span> already reached at <span class="math inline">d = 3</span> by the matrix above. (In the quantum upgrade these deviations become the <em>traceless</em> operators, the same idea in matrix language.)</p>
+<details class="aside">
+<summary>Why the bound is reached in every dimension</summary>
+<p>A nilpotent <span class="math inline">N</span> is governed by its Jordan form, a stack of blocks each of which powers to zero in exactly its own size. The largest block that fits on the <span class="math inline">(d-1)</span>-dimensional space of deviations is a single <span class="math inline">(d-1) \times (d-1)</span> block with ones on the superdiagonal, <span class="math display">
 N \;\cong\;
 \begin{pmatrix}
 0 &amp; 1 &amp; &amp; &amp; \\
@@ -1050,10 +1073,8 @@ N \;\cong\;
 &amp; &amp; &amp; 0 &amp; 1 \\
 &amp; &amp; &amp; &amp; 0
 \end{pmatrix}.
-</span> Each power pushes that diagonal of ones one step toward the corner, so <span class="math inline">N^{d-1} = 0</span> while <span class="math inline">N^{d-2} \neq 0</span>. The smallest <span class="math inline">k</span> with <span class="math inline">N^k = 0</span> is therefore at most <span class="math inline">d - 1</span>, which is the bound. It is tight: this very block, as long as <span class="math inline">P + N</span> stays bistochastic, gives a root of order exactly <span class="math inline">d - 1</span>.</p>
+</span> Each power pushes that diagonal of ones one step toward the corner, so <span class="math inline">N^{d-1} = 0</span> while <span class="math inline">N^{d-2} \neq 0</span>. As long as <span class="math inline">P + N</span> can be kept bistochastic, this very block gives a root of order exactly <span class="math inline">d - 1</span>.</p>
 </details>
-<p>For <span class="math inline">d = 2</span> the bound says <span class="math inline">k = 1</span>, which is to say there are no non-trivial roots. The two-state CDC can only be split into one step, itself. Total erasure of one classical bit is a one-shot affair.</p>
-<p>For <span class="math inline">d = 3</span> the bound is <span class="math inline">k = 2</span>. A square root of the bistochastic <span class="math inline">3 \times 3</span> CDC exists, and it acts on the simplex by funnelling every point along a two-step trajectory to the centre (<a href="#fig-root-d3" class="quarto-xref">Figure&nbsp;2</a>).</p>
 <div id="fig-root-d3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-root-d3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1077,8 +1098,7 @@ N \;\cong\;
 <div class="trajectory-interactive">
   <p class="tr-vh">Interactive square-root trajectories on the probability simplex, coloured by purity. Three default trajectories are shown: e1, e2, e3 each reach the maximally mixed centre in two steps, with e1 and e2 merging. Click inside the triangle to trace your own starting distribution and read off its two images under S.</p>
 
-<svg role="img" aria-label="Square-root trajectories on the probability simplex, coloured by purity" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 640 620" font-family="Georgia, 'Times New Roman', serif">
-
+<svg role="img" aria-label="Square-root trajectories on the probability simplex; the three pure-state corners are coloured red, green, and blue, draining toward the grey maximally mixed state at the centre" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 640 620" font-family="Georgia, 'Times New Roman', serif">
   <defs>
     <marker id="arrow" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="8" markerheight="8" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#233746"></path>
@@ -1800,21 +1820,21 @@ N \;\cong\;
   <circle cx="463.3" cy="330.0" r="5.5" fill="#9ebecc" stroke="#1c4a60" stroke-width="1.3"></circle>
   </g>
 
-  <!-- Starting points e1, e2, e3 (pure, green) -->
-  <circle cx="140.0" cy="510.0" r="6.0" fill="#2d6f8f"></circle>
-  <circle cx="540.0" cy="430.0" r="6.0" fill="#2d6f8f"></circle>
-  <circle cx="310.0" cy="130.0" r="6.0" fill="#2d6f8f"></circle>
+  <!-- Starting points e1, e2, e3 (identity colours: red, green, blue) -->
+  <circle cx="140.0" cy="510.0" r="6.0" fill="#cc3b3b"></circle>
+  <circle cx="540.0" cy="430.0" r="6.0" fill="#2e9e5b"></circle>
+  <circle cx="310.0" cy="130.0" r="6.0" fill="#3b6fb0"></circle>
 
-  <!-- Maximally mixed state p0 (solid marker, fully visible) -->
+  <!-- Maximally mixed state p0 (solid grey marker, fully visible) -->
   <circle cx="330.0" cy="356.7" r="9" fill="#f5f7f8"></circle>
-  <circle cx="330.0" cy="356.7" r="6" fill="#233746"></circle>
+  <circle cx="330.0" cy="356.7" r="6" fill="#8a8f94"></circle>
 
-  <!-- Vertex labels (green) + vectors (muted) -->
-  <text x="132.0" y="536.0" text-anchor="end" font-size="21" font-style="italic" fill="#233746">e₁</text>
+  <!-- Vertex labels (identity colours) + vectors (muted) -->
+  <text x="132.0" y="536.0" text-anchor="end" font-size="21" font-style="italic" fill="#cc3b3b">e₁</text>
   <text x="132.0" y="554.0" text-anchor="end" font-size="13" fill="#829aa6">(1, 0, 0)</text>
-  <text x="556.0" y="438.0" text-anchor="start" font-size="21" font-style="italic" fill="#233746">e₂</text>
+  <text x="556.0" y="438.0" text-anchor="start" font-size="21" font-style="italic" fill="#2e9e5b">e₂</text>
   <text x="556.0" y="456.0" text-anchor="start" font-size="13" fill="#829aa6">(0, 1, 0)</text>
-  <text x="310.0" y="102.0" text-anchor="middle" font-size="21" font-style="italic" fill="#233746">e₃</text>
+  <text x="310.0" y="102.0" text-anchor="middle" font-size="21" font-style="italic" fill="#3b6fb0">e₃</text>
   <text x="310.0" y="120.0" text-anchor="middle" font-size="13" fill="#829aa6">(0, 0, 1)</text>
 
   <!-- Intermediate labels = images under S (toggled off on click) -->
@@ -1927,7 +1947,7 @@ N \;\cong\;
 </script>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-root-d3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: One square root <span class="math inline">S</span> of the <span class="math inline">d = 3</span> bistochastic CDC (others exist), visualised on the simplex. Colour tracks purity: green at the pure corners, fading to the pale maximally mixed centre. Each pure state reaches the uniform distribution <span class="math inline">p_0</span> in two steps, one application of <span class="math inline">S</span> to an intermediate point, a second to the centre, since <span class="math inline">S^2 = P</span>, and you can watch the colour drain from green toward pale as it goes. The merge is the point. Both <span class="math inline">e_1</span> and <span class="math inline">e_2</span> land on the same intermediate point <span class="math inline">Se_1 = Se_2</span>, so three arrows arrive at step one but only two leave at step two. Information is erased in a stage. Click anywhere inside the triangle to trace your own starting distribution.
+Figure&nbsp;2: One square root <span class="math inline">S</span> of the <span class="math inline">d = 3</span> bistochastic CDC (others exist), visualised on the simplex. The three pure corners carry their identity colours, red, green, and blue; the fill tracks purity, fading to the pale, grey maximally mixed centre. Each pure state reaches the uniform distribution <span class="math inline">p_0</span> in two steps, one application of <span class="math inline">S</span> to an intermediate point, a second to the centre, since <span class="math inline">S^2 = P</span>, and you can watch each colour drain toward the grey centre as it goes. The merge is the point. Both <span class="math inline">e_1</span> and <span class="math inline">e_2</span> land on the same intermediate point <span class="math inline">Se_1 = Se_2</span>, so three arrows arrive at step one but only two leave at step two. Information is erased in a stage. Click anywhere inside the triangle to trace your own starting distribution.
 </figcaption>
 </figure>
 </div>
