@@ -78,6 +78,27 @@ a textbook chapter, rewrite it.
   channels that converge to a fixed point in the infinite limit), say
   so and point at it.
 
+## Expandable asides (math derivations)
+
+These are the click-to-expand `<details class="aside">` blocks, a
+different thing from the inline parenthetical asides in the Hard rules
+above. The rule:
+
+- An aside holds a self-contained mathematical derivation or proof:
+  the "why this is true" behind a claim. The claim always stays in the
+  main text; only its justification moves into the aside.
+- Reaching for one should feel natural. Whenever the math deserves a
+  fuller, more rigorous treatment than the narrative itself needs, it
+  belongs in an aside, not in the main thread.
+- Worked examples that build intuition stay in the main flowing text,
+  Quantum Country style. Asides are for proofs and derivations, not
+  for the illustrative examples that carry the pedagogy.
+- Asides do not count toward the post's target length. The length
+  budget (the split threshold above) is measured on the visible
+  main-text prose; asides are optional depth layered on top.
+- Click-to-expand, not hover (hover fails on touch and cannot hold
+  display math).
+
 ## Structural plan for the Clifford post
 
 1. **Hook.** Photocopy-of-a-photocopy framing. No math.
