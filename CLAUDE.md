@@ -12,8 +12,12 @@ post on Clifford channels as finite roots of the depolarizing channel.
 - **Math rendering** is MathJax (Quarto default).
 - **The current post in progress** is `posts/clifford-roots/index.qmd`,
   working title *"How finely can you divide a depolarizing channel?"*.
-- **`PROJECT.md`** at the repo root has the original project brief:
-  the result being explained, the structure, the source material.
+- **`PROJECT.md`** at the repo root is the original project brief:
+  the result being explained, the angle, the source material, and what
+  not to do. It is a frozen snapshot from the start of the project.
+  This file, `CLAUDE.md`, is the authoritative living source for how to
+  work, voice, structure, hard rules, and current state. Where the two
+  overlap, `CLAUDE.md` wins.
 - **`reference/Diplomarbeit_Florian.pdf`** is the source thesis
   (Florian Richter, Diploma Thesis, Hannover 2010). Chapter 5 is the
   primary source for the post.
@@ -55,6 +59,10 @@ The voice target is **Matuschak and Nielsen's
 - Equations framed by prose before and after, not displayed in
   isolation.
 - Story-first openings; no math in the hook of a section.
+
+Avoid thesis-prose crutches: "Furthermore," "We observe that," "In
+what follows," "It turns out that." If a paragraph starts reading like
+a textbook chapter, rewrite it.
 
 ## Hard rules
 
