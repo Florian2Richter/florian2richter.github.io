@@ -40,9 +40,10 @@ or engineering**, not a colleague reading in one sitting. That is the
 "very curious" reader Quantum Country addresses: comfortable with
 linear algebra and probability, but meeting quantum channels, Weyl
 operators, and finite fields here for the first time. Pedagogy wins
-over brevity; length is a result, not a target. A
-two-post split at the reduction (section 5) is on the table if the
-single post grows past about 7000 words.
+over brevity; length is a result, not a target, and the depth and
+worked-example density of Quantum Country is the model to aim for. A
+two-post split at the reduction (section 5) is on the table only if
+the single post grows well past about 12000 to 15000 words.
 
 The voice target is **Matuschak and Nielsen's
 [Quantum Country](https://quantum.country/qcvc)**. Specifically:

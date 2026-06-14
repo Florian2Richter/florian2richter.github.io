@@ -120,8 +120,9 @@ Key paths once scaffolded:
 
 ## Open questions / things to decide later
 
-- **Length target.** Governed by `CLAUDE.md` (split into two posts if
-  the single post grows past about 7000 words).
+- **Length target.** Governed by `CLAUDE.md` (Quantum-Country depth is
+  the aim; a two-post split only if it grows well past about 12000 to
+  15000 words).
 - **Whether to include code snippets.** Maybe a small Python block
   showing the matrix multiplication $T \cdot T = P$ for the
   3×3 case, for hands-on readers. Quarto can execute these live at
