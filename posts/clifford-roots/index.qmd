@@ -202,19 +202,22 @@ distributions.
 
 There is one more restriction we will impose, and it turns out to
 be the most interesting one in retrospect. We will only consider
-copiers that leave the *uniform distribution* untouched: the flat
-distribution that puts equal weight on every state has to come back
-out exactly as it went in.
+copiers that leave the *uniform distribution* untouched, the grey
+centre of the triangle from a moment ago: the flat distribution that
+puts equal weight on every state has to come back out exactly as it
+went in.
 
 Why? The uniform distribution represents *no information* about the
-state of the image: every outcome equally likely. A copier that maps
-"no information" to "some information" would be generating knowledge
-out of nothing, which is the opposite of what an erasure process
-ought to do. For a process whose job is to lose information, the
-uniform distribution is a natural fixed point to leave alone. (In
-the quantum upgrade later in the post, the analogous restriction is
-more than just natural, it is the standard convention. For now,
-take it as a sensible thing to ask for.)
+state of the image: every outcome equally likely. It is also the
+destination. The grey centre is exactly where an erasing copier is
+trying to send everything, so a process whose job is to forget should
+come to rest there once it arrives, not stir the grey back into a
+sharper image. A copier that instead turned "no information" into "some
+information" would be generating knowledge out of nothing, and leaving
+the grey centre fixed is the natural way to forbid that. (In the
+quantum upgrade later in the post, the analogous restriction is more
+than just natural, it is the standard convention. For now, take it as a
+sensible thing to ask for.)
 
 This small demand has a tidy consequence. We already know the columns
 of $S$ sum to one. Insisting that the uniform distribution survives
