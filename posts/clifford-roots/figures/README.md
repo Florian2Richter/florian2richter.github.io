@@ -11,7 +11,7 @@ or modified on its own, without touching the blog post**. The post only
 figures/
   README.md                 <- this file (the system + status)
   fig1-state-space/         <- Figure 1: classical 2-simplex (DONE, interactive)
-  fig2-simplex-root/        <- Figure 2: square-root trajectories (PLANNED)
+  fig2-simplex-root/        <- Figure 2: square-root channel, animated (DONE)
   fig3-bloch-ball/          <- Figure 3: Bloch ball (DONE, interactive)
   fig4-orbit-cycle/         <- Figure 4: the d=3 orbit cycle (PLANNED)
 ```
@@ -74,20 +74,17 @@ language in 3D. The blue-grey scientific palette:
 - grid lines (medians, wireframe): `GRID #829aa6`
 - centre marker halo: `CENTER #f5f7f8`, with a visible blue-grey outline
 
-**Exception for the classical figures (1 and 2):** on the simplex the
-*background field* still encodes purity as above, but the three
-pure-state **corner dots and `e1, e2, e3` labels** carry identity
-colours instead, `CORNER_COLOURS` = red `#cc3b3b`, green `#2e9e5b`, blue
-`#3b6fb0`, so the reader sees three distinct pure colours blending toward
-the grey centre (the post's opening "grey noise"). Their centre marker
-dot is a neutral `GREY_CENTER #8a8f94`. The Bloch ball keeps a single
-purity hue throughout (one qubit has no analogous three-corner identity).
-
-The **current sampled state** (the interactive marker the reader places)
-and any moving object are a **strong blue `#1565c0`** (dark-blue
-`#0d3f8f` stroke). In Figure 2 the whole user trajectory is this blue;
-the placed point is also set apart by **shape** (a square). The static
-default trajectories there use neutral-grey arrows.
+**Identity colours for the classical figures (1 and 2):** the three
+pure-state corners and `e1, e2, e3` labels carry identity colours,
+`CORNER_COLOURS` = red `#cc3b3b`, green `#2e9e5b`, blue `#3b6fb0`, so the
+reader sees three distinct pure colours blending toward the grey centre
+(the post's opening "grey noise"), whose marker dot is a neutral
+`GREY_CENTER #8a8f94`. Figure 1 keeps the purity background field behind
+these corners. Figure 2 is **animated** and drops the background field:
+its cloud of states is coloured by the same barycentric RGB blend and
+drains to grey as the channel collapses it (see that figure's README).
+The Bloch ball keeps a single purity hue throughout (one qubit has no
+analogous three-corner identity).
 
 Figure 4 (the orbit cycle) is the label plane `F_d^2`, not a state
 space, so purity does not apply there; it uses its own scheme.
@@ -134,13 +131,13 @@ See each figure's own `README.md` for the specifics.
 | # | figure | id | state |
 |---|--------|----|-------|
 | 1 | classical state space (2-simplex) | `fig-simplex-d3` | done, interactive |
-| 2 | square-root trajectories on the simplex | `fig-root-d3` | **planned** (no generator yet; placeholder image) |
+| 2 | square-root channel collapsing the simplex | `fig-root-d3` | done, animated |
 | 3 | Bloch ball (qubit state space) | `fig-bloch` | done, interactive |
 | 4 | the d=3 orbit cycle of h | `fig-orbit` | **planned** (no generator yet; placeholder image) |
 
-Figures 2 and 4 currently render as broken-image placeholders in the
-post (their SVGs do not exist yet). Their folders hold a README sketching
-what they should become.
+Figure 4 currently renders as a broken-image placeholder in the post
+(its SVG does not exist yet). Its folder holds a README sketching what it
+should become.
 
 ## A note on CSS
 
