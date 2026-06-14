@@ -280,13 +280,19 @@ The second condition is just "the erasure really happens at step $k$,
 not earlier." How large can $k$ be?
 
 The smallest case settles itself. A two-state bistochastic matrix has a
-single free number, $S = \begin{pmatrix} 1-a & a \\ a & 1-a \end{pmatrix}$,
+single free number,
+$$
+S = \begin{pmatrix} 1-a & a \\ a & 1-a \end{pmatrix},
+$$
 and $P$ is the case $a = \tfrac12$. Its one direction away from the grey
-centre, $v = (1,-1)$, is merely rescaled, $Sv = (1-2a)\,v$, so $S^k$
-scales it by $(1-2a)^k$. Asking $S^k = P$ forces $(1-2a)^k = 0$, and a
-number powers to zero only if it was already zero. So $a = \tfrac12$ and
-$S = P$ from the start: one classical bit has no genuine root, $k = 1$,
-erasure in a single shot.
+centre, $v = (1,-1)$, is merely rescaled,
+$$
+Sv = (1-2a)\,v,
+$$
+so $S^k$ scales it by $(1-2a)^k$. Asking $S^k = P$ forces $(1-2a)^k = 0$,
+and a number powers to zero only if it was already zero. So $a = \tfrac12$
+and $S = P$ from the start: one classical bit has no genuine root,
+$k = 1$, erasure in a single shot.
 
 Three states are the first with room to spare, and the clean way to find
 that room is to stop guessing whole matrices and split off the part that
