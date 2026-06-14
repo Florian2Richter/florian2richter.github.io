@@ -174,14 +174,23 @@ meaning what we want it to mean. So $S$ is linear.
 </details>
 ```
 
-And a linear map is just a matrix. So from here on our copier is a
-matrix, which we will call $S$, and applying it to a distribution is
-ordinary matrix multiplication.
+A linear map of vectors is exactly a matrix, so from here on our copier
+is a matrix, which we will call $S$, and applying it to a distribution
+is ordinary matrix-times-vector multiplication.
 
-That already pins down what the entries of $S$ can look like. Feed in a
-pure state, all the probability on one entry, and the output is just one
-column of $S$. For that column to be a probability distribution in its
-own right, its entries must be non-negative and sum to one:
+It is worth seeing what that does to our three corners, because it pins
+down the whole matrix. Feed in pure red, the vector $(1, 0, 0)$.
+Multiplying $S$ by a vector that is all zeros except for a single one
+just reads off the matching column, so the output is the first column of
+$S$: whatever $S$ does to red lives there. Pure green $(0, 1, 0)$ picks
+out the second column, pure blue $(0, 0, 1)$ the third. The three
+columns of $S$ are therefore nothing but the images of the three pure
+states, the three places the corners are sent, and once those are fixed
+linearity supplies every blend in between.
+
+That already constrains the entries. Each column is the image of a pure
+state, and that image has to be a legal state in its own right: its
+entries non-negative and summing to one,
 $$
 S_{ij} \geq 0, \qquad \sum_i S_{ij} = 1.
 $$
