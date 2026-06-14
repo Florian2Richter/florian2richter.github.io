@@ -439,13 +439,6 @@ ourselves leave classical probability behind.
 <!-- =================================================================== -->
 ## The quantum upgrade {#sec-quantum}
 
-If qubits and the $|0\rangle, |1\rangle$ notation aren't already part
-of your mental furniture, the gentlest on-ramp I know of is Matuschak
-and Nielsen's
-[Quantum Computing for the Very Curious](https://quantum.country/qcvc).
-Read it first, or just keep going and chase the link when something
-looks unfamiliar. We will lean on it rather than rebuild it.
-
 Everything so far was a rehearsal. The real question is about quantum
 information, and a quantum state carries more than a probability
 distribution does. More in a way we can count, and the count turns out
@@ -457,7 +450,7 @@ the rest left over. Those states form a line segment. One dimension of
 freedom, the two definite bits at its ends and the coin-flip state in
 the middle.
 
-A quantum bit, a *qubit*, has more room than that line. Its state is no
+A quantum bit, a *qubit*,[^qcvc] has more room than that line. Its state is no
 longer a list of probabilities but a small matrix, called a *density
 matrix*. You do not need its inner workings here, only its shape: the
 states of a single qubit fill a solid ball in three dimensions, the
@@ -465,6 +458,14 @@ states of a single qubit fill a solid ball in three dimensions, the
 "this bit is certainly $0$," sit on the surface. Blends of them sit
 inside. At the dead centre is the state of total ignorance, the quantum
 coin flip.
+
+[^qcvc]: We meet qubits, density matrices, and channels here at the
+level of pictures, not bra-ket algebra, so you can follow along cold. If
+you want the real foundations, single qubits, gates, and the
+$|0\rangle, |1\rangle$ notation built from scratch, Matuschak and
+Nielsen's [Quantum Computing for the Very Curious](https://quantum.country/qcvc)
+is the gentlest on-ramp I know, and it is the model this post is written
+in.
 
 ::: {#fig-bloch}
 

@@ -106,8 +106,10 @@ above. The rule:
    bistochastic CDC, divisibility, the $d - 1$ bound, $d = 3$ worked
    example.
 3. **The quantum upgrade.** Density matrices, channels, the maximally
-   mixed state. Bound jumps to $d^2 - 1$. Quantum Country
-   recommendation lives at the top of this section.
+   mixed state. Bound jumps to $d^2 - 1$. The section is self-contained
+   at the "shape" level (no bra-ket algebra), so the Quantum Country
+   recommendation is a footnote on the first qubit, not a gating
+   prerequisite at the top.
 4. **Clifford channels as the playground.** Weyl operators,
    projective representation,
    $T[\mathbf{w}(\eta)] = \lambda(\eta)\,\mathbf{w}(h(\eta))$. "Two
