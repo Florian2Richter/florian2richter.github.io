@@ -128,10 +128,11 @@ the $(d-1)$-dimensional version of the same idea (@fig-simplex-d3).
 {{< include figures/fig1-state-space/interactive.qmd >}}
 
 The classical state space for three outcomes: the probability simplex
-sitting inside the positive octant, with the pure states at the vertices
-and the uniform distribution $p_0 = (\tfrac13, \tfrac13, \tfrac13)$
-marked at the centre. The fill encodes purity, saturated at the pure
-corners and fading toward the maximally mixed centre.
+sitting inside the positive octant. Its three pure states sit at the
+vertices, marked in red, green, and blue, and the uniform distribution
+$p_0 = (\tfrac13, \tfrac13, \tfrac13)$ is the grey point at the centre,
+an even wash of all three. The fill separately encodes purity, saturated
+at the pure corners and fading toward the maximally mixed centre.
 
 :::
 
@@ -333,15 +334,16 @@ every point along a two-step trajectory to the centre (@fig-root-d3).
 {{< include figures/fig2-simplex-root/interactive.qmd >}}
 
 One square root $S$ of the $d = 3$ bistochastic CDC (others exist),
-visualised on the simplex. Colour tracks purity: green at the pure
-corners, fading to the pale maximally mixed centre. Each pure state
-reaches the uniform distribution $p_0$ in two steps, one application of
-$S$ to an intermediate point, a second to the centre, since $S^2 = P$,
-and you can watch the colour drain from green toward pale as it goes. The
-merge is the point. Both $e_1$ and $e_2$ land on the same intermediate
-point $Se_1 = Se_2$, so three arrows arrive at step one but only two
-leave at step two. Information is erased in a stage. Click anywhere
-inside the triangle to trace your own starting distribution.
+visualised on the simplex. The three pure corners carry their identity
+colours, red, green, and blue; the fill tracks purity, fading to the
+pale, grey maximally mixed centre. Each pure state reaches the uniform
+distribution $p_0$ in two steps, one application of $S$ to an
+intermediate point, a second to the centre, since $S^2 = P$, and you can
+watch each colour drain toward the grey centre as it goes. The merge is
+the point. Both $e_1$ and $e_2$ land on the same intermediate point
+$Se_1 = Se_2$, so three arrows arrive at step one but only two leave at
+step two. Information is erased in a stage. Click anywhere inside the
+triangle to trace your own starting distribution.
 
 :::
 

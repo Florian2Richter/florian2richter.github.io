@@ -14,12 +14,15 @@ three unit basis vectors `e1, e2, e3` (the pure states), faint dashed
 medians hinting at the barycentric structure, and the uniform
 distribution `p0 = (1/3, 1/3, 1/3)` at the centroid.
 
-**Colour encodes purity** (see the figures `README.md` for the shared
-scheme): the simplex is filled with the purity field `sum_i p_i^2`,
-blue-teal and saturated at the three pure corners, fading to a soft blue-grey glow at
-the maximally mixed centre. `p0` is drawn as a solid, fully opaque
-marker (white halo + dark `OUTLINE` dot) with its `p0` label and
-`(1/3, 1/3, 1/3)` coordinates at full strength.
+**Colour does two jobs.** The simplex *fill* encodes purity (the
+`sum_i p_i^2` field, blue-teal at the corners fading to a soft blue-grey
+glow at the centre). On top of that, the three pure-state *corners* are
+marked in their own identity colours, red, green, and blue (`e1` red,
+`e2` green, `e3` blue), so the reader sees three distinct pure colours
+blending toward grey at the maximally mixed centre. That grey centre is
+the "grey noise" the post opens with. `p0` is drawn as a solid, fully
+opaque grey marker (white halo + `GREY_CENTER` dot) with its `p0` label
+and `(1/3, 1/3, 1/3)` coordinates at full strength.
 
 ## No interaction (static figure)
 
@@ -62,9 +65,10 @@ ordering is the only coupling between the Python and the JS.
 - **Container styling:** the scoped `.simplex-static` CSS lives in the
   `<style>` block at the top of `interactive.qmd`.
 - **Palette:** the blue-grey field endpoints are `PURE_RGB` / `MIXED_RGB`
-  in `state_space_figure.py`. The `p0` marker is a `CENTER #f5f7f8` halo
-  over a dark `OUTLINE #233746` dot, with its labels in the same
-  `OUTLINE`.
+  in `state_space_figure.py`. The three corner identity colours are
+  `CORNER_COLOURS` (red, green, blue), used for both the pure-state dots
+  and the `e1, e2, e3` labels. The `p0` marker is a `CENTER #f5f7f8` halo
+  over a `GREY_CENTER #8a8f94` dot.
 
 After any change, re-render the post and confirm the figure and its
 `@fig-simplex-d3` reference. No edit to `index.qmd` is needed.

@@ -26,7 +26,10 @@ e3 -> q_b -> p0
 
 - The simplex carries the same **purity field** as Figure 1 (blue-teal pure
   corners fading to a blue-grey centre).
-- Starting points `e1, e2, e3` at the vertices are pure, so blue-teal.
+- Starting points `e1, e2, e3` at the vertices carry their **identity
+  colours**, red, green, and blue (`CORNER_COLOURS`, shared with Figure 1),
+  so the reader sees three distinct pure colours draining toward the grey
+  centre.
 - Intermediate points `q_a, q_b` are coloured by their own purity. `q_a`
   is already quite mixed, so it reads pale; `q_b` a little more blue-teal. `q_a`
   is drawn slightly larger because two trajectories arrive there.
@@ -38,8 +41,8 @@ e3 -> q_b -> p0
   two step-2). Colour is reserved for purity, so the arrows carry only
   the dynamics; the dots draining blue-teal to blue-grey carry the erasure.
 - The uniform distribution `p0` is a solid, fully opaque marker at the
-  centre (white halo + dark `OUTLINE` dot), matching Figure 1, with its
-  `(1/3, 1/3, 1/3)` coordinates labelled at full strength.
+  centre (white halo + `GREY_CENTER` grey dot), matching Figure 1, with
+  its `(1/3, 1/3, 1/3)` coordinates labelled at full strength.
 
 **The merge at `q_a` is the headline:** three step-1 arrows arrive but
 only two step-2 arrows leave, so the figure shows information being lost
@@ -78,11 +81,14 @@ ever changed.
 
 Blue-grey scheme shared with Figure 1: `AXIS #233746` labels, `GRID
 #829aa6` grid lines, blue-teal `PURE #2d6f8f` (pure) fading to blue-grey
-`MIXED #d6e5ea` (maximally mixed). Mixed dots get a dark blue-teal
-`#1c4a60` outline. Default-trajectory arrows are neutral grey. The user
-trajectory (every moving object) is a strong blue `STATE #1565c0`
-(dark-blue `#0d3f8f` stroke), with the placed point also set apart by
-**shape** (a square).
+`MIXED #d6e5ea` (maximally mixed) for the purity field and the
+intermediate dots. The three corner dots and `e1, e2, e3` labels use the
+identity colours `CORNER_COLOURS` (red `#cc3b3b`, green `#2e9e5b`, blue
+`#3b6fb0`); the `p0` centre marker is a `GREY_CENTER #8a8f94` dot. Mixed
+dots get a dark blue-teal `#1c4a60` outline. Default-trajectory arrows
+are neutral grey. The user trajectory (every moving object) is a strong
+blue `STATE #1565c0` (dark-blue `#0d3f8f` stroke), with the placed point
+also set apart by **shape** (a square).
 
 ## To modify
 

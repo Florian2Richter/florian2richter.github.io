@@ -68,11 +68,20 @@ So "erasure" reads visually as the field draining from blue-teal to
 blue-grey, and the Bloch ball's "inside the sphere" depth is the same
 language in 3D. The blue-grey scientific palette:
 
-- field high end (pure / boundary / pure-state dots): `PURE #2d6f8f`
+- field high end (pure / boundary): `PURE #2d6f8f`
 - field low end (maximally mixed): `MIXED #d6e5ea`
 - axes and text labels: `AXIS #233746`
 - grid lines (medians, wireframe): `GRID #829aa6`
-- centre marker fill: `CENTER #f5f7f8`, with a visible blue-grey outline
+- centre marker halo: `CENTER #f5f7f8`, with a visible blue-grey outline
+
+**Exception for the classical figures (1 and 2):** on the simplex the
+*background field* still encodes purity as above, but the three
+pure-state **corner dots and `e1, e2, e3` labels** carry identity
+colours instead, `CORNER_COLOURS` = red `#cc3b3b`, green `#2e9e5b`, blue
+`#3b6fb0`, so the reader sees three distinct pure colours blending toward
+the grey centre (the post's opening "grey noise"). Their centre marker
+dot is a neutral `GREY_CENTER #8a8f94`. The Bloch ball keeps a single
+purity hue throughout (one qubit has no analogous three-corner identity).
 
 The **current sampled state** (the interactive marker the reader places)
 and any moving object are a **strong blue `#1565c0`** (dark-blue
