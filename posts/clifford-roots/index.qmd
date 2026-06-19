@@ -274,18 +274,22 @@ $d$, or CDC for short.
 With $P$ pinned down, the question we opened with stops being a story
 about photocopiers and becomes one line of mathematics. The copier that
 erases in steps, the demand that it finish after exactly $k$ identical
-passes: all of it is now this. A *$k$-th root* of $P$ is a bistochastic
-matrix $S$ with
+passes: all of it is now this. Here $k$ is a positive integer, the number of passes. A *$k$-th root* of
+$P$ is a bistochastic matrix $S$ for which
 $$
-\boxed{\; S^k = P \quad\text{and}\quad S^r \ne P \ \text{ for } r < k. \;}
+\boxed{\; S^k = P, \qquad S^j \neq P \ \text{ for every integer } 1 \le j < k. \;}
 $$
-That first equation is the whole post in miniature: a single copier $S$
-that, run $k$ times over, accomplishes total erasure. The second line
-just insists the erasure arrives exactly at step $k$, not before.
-Everything from here on is the hunt for such an $S$ with $k$ as large as
-possible, and the difficulty (and the beauty) is in finding a
-*non-trivial* one, an $S$ that is not simply $P$ itself. How large can
-$k$ be?
+Spelled out: apply the copier $S$ exactly $k$ times and you get $P$,
+total erasure; apply it any smaller whole number of times, one pass, two,
+up to $k-1$, and the erasure has not happened yet. Both $k$ and $j$ count
+applications, so they are positive integers, and the second condition
+runs over every one of them below $k$. The first equation is the whole
+post in miniature, a single copier that erases totally in $k$ identical
+steps; the second pins $k$ down as the *exact* number, the erasure
+landing at step $k$ and not one sooner. Everything from here on is the
+hunt for such an $S$ with $k$ as large as possible, and the difficulty
+(and the beauty) is finding a *non-trivial* one, an $S$ that is not
+simply $P$ itself. How large can $k$ be?
 
 The smallest case settles itself. A two-state bistochastic matrix has a
 single free number,
