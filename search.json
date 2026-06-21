@@ -4,7 +4,7 @@
     "href": "posts/clifford-roots/figures/fig3b-bloch-root/interactive.html",
     "title": "Florian's Blog",
     "section": "",
-    "text": "Animation of the maximal qubit root S on the Bloch ball. A cloud of Bloch vectors is driven by S to the maximally mixed centre I/2 in stages, each step shrinking and rotating it onto the next axis (z to y to x to 0). Three pure axis states are highlighted: the z-pole takes three steps (the hero, realising the order-3 bound), the y-axis two, the x-axis one. Plays once when scrolled into view; tap to replay.\n\n  \n    \n      \n    \n    \n      \n    \n    \n      \n    \n    \n      \n      \n      \n    \n  \n\n  \n  \n\n  \n  \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n  \n\n  \n  \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n  \n\n  \n  \n\n  \n  \n  \n  \n\n  \n  \n  \n  \n  \n\n  \n  \n  \n\n  \n  |0⟩\n  |1⟩\n  x\n  y\n  z\n  I/2\n\nPlays once on scroll. Tap to replay."
+    "text": "Animation of the maximal qubit root S on the Bloch ball. A cloud of Bloch vectors is driven by S to the maximally mixed centre I/2 in stages, each step shrinking and rotating it onto the next axis (z to y to x to 0). Three pure axis states are highlighted: the z-pole takes three steps (the hero, realising the order-3 bound), the y-axis two, the x-axis one. Plays once when scrolled into view; tap to replay.\n\n  \n    \n      \n    \n    \n      \n    \n    \n      \n    \n  \n\n  \n  \n\n  \n  \n  \n  \n\n  \n  \n  \n  \n  \n\n  \n  \n  \n\n  \n  |0⟩\n  |1⟩\n  x\n  y\n  z\n  I/2\n\nPlays once on scroll. Tap to replay."
   },
   {
     "objectID": "posts/clifford-roots/figures/fig2-simplex-root/interactive.html",
