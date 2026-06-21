@@ -223,42 +223,11 @@ def build_svg():
             markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="{HERO_BLUE}"/>
     </marker>
-    <radialGradient id="purity" cx="{CX:g}" cy="{CY:g}" r="{R:g}"
-                    gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="{MIXED}" stop-opacity="0.30"/>
-      <stop offset="60%" stop-color="#5f93ad" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="{PURE}" stop-opacity="0.40"/>
-    </radialGradient>
   </defs>''')
 
-    # --- Ball interior: purity field ---
-    parts.append('\n\n  <!-- Ball interior: purity field -->')
-    parts.append(f'\n  <circle cx="{CX}" cy="{CY}" r="{R}" '
-                 f'fill="url(#purity)" stroke="none"/>')
-
-    # --- Latitude circles ---
-    parts.append('\n\n  <!-- Latitude circles -->')
-    parts.append('\n  <g>')
-    for z in LATITUDES:
-        if abs(z) < 1e-9:
-            parts.append(wire_runs(latitude_points(z), True, EQUATOR_W,
-                                   WIRE_BACK_W, EQUATOR_FRONT_OPACITY,
-                                   EQUATOR_BACK_OPACITY))
-        else:
-            parts.append(wire_runs(latitude_points(z), True, WIRE_FRONT_W,
-                                   WIRE_BACK_W, WIRE_FRONT_OPACITY,
-                                   WIRE_BACK_OPACITY))
-    parts.append('\n  </g>')
-
-    # --- Longitude meridians ---
-    parts.append('\n\n  <!-- Longitude meridians -->')
-    parts.append('\n  <g>')
-    for k in range(N_MERIDIANS):
-        phi = 2.0 * math.pi * k / N_MERIDIANS
-        parts.append(wire_runs(meridian_points(phi), False, WIRE_FRONT_W,
-                               WIRE_BACK_W, WIRE_FRONT_OPACITY,
-                               WIRE_BACK_OPACITY))
-    parts.append('\n  </g>')
+    # (Background wireframe removed for the animation: no purity field and no
+    # latitude/longitude gridlines. Only the silhouette and the coordinate axes
+    # survive, mirroring the stripped-down classical state-space sketch.)
 
     # --- Silhouette ---
     parts.append('\n\n  <!-- Silhouette (pure-state boundary) -->')

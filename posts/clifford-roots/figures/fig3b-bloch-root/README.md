@@ -77,9 +77,13 @@ the figure is self-contained.
 ## Animation layer
 
 Mirrors Figure 2's collapse animation, on the Bloch ball. The generator
-emits only the **skeleton** (ball wireframe, axes, poles, `I/2`, the
-`data-*` projection attributes, and empty `resting / trails / cloud / hl`
-layers); the script builds everything dynamic from the map `applyS(r) =
+emits only the **skeleton**: the ball *silhouette* and the coordinate
+axes (poles, `I/2`, axis labels), the `data-*` projection attributes, and
+empty `resting / trails / cloud / hl` layers. The background wireframe
+(latitude/longitude gridlines) and the purity field are deliberately
+dropped, mirroring the stripped-down classical state-space sketch, so the
+collapsing cloud reads cleanly; only the silhouette and axes survive
+behind it. The script builds everything dynamic from the map `applyS(r) =
 [r1/2, r2/2, 0]` (thesis eq. 4.19; `S^3 = 0`):
 
 - **Resting view** (shown at rest, and as the reduced-motion fallback):
