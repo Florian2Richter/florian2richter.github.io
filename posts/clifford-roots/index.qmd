@@ -265,7 +265,7 @@ $$
 
 Apply $P$ to anything and you get the uniform distribution back. All
 information about the input has been thrown away in a single step.
-Apply $P$ again and nothing changes: the simplex has been crushed to
+Apply $P$ again and nothing changes: the simplex has contracted to
 a single point, the centre, and $P$ just keeps mapping it there.
 This $P$ is bistochastic by inspection (every row sums to one as
 well), and it is the *completely depolarising channel* in dimension
@@ -424,7 +424,7 @@ bistochastic, this very block gives a root of order exactly $d - 1$.
 
 One square root $S$ of the $d = 3$ bistochastic CDC (others exist),
 animated on the simplex. A cloud of states, coloured by its
-red-green-blue mixture, is crushed in two equal steps: one application of
+red-green-blue mixture, is sent to the centre in two equal steps: one application of
 $S$ collapses the filled triangle onto a line segment, a second collapses
 that segment onto the grey maximally mixed centre $p_0$, since $S^2 = P$,
 and the colours drain toward grey as it goes. The three pure corners
@@ -586,9 +586,9 @@ to take roots of.
 Here is where that quadratic shows up where it counts. Ask the same
 question as in the classical case: how large can $k$ be, if a channel
 $S$ satisfies $S^k = P$ but no smaller power does? The argument has the
-same skeleton. The quantum CDC is again a rank-one map: it crushes the
+same skeleton. The quantum CDC is again a rank-one map: it sends the
 entire space of traceless operators, the directions away from the
-maximally mixed state, down to zero. Any $S$ powering to it must carry a
+maximally mixed state, to zero. Any $S$ powering to it must carry a
 *nilpotent* part on that space, and a single nilpotent block on a space
 of dimension $D$ takes at most $D$ steps to wind down. Only now
 $D = d^2 - 1$ rather than $d - 1$, so
@@ -633,14 +633,15 @@ it was not at all clear to me that a map assembled by wedging in a Jordan
 block stays completely positive. The bound might be a mirage, an order no
 genuine channel can reach.
 
-That doubt is what sent me to Clifford channels. Instead of gambling on
-whether some hand-built Jordan block survives complete positivity, I
-wanted a small, transparent family whose every member is a channel by
-construction, where I could just compute how large the order grows. So we
-tie our hands almost completely, work only inside that family, and see
-how close to $d^2 - 1$ we can still get. (It does turn out that the full
-bound is reachable, by a construction subtler than a raw Jordan block;
-that is a thread for the end of the post.)
+That doubt is what sent me to Clifford channels. Rather than try to
+settle by hand whether a Jordan-block construction stays completely
+positive, I turned to a much smaller, more structured family of channels:
+far less freedom, but every member a genuine channel by construction, and
+a class that has proved fruitful before across quantum information. The
+question then becomes concrete and answerable by direct computation, how
+large can the order grow inside this restricted family. (It does turn out
+that the full bound is reachable, by a construction subtler than a raw
+Jordan block; that is a thread for the end of the post.)
 
 <!-- =================================================================== -->
 ## Clifford channels as the playground {#sec-clifford}
@@ -859,7 +860,7 @@ thus plays out inside the class; taking roots never forces us back into
 the wilderness of general channels.
 
 What is *not* guaranteed is that this corner is large enough. It is
-entirely possible that, in giving up so much freedom, we have crushed the
+entirely possible that, in giving up so much freedom, we have driven the
 achievable $k$ back down toward the classical $d - 1$, making the
 restriction a poor bargain. Whether the room to subdivide erasure
 survives this drastic narrowing is exactly what the next sections settle,
