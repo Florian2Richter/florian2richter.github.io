@@ -510,11 +510,25 @@ The Bloch ball, the state space of a single qubit: pure states live on the surfa
 :::
 
 Notice what happened to the dimension. The classical bit lived on a
-line, one dimension. The qubit lives in a ball, *three*. That is no
-accident, and the pattern is the point. A quantum state in dimension
-$d$ is a $d \times d$ density matrix: Hermitian, with non-negative
-eigenvalues, and trace one. Count the real numbers it takes to pin one
-down and you get $d^2 - 1$.
+line, one dimension; the qubit fills a ball, *three*. That jump is the
+pattern worth chasing, but to count it for any number of levels we first
+have to say what a quantum state even is beyond the qubit.
+
+We met the qubit's state as an arrow, bookkept by a small matrix. For
+$d$ levels the bookkeeping object is the same kind of thing, a
+$d \times d$ matrix called the *density matrix*, and its rules are not
+arbitrary: they are exactly what it takes to still be describing
+probabilities. The matrix is Hermitian, so its eigenvalues are real;
+those eigenvalues are non-negative and sum to one. That last clause is
+the point, because non-negative numbers summing to one are a probability
+distribution. A density matrix is a classical probability distribution in
+disguise: its eigenvalues are the probabilities, and its eigenvectors say
+which mutually exclusive pure states they are spread across. The
+classical simplex from the first half of this post is the special case
+where the axes have already been chosen for you.
+
+Now we can count. A quantum state in dimension $d$ is pinned down by
+$d^2 - 1$ real numbers.
 
 ```{=html}
 <details class="aside">
