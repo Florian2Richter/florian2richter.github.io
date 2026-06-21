@@ -606,8 +606,9 @@ grew, and it grew quadratically.
 
 {{< include figures/fig3b-bloch-root/interactive.qmd >}}
 
-The maximal qubit root $S$ acting on the Bloch ball. It sends a Bloch
-vector $(r_1, r_2, r_3)$ to $(r_2/2,\, r_3/2,\, 0)$, driving every state
+A maximal qubit root $S$ acting on the Bloch ball (others exist). It
+sends a Bloch vector $(r_1, r_2, r_3)$ to $(r_2/2,\, r_3/2,\, 0)$,
+driving every state
 to the centre $I/2$ in at most three steps, and the $z$-pole takes all
 three, realising the order-3 bound ($d^2 - 1 = 3$ at $d = 2$). As with
 the classical square root in @fig-root-d3, erasure happens in stages:
@@ -621,14 +622,25 @@ replay.
 
 :::
 
-One honest caveat before we move on. That $d^2 - 1$ is an *upper* bound,
-and it came from a structural argument that does not, by itself, build
-anything. Whether some channel actually attains it, erasing in exactly
-$d^2 - 1$ steps and no fewer, is a separate and harder question. It is
-also the question the rest of this post is really about. We will
-approach it from an unlikely direction: not by ransacking the enormous
-space of all channels, but by tying our hands almost completely and
-seeing how close we can still get.
+One honest caveat before we move on, and it is really the seed of the
+rest of the post. That $d^2 - 1$ is only an *upper* bound. It comes from
+a structural argument: on the $d^2 - 1$ traceless directions, place the
+longest nilpotent Jordan block that fits, and its powers take exactly
+$d^2 - 1$ steps to vanish. That conjures a *linear map* of the right
+order, but a linear map is not yet a quantum channel. The binding
+constraint is complete positivity, and when I first sat with this problem
+it was not at all clear to me that a map assembled by wedging in a Jordan
+block stays completely positive. The bound might be a mirage, an order no
+genuine channel can reach.
+
+That doubt is what sent me to Clifford channels. Instead of gambling on
+whether some hand-built Jordan block survives complete positivity, I
+wanted a small, transparent family whose every member is a channel by
+construction, where I could just compute how large the order grows. So we
+tie our hands almost completely, work only inside that family, and see
+how close to $d^2 - 1$ we can still get. (It does turn out that the full
+bound is reachable, by a construction subtler than a raw Jordan block;
+that is a thread for the end of the post.)
 
 <!-- =================================================================== -->
 ## Clifford channels as the playground {#sec-clifford}
