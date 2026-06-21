@@ -132,18 +132,26 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<!-- Figure 3: Bloch ball (qubit state space). Static SVG inlined verbatim from bloch_ball_figure.py. No interactivity: the interaction lives in Figure 4 (the root trajectories), mirroring Figures 1 and 2. -->
+<!-- Figure 3: Bloch ball (qubit state space), interactive. Static SVG inlined from bloch_ball_figure.py (carries data-* projection attrs); the script ADDS a click-to-pick-a-direction + Purity-slider state marker and a plain-words readout of the one measurement the state answers with certainty. No root dynamics (that is Figure 4). JS off => static ball. -->
 <style>
-.bloch-static{max-width:520px;margin:1.25rem auto;}
-.bloch-static svg{width:100%;height:auto;display:block;}
-.bloch-static .bl-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+.bloch-state-interactive{max-width:520px;margin:1.25rem auto;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.bloch-state-interactive svg{width:100%;height:auto;display:block;cursor:crosshair;}
+.bloch-state-interactive .bl-readout{margin-top:1rem;padding:0.9rem 1.1rem;background:#f4f6f8;border:1px solid #e2e8ee;border-radius:10px;}
+.bloch-state-interactive .bl-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+.bloch-state-interactive .bl-head-label{font-size:13px;color:#3a5a72;}
+.bloch-state-interactive .bl-hint{font-size:13px;color:#9aa9b5;}
+.bloch-state-interactive .bl-hint.is-set{color:#1565c0;}
+.bloch-state-interactive .bl-slider-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.bloch-state-interactive .bl-slabel{font-size:13px;color:#3a5a72;min-width:42px;}
+.bloch-state-interactive .bl-slider-row input[type=range]{flex:1;accent-color:#1565c0;cursor:pointer;}
+.bloch-state-interactive .bl-slider-row input[type=range]:disabled{cursor:default;opacity:0.45;}
+.bloch-state-interactive .bl-rval{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;color:#1a3550;min-width:62px;text-align:right;}
+.bloch-state-interactive .bl-say{margin:0;font-size:14px;line-height:1.5;color:#1a3550;}
+.bloch-state-interactive .bl-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
 </style>
-
-<div class="bloch-static">
-  <p class="bl-vh">The Bloch ball, the state space of a single qubit, coloured by purity: blue-teal on the pure surface, fading to a soft blue-grey core at the maximally mixed state I/2 marked at the centre.</p>
-
-<svg role="img" aria-label="Bloch ball: the qubit state space" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 640 640" font-family="Georgia, 'Times New Roman', serif">
-
+<div class="bloch-state-interactive">
+<p class="bl-vh">Interactive Bloch ball, the qubit state space. Click the front of the ball to pick a direction; the Purity slider moves the state from the pure surface inward toward the maximally mixed centre. A readout names the one yes/no measurement the state answers with certainty, and how that certainty fades as the state becomes mixed.</p>
+<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 640 640" font-family="Georgia, 'Times New Roman', serif" role="img" aria-label="Bloch ball: the qubit state space" data-cx="320" data-cy="332" data-r="210" data-alpha-deg="35" data-elev-deg="20">
   <defs>
     <marker id="arrow" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="8" markerheight="8" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#233746"></path>
@@ -214,7 +222,119 @@ ul.task-list li input[type="checkbox"] {
   <text x="328.00" y="71.52" text-anchor="start" font-size="20" font-style="italic" fill="#233746">z</text>
   <text x="334.00" y="330.00" text-anchor="start" font-size="20" fill="#5e7886">I/2</text>
 </svg>
+  <div class="bl-readout">
+    <div class="bl-head">
+      <span class="bl-head-label">What this state answers</span>
+      <span class="bl-hint" data-bl="hint">click the front of the ball</span>
+    </div>
+    <div class="bl-slider-row">
+      <span class="bl-slabel">Purity</span>
+      <input type="range" min="0" max="1" step="0.01" value="1" data-bl="purity" aria-label="Purity of the state" disabled="">
+      <span class="bl-rval" data-bl="rval">r = —</span>
+    </div>
+    <p class="bl-say" data-bl="say">Pick a direction on the ball to read off the one measurement it answers with certainty.</p>
+  </div>
 </div>
+<script>
+(function () {
+  function setup(root) {
+    var svg = root.querySelector('svg');
+    if (!svg) return;
+    var CX = parseFloat(svg.dataset.cx), CY = parseFloat(svg.dataset.cy), R = parseFloat(svg.dataset.r);
+    var A = parseFloat(svg.dataset.alphaDeg) * Math.PI / 180;
+    var E = parseFloat(svg.dataset.elevDeg) * Math.PI / 180;
+    var cA = Math.cos(A), sA = Math.sin(A), cE = Math.cos(E), sE = Math.sin(E);
+    var NS = 'http://www.w3.org/2000/svg';
+    function el(t, a) { var e = document.createElementNS(NS, t); for (var k in a) e.setAttribute(k, a[k]); return e; }
+
+    function project(p) {
+      var x = p[0], y = p[1], z = p[2];
+      var u = R * (x * cA - y * sA);
+      var w = x * sA + y * cA;
+      var v = R * (z * cE - w * sE);
+      return [CX + u, CY - v];
+    }
+    function invert(sx, sy) {
+      var er = (sx - CX) / R, eu = (CY - sy) / R, s = er * er + eu * eu;
+      if (s > 1) return null;
+      var ev = Math.sqrt(1 - s);
+      var z = cE * eu + sE * ev, w = -sE * eu + cE * ev;
+      return [cA * er + sA * w, -sA * er + cA * w, z];
+    }
+    function toSvg(evt) { var pt = svg.createSVGPoint(); pt.x = evt.clientX; pt.y = evt.clientY; var m = svg.getScreenCTM(); if (!m) return null; var l = pt.matrixTransform(m.inverse()); return [l.x, l.y]; }
+
+    var hover = el('circle', { r: 6, fill: '#1565c0', 'fill-opacity': '0.4', 'pointer-events': 'none', opacity: '0' });
+    svg.appendChild(hover);
+    var layer = el('g', { 'pointer-events': 'none' });
+    svg.appendChild(layer);
+    function clearLayer() { while (layer.firstChild) layer.removeChild(layer.firstChild); }
+
+    var slider = root.querySelector('[data-bl="purity"]');
+    var rvalEl = root.querySelector('[data-bl="rval"]');
+    var hint = root.querySelector('[data-bl="hint"]');
+    var sayEl = root.querySelector('[data-bl="say"]');
+    var dir = null, rVal = 1;
+
+    function poleName(n) { if (n[2] > 0.985) return '|0⟩'; if (n[2] < -0.985) return '|1⟩'; return null; }
+    function say() {
+      if (!dir) { sayEl.textContent = 'Pick a direction on the ball to read off the one measurement it answers with certainty.'; return; }
+      if (rVal < 0.02) {
+        sayEl.textContent = 'The maximally mixed state I/2: total ignorance. No measurement has a certain answer; every yes/no question is a 50/50 coin flip.';
+      } else if (rVal > 0.985) {
+        var p = poleName(dir);
+        sayEl.textContent = p
+          ? ('This is the pole ' + p + ', the certain answer to the "0 or 1?" question. Along that axis you always get the same outcome; along a perpendicular axis the answer is a perfect coin flip.')
+          : 'A pure state on the surface. It is the certain answer to one yes/no measurement, the one along its own axis. Along that axis you always get the same outcome; along a perpendicular axis the answer is a perfect coin flip.';
+      } else {
+        var pct = Math.round(100 * (1 + rVal) / 2);
+        sayEl.textContent = 'A mixed state, partway in. Along its own axis it still leans the same way, giving that outcome about ' + pct + '% of the time; the deeper toward the centre, the more every question slides to a 50/50 coin flip.';
+      }
+    }
+
+    function update() {
+      if (!dir) return;
+      var r0 = [rVal * dir[0], rVal * dir[1], rVal * dir[2]];
+      var p0 = project(r0);
+      clearLayer();
+      var mk = el('g', { opacity: (0.4 + 0.6 * rVal).toFixed(3) });
+      mk.appendChild(el('circle', { cx: p0[0], cy: p0[1], r: 8, fill: '#ffffff', opacity: rVal.toFixed(3) }));
+      mk.appendChild(el('circle', { cx: p0[0], cy: p0[1], r: 6.5, fill: '#1565c0', stroke: '#0d3f8f', 'stroke-width': '1.5' }));
+      layer.appendChild(mk);
+      rvalEl.textContent = 'r = ' + rVal.toFixed(2);
+      hint.textContent = 'slide to mix'; hint.classList.add('is-set');
+      say();
+    }
+
+    function reset() {
+      dir = null; rVal = 1;
+      clearLayer();
+      slider.disabled = true; slider.value = 1; rvalEl.textContent = 'r = —';
+      hint.textContent = 'click the front of the ball'; hint.classList.remove('is-set');
+      say();
+    }
+
+    svg.addEventListener('pointermove', function (e) {
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      var loc = toSvg(e); if (!loc) return;
+      if (invert(loc[0], loc[1])) { hover.setAttribute('cx', loc[0]); hover.setAttribute('cy', loc[1]); hover.setAttribute('opacity', '1'); }
+      else hover.setAttribute('opacity', '0');
+    });
+    svg.addEventListener('pointerleave', function () { hover.setAttribute('opacity', '0'); });
+    svg.addEventListener('click', function (e) {
+      var loc = toSvg(e); if (!loc) return;
+      var n = invert(loc[0], loc[1]);
+      if (n) { dir = n; rVal = 1; slider.disabled = false; slider.value = 1; update(); }
+      else reset();
+    });
+    slider.addEventListener('input', function () { if (!dir) return; rVal = parseFloat(slider.value); update(); });
+
+    reset();
+  }
+  function init() { var roots = document.querySelectorAll('.bloch-state-interactive'); for (var i = 0; i < roots.length; i++) setup(roots[i]); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
 
 
 
