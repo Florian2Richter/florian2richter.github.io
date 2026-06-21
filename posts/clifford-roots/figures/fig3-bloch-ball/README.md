@@ -1,11 +1,17 @@
 # Figure 3: the Bloch ball (qubit state space)
 
-**Status:** done, static. Wired into the post as `#fig-bloch`,
-referenced in the prose as `@fig-bloch`. This is the quantum counterpart
-of Figure 1 (the classical simplex state space): both are static
-state-space sketches. The click-to-trace interaction lives in Figure 4
-(the root trajectories), mirroring how Figure 2 carries the classical
-interaction.
+**Status:** done, interactive. Wired into the post as `#fig-bloch`,
+referenced in the prose as `@fig-bloch`. The quantum counterpart of
+Figure 1 (the classical simplex). Clicking the front of the ball picks a
+pure direction, a Purity slider moves the state inward, and a plain-words
+readout names the one yes/no measurement the state answers with certainty
+(and how that certainty fades as the state mixes). The root *dynamics*
+(applying `S`) live in Figure 4; this figure is the state-space explorer.
+
+> **Note:** the click + Purity-slider machinery (projection `invert()`,
+> the sinking marker, the slider) is shared with Figure 4. Figure 3 reuses
+> it without the orbit; the readout here is the worded "certain question"
+> rather than the four Bloch vectors of a trajectory.
 
 ## What it shows
 
@@ -28,23 +34,27 @@ foreground marker. (The flat 2D figures, 1 and 2, keep their solid
 centre marker; the two Bloch balls, 3 and 4, use this recessed one.) The
 wireframe and axes stay navy.
 
-## No interaction (static figure)
+## Interaction (progressive enhancement)
 
-This figure is static. The earlier click-to-pick-a-state + purity-slider
-interaction (and its density-matrix readout) was moved to Figure 4, so
-there is no readout panel and no `<script>` here; the partial is the
-inlined SVG only. With or without JavaScript the reader sees the same
-static ball. (The generator still emits `data-*` projection attributes on
-the `<svg>` tag; they are harmless here and are what Figure 4's script
-relies on in its own SVG.)
+The static SVG is the whole figure with JS off (the same ball renders).
+The `<script>` then *adds* a click-to-pick-a-direction marker and a
+Purity slider: clicking the front face inverts the orthographic
+projection onto the camera-facing hemisphere to a pure direction `n`, the
+slider `r` in `[0,1]` sets the state `r0 = r * n` (surface inward toward
+`I/2`), and the marker sinks into the ball as purity drops (halo fades,
+`opacity = 0.4 + 0.6 r`), the depth cue. The readout is plain words: it
+names the one measurement the state answers with certainty (the poles are
+the "0 or 1?" question), and as `r` drops it reports the fading agreement
+(`(1+r)/2`) until, at the centre, every question is a coin flip. The
+projection is read from the `<svg>` `data-*` attributes.
 
 ## Files
 
 | file | role |
 |------|------|
-| `bloch_ball_figure.py` | generator for the static SVG; geometry, viewing angles, and wireframe density are constants at the top |
-| `bloch_ball.svg` | the generated static SVG (checked in) |
-| `interactive.qmd` | the partial the post includes: scoped `<style>` plus the inlined static SVG (no readout, no script) |
+| `bloch_ball_figure.py` | generator for the SVG; geometry, viewing angles, wireframe density, and the emitted `data-*` projection attrs are constants at the top |
+| `bloch_ball.svg` | the generated SVG (checked in), carrying the `data-*` projection attributes |
+| `interactive.qmd` | the partial the post includes: scoped `<style>`, the inlined SVG, the Purity slider + readout, and the `<script>` |
 
 ## To modify
 

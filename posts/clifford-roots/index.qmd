@@ -505,7 +505,7 @@ in.
 
 {{< include figures/fig3-bloch-ball/interactive.qmd >}}
 
-The Bloch ball, the state space of a single qubit: pure states live on the surface, mixed states inside, and the maximally mixed state $I/2$ sits at the centre. Compare the classical bit, whose states fill only a line segment. This is the quantum counterpart of the simplex in @fig-simplex-d3.
+The Bloch ball, the state space of a single qubit: pure states live on the surface, mixed states inside, and the maximally mixed state $I/2$ sits at the centre. Compare the classical bit, whose states fill only a line segment. This is the quantum counterpart of the simplex in @fig-simplex-d3. Click the front of the ball to pick a direction, and use the Purity slider to slide the state inward from the surface; the readout names the one measurement that direction answers with certainty, and how that certainty fades as the state mixes.
 
 :::
 
