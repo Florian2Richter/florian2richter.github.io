@@ -1399,6 +1399,14 @@ Figure&nbsp;2: One square root <span class="math inline">S</span> of the <span c
       var r0 = [rVal * dir[0], rVal * dir[1], rVal * dir[2]];
       var p0 = project(r0);
       clearLayer();
+      // The measurement axis the readout refers to: the diameter through the
+      // chosen direction, with its two outcomes marked at the poles (the
+      // certain outcome filled, the opposite one hollow).
+      var ap = project([-dir[0], -dir[1], -dir[2]]);
+      var bp = project([dir[0], dir[1], dir[2]]);
+      layer.appendChild(el('line', { x1: ap[0], y1: ap[1], x2: bp[0], y2: bp[1], stroke: '#1565c0', 'stroke-width': '1.6', 'stroke-opacity': '0.45', 'stroke-linecap': 'round' }));
+      layer.appendChild(el('circle', { cx: bp[0], cy: bp[1], r: 3.4, fill: '#1565c0', 'fill-opacity': '0.7' }));
+      layer.appendChild(el('circle', { cx: ap[0], cy: ap[1], r: 3.4, fill: 'none', stroke: '#1565c0', 'stroke-width': '1.4', 'stroke-opacity': '0.6' }));
       var mk = el('g', { opacity: (0.4 + 0.6 * rVal).toFixed(3) });
       mk.appendChild(el('circle', { cx: p0[0], cy: p0[1], r: 8, fill: '#ffffff', opacity: rVal.toFixed(3) }));
       mk.appendChild(el('circle', { cx: p0[0], cy: p0[1], r: 6.5, fill: '#1565c0', stroke: '#0d3f8f', 'stroke-width': '1.5' }));
@@ -1444,7 +1452,9 @@ Figure&nbsp;3: The Bloch ball, the state space of a single qubit: pure states li
 </figcaption>
 </figure>
 </div>
-<p>Notice what happened to the dimension. The classical bit lived on a line, one dimension. The qubit lives in a ball, <em>three</em>. That is no accident, and the pattern is the point. A quantum state in dimension <span class="math inline">d</span> is a <span class="math inline">d \times d</span> density matrix: Hermitian, with non-negative eigenvalues, and trace one. Count the real numbers it takes to pin one down and you get <span class="math inline">d^2 - 1</span>.</p>
+<p>Notice what happened to the dimension. The classical bit lived on a line, one dimension; the qubit fills a ball, <em>three</em>. That jump is the pattern worth chasing, but to count it for any number of levels we first have to say what a quantum state even is beyond the qubit.</p>
+<p>We met the qubit’s state as an arrow, bookkept by a small matrix. For <span class="math inline">d</span> levels the bookkeeping object is the same kind of thing, a <span class="math inline">d \times d</span> matrix called the <em>density matrix</em>, and its rules are not arbitrary: they are exactly what it takes to still be describing probabilities. The matrix is Hermitian, so its eigenvalues are real; those eigenvalues are non-negative and sum to one. That last clause is the point, because non-negative numbers summing to one are a probability distribution. A density matrix is a classical probability distribution in disguise: its eigenvalues are the probabilities, and its eigenvectors say which mutually exclusive pure states they are spread across. The classical simplex from the first half of this post is the special case where the axes have already been chosen for you.</p>
+<p>Now we can count. A quantum state in dimension <span class="math inline">d</span> is pinned down by <span class="math inline">d^2 - 1</span> real numbers.</p>
 <details class="aside">
 <summary>Where $d^2 - 1$ comes from</summary>
 <p>A <span class="math inline">d \times d</span> Hermitian matrix is fixed by <span class="math inline">d^2</span> real numbers: <span class="math inline">d</span> real numbers on the diagonal, plus the entries above the diagonal, each complex and so worth two reals, with everything below the diagonal forced by Hermiticity. The off-diagonal count is <span class="math inline">2 \cdot \tfrac{d(d-1)}{2} = d(d-1)</span>, and <span class="math inline">d + d(d-1) = d^2</span>. Fixing the trace to one removes a single degree of freedom, leaving <span class="math inline">d^2 - 1</span>.</p>
