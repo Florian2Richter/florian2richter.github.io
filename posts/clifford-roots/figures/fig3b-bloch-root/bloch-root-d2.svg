@@ -66,24 +66,11 @@
   <line x1="320.00" y1="332.00" x2="177.87" y2="401.43" stroke="#233746" stroke-width="1.8" marker-end="url(#arrow)"/>
   <line x1="320.00" y1="529.34" x2="320.00" y2="99.14" stroke="#233746" stroke-width="1.8" marker-end="url(#arrow)"/>
 
-  <!-- Default orbits (toggled off on click) -->
-  <g class="default-traj">
-  <!-- Secondary orbits (grey): y- and x-axis states -->
-  <line x1="207.42" y1="389.38" x2="397.16" y2="354.24" stroke="#829aa6" stroke-width="2.0" opacity="0.75" stroke-linecap="round" marker-end="url(#arrowG)"/>
-  <line x1="398.23" y1="350.74" x2="328.75" y2="334.10" stroke="#829aa6" stroke-width="2.0" opacity="0.45" stroke-linecap="round" marker-end="url(#arrowG)"/>
-  <line x1="484.24" y1="371.33" x2="328.75" y2="334.10" stroke="#829aa6" stroke-width="2.0" opacity="0.6" stroke-linecap="round" marker-end="url(#arrowG)"/>
-  <circle cx="406.01" cy="352.60" r="5.0" fill="#acc8d3" fill-opacity="0.535" stroke="#1c4a60" stroke-width="1.2" stroke-opacity="0.535"/>
-  <!-- Hero orbit (blue): the z-pole takes all three steps -->
-  <line x1="317.95" y1="142.40" x2="262.08" y2="352.72" stroke="#1565c0" stroke-width="2.7" opacity="0.75" stroke-linecap="round" marker-end="url(#arrowB)"/>
-  <line x1="267.64" y1="359.96" x2="354.16" y2="343.94" stroke="#1565c0" stroke-width="2.7" opacity="0.525" stroke-linecap="round" marker-end="url(#arrowB)"/>
-  <line x1="355.23" y1="340.44" x2="328.75" y2="334.10" stroke="#1565c0" stroke-width="2.7" opacity="0.375" stroke-linecap="round" marker-end="url(#arrowB)"/>
-  <circle cx="259.77" cy="361.42" r="5.0" fill="#acc8d3" fill-opacity="0.535" stroke="#1c4a60" stroke-width="1.2" stroke-opacity="0.535"/>
-  <circle cx="363.01" cy="342.30" r="5.0" fill="#cbdee4" fill-opacity="0.378" stroke="#1c4a60" stroke-width="1.2" stroke-opacity="0.378"/>
-  <!-- Start states (pure) -->
-  <circle cx="492.02" cy="373.20" r="6.0" fill="#2d6f8f" stroke="#1c4a60" stroke-width="1.4"/>
-  <circle cx="199.55" cy="390.83" r="6.0" fill="#2d6f8f" stroke="#1c4a60" stroke-width="1.4"/>
-  <circle cx="320.00" cy="134.66" r="7.0" fill="#2d6f8f" stroke="#0d3f8f" stroke-width="1.4"/>
-  </g>
+  <!-- Layers filled by the script (resting orbits, trails, cloud, hero) -->
+  <g class="resting"></g>
+  <g class="trails"></g>
+  <g class="cloud"></g>
+  <g class="hl"></g>
 
   <!-- Maximally mixed state I/2 (recessed, depth-cued) -->
   <circle cx="320.0" cy="332.0" r="8.5" fill="#f5f7f8" fill-opacity="0.5"/>

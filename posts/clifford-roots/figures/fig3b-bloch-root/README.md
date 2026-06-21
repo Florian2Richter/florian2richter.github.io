@@ -1,22 +1,12 @@
-# Figure 3b / Figure 4: Bloch-ball root trajectories
+# Figure 3b / Figure 4: Bloch-ball root, animated
 
-**Status:** done, interactive. Wired into the post as `#fig-bloch-root`,
+**Status:** done, animated. Wired into the post as `#fig-bloch-root`,
 referenced as `@fig-bloch-root`; it renders as **Figure 4**. Sits in
 "The quantum upgrade" section, right after Figure 3 (the Bloch ball state
 space). This is the quantum counterpart of Figure 2 (the classical
-square-root trajectories): both are the *interactive* root-trajectory
-figures, while Figures 1 and 3 are the static state-space sketches.
-
-> **Planned (next figure to build):** convert this into an *animation*
-> of the qubit root, the way Figure 2 was turned into the classical
-> square-root collapse animation. The Bloch ball should play once on
-> scroll (and replay on tap): a cloud of Bloch vectors driven by `S` to
-> the centre `I/2` in stages, each step shrinking and rotating the cloud
-> onto the next axis until it collapses, with `prefers-reduced-motion`
-> and JS-off falling back to a static labelled figure. Keep the existing
-> click-to-pick-a-direction interaction if it composes cleanly; Florian
-> liked the interactive state-space pick. Mirror Figure 2's structure
-> (skeleton SVG generator + animation script in `interactive.qmd`).
+square-root collapse animation): both play the root crushing a cloud of
+states to the centre in stages. The interactive state-space *pick* now
+lives in Figure 3; this figure is the animation.
 
 ## What it shows
 
@@ -84,34 +74,30 @@ the figure is self-contained.
 | `interactive.qmd` | the partial the post includes: scoped `<style>`, the inlined SVG, the readout, and the `<script>` for the click-to-trace layer |
 | `README.md` | this file |
 
-## Interactive layer
+## Animation layer
 
-Mirrors Figure 2, plus a purity slider like the old Figure 3. Clicking
-the **front face** of the ball picks a pure *direction* `n` (inverting
-the orthographic projection onto the camera-facing hemisphere, the same
-`invert()` as the old Figure 3). The **Purity** slider `r` in `[0, 1]`
-then sets how mixed the starting state is: `r0 = r * n`, from the surface
-(`r = 1`, pure) inward toward `I/2` (`r = 0`). The orbit
-`r0 -> S r0 -> S^2 r0 -> 0` is **recomputed in real time** as the slider
-moves (`update()` rebuilds the whole overlay): a blue circle at `r0` (a
-white halo plus a blue ring), blue dots at the (purity-coloured)
-intermediate points, blue arrows between them, and a readout of the four
-Bloch vectors and `r`. As purity drops the start circle **sinks into the
-ball**: its halo fades and the whole marker dims (`opacity = 0.4 + 0.6 r`),
-exactly the depth cue of the original Bloch figure. The final point is
-`0`, which lands on the `I/2` marker, so no dot is drawn there.
-On a click the three baked default orbits (the `default-traj` groups)
-vanish and only the reader's orbit is shown; a click outside the disc
-restores them and disables the slider. On desktop a faint blue dot
-previews where a click would land.
+Mirrors Figure 2's collapse animation, on the Bloch ball. The generator
+emits only the **skeleton** (ball wireframe, axes, poles, `I/2`, the
+`data-*` projection attributes, and empty `resting / trails / cloud / hl`
+layers); the script builds everything dynamic from the map `applyS(r) =
+[r1/2, r2/2, 0]` (thesis eq. 4.19; `S^3 = 0`):
+
+- **Resting view** (shown at rest, and as the reduced-motion fallback):
+  the three pure axis orbits drawn as arrows + purity-coloured dots, the
+  `z`-pole hero in blue (3 steps), the `y`- and `x`-axis orbits in grey
+  (2 and 1 step).
+- **Animation** (plays once on scroll into view via `IntersectionObserver`,
+  replays on tap): a cloud of ~150 Bloch vectors sampled in the ball is
+  driven through the three stages `r0 -> S r0 -> S^2 r0 -> 0`, each move
+  eased with a short dwell between. Cloud points are coloured by purity
+  and depth-faded (back of the ball paler, `0.45 + 0.55 * frontness`);
+  the three axis orbits are highlighted with trailing polylines. On
+  finish it settles back to the resting view.
 
 The script reads the projection from the `<svg>` `data-*` attributes
-(single source of truth) and holds the root `S` as `applyS(r) =
-[r1/2, r2/2, 0]` (thesis eq. 4.19; `S^3 = 0`). Its forward `project()`
-matches the generator exactly, and `project(invert(click)) = click`, so
-the placed square sits exactly under the cursor. Plain JS, no libraries.
-With JS off, the static ball with its three default orbits renders
-unchanged.
+(single source of truth); its `project()` matches the generator exactly.
+Plain JS, no libraries. With JS off or `prefers-reduced-motion`, the
+static ball plus the resting orbits is what shows.
 
 ## To modify
 

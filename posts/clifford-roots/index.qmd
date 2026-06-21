@@ -599,10 +599,11 @@ three, realising the order-3 bound ($d^2 - 1 = 3$ at $d = 2$). As with
 the classical square root in @fig-root-d3, erasure happens in stages:
 each step both shrinks the vector and rotates it onto the next axis.
 Directions already in the channel's kernel (here the $x$-axis) collapse
-sooner; the slowest direction sets the order. Three default orbits are
-shown; click the front of the ball to pick a direction, use the Purity
-slider to set how mixed the starting state is, and trace its own path to
-$I/2$.
+sooner; the slowest direction sets the order. The animation drives a
+whole cloud of Bloch vectors to $I/2$ through these stages and picks out
+the three axis orbits (the blue $z$-pole is the hero that takes all
+three steps); it plays once when it scrolls into view, and you can tap to
+replay.
 
 :::
 

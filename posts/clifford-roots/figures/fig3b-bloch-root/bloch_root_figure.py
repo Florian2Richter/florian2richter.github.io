@@ -279,77 +279,16 @@ def build_svg():
                  f'x2="{zt[0]:.2f}" y2="{zt[1]:.2f}" stroke="{AXIS}" '
                  f'stroke-width="{AXIS_W}" marker-end="url(#arrow)"/>')
 
-    # --- Trajectories under S (the content of this figure) ---
-    # Each is a list of Bloch vectors; consecutive points joined by arrows.
-    traj_hero = [(0.0, 0.0, 1.0), (0.0, 0.5, 0.0), (0.25, 0.0, 0.0), (0.0, 0.0, 0.0)]
-    traj_y = [(0.0, 1.0, 0.0), (0.5, 0.0, 0.0), (0.0, 0.0, 0.0)]
-    traj_x = [(1.0, 0.0, 0.0), (0.0, 0.0, 0.0)]
-
-    # Trajectory elements fade as they sink toward the centre I/2: opacity
-    # follows the Bloch-vector magnitude, so the orbit dims as it spirals in.
-    def mag(r):
-        return (r[0] ** 2 + r[1] ** 2 + r[2] ** 2) ** 0.5
-
-    def depth_op(m):
-        return round(0.30 + 0.60 * min(1.0, m), 3)      # arrows
-
-    def dot_op(m):
-        return round(0.22 + 0.63 * min(1.0, m), 3)      # points fade a touch more
-
-    def draw_arrows(traj, colour, width, marker):
-        out = []
-        for a, b in zip(traj, traj[1:]):
-            pa = project(a)[:2]
-            pb = project(b)[:2]
-            s, e = shorten2d(pa, pb, DOT_START + 2.0, DOT_MID + 4.0)
-            op = depth_op((mag(a) + mag(b)) / 2)
-            # Use group `opacity`, not stroke-opacity: the latter fades the
-            # line but NOT the arrowhead (a marker painted with its own fill).
-            out.append(f'\n  <line x1="{s[0]:.2f}" y1="{s[1]:.2f}" '
-                       f'x2="{e[0]:.2f}" y2="{e[1]:.2f}" stroke="{colour}" '
-                       f'stroke-width="{width}" opacity="{op}" '
-                       f'stroke-linecap="round" marker-end="url(#{marker})"/>')
-        return "".join(out)
-
-    def draw_dots(traj):
-        out = []
-        # intermediate points (skip the start and the centre) coloured by purity
-        for p in traj[1:-1]:
-            sx, sy, _ = project(p)
-            out.append(f'\n  <circle cx="{sx:.2f}" cy="{sy:.2f}" '
-                       f'r="{DOT_MID}" fill="{purity_colour(p)}" '
-                       f'fill-opacity="{dot_op(mag(p))}" '
-                       f'stroke="{DARK_DOT}" stroke-width="1.2" '
-                       f'stroke-opacity="{dot_op(mag(p))}"/>')
-        return "".join(out)
-
-    # The three default (pure axis-state) orbits live in a toggleable group:
-    # the interactive layer hides them once the reader picks a state, exactly
-    # as Figure 2 hides its baked trajectories.
-    parts.append('\n\n  <!-- Default orbits (toggled off on click) -->')
-    parts.append('\n  <g class="default-traj">')
-
-    parts.append('\n  <!-- Secondary orbits (grey): y- and x-axis states -->')
-    parts.append(draw_arrows(traj_y, ARROW_GREY, ARROW_W, "arrowG"))
-    parts.append(draw_arrows(traj_x, ARROW_GREY, ARROW_W, "arrowG"))
-    parts.append(draw_dots(traj_y))
-    parts.append(draw_dots(traj_x))
-
-    parts.append('\n  <!-- Hero orbit (blue): the z-pole takes all three steps -->')
-    parts.append(draw_arrows(traj_hero, HERO_BLUE, HERO_ARROW_W, "arrowB"))
-    parts.append(draw_dots(traj_hero))
-
-    # Start states (pure, on the surface).
-    parts.append('\n  <!-- Start states (pure) -->')
-    for p, hero in ((traj_x[0], False), (traj_y[0], False), (traj_hero[0], True)):
-        sx, sy, _ = project(p)
-        r = DOT_START + (1.0 if hero else 0.0)
-        stroke = HERO_DARK if hero else DARK_DOT
-        parts.append(f'\n  <circle cx="{sx:.2f}" cy="{sy:.2f}" r="{r}" '
-                     f'fill="{purity_colour(p)}" stroke="{stroke}" '
-                     f'stroke-width="1.4"/>')
-
-    parts.append('\n  </g>')
+    # --- Animated layers, filled by the script ---
+    # The resting axis orbits, the collapsing cloud of Bloch vectors, their
+    # trails and the highlighted hero orbits are all rebuilt by the script from
+    # the map S, so the generator emits only empty layers here. With JS off,
+    # the bare ball still renders.
+    parts.append('\n\n  <!-- Layers filled by the script (resting orbits, trails, cloud, hero) -->')
+    parts.append('\n  <g class="resting"></g>')
+    parts.append('\n  <g class="trails"></g>')
+    parts.append('\n  <g class="cloud"></g>')
+    parts.append('\n  <g class="hl"></g>')
 
     # --- Centre: maximally mixed state I/2, depth-cued (it sits inside the
     # ball): a muted blue-grey dot, a little transparent, recessed. ---

@@ -141,18 +141,16 @@ above. The rule:
   (hover fails on touch and can't hold display math).
 - **Figures.** Built and wired in: fig1 (classical simplex, static,
   red/green/blue corners and a grey centre), fig2 (the classical square
-  root, now an **animation** of the simplex collapsing 2D->1D->0D, plays
-  on scroll, tap to replay), fig3 (Bloch ball, interactive), fig3b (the
-  qubit root on the Bloch ball, currently interactive). Still a
-  placeholder: `figures/orbit-d3.svg` (section 7, the eight-point $d=3$
-  cycle), which renders as a broken image until built.
-  - **Next figure to build:** turn fig3b (the qubit root) into an
-    **animation**, the quantum counterpart of fig2's collapse animation
-    (cloud of Bloch vectors driven to $I/2$ in stages, play-on-scroll,
-    tap-to-replay, reduced-motion fallback). Florian liked the
-    interactive state-space pick, so keep the click-to-pick-a-direction
-    if it composes cleanly. Details in
-    `posts/clifford-roots/figures/fig3b-bloch-root/README.md`.
+  root, an **animation** of the simplex collapsing 2D->1D->0D, plays on
+  scroll, tap to replay), fig3 (Bloch ball, **interactive**: click-to-pick
+  a state + Purity slider + a plain-words "certain question" readout),
+  fig3b/fig4 (the qubit root, now an **animation** of a Bloch-vector cloud
+  collapsing to $I/2$ in stages z->y->x->0, play-on-scroll, tap-to-replay,
+  reduced-motion fallback to the resting axis orbits). The interactive
+  state-space pick lives in fig3, the animation in fig4 (mirroring the
+  classical fig1 static / fig2 animated split, but with fig3 interactive).
+  Still a placeholder: `figures/orbit-d3.svg` (section 7, the eight-point
+  $d=3$ cycle), which renders as a broken image until built.
 - **Citation TODOs:** mixing-channels footnote in the hook (candidates
   to verify), classical-bound footnote (section 2), the general
   $d^2-1$ construction (section 9, working title only), and confirm
