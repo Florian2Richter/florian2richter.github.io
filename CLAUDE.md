@@ -109,23 +109,30 @@ above. The rule:
    mixed state. Bound jumps to $d^2 - 1$. The section is self-contained
    at the "shape" level (no bra-ket algebra), so the Quantum Country
    recommendation is a footnote on the first qubit, not a gating
-   prerequisite at the top.
-4. **Clifford channels as the playground.** Weyl operators,
-   projective representation,
-   $T[\mathbf{w}(\eta)] = \lambda(\eta)\,\mathbf{w}(h(\eta))$. "Two
-   pieces of data."
-5. **The reduction (pivot).** $T^n$ acts on Weyl labels by $h^n$ with
+   prerequisite at the top. Ends on the honest caveat: the bound comes
+   from a Jordan block, but whether it is completely positive was unclear
+   (first person), which motivates the Clifford restriction.
+4. **Coordinates for the Paulis (interlude).** Hands-on: the Pauli group
+   (16 elements + multiplication table), the addresses $(a,b)$,
+   multiplying = adding mod $d$, the trailing phase that makes it a
+   *projective* representation, Weyl operators / $\mathbb{F}_d^2$, why $d$
+   prime (aside). The trailing phase is the seam that becomes $\lambda$.
+5. **Clifford channels as the playground.** The "axes to axes" geometric
+   restriction, CP/Choi tractability, and the channel as two pieces of
+   data, $T[\mathbf{w}(\eta)] = \lambda(\eta)\,\mathbf{w}(h(\eta))$:
+   relabelling $h$ + amplitude/phase $\lambda$.
+6. **The reduction (pivot).** $T^n$ acts on Weyl labels by $h^n$ with
    a product of $\lambda$'s along the orbit. The channel question
    becomes a question about a linear map on $\mathbb{F}_d^2$.
-6. **Ingredient 1: the order of $h$.** Max order $d^2 - 1$ via
+7. **Ingredient 1: the order of $h$.** Max order $d^2 - 1$ via
    companion matrix of a primitive polynomial. Finite-field sidebar
    at moment of need.
-7. **Ingredient 2: orbits and where $\lambda$ vanishes.** Transitive
+8. **Ingredient 2: orbits and where $\lambda$ vanishes.** Transitive
    action on $\mathbb{F}_d^2 \setminus \{0\}$, $\lambda$ vanishing on
    one inverse pair, bound $\frac{d^2 - 1}{2}$.
-8. **Punchline.** The room lives in the orbit structure of $h$, not
+9. **Punchline.** The room lives in the orbit structure of $h$, not
    in channel richness.
-9. **What's next.** Pointer to the published paper for the general
+10. **What's next.** Pointer to the published paper for the general
    $d^2 - 1$ construction.
 
 ## Current state

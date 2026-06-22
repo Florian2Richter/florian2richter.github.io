@@ -644,6 +644,144 @@ that the full bound is reachable, by a construction subtler than a raw
 Jordan block; that is a thread for the end of the post.)
 
 <!-- =================================================================== -->
+## Coordinates for the Paulis {#sec-paulis}
+
+We left the last section with a promise and a worry. The promise: rather
+than search the whole space of channels for one that reaches the
+$d^2 - 1$ bound, we would work inside a small, structured family where
+every member is a genuine channel by construction. The worry was what
+sent us there, that it was not clear, certainly not to me at the time,
+whether the bound-saturating Jordan block is a legal channel at all.
+Before we can pin that family down, we need a good way to handle the
+operators it is built from. This short interlude builds exactly that: a
+clean little arithmetic we lean on for the rest of the post.
+
+Start with what we have already been drawing. The three axes of the Bloch
+ball are not anonymous directions; each is a matrix, the *Pauli matrices*
+$$
+X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \qquad
+Y = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}, \qquad
+Z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix},
+$$
+with the identity $I$ at the centre. The $x$, $y$, $z$ axes of the ball
+are $X$, $Y$, $Z$. Everything a qubit can do is built from these four
+matrices.
+
+They make convenient handles because they multiply into one another.
+Square any one and you return to the identity, $X^2 = Y^2 = Z^2 = I$.
+Multiply two different ones and you get the third, with a phase out
+front,
+$$
+XY = iZ, \qquad YZ = iX, \qquad ZX = iY,
+$$
+and the order is not free: reverse it and the phase flips sign,
+$XZ = -iY$ against $ZX = iY$. The cleanest way to hold all of this at once
+is a small multiplication table, read as row times column:
+
+| $\cdot$ | $I$ | $X$ | $Y$ | $Z$ |
+|:---:|:---:|:---:|:---:|:---:|
+| $I$ | $I$ | $X$ | $Y$ | $Z$ |
+| $X$ | $X$ | $I$ | $iZ$ | $-iY$ |
+| $Y$ | $Y$ | $-iZ$ | $I$ | $iX$ |
+| $Z$ | $Z$ | $iY$ | $-iX$ | $I$ |
+
+Try to keep only $\{I, X, Y, Z\}$ and you cannot: the stray factors of
+$i$ and $-1$ refuse to leave. Let them in and you get a small, closed,
+finite collection,
+$$
+\{\, \pm I, \pm iI,\ \pm X, \pm iX,\ \pm Y, \pm iY,\ \pm Z, \pm iZ \,\},
+$$
+sixteen matrices that multiply among themselves and nowhere else. That
+collection is the *Pauli group*, the entire vocabulary of one qubit.
+
+Sixteen elements with sign-and-$i$ bookkeeping sounds fiddly, but nearly
+all of the fiddliness is the phases, and we can quarantine them. Track
+only *which* Pauli you are holding, ignoring any $\pm 1$ or $\pm i$ in
+front, and the multiplication collapses to something you could do in your
+head. Tag each Pauli with two bits, the first asking "does it flip?", the
+second "does it add a phase?":
+$$
+I = (0,0), \qquad X = (1,0), \qquad Z = (0,1), \qquad Y = (1,1).
+$$
+Now multiplying Paulis is just *adding* the tags, entry by entry, modulo
+two. $X$ times $Z$ ought to flip and phase at once: $(1,0) + (0,1) =
+(1,1)$, which is $Y$. Exactly right. The four Paulis have become the four
+points of a tiny grid, and their multiplication has become addition.
+
+One thing refused to come along: the phase. In shrugging off "any
+$\pm i$ in front" we discarded real information, the very $-1$ behind
+$XZ = -ZX$ in the table. Adding tags remembers *which* Pauli you land on
+but forgets the phase you collect getting there. Holding both at once,
+the tidy tag-addition and a phase trailing behind it, is what makes this
+a *projective* picture rather than a plain one. We need no machinery for
+the word, only the attitude: the labels are a clean plane to navigate,
+and a phase quietly rides along on top. Keep both in view, because that
+trailing phase is not noise to be thrown away. It is the seam the next
+section pries open.
+
+None of this leaned on there being two levels. Give the system $d$ levels
+instead of two and the same story unfolds with more dots. The Paulis grow
+into $d^2$ operators, the *Weyl operators* $\mathbf{w}(\eta)$, each tagged
+by a pair $\eta = (a, b)$ whose entries now run $0, 1, \ldots, d - 1$
+rather than just $0$ and $1$. They still form a basis of every
+$d \times d$ matrix, so a channel is fixed by what it does to them; they
+still multiply by adding tags, now modulo $d$; and they still do so only
+up to a trailing phase, now a $d$-th root of unity $\omega = e^{2\pi i/d}$
+in place of a sign. The tags no longer fill a $2 \times 2$ square but a
+$d \times d$ grid, the plane we will write $\mathbb{F}_d^2$.
+
+One label stands apart on that grid. The origin $(0,0)$ is the identity,
+the trace direction every channel in our class must leave untouched. That
+leaves $d^2 - 1$ nonzero labels, the directions that can genuinely be
+forgotten, and they are exactly the $d^2 - 1$ dimensions we counted on the
+Bloch ball, come back as the nonzero points of a finite grid. (One feature
+of the grid will matter later: it behaves like a full number system, where
+you can divide as freely as you add and multiply, only when $d$ is prime.
+We will not need division until the labels start moving, and the explicit
+shift-and-phase recipe for $\mathbf{w}(\eta)$ is one fold away.)
+
+```{=html}
+<details class="aside">
+<summary>The Weyl operators explicitly, and why $d$ must be prime</summary>
+```
+
+Fix $d$ levels, $|0\rangle$ through $|d-1\rangle$. Two elementary moves
+generate everything. The first is a *shift* that bumps every level up by
+one and wraps around at the top, $X\colon|j\rangle \mapsto |j+1\rangle$,
+the higher-dimensional bit-flip. The second is a *phase kick* that
+multiplies level $j$ by a $d$-th root of unity,
+$Z\colon|j\rangle \mapsto \omega^{\,j}|j\rangle$ with
+$\omega = e^{2\pi i/d}$, the higher-dimensional phase-flip. Applying $a$
+shifts and $b$ phase kicks gives the Weyl operator
+$\mathbf{w}(a,b) \sim X^a Z^b$, fixed up to a phase convention we never
+need; there are $d^2$ of them, one for each label $(a,b)$ with $a$ and
+$b$ taken modulo $d$. At $d = 2$ they are just the four Paulis renamed.
+
+Multiply two and the labels add, up to that same phase:
+$\mathbf{w}(\eta)\,\mathbf{w}(\xi) = (\text{phase}) \cdot \mathbf{w}(\eta + \xi)$.
+The labels add exactly, but the operators reproduce that addition only up
+to a phase, which is why the assignment is called a *projective*
+representation of the group of labels; we never need the phase's exact
+form. As for the primality: the integers modulo a prime form a *field*
+$\mathbb{F}_d$, in which division works as cleanly as addition,
+subtraction and multiplication. We will need to divide by labels, not
+merely add them, once the labels start moving around the plane, and
+division behaves only when $d$ is prime.
+
+```{=html}
+</details>
+```
+
+That is the whole stage: a plane of labels $\mathbb{F}_d^2$, with a phase
+trailing along whenever you multiply. Everything left in this post plays
+out on it. The channels we are about to single out do just two things to
+this plane. They *relabel* it, sending each point to another by a single
+linear map, each axis to an axis. And at each label they pin on a number
+of their own, a phase that is also allowed to shrink in size. That
+attached number is where forgetting will live, and following it around
+the plane is how we hunt down the long roots. Time to meet the channels.
+
+<!-- =================================================================== -->
 ## Clifford channels as the playground {#sec-clifford}
 
 Recall what we are after. The completely depolarising channel $P$ erases
@@ -669,10 +807,9 @@ case we can actually draw, the single qubit. Its states fill the Bloch
 ball, and a unital channel (one that fixes the maximally mixed state at
 the centre) is pinned down entirely by what it does to the three
 coordinate axes; once we know where the axes go, linearity supplies
-everything in between. And those axes are not anonymous directions. They
-are exactly the Pauli operators $X$, $Y$, $Z$, the same three that,
-together with the identity at the centre, coordinatise every qubit
-operation. A general channel is free to send each of them wherever it
+everything in between. And those axes are the Paulis $X$, $Y$, $Z$ we
+met in the interlude, with the identity at the centre. A general channel
+is free to send each of them wherever it
 pleases. The image of the $X$ axis may tilt off into some blend of all
 three directions, the ball is squashed into a skewed, shrunken ellipsoid,
 and the three clean axes we began with end up smeared into one another.
@@ -709,129 +846,36 @@ permutation of the other three.
 
 :::
 
-Now it is time for some notation, so that we can see the full range of our
-map. To each Pauli, and to the identity, we attach a two-component vector,
-its *address* in a small phase space:
+In the interlude we gave every Pauli an address on the plane
+$\mathbb{F}_d^2$ and saw that multiplying Paulis just adds their
+addresses. A Clifford channel's relabelling has to respect that addition,
+which pins it down: it must be a *linear* map of the plane, an invertible
+$2 \times 2$ matrix $h$ over $\mathbb{F}_d$ (two distinct axes can never be
+folded onto one place). For the qubit there are only $3! = 6$ of them, the
+permutations of the three nonzero labels; the one drawn in the figure is
+the three-cycle
 $$
-I \mapsto (0,0), \qquad X \mapsto (1,0), \qquad Z \mapsto (0,1), \qquad Y \mapsto (1,1).
+h = \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pmatrix} \qquad \text{over } \mathbb{F}_2,
 $$
-Read the first entry as "is there a flip?" and the second as "is there a
-phase?": $X$ flips, $Z$ adds a phase, and $Y$ does both at once.
-
-Identify the Paulis with these vectors and a small surprise falls out.
-Adding two vectors, with the entries taken modulo $2$, does exactly what
-multiplying the corresponding Paulis does. Multiply $X$ by $Z$ and, up to
-an overall phase, you get $Y$; add $(1,0)$ and $(0,1)$ and you get
-$(1,1)$, the very same address. A dictionary like this, in which
-multiplying the operators is mirrored by adding their addresses, is what
-mathematicians call a *representation*. The clumsy matrix products have
-quietly turned into vector addition over the *finite field* $\mathbb{F}_2$,
-the two-element number system in which $1 + 1$ wraps back to $0$.
-
-Now look again at what the relabelling $h$ is allowed to do. It carries
-each vector to another, the arrows in the figure, and there is really only
-one rule it has to obey. Because multiplying Paulis is adding their
-vectors, $h$ must respect that addition: it has to be a *linear* map. A
-linear map of two-component vectors is a $2 \times 2$ matrix over
-$\mathbb{F}_2$, and an invertible one, since two distinct axes can never be
-folded onto the same place.
-
-How many such maps are there? For the qubit, exactly six. An invertible
-$2 \times 2$ matrix over $\mathbb{F}_2$ is free to send the three nonzero
-vectors to the three nonzero vectors in any order whatever, so the
-relabellings are precisely the $3! = 6$ permutations of the $X$, $Z$, $Y$
-axes. The one drawn in the figure is the three-cycle
-$(1,0) \to (0,1) \to (1,1) \to (1,0)$, which as a matrix is
-$$
-h = \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pmatrix} \qquad \text{over } \mathbb{F}_2 .
-$$
-
-
-The qubit was special only in being easy to draw, its four Paulis sitting
-at the corners of one little square. Every higher dimension tells the same
-story with more dots. For a system of $d$ levels the Paulis become $d^2$
-operators, the *Weyl operators* $\mathbf{w}(\eta)$, and their two-bit
-addresses grow into two full coordinates $\eta = (a,b)$, each now running
-over $0, 1, \ldots, d - 1$ rather than just $0$ and $1$. They still form a
-basis of all $d \times d$ matrices, so a channel is still fixed by what it
-does to them, and multiplying two of them still adds their addresses, only
-now modulo $d$. The addresses no longer fill a square but a $d \times d$
-grid, the plane we will write $\mathbb{F}_d^2$, and $h$ is again a linear
-map of that grid: a $2 \times 2$ matrix, now with entries taken modulo
-$d$.
-
-One address still stands apart. The origin $(0,0)$ is the identity, the
-trace direction every channel in our class must leave untouched, exactly
-as it was for the qubit. That leaves $d^2 - 1$ nonzero addresses, the
-directions that can genuinely be forgotten, and they are precisely the
-$d^2 - 1$ dimensions we counted on the Bloch ball, come back as the
-nonzero points of a finite grid. Back at $d = 2$ those two bits already
-formed a field; for larger $d$ the grid stays a field only when $d$ is
-*prime*, a number system in which you can divide as well as add, subtract
-and multiply. We will not need division until later, once $h$ starts
-carrying points around the grid, but it is the whole reason for insisting
-$d$ is prime. The explicit construction is one fold away.
-
-```{=html}
-<details class="aside">
-<summary>The Weyl operators explicitly, and why $d$ must be prime</summary>
-```
-
-Fix $d$ levels, $|0\rangle$ through $|d-1\rangle$. Two elementary moves
-generate everything. The first is a *shift* that bumps every level up by
-one and wraps around at the top, $X\colon|j\rangle \mapsto |j+1\rangle$,
-the higher-dimensional bit-flip. The second is a *phase kick* that
-multiplies level $j$ by a $d$-th root of unity,
-$Z\colon|j\rangle \mapsto \omega^{\,j}|j\rangle$ with
-$\omega = e^{2\pi i/d}$, the higher-dimensional phase-flip. Applying $a$
-shifts and $b$ phase kicks gives the Weyl operator
-$\mathbf{w}(a,b) \sim X^a Z^b$, fixed up to a phase convention we never
-need; there are $d^2$ of them, one for each label $(a,b)$ with $a$ and
-$b$ taken modulo $d$. At $d = 2$ they are just the four Paulis renamed.
-
-Multiply two and the labels add, up to that same phase:
-$\mathbf{w}(\eta)\,\mathbf{w}(\xi) = (\text{phase}) \cdot \mathbf{w}(\eta + \xi)$.
-The labels add exactly, but the operators reproduce that addition only up
-to a phase, which is why the assignment is called a *projective*
-representation of the group of labels; we never need the phase's exact
-form. As for the primality: the integers modulo a prime form a *field*
-$\mathbb{F}_d$, in which division works as cleanly as addition,
-subtraction and multiplication. We will need to divide by labels, not
-merely add them, once $h$ starts moving points around the plane, and
-division behaves only when $d$ is prime.
-
-```{=html}
-</details>
-```
+cycling $(1,0) \to (0,1) \to (1,1) \to (1,0)$ and fixing the origin.
 
 We can now say precisely which channels we keep. Apply a general channel
 to a single Weyl operator and you get back a sprawling combination of all
 $d^2$ of them. A *Clifford channel* refuses the sprawl: it sends each
 Weyl operator to a single other Weyl operator, rescaled,
-$$T[\mathbf{w}(\eta)] = \lambda(\eta)\,\mathbf{w}(h(\eta)).$$
-This is the Paulis-to-Paulis rule of the qubit picture, written for every
-dimension, and it carries exactly two pieces of data. The first is $h$,
-the relabelling: it says which axis each axis is sent to. It is a linear,
-invertible map of the label plane (an element of $GL(2, \mathbb{F}_d)$)
-that does nothing but shuffle the coordinate system among itself. The
-second is $\lambda$, the list of amplitudes: one number $\lambda(\eta)$
-for each label, the factor by which that coordinate is stretched or
-shrunk. This is where forgetting lives: an amplitude below one in
-magnitude damps a coordinate, and an amplitude equal to zero erases it
-outright. In the qubit picture $h$ was the permutation of the three axes
-and $\lambda$ their rescaling; nothing has changed but the number of
-axes.
-
-To make this concrete, the relabelling drawn back in the figure is the
-matrix
 $$
-h = \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pmatrix} \quad \text{over } \mathbb{F}_2,
+T[\mathbf{w}(\eta)] = \lambda(\eta)\,\mathbf{w}(h(\eta)).
 $$
-cycling $(1,0) \to (0,1) \to (1,1) \to (1,0)$ through the three nonzero
-labels and fixing $(0,0)$. There every amplitude is $\lambda(\eta) = 1$,
-so the channel merely shuffles the axes and forgets nothing: a reversible
-relabelling. Forgetting begins only when some amplitude drops below one,
-which is what the coming sections are about.
+It carries exactly two pieces of data. The first is the relabelling $h$
+we just met, the invertible linear map of the label plane that shuffles
+the axes among themselves. The second is $\lambda$, the list of
+amplitudes: one number $\lambda(\eta)$ for each label, the factor by which
+that coordinate is stretched or shrunk. This is where forgetting lives. An
+amplitude below one in magnitude damps a coordinate, and an amplitude
+equal to zero erases it outright. Take $h$ the three-cycle above with
+every $\lambda(\eta) = 1$, and the channel merely shuffles the axes and
+forgets nothing, a reversible relabelling; forgetting begins only when
+some amplitude drops below one, which is what the coming sections are about.
 
 It is worth pausing on how little data this is. A general channel in
 dimension $d$ is described by its Choi matrix, an object of size
