@@ -1213,7 +1213,7 @@ N \;\cong\;
     // Rest on the initial state: a fresh, uncollapsed cloud at t=0.
     function showInitial(){buildAnim();renderFrame(0);showMode(true);}
     function animate(){
-      if(running)return;running=true;buildAnim();showMode(true);
+      if(running)return;running=true;showMode(true);
       var t0=null;
       function frame(now){
         if(t0===null)t0=now;var t=now-t0;if(t>DUR)t=DUR;var i,st,c;
@@ -1623,7 +1623,7 @@ k \;\leq\; d^2 - 1.
     // Rest on the initial state: a fresh, uncollapsed cloud at t=0.
     function showInitial(){buildAnim();renderFrame(0);showMode(true);}
     function animate(){
-      if(running)return;running=true;buildAnim();showMode(true);var t0=null;
+      if(running)return;running=true;showMode(true);var t0=null;
       function frame(now){if(t0===null)t0=now;var t=now-t0;if(t>DUR)t=DUR;var i,st,pr;
         for(i=0;i<cloud.length;i++){st=stateAt(cloud[i].s,t);pr=project(st);cloud[i].dot.setAttribute('cx',pr[0]);cloud[i].dot.setAttribute('cy',pr[1]);cloud[i].dot.setAttribute('fill',colof(st));cloud[i].dot.setAttribute('fill-opacity',frontOp(pr[2]).toFixed(3));}
         for(i=0;i<hl.length;i++){st=stateAt(hl[i].o,t);pr=project(st);hl[i].path.push(pr[0]+','+pr[1]);hl[i].trail.setAttribute('points',hl[i].path.join(' '));hl[i].dot.setAttribute('cx',pr[0]);hl[i].dot.setAttribute('cy',pr[1]);}
