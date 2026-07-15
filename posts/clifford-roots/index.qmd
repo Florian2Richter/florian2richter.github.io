@@ -2,7 +2,7 @@
 title: "How finely can you divide a depolarizing channel?"
 description: "Clifford channels are a tiny corner of the space of quantum channels, and yet they let you divide the most destructive channel of all into nearly as many discrete steps as the full quantum machinery allows. The room to do this lives in a surprising place."
 author: "Florian Richter"
-date: "2026-07-15 16:18"
+date: "2026-07-15 16:54"
 date-format: "YYYY-MM-DD HH:mm"
 categories: [quantum, channels, clifford, finite-fields]
 draft: true
@@ -685,15 +685,43 @@ this constrained? Answering that is where the rest of the post lives.
 <!-- =================================================================== -->
 ## Coordinates for the Paulis {#sec-paulis}
 
-We left the last section with a promise and a detour. The promise:
-rather than chase the general construction that saturates the
-$d^2 - 1$ bound, the one I only pinned down at the very end, we would
-work inside a small, structured family where every member is a genuine
-channel by construction and the order is something you can simply
-compute. Taking that detour is the whole fun of what follows.
-Before we can pin that family down, we need a good way to handle the
-operators it is built from. This short interlude builds exactly that: a
-clean little arithmetic we lean on for the rest of the post.
+Finite groups are among the simplest objects in mathematics, and among
+the most quietly powerful. A group is a finite collection of things with
+a single operation that combines any two of them into a third. The rule
+that gives the idea its force is closure: combine two members and you
+land on a member again, every time, so you can go on combining forever
+without ever leaving the set or enlarging it. The smallest example worth
+naming is $\mathbb{Z}_2$, two elements $0$ and $1$ combined by addition
+modulo two, with $0 + 1 = 1$ and $1 + 1 = 0$. A light switch, a coin
+turned over and over: two states and one move that flips between them,
+with nowhere else to go.
+
+Here is the move that makes groups so useful, and it is the one to hold
+onto. You can *represent* a group by matrices: attach a matrix to each
+element so that multiplying the matrices reproduces the group's own
+operation. A representation is the bridge from an abstract group to
+concrete linear algebra. For $\mathbb{Z}_2$ it can be as small as two
+$2 \times 2$ matrices,
+$$
+0 \;\longmapsto\; \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, \qquad
+1 \;\longmapsto\; \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}.
+$$
+The first does nothing; the second swaps the two entries it acts on, a
+flip. Multiply the flip by itself and the swaps cancel, returning the
+identity, exactly as $1 + 1 = 0$ in the group. Addition modulo two has
+become matrix multiplication. This translation is so fruitful that the
+representation theory of finite groups is a deep and thoroughly mapped
+field in its own right.
+
+That is precisely the handle we need, one size up. The operators a
+single qubit is built from also close into a finite group under
+multiplication, a richer cousin of $\mathbb{Z}_2$, and the matrices a
+qubit lives on are a representation of it. Our constrained channels are
+organised by that group. Pin down the group and its representation, and
+the channel question that resisted us becomes arithmetic we can carry
+out by hand. So we build the arithmetic first. What follows is a short,
+self-contained toolkit, and we lean on it for the rest of the post. We
+have, in fact, already written one of its members down.
 
 Start with what we have already been drawing. The three axes of the Bloch
 ball are not anonymous directions; each is a matrix, the *Pauli matrices*
