@@ -1,5 +1,5 @@
 ```{=html}
-<!-- Figure 4: maximal qubit root S on the Bloch ball, animated. Skeleton SVG (ball wireframe + axes + poles + I/2 + data-* + empty layers) from bloch_root_figure.py; the script builds the resting axis orbits and the cloud-collapse animation (z->y->x->0) from S. Autoplay on scroll, tap to replay, reduced-motion/JS-off => static ball. -->
+<!-- Figure 4: maximal qubit root S on the Bloch ball, animated. Skeleton SVG (ball wireframe + axes + poles + I/2 + data-* + empty layers) from bloch_root_figure.py; the script builds the resting axis orbits and the cloud-collapse animation (z->y->x->0) from S. Tap to play, reduced-motion/JS-off => static ball. -->
 <style>
 .bloch-root-animated{max-width:520px;margin:1.25rem auto;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
 .bloch-root-animated svg{width:100%;height:auto;display:block;}
@@ -7,7 +7,7 @@
 .bloch-root-animated .bl-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
 </style>
 <div class="bloch-root-animated">
-<p class="bl-vh">Animation of the maximal qubit root S on the Bloch ball. A cloud of Bloch vectors is driven by S to the maximally mixed centre I/2 in stages, each step shrinking and rotating it onto the next axis (z to y to x to 0). Three pure axis states are highlighted: the z-pole takes three steps (the hero, realising the order-3 bound), the y-axis two, the x-axis one. Plays once when scrolled into view; tap to replay.</p>
+<p class="bl-vh">Animation of the maximal qubit root S on the Bloch ball. A cloud of Bloch vectors is driven by S to the maximally mixed centre I/2 in stages, each step shrinking and rotating it onto the next axis (z to y to x to 0). Three pure axis states are highlighted: the z-pole takes three steps (the hero, realising the order-3 bound), the y-axis two, the x-axis one. Tap the figure to play the animation.</p>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" font-family="Georgia, 'Times New Roman', serif" role="img" aria-label="The maximal qubit root S driving Bloch vectors to the centre in stages" data-cx="320" data-cy="332" data-r="210" data-alpha-deg="35" data-elev-deg="20">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
@@ -50,7 +50,7 @@
   <text x="328.00" y="71.52" text-anchor="start" font-size="20" font-style="italic" fill="#233746">z</text>
   <text x="334.00" y="330.00" text-anchor="start" font-size="20" fill="#5e7886">I/2</text>
 </svg>
-<p class="bl-hint">Plays once on scroll. Tap to replay.</p>
+<p class="bl-hint">Tap to play.</p>
 </div>
 <script>
 (function(){
@@ -135,8 +135,6 @@
     if(!reduce){
       svg.style.cursor='pointer';
       svg.addEventListener('click',animate);
-      if('IntersectionObserver' in window){var seen=false;var io=new IntersectionObserver(function(es){for(var i=0;i<es.length;i++){if(es[i].isIntersecting&&!seen){seen=true;animate();}}},{threshold:0.25});io.observe(svg);}
-      else animate();
     }
   }
   function init(){var rs=document.querySelectorAll('.bloch-root-animated');for(var i=0;i<rs.length;i++)setup(rs[i]);}

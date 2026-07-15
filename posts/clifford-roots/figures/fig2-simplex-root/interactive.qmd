@@ -7,7 +7,7 @@
 .trajectory-animated .tr-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
 </style>
 <div class="trajectory-animated">
-<p class="tr-vh">Animation of the square-root channel S on the probability simplex. A cloud of states, coloured by its red-green-blue mixture, is mapped by S onto a line segment (the 2D simplex collapses to 1D), then by a second S onto the single grey maximally mixed point (1D collapses to 0D). The three pure corners e1, e2, e3 trace highlighted paths; e1 and e2 merge onto the same intermediate point. Plays once when scrolled into view; tap to replay.</p>
+<p class="tr-vh">Animation of the square-root channel S on the probability simplex. A cloud of states, coloured by its red-green-blue mixture, is mapped by S onto a line segment (the 2D simplex collapses to 1D), then by a second S onto the single grey maximally mixed point (1D collapses to 0D). The three pure corners e1, e2, e3 trace highlighted paths; e1 and e2 merge onto the same intermediate point. Tap the figure to play the animation.</p>
 <svg role="img" aria-label="The square-root channel collapsing the probability simplex to its grey centre in two steps. The three pure-state corners are coloured red, green, and blue; a cloud of states flows under the channel onto a line segment, then onto the single grey maximally mixed point." xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 620" font-family="Georgia, 'Times New Roman', serif">
   <polygon class="tri" points="140,510 540,430 310,130" fill="none" stroke="#2d6f8f" stroke-width="2.2" stroke-linejoin="round"/>
   <g class="resting"></g>
@@ -24,7 +24,7 @@
   <text x="310" y="120" text-anchor="middle" font-size="14" fill="#829aa6">(0, 0, 1)</text>
   <text x="346.0" y="352.6666666666667" font-size="22" font-style="italic" fill="#233746">p₀</text>
 </svg>
-<p class="anim-hint">Plays once on scroll. Tap to replay.</p>
+<p class="anim-hint">Tap to play.</p>
 </div>
 <script>
 (function(){
@@ -119,11 +119,6 @@
     if(!reduce){
       svg.style.cursor='pointer';
       svg.addEventListener('click',animate);
-      if('IntersectionObserver' in window){
-        var seen=false;
-        var io=new IntersectionObserver(function(es){for(var i=0;i<es.length;i++){if(es[i].isIntersecting&&!seen){seen=true;animate();}}},{threshold:0.25});
-        io.observe(svg);
-      }else animate();
     }
   }
   function init(){var rs=document.querySelectorAll('.trajectory-animated');for(var i=0;i<rs.length;i++)setup(rs[i]);}
