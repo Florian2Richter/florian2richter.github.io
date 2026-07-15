@@ -44,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-18ab93377f3033567ca77937b5de9070.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a3f9da43542dd30c35aa4b7c36df65ab.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -219,7 +219,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026-07-15 16:18</p>
+      <p class="date">2026-07-15 16:54</p>
     </div>
   </div>
   
@@ -1658,7 +1658,12 @@ Figure&nbsp;4: A maximal qubit root <span class="math inline">S</span> acting on
 </section>
 <section id="sec-paulis" class="level2">
 <h2 class="anchored" data-anchor-id="sec-paulis">Coordinates for the Paulis</h2>
-<p>We left the last section with a promise and a detour. The promise: rather than chase the general construction that saturates the <span class="math inline">d^2 - 1</span> bound, the one I only pinned down at the very end, we would work inside a small, structured family where every member is a genuine channel by construction and the order is something you can simply compute. Taking that detour is the whole fun of what follows. Before we can pin that family down, we need a good way to handle the operators it is built from. This short interlude builds exactly that: a clean little arithmetic we lean on for the rest of the post.</p>
+<p>Finite groups are among the simplest objects in mathematics, and among the most quietly powerful. A group is a finite collection of things with a single operation that combines any two of them into a third. The rule that gives the idea its force is closure: combine two members and you land on a member again, every time, so you can go on combining forever without ever leaving the set or enlarging it. The smallest example worth naming is <span class="math inline">\mathbb{Z}_2</span>, two elements <span class="math inline">0</span> and <span class="math inline">1</span> combined by addition modulo two, with <span class="math inline">0 + 1 = 1</span> and <span class="math inline">1 + 1 = 0</span>. A light switch, a coin turned over and over: two states and one move that flips between them, with nowhere else to go.</p>
+<p>Here is the move that makes groups so useful, and it is the one to hold onto. You can <em>represent</em> a group by matrices: attach a matrix to each element so that multiplying the matrices reproduces the group’s own operation. A representation is the bridge from an abstract group to concrete linear algebra. For <span class="math inline">\mathbb{Z}_2</span> it can be as small as two <span class="math inline">2 \times 2</span> matrices, <span class="math display">
+0 \;\longmapsto\; \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}, \qquad
+1 \;\longmapsto\; \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}.
+</span> The first does nothing; the second swaps the two entries it acts on, a flip. Multiply the flip by itself and the swaps cancel, returning the identity, exactly as <span class="math inline">1 + 1 = 0</span> in the group. Addition modulo two has become matrix multiplication. This translation is so fruitful that the representation theory of finite groups is a deep and thoroughly mapped field in its own right.</p>
+<p>That is precisely the handle we need, one size up. The operators a single qubit is built from also close into a finite group under multiplication, a richer cousin of <span class="math inline">\mathbb{Z}_2</span>, and the matrices a qubit lives on are a representation of it. Our constrained channels are organised by that group. Pin down the group and its representation, and the channel question that resisted us becomes arithmetic we can carry out by hand. So we build the arithmetic first. What follows is a short, self-contained toolkit, and we lean on it for the rest of the post. We have, in fact, already written one of its members down.</p>
 <p>Start with what we have already been drawing. The three axes of the Bloch ball are not anonymous directions; each is a matrix, the <em>Pauli matrices</em> <span class="math display">
 X = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}, \qquad
 Y = \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix}, \qquad
