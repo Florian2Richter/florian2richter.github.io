@@ -123,7 +123,7 @@
     // Rest on the initial state: a fresh, uncollapsed cloud at t=0.
     function showInitial(){buildAnim();renderFrame(0);showMode(true);}
     function animate(){
-      if(running)return;running=true;buildAnim();showMode(true);
+      if(running)return;running=true;showMode(true);
       var t0=null;
       function frame(now){
         if(t0===null)t0=now;var t=now-t0;if(t>DUR)t=DUR;var i,st,c;
