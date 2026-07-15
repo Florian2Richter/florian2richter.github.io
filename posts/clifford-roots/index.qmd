@@ -2,7 +2,7 @@
 title: "How finely can you divide a depolarizing channel?"
 description: "Clifford channels are a tiny corner of the space of quantum channels, and yet they let you divide the most destructive channel of all into nearly as many discrete steps as the full quantum machinery allows. The room to do this lives in a surprising place."
 author: "Florian Richter"
-date: "2026-07-15 17:04"
+date: "2026-07-15 17:18"
 date-format: "YYYY-MM-DD HH:mm"
 categories: [quantum, channels, clifford, finite-fields]
 draft: true
@@ -717,11 +717,6 @@ modulo two has become matrix multiplication, and that translation is so
 fruitful that the representation theory of finite groups is a deep and
 thoroughly mapped field in its own right.
 
-That is precisely the handle we need, one size up. The operators a
-single qubit is built from also close into a finite group under
-multiplication, a richer cousin of $\mathbb{Z}_2$, and the matrices a
-qubit lives on are a representation of it.
-
 So how does turning a group into matrices help us take roots of a
 depolarising channel? Ask first what a channel even is in this picture.
 A channel maps states to states, and it does so linearly. Suppose we
@@ -773,10 +768,23 @@ $$
 sixteen matrices that multiply among themselves and nowhere else. That
 collection is the *Pauli group*, the entire vocabulary of one qubit.
 
+There is a twist in these sixteen matrices worth naming before we tame
+them. Look again at how they multiply. $XY = iZ$, not simply $Z$: the
+product of two Paulis is another Pauli with a phase riding out front, and
+reversing the order flips that phase. So they reproduce the group's
+multiplication, but only up to a phase. A set of matrices that matches a
+group's operation exactly, as ours did for $\mathbb{Z}_2$, is a plain
+representation; one that matches it only up to a phase, as here, is
+called *projective*. The word needs no machinery, only the attitude:
+underneath sits a clean, phase-free structure, and a phase rides quietly
+on top of it. That trailing phase is not noise to be discarded. It is the
+seam the next section pries open.
+
 Sixteen elements with sign-and-$i$ bookkeeping sounds fiddly, but nearly
-all of the fiddliness is the phases, and we can quarantine them. Track
-only *which* Pauli you are holding, ignoring any $\pm 1$ or $\pm i$ in
-front, and the multiplication collapses to something you could do in your
+all of the fiddliness is the phases, and we can quarantine them for now.
+Track only *which* Pauli you are holding, ignoring any $\pm 1$ or $\pm i$
+in front, and the multiplication collapses to something you could do in
+your
 head. Tag each Pauli with two bits, the first asking "does it flip?", the
 second "does it add a phase?":
 $$
@@ -786,17 +794,8 @@ Now multiplying Paulis is just *adding* the tags, entry by entry, modulo
 two. $X$ times $Z$ ought to flip and phase at once: $(1,0) + (0,1) =
 (1,1)$, which is $Y$. Exactly right. The four Paulis have become the four
 points of a tiny grid, and their multiplication has become addition.
-
-One thing refused to come along: the phase. In shrugging off "any
-$\pm i$ in front" we discarded real information, the very $-1$ behind
-$XZ = -ZX$ in the table. Adding tags remembers *which* Pauli you land on
-but forgets the phase you collect getting there. Holding both at once,
-the tidy tag-addition and a phase trailing behind it, is what makes this
-a *projective* picture rather than a plain one. We need no machinery for
-the word, only the attitude: the labels are a clean plane to navigate,
-and a phase quietly rides along on top. Keep both in view, because that
-trailing phase is not noise to be thrown away. It is the seam the next
-section pries open.
+This grid is the clean, phase-free structure the earlier twist promised;
+the phase still rides along on top, exactly where we set it aside.
 
 None of this leaned on there being two levels. Give the system $d$ levels
 instead of two and the same story unfolds with more dots. The Paulis grow
