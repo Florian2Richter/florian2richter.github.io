@@ -11,30 +11,33 @@ format:
     toc-depth: 2
 ---
 
-This post is a compression of my diploma thesis in Quantum
-Information, which I wrote in Hannover in 2010. Back then I set out to
-answer a single, stubborn question: in how many equal steps can you
-take apart the most destructive process there is? The thesis posed
-that problem carefully and worked out the answer for a particular,
-highly structured family of processes. What you are reading now is
-that story, retold.
+This post grew out of my diploma thesis in Quantum Information, which
+I wrote in Hannover in 2010. The thesis was about quantum memory
+channels, and in particular about how deep their memory runs. Somewhere
+inside that work a smaller, self-contained question fell out, one I
+have wanted to retell ever since: how finely can you divide the most
+destructive process there is?
 
-I had wanted to retell it for a long time, because the original is
-written for examiners, not for curious readers. The arrival of large
-language models finally removed my last excuse. I could not resist the
-temptation to rewrite the whole thing with agentic support, trading
-the terse notation of a thesis for pictures, worked examples, and a
-slower pace, so that a motivated undergraduate can follow every step.
+The original is written for examiners, not for curious readers. The
+arrival of large language models finally removed my last excuse. I
+could not resist the temptation to rewrite the thing with agentic
+support, trading the terse notation of a thesis for pictures, worked
+examples, and a slower pace, so that a motivated undergraduate can
+follow every step.
 
-In hindsight I think it is an approachable and yet instructive
-example. Approachable, because you can pose the question with nothing
-more than probabilities arranged in a triangle. Instructive, because
-that innocent-looking question has a clean classical shadow, a
-satisfying answer once you upgrade to the quantum world, and, once you
-restrict attention to a small and well-behaved corner of that world,
-the Clifford channels, it opens a door onto finite fields and the
-geometry of their orbits, areas of mathematics that are still far from
-fully understood. Watching a physics question turn, almost on its own,
+The heart of the post is that dividing question and its answer in the
+full quantum world, a result I published years ago and that the post
+reaches by the end of the quantum part. I could have stopped there.
+
+Instead the post keeps going, into a small and well-behaved corner of
+the quantum world called the Clifford channels. This last step is a
+bonus, a side result I never published, and it earns its place for one
+reason: it is beautiful. Restricting to Clifford channels turns the
+whole problem into simple, concrete group theory, a handful of finite
+states and the permutations that shuffle them, something you can work
+through by hand. The reward is that even this tiny corner reaches, in
+prime dimensions, asymptotically the same complexity as the full
+quantum machinery. Watching a question about a physical process turn
 into a question about lines over a finite field is the part I still
 find surprising.
 
