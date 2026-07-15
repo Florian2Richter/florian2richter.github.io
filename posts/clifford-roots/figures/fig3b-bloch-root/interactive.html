@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-18ab93377f3033567ca77937b5de9070.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-a3f9da43542dd30c35aa4b7c36df65ab.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -250,19 +250,30 @@ ul.task-list li input[type="checkbox"] {
     function showMode(anim){gRest.style.display=anim?'none':'';gCloud.style.display=anim?'':'none';gHL.style.display=anim?'':'none';gTrail.style.display=anim?'':'none';}
 
     var running=false;
+    // Position the cloud and highlight dots at time t, without touching the trails.
+    function renderFrame(t){
+      var i,st,pr;
+      for(i=0;i<cloud.length;i++){st=stateAt(cloud[i].s,t);pr=project(st);cloud[i].dot.setAttribute('cx',pr[0]);cloud[i].dot.setAttribute('cy',pr[1]);cloud[i].dot.setAttribute('fill',colof(st));cloud[i].dot.setAttribute('fill-opacity',frontOp(pr[2]).toFixed(3));}
+      for(i=0;i<hl.length;i++){st=stateAt(hl[i].o,t);pr=project(st);hl[i].dot.setAttribute('cx',pr[0]);hl[i].dot.setAttribute('cy',pr[1]);}
+    }
+    // Rest on the initial state: a fresh, uncollapsed cloud at t=0.
+    function showInitial(){buildAnim();renderFrame(0);showMode(true);}
     function animate(){
       if(running)return;running=true;buildAnim();showMode(true);var t0=null;
       function frame(now){if(t0===null)t0=now;var t=now-t0;if(t>DUR)t=DUR;var i,st,pr;
         for(i=0;i<cloud.length;i++){st=stateAt(cloud[i].s,t);pr=project(st);cloud[i].dot.setAttribute('cx',pr[0]);cloud[i].dot.setAttribute('cy',pr[1]);cloud[i].dot.setAttribute('fill',colof(st));cloud[i].dot.setAttribute('fill-opacity',frontOp(pr[2]).toFixed(3));}
         for(i=0;i<hl.length;i++){st=stateAt(hl[i].o,t);pr=project(st);hl[i].path.push(pr[0]+','+pr[1]);hl[i].trail.setAttribute('points',hl[i].path.join(' '));hl[i].dot.setAttribute('cx',pr[0]);hl[i].dot.setAttribute('cy',pr[1]);}
-        if(t<DUR)requestAnimationFrame(frame);else setTimeout(function(){running=false;showMode(false);},700);
+        // Hold on the collapsed centre I/2, then jump back to the initial state.
+        if(t<DUR)requestAnimationFrame(frame);else setTimeout(function(){running=false;showInitial();},700);
       }
       requestAnimationFrame(frame);
     }
 
-    buildResting();showMode(false);
     var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(!reduce){
+    if(reduce){
+      buildResting();showMode(false);
+    }else{
+      showInitial();
       svg.style.cursor='pointer';
       svg.addEventListener('click',animate);
     }
