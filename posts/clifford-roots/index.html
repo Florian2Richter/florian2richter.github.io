@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Florian Richter">
-<meta name="dcterms.date" content="2026-05-30">
+<meta name="dcterms.date" content="2026-07-15">
 <meta name="description" content="Clifford channels are a tiny corner of the space of quantum channels, and yet they let you divide the most destructive channel of all into nearly as many discrete steps as the full quantum machinery allows. The room to do this lives in a surprising place.">
 
 <title>How finely can you divide a depolarizing channel? – Florian’s Blog</title>
@@ -220,7 +220,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 30, 2026</p>
+      <p class="date">July 15, 2026</p>
     </div>
   </div>
   
@@ -1091,8 +1091,21 @@ N \;\cong\;
 .trajectory-animated .tr-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
 </style>
 <div class="trajectory-animated">
-<p class="tr-vh">Animation of the square-root channel S on the probability simplex. A cloud of states, coloured by its red-green-blue mixture, is mapped by S onto a line segment (the 2D simplex collapses to 1D), then by a second S onto the single grey maximally mixed point (1D collapses to 0D). The three pure corners e1, e2, e3 trace highlighted paths; e1 and e2 merge onto the same intermediate point. Plays once when scrolled into view; tap to replay.</p>
+<p class="tr-vh">Animation of the square-root channel S on the probability simplex. A cloud of states, coloured by its red-green-blue mixture, is mapped by S onto a line segment (the 2D simplex collapses to 1D), then by a second S onto the single grey maximally mixed point (1D collapses to 0D). The three pure corners e1, e2, e3 trace highlighted paths; e1 and e2 merge onto the same intermediate point. Tap the figure to play the animation.</p>
 <svg role="img" aria-label="The square-root channel collapsing the probability simplex to its grey centre in two steps. The three pure-state corners are coloured red, green, and blue; a cloud of states flows under the channel onto a line segment, then onto the single grey maximally mixed point." xmlns="http://www.w3.org/2000/svg" viewbox="0 0 640 620" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <marker id="arrow2" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="8" markerheight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#233746"></path>
+    </marker>
+  </defs>
+  <!-- Coordinate axes (shared with Figure 1; static, so they stay through the whole animation) -->
+  <line x1="310" y1="430" x2="95" y2="530" stroke="#233746" stroke-width="1.8" marker-end="url(#arrow2)"></line>
+  <line x1="310" y1="430" x2="590" y2="430" stroke="#233746" stroke-width="1.8" marker-end="url(#arrow2)"></line>
+  <line x1="310" y1="430" x2="310" y2="75" stroke="#233746" stroke-width="1.8" marker-end="url(#arrow2)"></line>
+  <!-- Unit tick marks -->
+  <line x1="143.0" y1="516.3" x2="137.0" y2="503.7" stroke="#233746" stroke-width="1.6"></line>
+  <line x1="540.0" y1="423.0" x2="540.0" y2="437.0" stroke="#233746" stroke-width="1.6"></line>
+  <line x1="303.0" y1="130.0" x2="317.0" y2="130.0" stroke="#233746" stroke-width="1.6"></line>
   <polygon class="tri" points="140,510 540,430 310,130" fill="none" stroke="#2d6f8f" stroke-width="2.2" stroke-linejoin="round"></polygon>
   <g class="resting"></g>
   <g class="trails"></g>
@@ -1108,7 +1121,7 @@ N \;\cong\;
   <text x="310" y="120" text-anchor="middle" font-size="14" fill="#829aa6">(0, 0, 1)</text>
   <text x="346.0" y="352.6666666666667" font-size="22" font-style="italic" fill="#233746">p₀</text>
 </svg>
-<p class="anim-hint">Plays once on scroll. Tap to replay.</p>
+<p class="anim-hint">Tap to play.</p>
 </div>
 <script>
 (function(){
@@ -1203,11 +1216,6 @@ N \;\cong\;
     if(!reduce){
       svg.style.cursor='pointer';
       svg.addEventListener('click',animate);
-      if('IntersectionObserver' in window){
-        var seen=false;
-        var io=new IntersectionObserver(function(es){for(var i=0;i<es.length;i++){if(es[i].isIntersecting&&!seen){seen=true;animate();}}},{threshold:0.25});
-        io.observe(svg);
-      }else animate();
     }
   }
   function init(){var rs=document.querySelectorAll('.trajectory-animated');for(var i=0;i<rs.length;i++)setup(rs[i]);}
@@ -1471,7 +1479,7 @@ k \;\leq\; d^2 - 1.
 <div id="fig-bloch-root" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bloch-root-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<!-- Figure 4: maximal qubit root S on the Bloch ball, animated. Skeleton SVG (ball wireframe + axes + poles + I/2 + data-* + empty layers) from bloch_root_figure.py; the script builds the resting axis orbits and the cloud-collapse animation (z->y->x->0) from S. Autoplay on scroll, tap to replay, reduced-motion/JS-off => static ball. -->
+<!-- Figure 4: maximal qubit root S on the Bloch ball, animated. Skeleton SVG (ball wireframe + axes + poles + I/2 + data-* + empty layers) from bloch_root_figure.py; the script builds the resting axis orbits and the cloud-collapse animation (z->y->x->0) from S. Tap to play, reduced-motion/JS-off => static ball. -->
 <style>
 .bloch-root-animated{max-width:520px;margin:1.25rem auto;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
 .bloch-root-animated svg{width:100%;height:auto;display:block;}
@@ -1479,7 +1487,7 @@ k \;\leq\; d^2 - 1.
 .bloch-root-animated .bl-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
 </style>
 <div class="bloch-root-animated">
-<p class="bl-vh">Animation of the maximal qubit root S on the Bloch ball. A cloud of Bloch vectors is driven by S to the maximally mixed centre I/2 in stages, each step shrinking and rotating it onto the next axis (z to y to x to 0). Three pure axis states are highlighted: the z-pole takes three steps (the hero, realising the order-3 bound), the y-axis two, the x-axis one. Plays once when scrolled into view; tap to replay.</p>
+<p class="bl-vh">Animation of the maximal qubit root S on the Bloch ball. A cloud of Bloch vectors is driven by S to the maximally mixed centre I/2 in stages, each step shrinking and rotating it onto the next axis (z to y to x to 0). Three pure axis states are highlighted: the z-pole takes three steps (the hero, realising the order-3 bound), the y-axis two, the x-axis one. Tap the figure to play the animation.</p>
 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 640 640" font-family="Georgia, 'Times New Roman', serif" role="img" aria-label="The maximal qubit root S driving Bloch vectors to the centre in stages" data-cx="320" data-cy="332" data-r="210" data-alpha-deg="35" data-elev-deg="20">
   <defs>
     <marker id="arrow" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="8" markerheight="8" orient="auto-start-reverse">
@@ -1519,7 +1527,7 @@ k \;\leq\; d^2 - 1.
   <text x="328.00" y="71.52" text-anchor="start" font-size="20" font-style="italic" fill="#233746">z</text>
   <text x="334.00" y="330.00" text-anchor="start" font-size="20" fill="#5e7886">I/2</text>
 </svg>
-<p class="bl-hint">Plays once on scroll. Tap to replay.</p>
+<p class="bl-hint">Tap to play.</p>
 </div>
 <script>
 (function(){
@@ -1604,8 +1612,6 @@ k \;\leq\; d^2 - 1.
     if(!reduce){
       svg.style.cursor='pointer';
       svg.addEventListener('click',animate);
-      if('IntersectionObserver' in window){var seen=false;var io=new IntersectionObserver(function(es){for(var i=0;i<es.length;i++){if(es[i].isIntersecting&&!seen){seen=true;animate();}}},{threshold:0.25});io.observe(svg);}
-      else animate();
     }
   }
   function init(){var rs=document.querySelectorAll('.bloch-root-animated');for(var i=0;i<rs.length;i++)setup(rs[i]);}

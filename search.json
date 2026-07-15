@@ -4,14 +4,14 @@
     "href": "posts/clifford-roots/figures/fig3b-bloch-root/interactive.html",
     "title": "Florian's Blog",
     "section": "",
-    "text": "Animation of the maximal qubit root S on the Bloch ball. A cloud of Bloch vectors is driven by S to the maximally mixed centre I/2 in stages, each step shrinking and rotating it onto the next axis (z to y to x to 0). Three pure axis states are highlighted: the z-pole takes three steps (the hero, realising the order-3 bound), the y-axis two, the x-axis one. Plays once when scrolled into view; tap to replay.\n\n  \n    \n      \n    \n    \n      \n    \n    \n      \n    \n  \n\n  \n  \n\n  \n  \n  \n  \n\n  \n  \n  \n  \n  \n\n  \n  \n  \n\n  \n  |0⟩\n  |1⟩\n  x\n  y\n  z\n  I/2\n\nPlays once on scroll. Tap to replay."
+    "text": "Animation of the maximal qubit root S on the Bloch ball. A cloud of Bloch vectors is driven by S to the maximally mixed centre I/2 in stages, each step shrinking and rotating it onto the next axis (z to y to x to 0). Three pure axis states are highlighted: the z-pole takes three steps (the hero, realising the order-3 bound), the y-axis two, the x-axis one. Tap the figure to play the animation.\n\n  \n    \n      \n    \n    \n      \n    \n    \n      \n    \n  \n\n  \n  \n\n  \n  \n  \n  \n\n  \n  \n  \n  \n  \n\n  \n  \n  \n\n  \n  |0⟩\n  |1⟩\n  x\n  y\n  z\n  I/2\n\nTap to play."
   },
   {
     "objectID": "posts/clifford-roots/figures/fig2-simplex-root/interactive.html",
     "href": "posts/clifford-roots/figures/fig2-simplex-root/interactive.html",
     "title": "Florian's Blog",
     "section": "",
-    "text": "Animation of the square-root channel S on the probability simplex. A cloud of states, coloured by its red-green-blue mixture, is mapped by S onto a line segment (the 2D simplex collapses to 1D), then by a second S onto the single grey maximally mixed point (1D collapses to 0D). The three pure corners e1, e2, e3 trace highlighted paths; e1 and e2 merge onto the same intermediate point. Plays once when scrolled into view; tap to replay.\n\n  \n  \n  \n  \n  \n  \n  \n  e₁\n  (1, 0, 0)\n  e₂\n  (0, 1, 0)\n  e₃\n  (0, 0, 1)\n  p₀\n\nPlays once on scroll. Tap to replay."
+    "text": "Animation of the square-root channel S on the probability simplex. A cloud of states, coloured by its red-green-blue mixture, is mapped by S onto a line segment (the 2D simplex collapses to 1D), then by a second S onto the single grey maximally mixed point (1D collapses to 0D). The three pure corners e1, e2, e3 trace highlighted paths; e1 and e2 merge onto the same intermediate point. Tap the figure to play the animation.\n\n  \n    \n      \n    \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  e₁\n  (1, 0, 0)\n  e₂\n  (0, 1, 0)\n  e₃\n  (0, 0, 1)\n  p₀\n\nTap to play."
   },
   {
     "objectID": "about.html",
