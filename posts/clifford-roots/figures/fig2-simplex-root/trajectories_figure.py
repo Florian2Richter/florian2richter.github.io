@@ -75,6 +75,24 @@ def build_svg():
         f'viewBox="0 0 {width} {height}" font-family="{FONT_FAMILY}">'
     )
 
+    # coordinate axes (shared with Figure 1, so the classical state space keeps
+    # its coordinate system through the whole animation; static, always visible)
+    p.append(
+        '\n  <defs>'
+        '\n    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" '
+        'markerWidth="8" markerHeight="8" orient="auto-start-reverse">'
+        f'\n      <path d="M 0 0 L 10 5 L 0 10 z" fill="{OUTLINE}"/>'
+        '\n    </marker>'
+        '\n  </defs>'
+    )
+    for x1, y1, x2, y2 in ((310, 430, 95, 530), (310, 430, 590, 430), (310, 430, 310, 75)):
+        p.append(f'\n  <line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" '
+                 f'stroke="{OUTLINE}" stroke-width="1.8" marker-end="url(#arrow2)"/>')
+    for x1, y1, x2, y2 in ((143.0, 516.3, 137.0, 503.7), (540.0, 423.0, 540.0, 437.0),
+                           (303.0, 130.0, 317.0, 130.0)):
+        p.append(f'\n  <line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" '
+                 f'stroke="{OUTLINE}" stroke-width="1.6"/>')
+
     # simplex outline (vertices in e1, e2, e3 order: the geometry source)
     pts = " ".join(f"{x},{y}" for x, y in VERTICES)
     p.append(f'\n  <polygon class="tri" points="{pts}" fill="none" '
