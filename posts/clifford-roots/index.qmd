@@ -2,7 +2,7 @@
 title: "How finely can you divide a depolarizing channel?"
 description: "Clifford channels are a tiny corner of the space of quantum channels, and yet they let you divide the most destructive channel of all into nearly as many discrete steps as the full quantum machinery allows. The room to do this lives in a surprising place."
 author: "Florian Richter"
-date: "2026-07-15 16:04"
+date: "2026-07-15 16:18"
 date-format: "YYYY-MM-DD HH:mm"
 categories: [quantum, channels, clifford, finite-fields]
 draft: true
@@ -657,36 +657,40 @@ replay.
 
 :::
 
-One honest caveat before we move on, and it is really the seed of the
-rest of the post. That $d^2 - 1$ is only an *upper* bound. It comes from
-a structural argument: on the $d^2 - 1$ traceless directions, place the
-longest nilpotent Jordan block that fits, and its powers take exactly
-$d^2 - 1$ steps to vanish. That conjures a *linear map* of the right
-order, but a linear map is not yet a quantum channel. The binding
-constraint is complete positivity, and when I first sat with this problem
-it was not at all clear to me that a map assembled by wedging in a Jordan
-block stays completely positive. The bound might be a mirage, an order no
-genuine channel can reach.
+One honest word before we move on, because it seeds the rest of the
+post. That $d^2 - 1$ is an *upper* bound. It comes from a structural
+argument: on the $d^2 - 1$ traceless directions, place the longest
+nilpotent Jordan block that fits, and its powers take exactly
+$d^2 - 1$ steps to vanish. And the bound is not only a ceiling. It is
+*reached*, in every dimension. Take that same nilpotent block, shrink
+it until it sits a hair away from the completely depolarising channel,
+and what you get is a genuine channel whose order is exactly
+$d^2 - 1$. That is the real answer to the question. I am not going to
+build it here.
 
-That doubt is what sent me to Clifford channels. Rather than try to
-settle by hand whether a Jordan-block construction stays completely
-positive, I turned to a much smaller, more structured family of channels:
-far less freedom, but every member a genuine channel by construction, and
-a class that has proved fruitful before across quantum information. The
-question then becomes concrete and answerable by direct computation, how
-large can the order grow inside this restricted family. (It does turn out
-that the full bound is reachable, by a construction subtler than a raw
-Jordan block; that is a thread for the end of the post.)
+Here is the honest chronology. I did not find that construction until
+the very end of my thesis, and for a long time it stayed out of reach.
+The obstacle has a name: complete positivity. A Jordan block hands you
+a *linear map* of the right order, but a linear map is not yet a
+channel, and it was not at all clear to me then that a bound-saturating
+block could be shrunk into a legal one without losing its order. So I
+did what you do when the general problem resists. I looked for a
+smaller room to think in: a much more structured family of channels,
+with far less freedom, but where every member is a genuine channel by
+construction, and one that has proved fruitful before across quantum
+information. Inside that family the question turns concrete and yields
+to direct computation. How large can the order grow when the channel is
+this constrained? Answering that is where the rest of the post lives.
 
 <!-- =================================================================== -->
 ## Coordinates for the Paulis {#sec-paulis}
 
-We left the last section with a promise and a worry. The promise: rather
-than search the whole space of channels for one that reaches the
-$d^2 - 1$ bound, we would work inside a small, structured family where
-every member is a genuine channel by construction. The worry was what
-sent us there, that it was not clear, certainly not to me at the time,
-whether the bound-saturating Jordan block is a legal channel at all.
+We left the last section with a promise and a detour. The promise:
+rather than chase the general construction that saturates the
+$d^2 - 1$ bound, the one I only pinned down at the very end, we would
+work inside a small, structured family where every member is a genuine
+channel by construction and the order is something you can simply
+compute. Taking that detour is the whole fun of what follows.
 Before we can pin that family down, we need a good way to handle the
 operators it is built from. This short interlude builds exactly that: a
 clean little arithmetic we lean on for the rest of the post.
