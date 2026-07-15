@@ -8,7 +8,7 @@
 
 <meta name="author" content="Florian Richter">
 <meta name="dcterms.date" content="2026-07-15">
-<meta name="description" content="The following blog post is a compression of my diploma thesis in Quantum Information, written back in 2009. It lays out the problem statement together with the solutions we found at the time. Now, with the advent of language models, I could not resist the temptation to rewrite it with agentic support and make it accessible to a broader audience. In hindsight, I think the question of roots of a depolarizing channel is an approachable and yet instructive example: it shows nice correspondences with classical information theory and also has a clean solution in the quantum setting. I also think that considering the problem for a small subset of the full quantum world, the Clifford channels, leads into some very interesting and still not fully understood areas of mathematics. Enjoy your read :)">
+<meta name="description" content="Clifford channels are a tiny corner of the space of quantum channels, and yet they let you divide the most destructive channel of all into nearly as many discrete steps as the full quantum machinery allows. The room to do this lives in a surprising place.">
 
 <title>How finely can you divide a depolarizing channel? – Florian’s Blog</title>
 <style>
@@ -203,7 +203,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    The following blog post is a compression of my diploma thesis in Quantum Information, written back in 2009. It lays out the problem statement together with the solutions we found at the time. Now, with the advent of language models, I could not resist the temptation to rewrite it with agentic support and make it accessible to a broader audience. In hindsight, I think the question of roots of a depolarizing channel is an approachable and yet instructive example: it shows nice correspondences with classical information theory and also has a clean solution in the quantum setting. I also think that considering the problem for a small subset of the full quantum world, the Clifford channels, leads into some very interesting and still not fully understood areas of mathematics. Enjoy your read :)
+    Clifford channels are a tiny corner of the space of quantum channels, and yet they let you divide the most destructive channel of all into nearly as many discrete steps as the full quantum machinery allows. The room to do this lives in a surprising place.
   </div>
 </div>
 
@@ -232,6 +232,11 @@ window.Quarto = {
 </header>
 
 
+<p>This post is a compression of my diploma thesis in Quantum Information, which I wrote in Hannover in 2010. Back then I set out to answer a single, stubborn question: in how many equal steps can you take apart the most destructive process there is? The thesis posed that problem carefully and worked out the answer for a particular, highly structured family of processes. What you are reading now is that story, retold.</p>
+<p>I had wanted to retell it for a long time, because the original is written for examiners, not for curious readers. The arrival of large language models finally removed my last excuse. I could not resist the temptation to rewrite the whole thing with agentic support, trading the terse notation of a thesis for pictures, worked examples, and a slower pace, so that a motivated undergraduate can follow every step.</p>
+<p>In hindsight I think it is an approachable and yet instructive example. Approachable, because you can pose the question with nothing more than probabilities arranged in a triangle. Instructive, because that innocent-looking question has a clean classical shadow, a satisfying answer once you upgrade to the quantum world, and, once you restrict attention to a small and well-behaved corner of that world, the Clifford channels, it opens a door onto finite fields and the geometry of their orbits, areas of mathematics that are still far from fully understood. Watching a physics question turn, almost on its own, into a question about lines over a finite field is the part I still find surprising.</p>
+<p>Enjoy your read :)</p>
+<hr>
 <p>Take a photograph and make a photocopy. Then a photocopy of the photocopy. Do it again. And again.</p>
 <p>If you keep going long enough, the picture is gone. What’s on the page is grey noise that could plausibly have started as almost anything. The information about the original has been erased.</p>
 <p>This is a familiar form of loss. Each pass through the copier loses a little, the losses pile up, and eventually nothing remains. Heat works this way too. So does mixing dye into water, or scrambling a Rubik’s cube, or letting milk cool in a glass. Everywhere you look, processes that destroy information are processes that destroy it in <em>steps</em>: many small irreversible nudges that add up.</p>
