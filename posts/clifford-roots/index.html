@@ -1198,6 +1198,14 @@ N \;\cong\;
       gTrail.style.display=anim?'':'none';
     }
     var running=false;
+    // Position the cloud and highlight dots at time t, without touching the trails.
+    function renderFrame(t){
+      var i,st,c;
+      for(i=0;i<cloud.length;i++){st=stateAt(cloud[i],t);c=b2c(st);cloud[i].dot.setAttribute('cx',c[0]);cloud[i].dot.setAttribute('cy',c[1]);cloud[i].dot.setAttribute('fill',colof(st));}
+      for(i=0;i<hl.length;i++){st=stateAt(hl[i],t);c=b2c(st);hl[i].dot.setAttribute('cx',c[0]);hl[i].dot.setAttribute('cy',c[1]);hl[i].dot.setAttribute('fill',colof(st));}
+    }
+    // Rest on the initial state: a fresh, uncollapsed cloud at t=0.
+    function showInitial(){buildAnim();renderFrame(0);showMode(true);}
     function animate(){
       if(running)return;running=true;buildAnim();showMode(true);
       var t0=null;
@@ -1206,14 +1214,17 @@ N \;\cong\;
         for(i=0;i<cloud.length;i++){st=stateAt(cloud[i],t);c=b2c(st);cloud[i].dot.setAttribute('cx',c[0]);cloud[i].dot.setAttribute('cy',c[1]);cloud[i].dot.setAttribute('fill',colof(st));}
         for(i=0;i<hl.length;i++){st=stateAt(hl[i],t);c=b2c(st);hl[i].path.push(c[0]+','+c[1]);hl[i].trail.setAttribute('points',hl[i].path.join(' '));hl[i].dot.setAttribute('cx',c[0]);hl[i].dot.setAttribute('cy',c[1]);hl[i].dot.setAttribute('fill',colof(st));}
         if(t<DUR)requestAnimationFrame(frame);
-        else setTimeout(function(){running=false;showMode(false);},900);
+        // Hold on the collapsed centre, then jump back to the initial state.
+        else setTimeout(function(){running=false;showInitial();},900);
       }
       requestAnimationFrame(frame);
     }
 
-    buildResting();showMode(false);
     var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(!reduce){
+    if(reduce){
+      buildResting();showMode(false);
+    }else{
+      showInitial();
       svg.style.cursor='pointer';
       svg.addEventListener('click',animate);
     }
