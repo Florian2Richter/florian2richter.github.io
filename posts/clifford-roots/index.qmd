@@ -2,7 +2,7 @@
 title: "How finely can you divide a depolarizing channel?"
 description: "Clifford channels are a tiny corner of the space of quantum channels, and yet they let you divide the most destructive channel of all into nearly as many discrete steps as the full quantum machinery allows. The room to do this lives in a surprising place."
 author: "Florian Richter"
-date: "2026-07-15 17:18"
+date: "2026-07-15 20:00"
 date-format: "YYYY-MM-DD HH:mm"
 categories: [quantum, channels, clifford, finite-fields]
 draft: true
@@ -717,85 +717,68 @@ modulo two has become matrix multiplication, and that translation is so
 fruitful that the representation theory of finite groups is a deep and
 thoroughly mapped field in its own right.
 
-So how does turning a group into matrices help us take roots of a
-depolarising channel? Ask first what a channel even is in this picture.
-A channel maps states to states, and it does so linearly. Suppose we
-could tie each quantum state to the group's elements, the way a point in
-the plane is tied to its coordinates. A channel would then be no more
-than a rule for shuffling those elements around, a single linear map
-living entirely on the finite group. And a linear map on a finite group
-is a small, rigid, fully knowable thing. That is the trade this section
-sets up: give up a channel adrift in the vast space of quantum
-operations, and get back a linear map on a handful of group elements,
-where every question can be settled by direct calculation. We have, in
-fact, already written one of those elements down.
+We built $\mathbb{Z}_2$ and its representation as a rehearsal, because
+the qubit is one honest step up from it. Read $\mathbb{Z}_2$ as the
+arithmetic of a single classical bit: the only move is to flip it or
+leave it, one coordinate over $\{0,1\}$, and its exact representation was
+the pair $\{I, \text{flip}\}$. One coordinate, no phase. That is the
+whole classical system.
 
-Start with what we have already been drawing. The three axes of the Bloch
-ball are not anonymous directions; each is a matrix, the *Pauli matrices*
+Passing to a qubit adds exactly one coordinate. Beside the classical
+question "does it flip?" the quantum world sets a second one with no
+classical echo: "does it pick up a phase?" A qubit's elementary moves are
+labelled by both answers at once, a little vector
+$$
+(a, b) \in \mathbb{Z}_2^2,
+$$
+with $a$ the flip and $b$ the phase. There are exactly four,
+$$
+(0,0), \quad (1,0), \quad (0,1), \quad (1,1),
+$$
+and this two-coordinate space over $\mathbb{Z}_2$, the classical bit
+widened by a phase axis, is the qubit's *phase space*.
+
+Each vector names one operator we have been drawing since the Bloch ball.
+Nothing done is the identity; a flip alone is $X$; a phase alone is $Z$; a
+flip and a phase together is $Y$:
+$$
+(0,0) \mapsto I, \quad (1,0) \mapsto X, \quad (0,1) \mapsto Z, \quad
+(1,1) \mapsto Y.
+$$
+These are the *Pauli matrices*,
 $$
 X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \qquad
 Y = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}, \qquad
 Z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix},
 $$
-with the identity $I$ at the centre. The $x$, $y$, $z$ axes of the ball
-are $X$, $Y$, $Z$. Everything a qubit can do is built from these four
+with the identity $I$ at the centre, and they are the $x$, $y$, $z$ axes
+of the Bloch ball we have been drawing all along. The four Paulis are
+nothing more than the four points of the phase space, written as
 matrices.
 
-They make convenient handles because they multiply into one another.
-Square any one and you return to the identity, $X^2 = Y^2 = Z^2 = I$.
-Multiply two different ones and you get the third, with a phase out
-front,
-$$
-XY = iZ, \qquad YZ = iX, \qquad ZX = iY,
-$$
-and the order is not free: reverse it and the phase flips sign,
-$XZ = -iY$ against $ZX = iY$. The cleanest way to hold all of this at once
-is a small multiplication table, read as row times column:
+The group law carries across unchanged: to combine two operators, add
+their vectors entry by entry, modulo two, exactly as we added in
+$\mathbb{Z}_2$. A flip $(1,0)$ then a phase $(0,1)$ gives $(1,1)$, which
+is $Y$, a flip and a phase at once. Multiplying Paulis has become adding
+phase-space vectors, the same move as before, one dimension wider.
 
-| $\cdot$ | $I$ | $X$ | $Y$ | $Z$ |
-|:---:|:---:|:---:|:---:|:---:|
-| $I$ | $I$ | $X$ | $Y$ | $Z$ |
-| $X$ | $X$ | $I$ | $iZ$ | $-iY$ |
-| $Y$ | $Y$ | $-iZ$ | $I$ | $iX$ |
-| $Z$ | $Z$ | $iY$ | $-iX$ | $I$ |
+One thing is new, and it is the thing the rest of the post turns on.
+Multiply the actual matrices and an extra phase appears that the vectors
+never see. Set $XZ$ against $ZX$: both reach the same vector $(1,1)$, yet
+the matrices differ by a sign, $XZ = -ZX$. Adding vectors records *which*
+operator you land on and quietly loses the phase you gathered getting
+there. So the Paulis are not quite a representation of $\mathbb{Z}_2^2$.
+They are a representation up to a phase, a *projective* one. The classical
+bit had nothing of the sort; the new coordinate arrived with a phase
+riding on top of it.
 
-Try to keep only $\{I, X, Y, Z\}$ and you cannot: the stray factors of
-$i$ and $-1$ refuse to leave. Let them in and you get a small, closed,
-finite collection,
-$$
-\{\, \pm I, \pm iI,\ \pm X, \pm iX,\ \pm Y, \pm iY,\ \pm Z, \pm iZ \,\},
-$$
-sixteen matrices that multiply among themselves and nowhere else. That
-collection is the *Pauli group*, the entire vocabulary of one qubit.
-
-There is a twist in these sixteen matrices worth naming before we tame
-them. Look again at how they multiply. $XY = iZ$, not simply $Z$: the
-product of two Paulis is another Pauli with a phase riding out front, and
-reversing the order flips that phase. So they reproduce the group's
-multiplication, but only up to a phase. A set of matrices that matches a
-group's operation exactly, as ours did for $\mathbb{Z}_2$, is a plain
-representation; one that matches it only up to a phase, as here, is
-called *projective*. The word needs no machinery, only the attitude:
-underneath sits a clean, phase-free structure, and a phase rides quietly
-on top of it. That trailing phase is not noise to be discarded. It is the
-seam the next section pries open.
-
-Sixteen elements with sign-and-$i$ bookkeeping sounds fiddly, but nearly
-all of the fiddliness is the phases, and we can quarantine them for now.
-Track only *which* Pauli you are holding, ignoring any $\pm 1$ or $\pm i$
-in front, and the multiplication collapses to something you could do in
-your
-head. Tag each Pauli with two bits, the first asking "does it flip?", the
-second "does it add a phase?":
-$$
-I = (0,0), \qquad X = (1,0), \qquad Z = (0,1), \qquad Y = (1,1).
-$$
-Now multiplying Paulis is just *adding* the tags, entry by entry, modulo
-two. $X$ times $Z$ ought to flip and phase at once: $(1,0) + (0,1) =
-(1,1)$, which is $Y$. Exactly right. The four Paulis have become the four
-points of a tiny grid, and their multiplication has become addition.
-This grid is the clean, phase-free structure the earlier twist promised;
-the phase still rides along on top, exactly where we set it aside.
+That phase is the one genuinely new ingredient the quantum problem hands
+us, and naming it well is most of the work ahead. Carry it as a function
+sitting on top of the phase space, a single phase pinned to each vector.
+Then anything built from these operators, a channel included, comes apart
+into two clean pieces: a rule that moves the phase-space vectors around,
+and this phase function riding along above them. Those two pieces, and
+nothing heavier, are all we need to take the qubit apart.
 
 None of this leaned on there being two levels. Give the system $d$ levels
 instead of two and the same story unfolds with more dots. The Paulis grow
