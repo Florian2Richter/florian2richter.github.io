@@ -237,6 +237,10 @@ window.Quarto = {
 <p>Instead the post keeps going, into a small and well-behaved corner of the quantum world called the Clifford channels. This last step is a bonus, a side result I never published, and it earns its place for one reason: it is beautiful. Restricting to Clifford channels turns the whole problem into simple, concrete group theory, a handful of finite states and the permutations that shuffle them, something you can work through by hand. The reward is that even this tiny corner reaches, in prime dimensions, asymptotically the same complexity as the full quantum machinery. Watching a question about a physical process turn into a question about lines over a finite field is the part I still find surprising.</p>
 <p>Enjoy your read :)</p>
 <hr>
+<!-- The body of this post is split into per-section partials so each
+     can be edited on its own. Order and content live in the _NN-*.qmd
+     files below; this index just stitches them together. Leading
+     underscores keep Quarto from rendering them as standalone pages. -->
 <p>Take a photograph and make a photocopy. Then a photocopy of the photocopy. Do it again. And again.</p>
 <p>If you keep going long enough, the picture is gone. What’s on the page is grey noise that could plausibly have started as almost anything. The information about the original has been erased.</p>
 <p>This is a familiar form of loss. Each pass through the copier loses a little, the losses pile up, and eventually nothing remains. Heat works this way too. So does mixing dye into water, or scrambling a Rubik’s cube, or letting milk cool in a glass. Everywhere you look, processes that destroy information are processes that destroy it in <em>steps</em>: many small irreversible nudges that add up.</p>
@@ -248,7 +252,6 @@ window.Quarto = {
 <p>And with no separate input to track, a device that becomes strictly forgetful after exactly <span class="math inline">k</span> uses is nothing but a <span class="math inline">k</span>-th root of complete erasure.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> To ask how finely we can divide erasure is to ask how long a finite quantum memory can survive before it is forced to forget exactly, and the largest <span class="math inline">k</span> is the deepest such memory a device of this kind can hold.</p>
 <p>That largest <span class="math inline">k</span> is where this post lives, and it has different answers in different settings. If the copier has to behave like a classical probabilistic process, you get one bound. Upgrade to quantum mechanics, and the bound becomes <em>quadratically</em> larger. Then restrict the quantum copier to a tightly constrained, low-parameter family of operations, a family with vastly less freedom than the general quantum case, and you might expect the bound to drop most of the way back down.</p>
 <p>It almost doesn’t. The factor-of-2 gap that remains is the punchline. The reason it remains is a piece of finite-field bookkeeping that turns out, if you sit with it, to be unreasonably beautiful.</p>
-<!-- =================================================================== -->
 <section id="sec-classical" class="level2">
 <h2 class="anchored" data-anchor-id="sec-classical">The classical setup</h2>
 <p>Let’s make the photocopier mathematically precise. We start with the classical case, where everything is ordinary probability theory.</p>
@@ -1247,7 +1250,6 @@ Figure&nbsp;2: One square root <span class="math inline">S</span> of the <span c
 </div>
 <p>And that is the classical story. A clean bound, a clean construction, and not much more to say about it.</p>
 <p>The interesting thing is what happens to that bound when we let ourselves leave classical probability behind.</p>
-<!-- =================================================================== -->
 </section>
 <section id="sec-quantum" class="level2">
 <h2 class="anchored" data-anchor-id="sec-quantum">The quantum upgrade</h2>
@@ -1654,7 +1656,6 @@ Figure&nbsp;4: A maximal qubit root <span class="math inline">S</span> acting on
 </div>
 <p>One honest word before we move on, because it seeds the rest of the post. That <span class="math inline">d^2 - 1</span> is an <em>upper</em> bound. It comes from a structural argument: on the <span class="math inline">d^2 - 1</span> traceless directions, place the longest nilpotent Jordan block that fits, and its powers take exactly <span class="math inline">d^2 - 1</span> steps to vanish. And the bound is not only a ceiling. It is <em>reached</em>, in every dimension. Take that same nilpotent block, shrink it until it sits a hair away from the completely depolarising channel, and what you get is a genuine channel whose order is exactly <span class="math inline">d^2 - 1</span>. That is the real answer to the question. I am not going to build it here.</p>
 <p>Here is the honest chronology. I did not find that construction until the very end of my thesis, and for a long time it stayed out of reach. The obstacle has a name: complete positivity. A Jordan block hands you a <em>linear map</em> of the right order, but a linear map is not yet a channel, and it was not at all clear to me then that a bound-saturating block could be shrunk into a legal one without losing its order. So I did what you do when the general problem resists. I looked for a smaller room to think in: a much more structured family of channels, with far less freedom, but where every member is a genuine channel by construction, and one that has proved fruitful before across quantum information. Inside that family the question turns concrete and yields to direct computation. How large can the order grow when the channel is this constrained? Answering that is where the rest of the post lives.</p>
-<!-- =================================================================== -->
 </section>
 <section id="sec-paulis" class="level2">
 <h2 class="anchored" data-anchor-id="sec-paulis">Coordinates for the Paulis</h2>
@@ -1688,7 +1689,6 @@ Z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix},
 <p>Multiply two and the labels add, up to that same phase: <span class="math inline">\mathbf{w}(\eta)\,\mathbf{w}(\xi) = (\text{phase}) \cdot \mathbf{w}(\eta + \xi)</span>. The labels add exactly, but the operators reproduce that addition only up to a phase, which is why the assignment is called a <em>projective</em> representation of the group of labels; we never need the phase’s exact form. As for the primality: the integers modulo a prime form a <em>field</em> <span class="math inline">\mathbb{F}_d</span>, in which division works as cleanly as addition, subtraction and multiplication. We will need to divide by labels, not merely add them, once the labels start moving around the plane, and division behaves only when <span class="math inline">d</span> is prime.</p>
 </details>
 <p>That is the whole stage: a plane of labels <span class="math inline">\mathbb{F}_d^2</span>, with a phase trailing along whenever you multiply. Everything left in this post plays out on it. The channels we are about to single out do just two things to this plane. They <em>relabel</em> it, sending each point to another by a single linear map, each axis to an axis. And at each label they pin on a number of their own, a phase that is also allowed to shrink in size. That attached number is where forgetting will live, and following it around the plane is how we hunt down the long roots. Time to meet the channels.</p>
-<!-- =================================================================== -->
 </section>
 <section id="sec-clifford" class="level2">
 <h2 class="anchored" data-anchor-id="sec-clifford">Clifford channels as the playground</h2>
@@ -1802,7 +1802,6 @@ T[\mathbf{w}(\eta)] = \lambda(\eta)\,\mathbf{w}(h(\eta)).
 <p>It is worth pausing on how little data this is. A general channel in dimension <span class="math inline">d</span> is described by its Choi matrix, an object of size <span class="math inline">d^2 \times d^2</span> carrying on the order of <span class="math inline">d^4</span> free numbers, all of them laced together by the global positivity condition we balked at earlier. A Clifford channel is a single <span class="math inline">2 \times 2</span> matrix over the finite field <span class="math inline">\mathbb{F}_d</span> together with a list of <span class="math inline">d^2</span> amplitudes. The two pieces are not even the same kind of object: the relabelling <span class="math inline">h</span> is one choice out of a finite set, while the amplitudes <span class="math inline">\lambda</span> are the only continuous freedom that remains. We have kept a tiny corner of the space of channels.</p>
 <p>With the class fixed, we return to the question we actually care about: we want a Clifford channel <span class="math inline">S</span> that is a root of total erasure, <span class="math inline">S^k = P</span>, with <span class="math inline">k</span> as large as we can make it. Before going further it is worth asking whether this is even a sensible place to look, and two facts reassure us. First, the target itself belongs to the class. The completely depolarising channel fixes the identity and annihilates every other Weyl operator, precisely the Clifford form with the trivial relabelling and every amplitude but the central one set to zero. We are not chasing something that lives outside our playground. Second, the class is closed under composition: feed one Clifford channel into another and the relabellings compose while the amplitudes multiply, so every power <span class="math inline">S^k</span> is again a Clifford channel. The whole equation <span class="math inline">S^k = P</span> thus plays out inside the class; taking roots never forces us back into the wilderness of general channels.</p>
 <p>What is <em>not</em> guaranteed is that this corner is large enough. It is entirely possible that, in giving up so much freedom, we have driven the achievable <span class="math inline">k</span> back down toward the classical <span class="math inline">d - 1</span>, making the restriction a poor bargain. Whether the room to subdivide erasure survives this drastic narrowing is exactly what the next sections settle, and the reason we can settle it, rather than merely hope, is that powers of a Clifford channel are transparent in a way powers of a general channel never are. To that transparency we now turn.</p>
-<!-- =================================================================== -->
 </section>
 <section id="sec-reduction" class="level2">
 <h2 class="anchored" data-anchor-id="sec-reduction">The reduction (the pivot)</h2>
@@ -1831,7 +1830,6 @@ P[\mathbf{w}(\eta)] = 0 \quad \text{for every } \eta \neq 0.
 <li><p><strong>Where <span class="math inline">\lambda</span> is allowed to vanish.</strong> We need <span class="math inline">\lambda</span> to hit zero at least once on every orbit, but as late as possible. And <span class="math inline">\lambda</span> is not free to vanish wherever it pleases: a constraint inherited from complete positivity forces its zeros to come in pairs, and that pairing is exactly what costs us a factor of two. That is the section after.</p></li>
 </ol>
 <p>Solve those two and the bound drops out. The astonishing part, already half in view, is that neither question mentions a quantum channel any more. From here on we are doing linear algebra over a finite field.</p>
-<!-- =================================================================== -->
 </section>
 <section id="sec-ingredient-h" class="level2">
 <h2 class="anchored" data-anchor-id="sec-ingredient-h">Ingredient 1: the order of <span class="math inline">h</span></h2>
@@ -1849,7 +1847,6 @@ h = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}.
 (1,0) \to (0,1) \to (1,2) \to (2,2) \to (2,0) \to (0,2) \to (2,1) \to (1,1) \to (1,0).
 </span> Eight steps, eight distinct labels, every nonzero point of the plane visited exactly once, and then home. This <span class="math inline">h</span> has order <span class="math inline">8 = 3^2 - 1</span>, the most a <span class="math inline">2 \times 2</span> matrix over <span class="math inline">\mathbb{F}_3</span> can manage. One orbit, as long as the plane allows.</p>
 <p>If <span class="math inline">\lambda</span> could vanish at just a single point of this cycle, we would be done, and we would reach the full quantum bound: a point starting one step past the lone zero would have to travel all <span class="math inline">d^2 - 1</span> steps to come back to it. That would be a root of order <span class="math inline">d^2 - 1</span>. But <span class="math inline">\lambda</span> cannot vanish at only one point, and the reason is the second ingredient.</p>
-<!-- =================================================================== -->
 </section>
 <section id="sec-ingredient-lambda" class="level2">
 <h2 class="anchored" data-anchor-id="sec-ingredient-lambda">Ingredient 2: orbits and where <span class="math inline">\lambda</span> vanishes</h2>
@@ -1881,7 +1878,6 @@ Figure&nbsp;6: The grand orbit of <span class="math inline">h</span> for <span c
 k = \frac{d^2 - 1}{2}
 </span> steps and no fewer. A Clifford root of the completely depolarising channel of that order exists.</p>
 <p>For our qutrit, <span class="math inline">d = 3</span>, that is a root of order <span class="math inline">4</span>: four gentle steps to erase a qutrit using nothing but the two-piece Clifford data. The mirror pair of zeros sits at <span class="math inline">(1,0)</span> and <span class="math inline">(2,0)</span> in the cycle above, and every other label is at most four steps from one of them.</p>
-<!-- =================================================================== -->
 </section>
 <section id="sec-punchline" class="level2">
 <h2 class="anchored" data-anchor-id="sec-punchline">Punchline</h2>
@@ -1896,7 +1892,6 @@ k = \frac{d^2 - 1}{2}
 <p>That is the part worth carrying away. When we restricted from all quantum channels down to Clifford channels, we threw away almost all the freedom. A general channel needs of order <span class="math inline">d^4</span> numbers to describe; a Clifford channel needs a <span class="math inline">2 \times 2</span> matrix over <span class="math inline">\mathbb{F}_d</span> and a short list of amplitudes. You might have guessed the bound would collapse most of the way back to the classical <span class="math inline">d - 1</span>. It barely moved.</p>
 <p>The reason is that the room to subdivide erasure never lived in the richness of the channel in the first place. It lived in the orbit structure of a single linear map on a small finite plane. The longest root is as long as the longest orbit of <span class="math inline">h</span>, and a well-chosen <span class="math inline">h</span> runs through all <span class="math inline">d^2 - 1</span> labels at once. The only thing the quantum machinery buys you over this finite-field skeleton is the factor of two, and even that is not channel richness: it is the one symmetry, <span class="math inline">\lambda(-\eta) = \overline{\lambda(\eta)}</span>, that Hermiticity preservation stamps on the amplitudes and nothing more.</p>
 <p>A question that began with photocopiers and density matrices turns out to be answered, almost entirely, by asking how long a point can wander in the plane <span class="math inline">\mathbb{F}_d^2</span> before it is forced to step on a marked square. That is the unreasonable beauty promised at the top.</p>
-<!-- =================================================================== -->
 </section>
 <section id="sec-closing" class="level2">
 <h2 class="anchored" data-anchor-id="sec-closing">What’s next</h2>
