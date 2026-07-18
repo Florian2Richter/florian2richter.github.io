@@ -59,14 +59,6 @@ Enjoy your read :)
 
 {{< include _04-paulis.qmd >}}
 
-{{< include _05-clifford-channels.qmd >}}
+{{< include _05-clifford-higher-dimensions.qmd >}}
 
-{{< include _06-reduction.qmd >}}
-
-{{< include _07-ingredient-order-h.qmd >}}
-
-{{< include _08-ingredient-lambda.qmd >}}
-
-{{< include _09-punchline.qmd >}}
-
-{{< include _10-whats-next.qmd >}}
+{{< include _06-whats-next.qmd >}}

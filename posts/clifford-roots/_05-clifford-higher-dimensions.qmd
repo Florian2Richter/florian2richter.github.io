@@ -1,0 +1,81 @@
+## Clifford channels in higher dimensions {#sec-higher-d}
+
+<!-- SKETCH ONLY. Bullet skeleton; prose still to be written.
+
+     Every beat below was worked out in full prose in the previous
+     draft. To recover it:
+
+         git show 908448b:posts/clifford-roots/_05-clifford-channels.qmd
+         git show 908448b:posts/clifford-roots/_06-reduction.qmd
+         git show 908448b:posts/clifford-roots/_07-ingredient-order-h.qmd
+         git show 908448b:posts/clifford-roots/_08-ingredient-lambda.qmd
+         git show 908448b:posts/clifford-roots/_09-punchline.qmd
+-->
+
+The qubit was the easy case, and a misleadingly generous one. Everything
+in the last chapter leaned on $-\eta = \eta$, which holds only at
+$d = 2$. Raise the dimension and a symmetry tax appears that costs
+exactly a factor of two.
+
+TODO: write this chapter. The beats, in order:
+
+- **Weyl operators.** The four Paulis grow into $d^2$ operators
+  $\mathbf{w}(\eta)$, labelled by pairs $\eta = (a,b)$ with entries
+  running $0, \ldots, d-1$. They still form a basis of every
+  $d \times d$ matrix, so a channel is fixed by what it does to them;
+  they still multiply by adding labels, now modulo $d$; and they still
+  do so only up to a trailing phase, now a $d$-th root of unity
+  $\omega = e^{2\pi i/d}$ in place of a sign. The labels fill the plane
+  $\mathbb{F}_d^2$.
+
+- **Why $d$ must be prime.** The integers modulo a prime form a field,
+  where division works as cleanly as addition. We need to divide once
+  the labels start moving. Aside: the explicit shift-and-phase recipe,
+  $\mathbf{w}(a,b) \sim X^a Z^b$, with $X$ the cyclic shift and $Z$ the
+  phase kick.
+
+- **The reduction carries over unchanged.** $T^n$ acts on labels by
+  $h^n$ and accumulates a product of $\lambda$'s along the orbit,
+  exactly as for the qubit. The question is still "how long before the
+  orbit steps on a marked square?"
+
+- **Ingredient 1: the order of $h$.** The longest possible orbit is
+  $d^2 - 1$, and it is reached. The plane $\mathbb{F}_d^2$ is also the
+  field $\mathbb{F}_{d^2}$, whose nonzero elements form a single
+  multiplicative cycle; multiplication by a generator is
+  $\mathbb{F}_d$-linear, and as a matrix it is the companion matrix of
+  a primitive polynomial. Aside: primitive polynomials, and why the
+  order is exactly $d^2 - 1$.
+
+- **Ingredient 2: where $\lambda$ vanishes.** This is where the qubit's
+  gift is withdrawn. Hermiticity still forces
+  $\lambda(-\eta) = \overline{\lambda(\eta)}$, so $|\lambda|$ agrees on
+  mirror labels and zeros come in pairs. For odd $d$, $\eta$ and
+  $-\eta$ are distinct points, and the mirror map sends you exactly
+  halfway around the grand cycle. The two paired zeros sit at opposite
+  poles and cut the cycle into two arcs of length $(d^2-1)/2$.
+
+- **The bound.** $k = (d^2-1)/2$, a factor of two below the general
+  quantum bound. Flag honestly: choosing where $\lambda$ vanishes is
+  not the same as proving the result is completely positive. Complete
+  positivity asks a matrix built from the $\lambda$ values to be
+  positive semidefinite, and the mirror pairing alone does not deliver
+  it. It can be met by keeping the surviving amplitudes modest. The
+  thesis works the criterion out in full (§5.2.1).
+
+- **Worked example, $d = 3$.** Primitive polynomial $x^2 + x + 2$,
+  companion matrix $h = \left(\begin{smallmatrix} 0 & 1 \\ 1 & 2\end{smallmatrix}\right)$,
+  the explicit eight-cycle
+  $(1,0) \to (0,1) \to (1,2) \to (2,2) \to (2,0) \to (0,2) \to (2,1) \to (1,1) \to (1,0)$,
+  mirror-pair zeros at $(1,0)$ and $(2,0)$, giving a root of order $4$.
+  Needs `figures/orbit-d3.svg`, still a placeholder.
+
+- **Punchline.** Line up the three bounds: $d-1$ classically, $d^2-1$
+  for a general quantum channel, and $(d^2-1)/2$ for a Clifford channel
+  at odd prime $d$ (with $d = 2$ the exception that reaches the full
+  $d^2 - 1$, as the last chapter showed). For a qutrit: $2$, $8$, $4$.
+  Almost all the freedom was thrown away and the bound barely moved,
+  because the room to subdivide erasure never lived in the richness of
+  the channel. It lives in the orbit structure of one linear map on a
+  small finite plane, and the only thing the quantum machinery buys is
+  the factor of two that Hermiticity stamps on the amplitudes.
