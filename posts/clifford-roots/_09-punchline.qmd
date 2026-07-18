@@ -1,0 +1,40 @@
+## Punchline {#sec-punchline}
+
+Line up the three bounds. How finely can you divide total erasure, the
+completely depolarising channel, into equal steps?
+
+- Classically, with a bistochastic copier: $d - 1$ steps.
+- With a general quantum channel: $d^2 - 1$ steps.
+- With a Clifford channel: $d^2 - 1$ at $d = 2$, dropping to
+  $\dfrac{d^2 - 1}{2}$ for $d$ an odd prime.
+
+For a qubit ($d = 2$): $1$ classically, $3$ generally, $3$ with Clifford
+channels. The qubit is the case where the Clifford toolbox is already the
+full toolbox.
+
+For a qutrit ($d = 3$): $2$ classically, $8$ generally, $4$ with Clifford
+channels. Here the gap opens. The Clifford copier, carrying almost no
+information about itself, lands at $4$: within a factor of two of the
+full quantum power of $8$, and already twice the classical $2$.
+
+That is the part worth carrying away. When we restricted from all
+quantum channels down to Clifford channels, we threw away almost all the
+freedom. A general channel needs of order $d^4$ numbers to describe; a
+Clifford channel needs a $2 \times 2$ matrix over $\mathbb{F}_d$ and a
+short list of amplitudes. You might have guessed the bound would
+collapse most of the way back to the classical $d - 1$. It barely moved.
+
+The reason is that the room to subdivide erasure never lived in the
+richness of the channel in the first place. It lived in the orbit
+structure of a single linear map on a small finite plane. The longest
+root is as long as the longest orbit of $h$, and a well-chosen $h$ runs
+through all $d^2 - 1$ labels at once. The only thing the quantum
+machinery buys you over this finite-field skeleton is the factor of two,
+and even that is not channel richness: it is the one symmetry,
+$\lambda(-\eta) = \overline{\lambda(\eta)}$, that Hermiticity preservation
+stamps on the amplitudes and nothing more.
+
+A question that began with photocopiers and density matrices turns out
+to be answered, almost entirely, by asking how long a point can wander
+in the plane $\mathbb{F}_d^2$ before it is forced to step on a marked
+square. That is the unreasonable beauty promised at the top.

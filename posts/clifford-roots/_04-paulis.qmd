@@ -1,0 +1,158 @@
+## Coordinates for the Paulis {#sec-paulis}
+
+Finite groups are among the simplest objects in mathematics, and among
+the most quietly powerful. A group is a finite collection of things with
+a single operation that combines any two of them into a third. The rule
+that gives the idea its force is closure: combine two members and you
+land on a member again, every time, so you can go on combining forever
+without ever leaving the set or enlarging it. The smallest example worth
+naming is $\mathbb{Z}_2$, two elements $0$ and $1$ combined by addition
+modulo two, with $0 + 1 = 1$ and $1 + 1 = 0$. A light switch, a coin
+turned over and over: two states and one move that flips between them,
+with nowhere else to go.
+
+Here is the move that makes groups so useful, and it is the one to hold
+onto. You can *represent* a group by matrices: attach a matrix to each
+element so that multiplying the matrices reproduces the group's own
+operation. A representation is the bridge from an abstract group to
+concrete linear algebra. For $\mathbb{Z}_2$ it can be as small as two
+$2 \times 2$ matrices,
+$$
+0 \;\longmapsto\; \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, \qquad
+1 \;\longmapsto\; \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}.
+$$
+The first does nothing; the second swaps the two entries it acts on, a
+flip. Multiply the flip by itself and the swaps cancel, returning the
+identity, exactly as $1 + 1 = 0$ in the group. Before reading on, it is
+worth confirming for yourself that this really is a representation: it
+has to turn every sum in the group into the matching product of
+matrices. There are only four sums to check, so run the identity and the
+flip through all of them and watch each one land on the nose. Addition
+modulo two has become matrix multiplication, and that translation is so
+fruitful that the representation theory of finite groups is a deep and
+thoroughly mapped field in its own right.
+
+We built $\mathbb{Z}_2$ and its representation as a rehearsal, because
+the qubit is one honest step up from it. Read $\mathbb{Z}_2$ as the
+arithmetic of a single classical bit: the only move is to flip it or
+leave it, one coordinate over $\{0,1\}$, and its exact representation was
+the pair $\{I, \text{flip}\}$. One coordinate, no phase. That is the
+whole classical system.
+
+Passing to a qubit adds exactly one coordinate. Beside the classical
+question "does it flip?" the quantum world sets a second one with no
+classical echo: "does it pick up a phase?" A qubit's elementary moves are
+labelled by both answers at once, a little vector
+$$
+(a, b) \in \mathbb{Z}_2^2,
+$$
+with $a$ the flip and $b$ the phase. There are exactly four,
+$$
+(0,0), \quad (1,0), \quad (0,1), \quad (1,1),
+$$
+and this two-coordinate space over $\mathbb{Z}_2$, the classical bit
+widened by a phase axis, is the qubit's *phase space*.
+
+Each vector names one operator we have been drawing since the Bloch ball.
+Nothing done is the identity; a flip alone is $X$; a phase alone is $Z$; a
+flip and a phase together is $Y$:
+$$
+(0,0) \mapsto I, \quad (1,0) \mapsto X, \quad (0,1) \mapsto Z, \quad
+(1,1) \mapsto Y.
+$$
+These are the *Pauli matrices*,
+$$
+X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \qquad
+Y = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}, \qquad
+Z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix},
+$$
+with the identity $I$ at the centre, and they are the $x$, $y$, $z$ axes
+of the Bloch ball we have been drawing all along. The four Paulis are
+nothing more than the four points of the phase space, written as
+matrices.
+
+The group law carries across unchanged: to combine two operators, add
+their vectors entry by entry, modulo two, exactly as we added in
+$\mathbb{Z}_2$. A flip $(1,0)$ then a phase $(0,1)$ gives $(1,1)$, which
+is $Y$, a flip and a phase at once. Multiplying Paulis has become adding
+phase-space vectors, the same move as before, one dimension wider.
+
+One thing is new, and it is the thing the rest of the post turns on.
+Multiply the actual matrices and an extra phase appears that the vectors
+never see. Set $XZ$ against $ZX$: both reach the same vector $(1,1)$, yet
+the matrices differ by a sign, $XZ = -ZX$. Adding vectors records *which*
+operator you land on and quietly loses the phase you gathered getting
+there. So the Paulis are not quite a representation of $\mathbb{Z}_2^2$.
+They are a representation up to a phase, a *projective* one. The classical
+bit had nothing of the sort; the new coordinate arrived with a phase
+riding on top of it.
+
+That phase is the one genuinely new ingredient the quantum problem hands
+us, and naming it well is most of the work ahead. Carry it as a function
+sitting on top of the phase space, a single phase pinned to each vector.
+Then anything built from these operators, a channel included, comes apart
+into two clean pieces: a rule that moves the phase-space vectors around,
+and this phase function riding along above them. Those two pieces, and
+nothing heavier, are all we need to take the qubit apart.
+
+None of this leaned on there being two levels. Give the system $d$ levels
+instead of two and the same story unfolds with more dots. The Paulis grow
+into $d^2$ operators, the *Weyl operators* $\mathbf{w}(\eta)$, each tagged
+by a pair $\eta = (a, b)$ whose entries now run $0, 1, \ldots, d - 1$
+rather than just $0$ and $1$. They still form a basis of every
+$d \times d$ matrix, so a channel is fixed by what it does to them; they
+still multiply by adding tags, now modulo $d$; and they still do so only
+up to a trailing phase, now a $d$-th root of unity $\omega = e^{2\pi i/d}$
+in place of a sign. The tags no longer fill a $2 \times 2$ square but a
+$d \times d$ grid, the plane we will write $\mathbb{F}_d^2$.
+
+One label stands apart on that grid. The origin $(0,0)$ is the identity,
+the trace direction every channel in our class must leave untouched. That
+leaves $d^2 - 1$ nonzero labels, the directions that can genuinely be
+forgotten, and they are exactly the $d^2 - 1$ dimensions we counted on the
+Bloch ball, come back as the nonzero points of a finite grid. (One feature
+of the grid will matter later: it behaves like a full number system, where
+you can divide as freely as you add and multiply, only when $d$ is prime.
+We will not need division until the labels start moving, and the explicit
+shift-and-phase recipe for $\mathbf{w}(\eta)$ is one fold away.)
+
+```{=html}
+<details class="aside">
+<summary>The Weyl operators explicitly, and why $d$ must be prime</summary>
+```
+
+Fix $d$ levels, $|0\rangle$ through $|d-1\rangle$. Two elementary moves
+generate everything. The first is a *shift* that bumps every level up by
+one and wraps around at the top, $X\colon|j\rangle \mapsto |j+1\rangle$,
+the higher-dimensional bit-flip. The second is a *phase kick* that
+multiplies level $j$ by a $d$-th root of unity,
+$Z\colon|j\rangle \mapsto \omega^{\,j}|j\rangle$ with
+$\omega = e^{2\pi i/d}$, the higher-dimensional phase-flip. Applying $a$
+shifts and $b$ phase kicks gives the Weyl operator
+$\mathbf{w}(a,b) \sim X^a Z^b$, fixed up to a phase convention we never
+need; there are $d^2$ of them, one for each label $(a,b)$ with $a$ and
+$b$ taken modulo $d$. At $d = 2$ they are just the four Paulis renamed.
+
+Multiply two and the labels add, up to that same phase:
+$\mathbf{w}(\eta)\,\mathbf{w}(\xi) = (\text{phase}) \cdot \mathbf{w}(\eta + \xi)$.
+The labels add exactly, but the operators reproduce that addition only up
+to a phase, which is why the assignment is called a *projective*
+representation of the group of labels; we never need the phase's exact
+form. As for the primality: the integers modulo a prime form a *field*
+$\mathbb{F}_d$, in which division works as cleanly as addition,
+subtraction and multiplication. We will need to divide by labels, not
+merely add them, once the labels start moving around the plane, and
+division behaves only when $d$ is prime.
+
+```{=html}
+</details>
+```
+
+That is the whole stage: a plane of labels $\mathbb{F}_d^2$, with a phase
+trailing along whenever you multiply. Everything left in this post plays
+out on it. The channels we are about to single out do just two things to
+this plane. They *relabel* it, sending each point to another by a single
+linear map, each axis to an axis. And at each label they pin on a number
+of their own, a phase that is also allowed to shrink in size. That
+attached number is where forgetting will live, and following it around
+the plane is how we hunt down the long roots. Time to meet the channels.

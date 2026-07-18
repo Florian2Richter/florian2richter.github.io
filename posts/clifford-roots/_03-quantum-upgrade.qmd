@@ -1,0 +1,205 @@
+## The quantum upgrade {#sec-quantum}
+
+Everything so far was a rehearsal. The real question is about quantum
+information, and a quantum state carries more than a *classical*
+probability distribution does. More in a way we can count, and the count
+turns out to be the whole plot of this section.
+
+Go back to the smallest example. A classical bit is one number: how a
+coin is weighted between its two outcomes, $0$ and $1$. Picture that
+number as a position on a line segment. The two ends are the only
+*certain* states, "definitely $0$" and "definitely $1$"; every point
+between is a blend, more or less uncertain, with the fair coin sitting at
+the dead centre. One number, one dimension of freedom.
+
+A quantum bit, a *qubit*, has more room, and the cleanest way to see how
+much more is to ask what its *certain* states are. (Quantum mechanics
+also allows genuine superpositions, the $\alpha\,|0\rangle + \beta\,|1\rangle$
+of the amplitude picture,[^qcvc] but for a story about forgetting we want
+the geometry of states, not the algebra of amplitudes.) Classically there
+were exactly two certain states, the two ends of the line. A qubit has
+infinitely many. That is one of the genuine surprises of quantum
+mechanics, and not one this post can derive; we take it as given and
+simply draw it. The certain states no longer sit at two points. They
+fill the entire surface of a ball.
+
+This is not a mathematical fiction. Two everyday incarnations make it
+concrete. The polarization of a photon is a qubit: a filter aligned with
+it passes the photon every time, a filter at right angles blocks it, and
+one at $45^\circ$ lets it through half the time. So is the spin of an
+electron: point a detector along the spin and you always read the same
+way, turn the detector sideways and the outcome goes random. In each, the
+certain states are not two but a whole continuum, one for every angle you
+could set the filter or the detector to.
+
+That continuum is the surface of the qubit's state space, the *Bloch
+ball* (@fig-bloch). Picture a state as an arrow inside the ball, with a
+direction and a length. The *length* says how certain the state is:
+arrows reaching the surface are the certain, *pure* states, shorter
+arrows are blurrier mixtures, and the zero-length arrow at the dead
+centre is total ignorance, the quantum coin flip. The *direction* says
+which question the state answers with certainty. Every direction names a
+measurement you could make, and the state pointing that way is the one
+whose outcome you can predict. The poles are the ordinary question, "are
+you $0$ or $1$?", and the classical bit's two states sit there. A state
+out on the equator answers that question with a perfect coin flip, yet is
+itself perfectly definite, just for a *different* question. Ask a qubit
+the wrong question and the answer turns random; that, and not fuzziness,
+is what the surface is encoding.
+
+The object that bookkeeps this arrow is a small matrix, the *density
+matrix*, but you need only its shape here, not its inner workings.
+
+[^qcvc]: We meet qubits, density matrices, and channels here at the
+level of pictures, not bra-ket algebra, so you can follow along cold. If
+you want the real foundations, single qubits, gates, and the
+$|0\rangle, |1\rangle$ notation built from scratch, Matuschak and
+Nielsen's [Quantum Computing for the Very Curious](https://quantum.country/qcvc)
+is the gentlest on-ramp I know, and it is the model this post is written
+in.
+
+::: {#fig-bloch}
+
+{{< include figures/fig3-bloch-ball/interactive.qmd >}}
+
+The Bloch ball, the state space of a single qubit: pure states live on the surface, mixed states inside, and the maximally mixed state $I/2$ sits at the centre. Compare the classical bit, whose states fill only a line segment. This is the quantum counterpart of the simplex in @fig-simplex-d3. Click the front of the ball to pick a direction, and use the Purity slider to slide the state inward from the surface; the readout names the one measurement that direction answers with certainty, and how that certainty fades as the state mixes.
+
+:::
+
+Notice what happened to the dimension. The classical bit lived on a
+line, one dimension; the qubit fills a ball, *three*. That jump is the
+pattern worth chasing, but to count it for any number of levels we first
+have to say what a quantum state even is beyond the qubit.
+
+We met the qubit's state as an arrow, bookkept by a small matrix. For
+$d$ levels the bookkeeping object is the same kind of thing, a
+$d \times d$ matrix called the *density matrix*, and its rules are not
+arbitrary: they are exactly what it takes to still be describing
+probabilities. The matrix is Hermitian, so its eigenvalues are real;
+those eigenvalues are non-negative and sum to one. That last clause is
+the point, because non-negative numbers summing to one are a probability
+distribution. A density matrix is a classical probability distribution in
+disguise: its eigenvalues are the probabilities, and its eigenvectors say
+which mutually exclusive pure states they are spread across. The
+classical simplex from the first half of this post is the special case
+where the axes have already been chosen for you.
+
+Now we can count. A quantum state in dimension $d$ is pinned down by
+$d^2 - 1$ real numbers.
+
+```{=html}
+<details class="aside">
+<summary>Where $d^2 - 1$ comes from</summary>
+```
+
+A $d \times d$ Hermitian matrix is fixed by $d^2$ real numbers: $d$
+real numbers on the diagonal, plus the entries above the diagonal,
+each complex and so worth two reals, with everything below the diagonal
+forced by Hermiticity. The off-diagonal count is $2 \cdot \tfrac{d(d-1)}{2} = d(d-1)$,
+and $d + d(d-1) = d^2$. Fixing the trace to one removes a single degree
+of freedom, leaving $d^2 - 1$.
+
+```{=html}
+</details>
+```
+
+So the quantum state space is $(d^2 - 1)$-dimensional, against the
+classical simplex's $d - 1$. For a single bit, three against one. The
+freedom grew *quadratically*, and every result in this post is a shadow
+of that one fact.
+
+The rest of the cast carries over almost unchanged. A quantum copier is
+a *channel*: a linear map that turns density matrices into density
+matrices. It has to be linear for exactly the reason it was classically,
+that a coin-flip mixture of inputs must come out as the same coin-flip
+mixture of outputs. There is one extra demand with no classical echo,
+called *complete positivity*, which insists the map keeps sending valid
+states to valid states even when it acts on only part of a larger
+entangled system. Channels are well understood objects with a clean
+structure theory.[^channels] For us they are simply the right notion of
+"physically allowed operation," and we will not pry them open.
+
+[^channels]: For the structure theory of quantum channels, including
+the Kraus decomposition and the Stinespring dilation, the standard
+reference is Nielsen and Chuang, *Quantum Computation and Quantum
+Information*, chapter 8. Michael Wolf's lecture notes *Quantum Channels
+and Operations: Guided Tour* are a more focused modern treatment.
+
+We make the same restriction we made classically. Out of all channels
+we keep the ones that leave the state of total ignorance untouched.
+Classically that was the uniform distribution. Here it is the *maximally
+mixed state*, the centre of the Bloch ball, written $I/d$ with $I$ the
+identity matrix. A channel that fixes it invents no information from
+nothing and secretly prefers no state to any other, which is the least
+we should ask of a process whose only job is to forget. (Such channels
+have a name, *unital*, but the name matters less than the picture.)
+
+Total erasure is the same idea as before, too. The *completely
+depolarising channel* sends every input, no exceptions, to the maximally
+mixed state. The whole Bloch ball collapses to its centre point in a
+single step. This is the quantum CDC, and it is the operator we now want
+to take roots of.
+
+Here is where that quadratic shows up where it counts. Ask the same
+question as in the classical case: how large can $k$ be, if a channel
+$S$ satisfies $S^k = P$ but no smaller power does? The argument has the
+same skeleton. The quantum CDC is again a rank-one map: it sends the
+entire space of traceless operators, the directions away from the
+maximally mixed state, to zero. Any $S$ powering to it must carry a
+*nilpotent* part on that space, and a single nilpotent block on a space
+of dimension $D$ takes at most $D$ steps to wind down. Only now
+$D = d^2 - 1$ rather than $d - 1$, so
+$$
+k \;\leq\; d^2 - 1.
+$$
+
+Set $d = 2$. The classical bound was $k \leq 1$: a single bit could not
+be erased in more than one step. The quantum bound is $k \leq 3$. Three
+gentle steps to forget one qubit (@fig-bloch-root), where one classical
+bit allowed only the abrupt single step. The room to subdivide erasure
+grew, and it grew quadratically.
+
+::: {#fig-bloch-root}
+
+{{< include figures/fig3b-bloch-root/interactive.qmd >}}
+
+A maximal qubit root $S$ acting on the Bloch ball (others exist). It
+sends a Bloch vector $(r_1, r_2, r_3)$ to $(r_2/2,\, r_3/2,\, 0)$,
+driving every state
+to the centre $I/2$ in at most three steps, and the $z$-pole takes all
+three, realising the order-3 bound ($d^2 - 1 = 3$ at $d = 2$). As with
+the classical square root in @fig-root-d3, erasure happens in stages:
+each step both shrinks the vector and rotates it onto the next axis.
+Directions already in the channel's kernel (here the $x$-axis) collapse
+sooner; the slowest direction sets the order. The animation drives a
+whole cloud of Bloch vectors to $I/2$ through these stages and picks out
+the three axis orbits (the blue $z$-pole is the hero that takes all
+three steps); it plays once when it scrolls into view, and you can tap to
+replay.
+
+:::
+
+One honest word before we move on, because it seeds the rest of the
+post. That $d^2 - 1$ is an *upper* bound. It comes from a structural
+argument: on the $d^2 - 1$ traceless directions, place the longest
+nilpotent Jordan block that fits, and its powers take exactly
+$d^2 - 1$ steps to vanish. And the bound is not only a ceiling. It is
+*reached*, in every dimension. Take that same nilpotent block, shrink
+it until it sits a hair away from the completely depolarising channel,
+and what you get is a genuine channel whose order is exactly
+$d^2 - 1$. That is the real answer to the question. I am not going to
+build it here.
+
+Here is the honest chronology. I did not find that construction until
+the very end of my thesis, and for a long time it stayed out of reach.
+The obstacle has a name: complete positivity. A Jordan block hands you
+a *linear map* of the right order, but a linear map is not yet a
+channel, and it was not at all clear to me then that a bound-saturating
+block could be shrunk into a legal one without losing its order. So I
+did what you do when the general problem resists. I looked for a
+smaller room to think in: a much more structured family of channels,
+with far less freedom, but where every member is a genuine channel by
+construction, and one that has proved fruitful before across quantum
+information. Inside that family the question turns concrete and yields
+to direct computation. How large can the order grow when the channel is
+this constrained? Answering that is where the rest of the post lives.

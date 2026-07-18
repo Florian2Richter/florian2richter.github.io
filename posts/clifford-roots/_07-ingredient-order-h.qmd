@@ -1,0 +1,67 @@
+## Ingredient 1: the order of $h$ {#sec-ingredient-h}
+
+The first ingredient is the easy one to state. We want the point to
+visit as many labels as possible before it starts repeating, so we want
+the orbits of $h$ to be long. How long can they get?
+
+There are $d^2 - 1$ nonzero labels in all, so no orbit can be longer
+than that. The happy fact is that the maximum is reached. There exist
+matrices $h$ in $GL(2, \mathbb{F}_d)$ whose single orbit sweeps through
+*every* nonzero label before returning home: one grand cycle of length
+$d^2 - 1$, visiting all of $\mathbb{F}_d^2 \setminus \{0\}$. Such an $h$
+acts *transitively* on the nonzero labels.
+
+Where do these maximal matrices come from? From a second field hiding
+inside the first. The plane $\mathbb{F}_d^2$ is two-dimensional over
+$\mathbb{F}_d$, and it happens to also *be* a larger field, the field
+$\mathbb{F}_{d^2}$ with $d^2$ elements. In any finite field the nonzero
+elements, multiplied together, form a single cycle: there is a
+*generator* whose powers run through every nonzero element exactly once.
+Multiplication by that generator is an $\mathbb{F}_d$-linear map on the
+plane, and as a matrix it is our maximal $h$.
+
+```{=html}
+<details class="aside">
+<summary>Primitive polynomials, and why the order is exactly $d^2 - 1$</summary>
+```
+
+A *primitive polynomial* of degree two over $\mathbb{F}_d$ is an
+irreducible quadratic whose root generates the multiplicative group of
+$\mathbb{F}_{d^2}$. Call that root $g$. Its powers
+$g, g^2, g^3, \ldots$ cycle through all $d^2 - 1$ nonzero elements of
+$\mathbb{F}_{d^2}$ before $g^{\,d^2 - 1} = 1$ brings them back, so $g$
+has multiplicative order exactly $d^2 - 1$.
+
+Viewing $\mathbb{F}_{d^2}$ as the plane $\mathbb{F}_d^2$, multiplication
+by $g$ is a linear map, and in a basis it is the *companion matrix* of
+the primitive polynomial. It inherits the order $d^2 - 1$, and that is
+the largest order any element of $GL(2, \mathbb{F}_d)$ can have. (Every
+other kind of element, the diagonalisable ones and the single-eigenvalue
+ones, tops out lower; the irreducible "Singer" elements like this one are
+the champions.)
+
+```{=html}
+</details>
+```
+
+It pays to see one. Take $d = 3$, so we are working modulo $3$ and the
+plane has $3^2 - 1 = 8$ nonzero points. The polynomial $x^2 + x + 2$ is
+primitive over $\mathbb{F}_3$, and its companion matrix is
+$$
+h = \begin{pmatrix} 0 & 1 \\ 1 & 2 \end{pmatrix}.
+$$
+Start at the label $(1,0)$ and apply $h$ over and over, doing all the
+arithmetic modulo $3$:
+$$
+(1,0) \to (0,1) \to (1,2) \to (2,2) \to (2,0) \to (0,2) \to (2,1) \to (1,1) \to (1,0).
+$$
+Eight steps, eight distinct labels, every nonzero point of the plane
+visited exactly once, and then home. This $h$ has order $8 = 3^2 - 1$,
+the most a $2 \times 2$ matrix over $\mathbb{F}_3$ can manage. One orbit,
+as long as the plane allows.
+
+If $\lambda$ could vanish at just a single point of this cycle, we would
+be done, and we would reach the full quantum bound: a point starting one
+step past the lone zero would have to travel all $d^2 - 1$ steps to come
+back to it. That would be a root of order $d^2 - 1$. But $\lambda$ cannot
+vanish at only one point, and the reason is the second ingredient.

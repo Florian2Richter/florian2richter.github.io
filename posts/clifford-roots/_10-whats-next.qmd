@@ -1,0 +1,25 @@
+## What's next {#sec-closing}
+
+One loose thread remains: the factor of two. Is $(d^2 - 1)/2$ the end of
+the story, or just the end of the *Clifford* story? It is only the
+Clifford story. The full quantum bound $d^2 - 1$ really can be reached,
+by a channel that gives up the tidy Weyl structure we leaned on. Instead
+of asking a single matrix $h$ to do all the work, one builds the root
+directly at the level of the channel's representation, nudging a Jordan
+block into exactly the shape the bound allows. That construction does
+not care about mirror pairs, so the factor of two disappears, and the
+gap to $d^2 - 1$ closes.
+
+That more general result subsumes the Clifford one, which is why the
+Clifford construction does not appear in the final paper. I wanted to
+write it up anyway, because it is the cleanest place I know to actually
+*see* the finite-field representation theory at work. In the general
+construction the orbit structure is buried inside linear algebra over
+$\mathbb{C}$. Here it sits on the surface: a point hopping around a plane
+of $d^2$ labels, a matrix of order $d^2 - 1$, and a single symmetry that
+costs a factor of two. The whole argument fits in the palm of your hand,
+and you can check the $d = 3$ case by stepping around an eight-point
+cycle with a pencil.
+
+The full development, including the classical and general quantum bounds
+and the Clifford channels above, is in my diploma thesis.
