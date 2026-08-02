@@ -321,9 +321,22 @@ N \;\cong\;
  & & & & 0
 \end{pmatrix}.
 $$
+That matrix is a representation of $N$, and the basis is ours to pick.
+The deviations are exactly the orthogonal complement of the maximally
+mixed state, so any orthonormal basis of that complement will do, and
+nothing in the argument depends on which one we take.
+
 Each power pushes that diagonal of ones one step toward the corner, so
-$N^{d-1} = 0$ while $N^{d-2} \neq 0$. As long as $P + N$ can be kept
-bistochastic, this very block gives a root of order exactly $d - 1$.
+$N^{d-1} = 0$ while $N^{d-2} \neq 0$.
+
+The row and column sums of $P + N$ are right by construction, so the only
+thing that can still fail is non-negativity. Every entry of $P$ is $1/d$,
+strictly positive, so shrinking $N$ to $\varepsilon N$ keeps every entry
+$1/d + \varepsilon N_{ij}$ non-negative once $\varepsilon$ is small
+enough, and the order is untouched, since
+$(\varepsilon N)^k = \varepsilon^k N^k$ (the $\tfrac16$ in the $d = 3$
+example above was exactly this). So the block really does give a root of
+order exactly $d - 1$, in every dimension.
 
 ```{=html}
 </details>
