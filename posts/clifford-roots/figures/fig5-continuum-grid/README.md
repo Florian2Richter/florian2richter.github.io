@@ -1,8 +1,11 @@
 # Figure 5: continuum vs. finite grid
 
-**Status:** done, static. Wired into the post as `#fig-clifford-grid`,
-referenced as `@fig-clifford-grid`. Lives in the "Clifford channels as
-the playground" section, after the second motivation paragraph.
+**Status:** done, static. Wired into the post as `#fig-clifford-grid`
+in `_04-paulis.qmd` (the qubit chapter), placed in the
+Clifford-family beat right after the channel data is untangled;
+referenced as `@fig-clifford-grid`. The example `h` drawn on the
+right panel is exactly the 3-cycle the chapter's root design picks,
+and the design-the-root beat points back at it.
 
 ## What it shows
 

@@ -1,21 +1,6 @@
 ## Clifford channels in higher dimensions {#sec-higher-d}
 
-<!-- SKETCH ONLY. Bullet skeleton; prose still to be written.
-
-     Every beat below was worked out in full prose in the previous
-     draft. To recover it:
-
-         git show 908448b:posts/clifford-roots/_05-clifford-channels.qmd
-         git show 908448b:posts/clifford-roots/_06-reduction.qmd
-         git show 908448b:posts/clifford-roots/_07-ingredient-order-h.qmd
-         git show 908448b:posts/clifford-roots/_08-ingredient-lambda.qmd
-         git show 908448b:posts/clifford-roots/_09-punchline.qmd
--->
-
-The qubit was the easy case, and a misleadingly generous one. Everything
-in the last chapter leaned on $-\eta = \eta$, which holds only at
-$d = 2$. Raise the dimension and a symmetry tax appears that costs
-exactly a factor of two.
+The qubit was an interesting case, where we reached the maximal level. However, in order to take it to higher dimensions, we have to consider a generalization of the pauli matrices into higher dimensions and it's consquences for the consturction on channels in those class.
 
 TODO: write this chapter. The beats, in order:
 
@@ -69,13 +54,3 @@ TODO: write this chapter. The beats, in order:
   $(1,0) \to (0,1) \to (1,2) \to (2,2) \to (2,0) \to (0,2) \to (2,1) \to (1,1) \to (1,0)$,
   mirror-pair zeros at $(1,0)$ and $(2,0)$, giving a root of order $4$.
   Needs `figures/orbit-d3.svg`, still a placeholder.
-
-- **Punchline.** Line up the three bounds: $d-1$ classically, $d^2-1$
-  for a general quantum channel, and $(d^2-1)/2$ for a Clifford channel
-  at odd prime $d$ (with $d = 2$ the exception that reaches the full
-  $d^2 - 1$, as the last chapter showed). For a qutrit: $2$, $8$, $4$.
-  Almost all the freedom was thrown away and the bound barely moved,
-  because the room to subdivide erasure never lived in the richness of
-  the channel. It lives in the orbit structure of one linear map on a
-  small finite plane, and the only thing the quantum machinery buys is
-  the factor of two that Hermiticity stamps on the amplitudes.

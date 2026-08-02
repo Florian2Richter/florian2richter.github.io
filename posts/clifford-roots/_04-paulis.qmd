@@ -1,352 +1,225 @@
-## Coordinates for the Paulis {#sec-paulis}
+## Rebuilding the qubit from the bit {#sec-paulis}
 
-Finite groups are among the simplest objects in mathematics, and among
-the most quietly powerful. A group is a finite collection of things with
-a single operation that combines any two of them into a third. The rule
-that gives the idea its force is closure: combine two members and you
-land on a member again, every time, so you can go on combining forever
-without ever leaving the set or enlarging it. The smallest example worth
-naming is a group of just two elements,
-$$
-\mathbb{Z}_2 = \{0, 1\},
-$$
-combined by addition modulo two:
-$$
-0 + 0 = 0, \qquad 0 + 1 = 1, \qquad 1 + 1 = 0.
-$$
-A light switch, a coin turned over and over: two states and one move that
-flips between them, with nowhere else to go. That last rule, $1 + 1 = 0$,
-is the XOR sitting inside every one-bit adder.
+<!-- Working title; alternatives: "The smallest quantum step",
+     "Coordinates for the qubit". The anchor #sec-paulis is new and
+     nothing references it yet, so it is safe to rename. -->
 
-Groups get far richer than counting modulo something, and one question
-sorts them more sharply than any other: does the order of combining
-matter? Take two members, combine them one way, then the other way
-round, and you may or may not land in the same place. In $\mathbb{Z}_2$
-you always do, and a group where that always holds is called
-*commutative*, or in the usual group-theoretic word, *abelian*. Keep the
-question in view. The operators this post is heading toward will answer
-it with a no, and that refusal to commute is the seam the whole argument
-runs along.
+TODO: write this chapter as prose. The shape below is settled; it is
+the outline agreed in discussion, spelled out so the prose pass only
+has to write, not decide.
 
-What we need from a group here is not a classification, though. It is a
-way to make one concrete enough to work with, so that it can be aimed at
-our original question about dividing the depolarizing channel. That
-bridge is a *representation*: attach a matrix to each element so that
-multiplying the matrices reproduces the group's own operation, carrying
-an abstract group over into concrete linear algebra. For $\mathbb{Z}_2$
-it can be as small as two $2 \times 2$ matrices,
-$$
-0 \;\longmapsto\; \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, \qquad
-1 \;\longmapsto\; \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}.
-$$
-The first does nothing; the second swaps the two entries it acts on, a
-flip. Multiply the flip by itself and the swaps cancel, returning the
-identity, exactly as $1 + 1 = 0$ in the group. Before reading on, it is
-worth confirming for yourself that this really is a representation: it
-has to turn every sum in the group into the matching product of
-matrices. There are only four sums to check, so run the identity and the
-flip through all of them and watch each one land on the nose. Addition
-modulo two has become matrix multiplication, and that translation is so
-fruitful that the representation theory of finite groups is a deep and
-thoroughly mapped field in its own right.
+**Settled conventions.**
 
-We built $\mathbb{Z}_2$ and its representation as a rehearsal, because
-the qubit is one honest step up from it. Read $\mathbb{Z}_2$ as the
-arithmetic of a single classical bit: one coordinate over $\{0, 1\}$,
-the only move being to flip it or leave it, and the representation we
-just built was the pair $\{I, \text{flip}\}$. One coordinate, no phase.
-That is the whole classical system.
+- Symbols are the working language ($\mathbb{Z}_2$, $\sigma(a)$,
+  *projective representation* as a defined term), but the four
+  matrices go by their letters $I, X, Y, Z$ throughout. The scalable
+  notation $\mathbf{w}(a,b)$ debuts in the next chapter, not here.
+- The operator basis is the Hermitian quartet: the matrix at label
+  $(1,1)$ is $Y = iXZ$, the $i$ presented as a grooming phase chosen
+  so that all four basis matrices are Hermitian and square to $I$.
+  (Consequences used later: the dials $\lambda$ come out real, and
+  the Bloch dictionary matches chapter 3's figures untranslated.)
+- No 16-element Pauli group. Four labels and one phase-decorated
+  multiplication table carry everything.
+- Two asides: the forced-phase proof (beat 4) and the CP
+  decomposition (beat 10). Worked examples stay in the main text.
 
-Now let us be bold and simply widen it. Give the group a second
-coordinate, change nothing else, and see what we are forced into. The
-group is
-$$
-\mathbb{Z}_2^2 = \bigl\{ (0,0),\; (1,0),\; (0,1),\; (1,1) \bigr\},
-$$
-four labels added entry by entry modulo two, and we go hunting for a
-representation of it by $2 \times 2$ matrices exactly as before.
+The beats, in order:
 
-Two of the four assignments are already settled. The label $(0,0)$ does
-nothing, so it takes the identity, and the first coordinate is still the
-classical flip, so $(1,0)$ takes the flip matrix. The second coordinate
-is the genuinely new one, and the simplest move a qubit has that a bit
-does not is a *sign*: leave both levels in place, but flip the sign of
-the second. That is $(0,1)$. The last label $(1,1)$ means both at once,
-and the matrix that does both, fixed up so that it names an axis of the
-Bloch ball like the other three, completes the set:
-$$
-(0,0) \;\longmapsto\; I, \qquad
-(1,0) \;\longmapsto\; X, \qquad
-(0,1) \;\longmapsto\; Z, \qquad
-(1,1) \;\longmapsto\; Y,
-$$
-with
-$$
-I = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, \quad
-X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \quad
-Y = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}, \quad
-Z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}.
-$$
-These are the *Pauli matrices*, and they are not strangers. They are the
-$x$, $y$, $z$ axes of the Bloch ball we have been drawing all along,
-with the identity sitting at the centre. Write $\sigma(\eta)$ for the
-matrix this map attaches to the label $\eta$, so that $\sigma(0,0) = I$
-and $\sigma(1,0) = X$; that shorthand carries the rest of the chapter.
-Read a label $(a, b)$ as two yes-or-no questions, $a$ for "does it
-flip?" and $b$ for "does it pick up a sign?", and this two-coordinate
-space, the classical bit widened by a phase axis, is the qubit's *phase
-space*.
+- **Hook: the classical bit never left.** Story-first, no math in the
+  opening. Chapter 3 closed looking for a smaller room; this chapter
+  builds it, starting from a picture the reader already owns. In the
+  Bloch ball the two classical states sit at the poles, and the whole
+  classical state space of chapter 2, the line segment, is the
+  vertical diameter. The ball grew *around* the classical line. So
+  invert the strategy: instead of shrinking the general quantum
+  problem, grow the classical bit up by the smallest possible step
+  and watch what the step forces. Promise the arc in one breath: a
+  coordinate system for the qubit, the family of channels that
+  respects it, and chapter 3's mystery root re-derived by design
+  instead of pulled from a hat.
 
-So far the widening has cost us nothing. Now make it earn its keep and
-check that the map really is a representation, the way you checked the
-two-element case. Every sum of labels has to come out as the matching
-product of matrices. Plenty of the checks pass without complaint:
-$(1,0) + (1,0) = (0,0)$ on the label side, and $X^2 = I$ on the matrix
-side.
+- **The bit as $\mathbb{Z}_2$, and the template.** Set
+  $\sigma(0) = I$, $\sigma(1) = Z$: exactly what the states of a bit
+  need, $\rho = \tfrac12(I + rZ)$, the diameter between the poles.
+  Name the two roles these matrices play, lightly: the *basis* role
+  ($I$ and $Z$ span the classical states) and the *group* role
+  ($Z \cdot Z = I$ matches $1 + 1 = 0$: matrices multiply the way
+  labels add). The word *representation* enters here, where the match
+  is exact and phase-free. Then the recast: chapter 2's copier, in
+  these coordinates, is $T[I] = I$, $T[Z] = (1-2a)\,Z$. That is
+  already the template, a (trivial) relabelling plus one dial
+  $\lambda = 1-2a$; chapter 2's eigenvector $v = (1,-1)$ was the
+  diagonal of $Z$ all along, and the bit's no-root theorem becomes
+  one sentence: a product of copies of a single $\lambda$ vanishes
+  only if $\lambda$ was already zero. (This plants the reduction of
+  beat 8.)
 
-Then take $(1,0)$ and $(0,1)$. The labels add to $(1,1)$, which the map
-sends to $Y$. Multiply the two matrices in that order, though, and
-$$
-XZ \;=\; \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} \;=\; -i\,Y.
-$$
-Close, but not equal. A factor of $-i$ has appeared out of nowhere, and
-the labels have nowhere to record it.
+- **The doubling.** Chapter 3 counted $d^2 - 1 = 3$ free parameters,
+  so a basis of everything needs $d^2 = 4$ matrices, so the label
+  group needs four elements: $\mathbb{Z}_2 \to \mathbb{Z}_2^2$. The
+  second generator is $X$, introduced as the bit's missing
+  *operation*: the flip, the one classical thing no copier in
+  chapter 2 ever purely did. $X$ is a permutation matrix with
+  $X^2 = I$, a second independent $\mathbb{Z}_2$. Labels
+  $(a,b) \in \mathbb{Z}_2^2$, matrices $X^a Z^b$; the fourth matrix
+  is $XZ$, groomed into $Y$ two beats down.
 
-It gets worse, and the way it gets worse is the whole point. Multiply
-the same two matrices in the opposite order:
-$$
-ZX \;=\; \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} \;=\; +i\,Y,
-\qquad\text{so}\qquad XZ = -ZX.
-$$
-And there is the answer to the question we left hanging. Addition in
-$\mathbb{Z}_2^2$ is commutative, so $(1,0) + (0,1)$ and $(0,1) + (1,0)$
-are the very same label: the labels are blind to the order you worked
-in. The matrices are not. They come out differing by a sign.
+- **The phase is forced.** The chapter's deepest beat, at full
+  strength. The labels commute; but four matrices that all commute
+  can be simultaneously diagonalized and then span at most two
+  dimensions, not four. So *no* choice of matrices, for *any* abelian
+  group of four labels, can multiply exactly as the labels add and
+  still span everything. The only slack on offer is a scalar phase
+  out front, and it must be used: projectivity is not a blemish of
+  the Paulis but the price of an operator basis, paid by every
+  possible choice. This also disposes of $\mathbb{Z}_4$ silently,
+  since powers of a single matrix commute. Aside: the proof, resting
+  on "commuting Hermitian matrices are simultaneously
+  diagonalizable", stated as a citable linear-algebra fact.
 
-That is fatal to the strict goal, and no cleverer choice of the four
-matrices rescues it. The labels commute, the operators do not, and
-rescaling the assignments only shuffles the phases around without ever
-removing them.
+- **The multiplication, the table, the name.** Worked example in the
+  main text: $XZ$ and $ZX$ multiplied out entry by entry, the same
+  matrix with opposite signs; the labels added identically both
+  times, but the matrices remember the order. Fix the convention:
+  the matrix at label $(1,1)$ is $Y = iXZ$, the $i$ a grooming phase
+  that makes the fourth sibling Hermitian like the other three;
+  phases out front never touch the label bookkeeping (quietly, this
+  is why the channel data will split cleanly in two). Centerpiece:
+  the full $4 \times 4$ multiplication table ($XY = iZ$, $YX = -iZ$,
+  $XZ = -iY$, and so on), then the instruction to cover the phases
+  and read only the letters: labels add coordinate-wise, every time,
+  no exceptions. Only now the name:
+  $\sigma(g)\,\sigma(h) = c(g,h)\,\sigma(g+h)$ with $|c| = 1$ is a
+  *projective representation*, plus one sentence of context: global
+  phases were never physical (a state and its phase-rotated copy
+  answer every measurement identically), so representation-up-to-
+  phase is the native quantum notion of realizing a symmetry, not a
+  defect. Tie back: the phase freedom is exactly the slack that lets
+  a commutative label set span a non-commutative world.
 
-```{=html}
-<details class="aside">
-<summary>Why no choice of phases can repair it</summary>
-```
-
-Suppose we tried to patch the mismatch by rescaling the assignment,
-replacing $\sigma(\eta)$ by $\sigma'(\eta) = c_\eta\,\sigma(\eta)$ for
-some nonzero numbers $c_\eta$.
-Whenever two labels commute, which in $\mathbb{Z}_2^2$ is always, a
-genuine representation would need
-$\sigma'(\eta)\,\sigma'(\xi) = \sigma'(\xi)\,\sigma'(\eta)$. But
-$$
-\sigma'(\eta)\,\sigma'(\xi) = c_\eta c_\xi\,\sigma(\eta)\,\sigma(\xi), \qquad
-\sigma'(\xi)\,\sigma'(\eta) = c_\xi c_\eta\,\sigma(\xi)\,\sigma(\eta),
-$$
-and $c_\eta c_\xi = c_\xi c_\eta$, because ordinary numbers commute. The
-two sides therefore still differ by exactly the factor that
-$\sigma(\eta)\,\sigma(\xi)$ and $\sigma(\xi)\,\sigma(\eta)$ differed by in the first
-place, which for $X$ and $Z$ is $-1$. Rescaling moves the phases about;
-it cannot remove them.
-
-```{=html}
-</details>
-```
-
-The failure is an interesting one, though, and worth naming precisely.
-Adding labels records *which* operator you land on and quietly loses the
-phase you gathered getting there. So the Paulis are not a representation
-of $\mathbb{Z}_2^2$ in the strict sense we set up for $\mathbb{Z}_2$.
-They are a representation *up to a phase*, a *projective* one. The
-classical bit had nothing of the sort; the new coordinate arrived with a
-phase riding on top of it.
-
-That phase is the one genuinely new ingredient the quantum problem hands
-us, and naming it well is most of the work ahead. Carry it as a function
-sitting on top of the phase space, a single phase pinned to each vector.
-Then anything built from these operators, a channel included, comes apart
-into two clean pieces: a rule that moves the phase-space vectors around,
-and this phase function riding along above them. Those two pieces, and
-nothing heavier, are all we need to take the qubit apart.
-
-### Narrowing the field
-
-Time to make good on that promise, and to bring back the question the
-post is actually about.
-
-Recall what we are after. The completely depolarising channel $P$ erases
-every input in a single step, and we want to write it as $P = S^k$ for a
-channel $S$ that takes as many identical steps as possible to do the
-same damage. For a qubit we already know the ceiling. Any such $S$ acts
-nilpotently on the three traceless directions, so $k \le 3$. What we do
-not know is whether anything reaches it.
-
-Hunting through the full space of channels is unpleasant work. Even for
-one qubit a channel carries a Choi matrix with on the order of $d^4$
-free numbers in it, and the condition that picks out the physically
-allowed ones, complete positivity, is not a list of separate bounds on
-those numbers but a single global positivity requirement. Tracking where
-it holds as the entries vary is delicate here and hopeless higher up. We
-would rather not confront that space head-on.
-
-So let us cut it down, and the Bloch ball shows where to cut. A unital
-channel is pinned down entirely by what it does to the three coordinate
-axes, and those axes are $X$, $Y$ and $Z$. A general channel may send
-each one wherever it pleases: the image of $X$ can tilt off into a blend
-of all three, the ball is squashed into a skewed ellipsoid, and the
-three clean axes end up smeared into one another. That freedom is
-precisely what we just called hard to oversee.
-
-Here is the restriction, and it is a severe one. Demand that each Pauli
-be carried to a single Pauli, at most rescaled, never to a mixture of
-them. Geometrically the ellipsoid is no longer allowed to tumble: its
-principal axes stay aligned with the originals, permuted among
-themselves and stretched or squeezed, but never rotated into off-axis
-directions. The rule already has a pedigree. The unitaries that send
-Paulis to Paulis under conjugation are exactly the *Clifford group*, the
-well-behaved gates at the heart of quantum error correction. The maps we
-have just described are their dissipative relatives: same
-Paulis-to-Paulis bookkeeping, but allowed to *shrink* an axis rather
-than merely permute it, and it is in that shrinking that forgetting will
-live. We call them *Clifford channels*.
+- **The family: Clifford channels.** A channel is pinned down by what
+  it does to the four basis matrices (the third use of this move in
+  the post). A generic channel smears each Pauli into a mixture of
+  all four, ignoring the coordinates we built. The family is the
+  channels that leave the group structure invariant, each labelled
+  matrix going to a multiple of a single labelled matrix:
+  $$
+  T[I] = I, \quad T[X] = \lambda_X\,h(X), \quad
+  T[Y] = \lambda_Y\,h(Y), \quad T[Z] = \lambda_Z\,h(Z),
+  $$
+  with $h$ a permutation of the three letters. (Just a permutation,
+  for now; the closing beat whispers what more will be asked of it,
+  and the name $h$ matches the figure below and the next chapter.)
+  Geometric gloss in
+  the same breath: axes to axes, possibly shrunk, never smeared
+  (@fig-bloch). Drop the name here: *Clifford channels*, channel
+  cousins of the Clifford gates of quantum computing, the unitaries
+  that map Paulis to Paulis; footnote disambiguating from Clifford
+  algebras and pointing at the stabilizer formalism. The data,
+  untangled: six skeletons (the permutations), each dressed with
+  three real dials. Constraints derived on the spot: $T[I] = I$ is
+  the standing fixed-centre rule; the $\lambda$'s are *real* because
+  $T$ maps Hermitian to Hermitian and all four basis matrices are
+  Hermitian (one line, and the qubit seed of the next chapter's
+  $\lambda(-\eta) = \overline{\lambda(\eta)}$); $|\lambda| \le 1$
+  because the ball must map into itself. Honest flag: necessary, not
+  sufficient. Complete positivity, the villain of chapter 3's
+  confession, still patrols the family, and legality will be checked
+  by hand for the one channel that matters. The chapter's figure
+  sits here, right after the data is untangled:
 
 ::: {#fig-clifford-grid}
 
 {{< include figures/fig5-continuum-grid/interactive.qmd >}}
 
-Left: the qubit state space, a continuum that a general channel can
-deform into an ellipsoid at any angle. Right: the four labels $(a, b)$,
-with $a$ counting bit-flips and $b$ phase-flips, so $(1,0)$, $(0,1)$,
-$(1,1)$ are the $X$, $Z$, $Y$ axes and $(0,0)$ is the identity. A
-Clifford channel may stretch or swap the three coloured axes but never
-tilt them, so all of its "where each direction goes" freedom is the map
-$h$ permuting these finitely many points. The origin $(0,0)$, the
-identity every copier fixes, stays put; for the qubit, $h$ is just a
-permutation of the other three.
+Draft caption. A Clifford channel's structural core is finite. Left:
+the continuum of qubit states, the three Bloch axes carrying both
+their letters and their labels, with the identity's label $(0,0)$ at
+the fixed centre. Right: the label plane on its own, four points. The
+relabelling half $h$ of a Clifford channel is a map on this finite
+grid, drawn here as a 3-cycle of the three nonzero labels that leaves
+the centre untouched (keep an eye on this particular cycle: it
+returns when we design the root). The dials $\lambda$, the other half
+of the data, are deliberately not drawn: a Clifford channel is a
+relabelling *and* an amplitude per axis, never just a permutation.
 
 :::
 
-Written out, a Clifford channel does exactly this:
-$$
-T[\sigma(\eta)] = \lambda(\eta)\,\sigma(h(\eta)).
-$$
-There are the two pieces we were promised, and there is nothing else in
-it. The first is the relabelling $h$, the rule that moves the labels
-around. Because multiplying Paulis adds their labels, $h$ has to respect
-that addition, and that pins it down: it must be an invertible linear
-map of the plane $\mathbb{Z}_2^2$ fixing the origin. For the qubit there
-are only $3! = 6$ of them, the permutations of the three nonzero labels.
-The second piece is $\lambda$, the phase function riding above, now one
-number per label giving the factor by which that axis is stretched or
-shrunk. This is where forgetting lives. An amplitude below one in
-magnitude damps an axis, and an amplitude equal to zero erases it
-outright.
+- **Examples parade** (three short paragraphs; the family already
+  contains everything the post has met):
+  - Chapter 2's copier, lifted: flip the bit with probability $a$.
+    Then $h = \mathrm{id}$, $\lambda = (1,\, 1-2a,\, 1-2a)$, and on
+    the diameter this is exactly the bistochastic matrix of
+    chapter 2. The template beat pays off.
+  - Unitary members: conjugation by $X$ gives $h = \mathrm{id}$,
+    $\lambda = (1, -1, -1)$; conjugation by the Hadamard swaps
+    $X \leftrightarrow Z$ with $\lambda_Y = -1$. A nontrivial $h$,
+    and negative dials are legal.
+  - The CDC itself: $\lambda = (0, 0, 0)$, any $h$. The target of
+    the root hunt is a member, so roots have somewhere to live.
 
-Two facts make this a sensible place to hunt. The target is already in
-the class, since $P$ fixes the identity and annihilates every other
-Pauli, which is the Clifford form with trivial $h$ and every amplitude
-but the central one set to zero. And the class is closed under
-composition: feed one Clifford channel into another and the relabellings
-compose while the amplitudes multiply. The whole equation $S^k = P$
-plays out inside the class, so taking roots never throws us back into
-the wilderness.
+- **The reduction, by hand.** Apply $T$ twice:
+  $T^2[X] = \lambda_X\,\lambda_{h(X)}\,h^2(X)$. Each letter walks
+  along $h$, and the dials *multiply along the walk*. So $T^n = P$
+  exactly when every letter's $n$-step product has died. The channel
+  question has become bookkeeping about walks and products. Taught
+  here once, on three letters; the next chapter inherits it
+  unchanged.
 
-### Iterating is now bookkeeping
+- **Design the root.** Design-first, no hat. Products die fastest
+  through a single zero, so spend exactly one; make every walk reach
+  it as late as possible, so $h$ must be the 3-cycle. Set the
+  surviving dials to $\tfrac12$, modest enough to keep everything
+  legal, and out comes
+  $$
+  T[X] = 0, \qquad T[Y] = \tfrac12\,X, \qquad T[Z] = \tfrac12\,Y.
+  $$
+  Compute $T, T^2, T^3$ letter by letter: $X$ dies in one step, $Y$
+  in two, $Z$ in three, so $T^3 = P$ while $T^2 \neq P$: order
+  $3 = d^2 - 1$, the full quantum bound met inside the tiny family.
+  No new figure here: the example $h$ drawn on the right panel of
+  @fig-clifford-grid is exactly this 3-cycle, so the reader has
+  already seen the walk; the dials $(0, \tfrac12, \tfrac12)$ live in
+  the prose computation. Recognition: on Bloch vectors this is
+  $(r_1, r_2, r_3) \mapsto (r_2/2,\, r_3/2,\, 0)$, chapter 3's
+  mystery root, and the z, y, x stages of @fig-bloch-root are
+  literally the orbit walk. The hat trick was a two-line design all
+  along.
 
-Apply $T$ twice and watch. The output of the first application is itself
-a single Pauli, so $T$ knows exactly what to do with it:
-$$
-T^2[\sigma(\eta)] = \lambda(\eta)\,T[\sigma(h(\eta))]
-= \lambda(\eta)\,\lambda(h(\eta))\,\sigma(h^2(\eta)).
-$$
-Apply it $n$ times and the pattern is plain:
-$$
-T^n[\sigma(\eta)] = \Biggl(\prod_{j=0}^{n-1} \lambda\bigl(h^j(\eta)\bigr)\Biggr)\,\sigma\bigl(h^n(\eta)\bigr).
-$$
+- **Complete positivity, dissolved.** The payoff of chapter 3's
+  confession, given a full beat. The root is a coin flip among three
+  rotations: apply $U$, $XU$, or $YU$ with probabilities
+  $\tfrac12, \tfrac14, \tfrac14$, where $U$ is the rotation by a
+  third of a turn about the ball's diagonal axis, the one that
+  cycles the three coordinate axes. A random choice among unitaries
+  is manifestly a channel, so this member of the family is legal by
+  inspection, no Choi matrix needed. Aside: the derivation. Write
+  $T$ as that rotation followed by the shrink
+  $\mathrm{diag}(\tfrac12, \tfrac12, 0)$, realize the shrink as the
+  mixture "do nothing with probability $\tfrac12$, conjugate by $X$
+  or by $Y$ with probability $\tfrac14$ each" (a small linear system
+  for the weights), then compose.
 
-Sit with that for a moment, because the fog has lifted completely.
-Iterating the channel did two clean and separate things. The label
-moved, a single point hopping around the plane under repeated
-application of the one matrix $h$. And an amplitude piled up, a running
-product, one factor collected at each label the point lands on. That
-sequence of labels is the *orbit* of $\eta$ under $h$.
+- **Close: two seeds for the next chapter.** The linearity whisper:
+  a relabelling ought to respect the addition of labels; for three
+  letters every permutation happens to, so the condition was
+  invisible here. (The next chapter reveals the six permutations as
+  the six invertible $2 \times 2$ matrices over $\mathbb{F}_2$, and
+  in higher dimensions respecting addition becomes a real
+  constraint.) The cliffhanger: the label where $\lambda$ died is
+  its own negative, $-(1,0) = (1,0)$ mod 2. For odd $d$ a label and
+  its negative are different points, and zeros will be forced to
+  come in mirror pairs. That innocent coincidence is worth exactly a
+  factor of two, and it is the last thing the qubit gives us for
+  free.
 
-Now recall what $P$ does. It leaves the identity alone and annihilates
-everything else. The identity takes care of itself, since
-$\lambda(0) = 1$ for any channel that preserves the trace. So asking for
-$T^k = P$ is asking for the accumulated amplitude to vanish on every
-nonzero label after exactly $k$ steps:
-$$
-\prod_{j=0}^{k-1} \lambda\bigl(h^j(\eta)\bigr) = 0
-\qquad \text{for every } \eta \neq 0.
-$$
-A product of numbers is zero exactly when one of its factors is. So the
-condition says something you can picture: travelling along the orbit of
-any nonzero label, the point has to step on a label where $\lambda$
-vanishes within the first $k$ moves. Push $k$ as high as it will go
-while still erasing every orbit, and you have the longest root.
-
-Let me state it with no quantum mechanics in the sentence at all. We
-want a point that, started anywhere nonzero and moved repeatedly by $h$,
-takes as long as possible to first land on a marked square.
-
-### The qubit answer
-
-For a qubit the plane holds four points and the origin sits the game
-out, so everything comes down to three labels,
-$$
-(1,0) = X, \qquad (0,1) = Z, \qquad (1,1) = Y,
-$$
-and to how long a permutation of them can postpone the inevitable.
-
-Take $h$ as long as it goes. The best available is a three-cycle, for
-instance
-$$
-h = \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pmatrix}
-\qquad \text{over } \mathbb{F}_2,
-$$
-which sends $X \to Z \to Y \to X$ and fixes the origin. One orbit,
-sweeping every nonzero label before returning home.
-
-Now place the zeros of $\lambda$, and here the qubit is handed a gift
-worth understanding, because it is the thing that will be taken away
-again in the next chapter. Preserving Hermiticity forces a relation
-between the amplitude at a label and the amplitude at its mirror image,
-$$
-\lambda(-\eta) = \overline{\lambda(\eta)},
-$$
-so the two always have the same size, and a zero at $\eta$ drags a zero
-to $-\eta$ with it. At $d = 2$ the arithmetic is modulo two, so
-$-\eta = \eta$ and every label is its own mirror. The relation collapses
-to $\lambda(\eta) = \overline{\lambda(\eta)}$, which says nothing more
-than that the amplitudes are *real*. It forces no second zero anywhere.
-
-So a single zero suffices. Set $\lambda(X) = 0$ and leave the other two
-alone, say $\lambda(Y) = \lambda(Z) = \tfrac12$. Follow each label
-around the cycle and count how long it survives:
-
-- $X$ is marked, so it dies on the first step.
-- $Y$ moves to $X$, so it dies on the second.
-- $Z$ moves to $Y$, then to $X$, so it takes all three.
-
-Every nonzero label is gone by step three, and one of them is still
-alive after step two. That is exactly $T^3 = P$ with $T^2 \neq P$, so
-$$
-k = 3 = d^2 - 1 \qquad \text{at } d = 2.
-$$
-
-There is the qubit's answer in full. A Clifford channel, carrying
-nothing but a permutation of three labels and three real numbers,
-divides total erasure into three equal steps, and three is the most that
-*any* quantum channel on a qubit can manage. We threw away almost all
-the freedom in the space of channels and lost nothing at all. For the
-qubit, the Clifford toolbox is already the full toolbox.
-
-You have met this channel before, as it happens. Back in
-@fig-bloch-root we drew a maximal qubit root sending a Bloch vector
-$(r_1, r_2, r_3)$ to $(r_2/2,\, r_3/2,\, 0)$, with the $x$-axis
-collapsing at once and the $z$-pole taking all three steps. That is
-precisely the channel we have just built: the vanishing amplitude is
-$\lambda(X) = 0$, the two survivors are the halves, and the $z$-pole is
-the hero because $Z$ is the label furthest from the mark. The picture
-came first. Now the finite plane explains it.
+**Figure note.** The chapter's figure is @fig-clifford-grid
+(`figures/fig5-continuum-grid`, built, static, wired in above at the
+family beat): the continuum on the left, the finite label grid on
+the right, colour carrying the axis-to-point correspondence, and the
+example $h$ on its right panel is precisely the 3-cycle the root
+design picks. An earlier idea of a separate $d = 2$ orbit ring is
+dropped as redundant with that right panel. The orbit-ring figure
+(`figures/fig4-orbit-cycle`, the $d = 3$ eight-ring) comes later, in
+the next chapter's worked example.

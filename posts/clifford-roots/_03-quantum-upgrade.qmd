@@ -197,9 +197,10 @@ a *linear map* of the right order, but a linear map is not yet a
 channel, and it was not at all clear to me then that a bound-saturating
 block could be shrunk into a legal one without losing its order. So I
 did what you do when the general problem resists. I looked for a
-smaller room to think in: a much more structured family of channels,
-with far less freedom, but where every member is a genuine channel by
-construction, and one that has proved fruitful before across quantum
-information. Inside that family the question turns concrete and yields
-to direct computation. How large can the order grow when the channel is
-this constrained? Answering that is where the rest of the post lives.
+smaller room to think in: a corner of the quantum world with far less
+freedom, but one that has proved fruitful before across quantum
+information. Inside that corner the question turns concrete and yields
+to direct computation. Building the room takes a little construction
+work, and the construction starts further back than you might expect.
+How large can the order grow when the room is this constrained?
+Answering that is where the rest of the post lives.
