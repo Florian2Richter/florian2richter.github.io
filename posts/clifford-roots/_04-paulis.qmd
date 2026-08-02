@@ -1,225 +1,526 @@
 ## Rebuilding the qubit from the bit {#sec-paulis}
 
-<!-- Working title; alternatives: "The smallest quantum step",
-     "Coordinates for the qubit". The anchor #sec-paulis is new and
-     nothing references it yet, so it is safe to rename. -->
+Look once more at the Bloch ball of @fig-bloch, because something
+classical is hiding in plain sight. The two states of an ordinary
+bit sit at the poles. The straight line between them, running
+through the centre, is the entire state space of the classical bit:
+the segment from the very start of this post, with its two certain
+ends and its ignorant middle. The quantum ball did not replace the
+classical picture. It grew *around* it.
 
-TODO: write this chapter as prose. The shape below is settled; it is
-the outline agreed in discussion, spelled out so the prose pass only
-has to write, not decide.
+That is worth taking seriously, because it suggests a way into the
+smaller room the previous section went looking for. Attacking the
+space of all quantum channels head-on earned us an upper bound and a
+villain, complete positivity. So this time we go the other way
+around. Start from the classical bit, the smallest state space we
+own, and take the smallest step that turns it quantum, keeping both
+hands on the algebra the whole way. By the end of the section that
+small step will have produced a coordinate system for the qubit, a
+family of channels that respects those coordinates, and a
+rederivation of the three-step eraser of @fig-bloch-root: not pulled
+from a hat this time, but designed, with every choice visible.
 
-**Settled conventions.**
+Begin with the bit, dressed in matrix clothes. A classical bit is a
+probability $p$ of reading $0$ and $1 - p$ of reading $1$, and its
+density matrix is diagonal:
+$$
+\rho \;=\; \begin{pmatrix} p & 0 \\ 0 & 1-p \end{pmatrix}
+\;=\; \tfrac12\bigl(I + r\,Z\bigr),
+\qquad r = 2p - 1 .
+$$
+Two matrices carry the whole classical story: the identity $I$, and
+$$
+Z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}.
+$$
+As $p$ sweeps from one to zero, $r$ slides from $+1$ down to $-1$,
+and $\tfrac12(I + rZ)$ traces out exactly the vertical diameter of
+the Bloch ball. So $I$ and $Z$ are a *basis* for the classical
+states: every state of a bit is a combination of these two matrices,
+and nothing else is needed.
 
-- Symbols are the working language ($\mathbb{Z}_2$, $\sigma(a)$,
-  *projective representation* as a defined term), but the four
-  matrices go by their letters $I, X, Y, Z$ throughout. The scalable
-  notation $\mathbf{w}(a,b)$ debuts in the next chapter, not here.
-- The operator basis is the Hermitian quartet: the matrix at label
-  $(1,1)$ is $Y = iXZ$, the $i$ presented as a grooming phase chosen
-  so that all four basis matrices are Hermitian and square to $I$.
-  (Consequences used later: the dials $\lambda$ come out real, and
-  the Bloch dictionary matches chapter 3's figures untranslated.)
-- No 16-element Pauli group. Four labels and one phase-decorated
-  multiplication table carry everything.
-- Two asides: the forced-phase proof (beat 4) and the CP
-  decomposition (beat 10). Worked examples stay in the main text.
+That is the first role the two matrices play. Here is the second,
+and it looks almost too small to mention. Give them labels: attach
+$0$ to $I$ and $1$ to $Z$, writing $\sigma(0) = I$ and
+$\sigma(1) = Z$. The labels add modulo $2$, the arithmetic of even
+and odd; as a group this label set is called $\mathbb{Z}_2$. Now
+multiply the matrices and watch the labels. $Z \cdot Z = I$, which
+is $1 + 1 = 0$. $I \cdot Z = Z$, which is $0 + 1 = 1$.
+Multiplication upstairs is addition downstairs, exactly, with
+nothing left over. An assignment with this property is called a
+*representation* of the group. For the moment this is idle
+bookkeeping. It is also the seed of everything below.
 
-The beats, in order:
+To watch the bookkeeping earn its keep, take the one copier family
+we have already solved and translate it. The two-state copier from
+the classical section was
+$$
+S = \begin{pmatrix} 1-a & a \\ a & 1-a \end{pmatrix},
+$$
+copying faithfully with probability $1 - a$ and flipping with
+probability $a$. In matrix clothes its entire action collapses to
+two statements:
+$$
+T[I] = I, \qquad T[Z] = (1 - 2a)\, Z .
+$$
+The identity is left alone, and $Z$ is multiplied by a number. That
+is the whole copier. (The vector $v = (1, -1)$ that carried the
+classical computation back then is nothing but the diagonal of $Z$.)
+And the classical no-root theorem, the fact that a bit cannot be
+erased gently, becomes a single sentence: applying $T$ repeatedly
+multiplies $Z$ by $(1-2a)^k$, and a product of copies of one number
+vanishes only if that number was zero from the start. One label
+beyond the identity, one number attached to it, no room to
+manoeuvre. Keep this template in view: *a copier in these
+coordinates is a rule for the labels plus a number per label*. The
+rest of the section is that sentence, rerun with better
+ingredients.
 
-- **Hook: the classical bit never left.** Story-first, no math in the
-  opening. Chapter 3 closed looking for a smaller room; this chapter
-  builds it, starting from a picture the reader already owns. In the
-  Bloch ball the two classical states sit at the poles, and the whole
-  classical state space of chapter 2, the line segment, is the
-  vertical diameter. The ball grew *around* the classical line. So
-  invert the strategy: instead of shrinking the general quantum
-  problem, grow the classical bit up by the smallest possible step
-  and watch what the step forces. Promise the arc in one breath: a
-  coordinate system for the qubit, the family of channels that
-  respects it, and chapter 3's mystery root re-derived by design
-  instead of pulled from a hat.
+Now count what the qubit needs. The previous section counted
+$d^2 - 1 = 3$ real numbers for a qubit state, and the count came
+from the $d^2 = 4$ real dimensions of Hermitian $2 \times 2$
+matrices, with one dimension spent on fixing the trace. A basis for
+*everything*, then, needs four matrices, and if the label
+bookkeeping is to keep working, the label set needs four elements.
+The smallest possible step is to double the group,
+$$
+\mathbb{Z}_2 \;\longrightarrow\; \mathbb{Z}_2 \times \mathbb{Z}_2 ,
+$$
+labels $(a, b)$ with each coordinate adding modulo $2$ on its own.
 
-- **The bit as $\mathbb{Z}_2$, and the template.** Set
-  $\sigma(0) = I$, $\sigma(1) = Z$: exactly what the states of a bit
-  need, $\rho = \tfrac12(I + rZ)$, the diameter between the poles.
-  Name the two roles these matrices play, lightly: the *basis* role
-  ($I$ and $Z$ span the classical states) and the *group* role
-  ($Z \cdot Z = I$ matches $1 + 1 = 0$: matrices multiply the way
-  labels add). The word *representation* enters here, where the match
-  is exact and phase-free. Then the recast: chapter 2's copier, in
-  these coordinates, is $T[I] = I$, $T[Z] = (1-2a)\,Z$. That is
-  already the template, a (trivial) relabelling plus one dial
-  $\lambda = 1-2a$; chapter 2's eigenvector $v = (1,-1)$ was the
-  diagonal of $Z$ all along, and the bit's no-root theorem becomes
-  one sentence: a product of copies of a single $\lambda$ vanishes
-  only if $\lambda$ was already zero. (This plants the reduction of
-  beat 8.)
+Where should the second generator come from? We have used the
+*states* of the bit; we have barely used its one interesting
+*operation*. The flip. In the classical family above it sits at the
+corner $a = 1$, the copier that flips every bit with certainty, and
+its matrix is
+$$
+X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix},
+$$
+a plain permutation matrix. It is Hermitian, and $X^2 = I$: flipping
+twice is doing nothing. A second matrix of order two, independent of
+the first. So the four labels get their candidate matrices in the
+obvious way,
+$$
+\sigma(a, b) = X^a Z^b :
+\qquad
+\sigma(0,0) = I, \quad \sigma(1,0) = X, \quad \sigma(0,1) = Z,
+\quad \sigma(1,1) = XZ ,
+$$
+and only one of the four, the product $XZ$, is genuinely new.
+Before writing it out, though, there is a question that sounds
+pedantic until you take it seriously.
 
-- **The doubling.** Chapter 3 counted $d^2 - 1 = 3$ free parameters,
-  so a basis of everything needs $d^2 = 4$ matrices, so the label
-  group needs four elements: $\mathbb{Z}_2 \to \mathbb{Z}_2^2$. The
-  second generator is $X$, introduced as the bit's missing
-  *operation*: the flip, the one classical thing no copier in
-  chapter 2 ever purely did. $X$ is a permutation matrix with
-  $X^2 = I$, a second independent $\mathbb{Z}_2$. Labels
-  $(a,b) \in \mathbb{Z}_2^2$, matrices $X^a Z^b$; the fourth matrix
-  is $XZ$, groomed into $Y$ two beats down.
+Could the luck of the classical stage hold? There, multiplication
+matched addition perfectly. Could four matrices be chosen, these or
+any others, so that the match stays perfect *and* the four still
+span everything? The answer is no, and the reason is a counting
+argument, not bad luck. Labels commute:
+$(a,b) + (a',b') = (a',b') + (a,b)$. If multiplication upstairs
+copied addition downstairs exactly, the four matrices would have to
+commute with one another too. But commuting is contagious: a matrix
+that commutes with all four basis matrices commutes with everything
+they span, and their span was supposed to be *all* $2 \times 2$
+matrices. A matrix that commutes with every matrix can only be a
+multiple of the identity. So all four would be stretched copies of
+$I$, spanning a single dimension rather than four. Phase-free
+multiplication and a full basis cannot coexist. Something has to
+give, and in quantum mechanics exactly one thing is allowed to give:
+a number out front. The matrices may multiply like the labels *up
+to a scalar factor*. That factor is not a blemish on an otherwise
+clean story. It is the mechanism by which four commuting labels
+manage to span a non-commuting world, and by the end of the post it
+will be carrying the answer.
 
-- **The phase is forced.** The chapter's deepest beat, at full
-  strength. The labels commute; but four matrices that all commute
-  can be simultaneously diagonalized and then span at most two
-  dimensions, not four. So *no* choice of matrices, for *any* abelian
-  group of four labels, can multiply exactly as the labels add and
-  still span everything. The only slack on offer is a scalar phase
-  out front, and it must be used: projectivity is not a blemish of
-  the Paulis but the price of an operator basis, paid by every
-  possible choice. This also disposes of $\mathbb{Z}_4$ silently,
-  since powers of a single matrix commute. Aside: the proof, resting
-  on "commuting Hermitian matrices are simultaneously
-  diagonalizable", stated as a citable linear-algebra fact.
+```{=html}
+<details class="aside">
+<summary>Why no choice of matrices can dodge the phase</summary>
+```
 
-- **The multiplication, the table, the name.** Worked example in the
-  main text: $XZ$ and $ZX$ multiplied out entry by entry, the same
-  matrix with opposite signs; the labels added identically both
-  times, but the matrices remember the order. Fix the convention:
-  the matrix at label $(1,1)$ is $Y = iXZ$, the $i$ a grooming phase
-  that makes the fourth sibling Hermitian like the other three;
-  phases out front never touch the label bookkeeping (quietly, this
-  is why the channel data will split cleanly in two). Centerpiece:
-  the full $4 \times 4$ multiplication table ($XY = iZ$, $YX = -iZ$,
-  $XZ = -iY$, and so on), then the instruction to cover the phases
-  and read only the letters: labels add coordinate-wise, every time,
-  no exceptions. Only now the name:
-  $\sigma(g)\,\sigma(h) = c(g,h)\,\sigma(g+h)$ with $|c| = 1$ is a
-  *projective representation*, plus one sentence of context: global
-  phases were never physical (a state and its phase-rotated copy
-  answer every measurement identically), so representation-up-to-
-  phase is the native quantum notion of realizing a symmetry, not a
-  defect. Tie back: the phase freedom is exactly the slack that lets
-  a commutative label set span a non-commutative world.
+Suppose $\sigma$ assigns a matrix to each element of some abelian
+group of four labels, with multiplication matching addition exactly:
+$\sigma(g)\,\sigma(g') = \sigma(g + g')$. Because $g + g' = g' + g$,
+the four matrices commute pairwise.
 
-- **The family: Clifford channels.** A channel is pinned down by what
-  it does to the four basis matrices (the third use of this move in
-  the post). A generic channel smears each Pauli into a mixture of
-  all four, ignoring the coordinates we built. The family is the
-  channels that leave the group structure invariant, each labelled
-  matrix going to a multiple of a single labelled matrix:
-  $$
-  T[I] = I, \quad T[X] = \lambda_X\,h(X), \quad
-  T[Y] = \lambda_Y\,h(Y), \quad T[Z] = \lambda_Z\,h(Z),
-  $$
-  with $h$ a permutation of the three letters. (Just a permutation,
-  for now; the closing beat whispers what more will be asked of it,
-  and the name $h$ matches the figure below and the next chapter.)
-  Geometric gloss in
-  the same breath: axes to axes, possibly shrunk, never smeared
-  (@fig-bloch). Drop the name here: *Clifford channels*, channel
-  cousins of the Clifford gates of quantum computing, the unitaries
-  that map Paulis to Paulis; footnote disambiguating from Clifford
-  algebras and pointing at the stabilizer formalism. The data,
-  untangled: six skeletons (the permutations), each dressed with
-  three real dials. Constraints derived on the spot: $T[I] = I$ is
-  the standing fixed-centre rule; the $\lambda$'s are *real* because
-  $T$ maps Hermitian to Hermitian and all four basis matrices are
-  Hermitian (one line, and the qubit seed of the next chapter's
-  $\lambda(-\eta) = \overline{\lambda(\eta)}$); $|\lambda| \le 1$
-  because the ball must map into itself. Honest flag: necessary, not
-  sufficient. Complete positivity, the villain of chapter 3's
-  confession, still patrols the family, and legality will be checked
-  by hand for the one channel that matters. The chapter's figure
-  sits here, right after the data is untangled:
+Now suppose they also span the whole space of $2 \times 2$ matrices.
+The commutator is linear in each slot, so a matrix that commutes
+with all four basis matrices commutes with every linear combination
+of them, which by assumption is every matrix. In particular each
+$\sigma(g)$ commutes with every $2 \times 2$ matrix.
+
+That is an extremely restrictive property. Let $M$ commute with
+everything. Comparing off-diagonal entries of $MZ$ and $ZM$ gives
+$-M_{12} = M_{12}$ and $-M_{21} = M_{21}$, so both vanish and $M$ is
+diagonal. Commuting with $X$ then forces the two diagonal entries to
+be equal. So $M$ is a multiple of the identity.
+
+Each $\sigma(g)$ is therefore a multiple of $I$, and the span of all
+four is the one-dimensional line of multiples of $I$, not the
+four-dimensional space we demanded. Contradiction.
+
+Notice what the argument never used: which four-element abelian
+group the labels form. The cyclic group $\mathbb{Z}_4$ fails for the
+same reason (powers of a single matrix always commute with each
+other). Nothing was special about $2 \times 2$ either: in any
+dimension, a phase-free representation of an abelian label set can
+never supply a full operator basis. The phase is compulsory,
+everywhere.
+
+```{=html}
+</details>
+```
+
+Now watch the compulsory phase show up in the flesh. Multiply the
+two generators in both orders:
+$$
+XZ =
+\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}
+\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}
+= \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix},
+\qquad
+ZX =
+\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}
+\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}
+= \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}.
+$$
+The same matrix, with opposite signs: $XZ = -ZX$. The labels added
+the same way both times, $(1,0) + (0,1) = (1,1)$, but the matrices
+remember the *order*, and they file that memory in a sign.
+
+One cosmetic decision before the full table. The fourth matrix $XZ$
+is the odd sibling: $X$ and $Z$ are Hermitian, but transposing and
+conjugating $XZ$ flips its sign. A phase out front is ours to spend,
+it never touches the label bookkeeping, so spend it on restoring the
+family resemblance: define
+$$
+Y \;=\; i\,XZ \;=\; \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix},
+$$
+Hermitian, and squaring to $I$ like its siblings. The label of $Y$
+is $(1,1)$, and the quartet $I, X, Y, Z$ is complete. These are the
+*Pauli matrices*, the standard cast of single-qubit quantum
+mechanics, rebuilt here from the bit upward rather than handed down
+from above.
+
+Here are all sixteen products.
+
+|  $\cdot$  |  $I$  |  $X$  |  $Y$  |  $Z$  |
+|:---------:|:-----:|:-----:|:-----:|:-----:|
+| $I$ | $I$ | $X$ | $Y$ | $Z$ |
+| $X$ | $X$ | $I$ | $iZ$ | $-iY$ |
+| $Y$ | $Y$ | $-iZ$ | $I$ | $iX$ |
+| $Z$ | $Z$ | $iY$ | $-iX$ | $I$ |
+
+: The multiplication table of the Pauli quartet: row times column.
+
+Now do the exercise this table is begging for: put a thumb over the
+phases and read only the letters. $X \cdot Y$ lands on $Z$, and the
+labels agree: $(1,0) + (1,1) = (0,1)$. $Y \cdot Z$ lands on $X$:
+$(1,1) + (0,1) = (1,0)$. Every diagonal entry is $I$: any label
+added to itself is $(0,0)$. Sixteen products, and the letters add
+coordinate-wise every single time, without exception. The scattered
+$i$'s and signs are trailing decoration that the labels never see.
+
+This situation has a name. A rule $\sigma$ satisfying
+$$
+\sigma(g)\,\sigma(g') \;=\; c(g, g')\,\sigma(g + g'),
+\qquad |c(g, g')| = 1,
+$$
+multiplication matching addition up to a phase factor, is called a
+*projective representation* of the group. The name should not
+suggest something second-rate. Quantum mechanics never cared about
+overall phases in the first place: a state and its phase-rotated
+copy answer every measurement identically, so representation up to
+phase is the native quantum notion of realizing a symmetry, not a
+defect of our particular matrices. And the aside above says the
+projective escape hatch is not merely permitted here. It is the one
+door that counting left open.
+
+Coordinates in hand, we can finally say which copiers deserve them.
+A channel is linear, so it is pinned down by what it does to a
+basis; this is the move we used on the corners of the simplex, and
+we now use it on the quartet. A generic qubit channel that fixes the
+centre sprays each Pauli across all three Pauli directions, a
+$3 \times 3$ grid of numbers, nine parameters with no structure to
+hold on to, and the coordinates we just built play no role in it
+whatsoever. The channels worth keeping are the ones that *respect
+the labels*, sending each Pauli to a multiple of a single Pauli:
+$$
+T[I] = I, \qquad
+T[X] = \lambda_X\, h(X), \qquad
+T[Y] = \lambda_Y\, h(Y), \qquad
+T[Z] = \lambda_Z\, h(Z),
+$$
+where $h$ shuffles the three letters and each $\lambda$ is a plain
+number. In group language: the channel leaves the structure we built
+invariant, mapping the representation onto itself instead of
+dissolving it. Geometrically: axes go to axes, possibly shrunk,
+never smeared. These are the *Clifford channels*.[^clifford-name]
+
+[^clifford-name]: The name comes from their reversible cousins: the
+Clifford gates of quantum computing are the unitaries that map Pauli
+operators to Pauli operators under conjugation, and they are the
+backbone of the stabilizer formalism of quantum error correction
+(Nielsen and Chuang, chapter 10). The channels here are the
+open-system version of the same idea. Not to be confused with
+Clifford *algebras*, another legacy of the same nineteenth-century
+geometer, William Kingdon Clifford.
+
+So a Clifford channel is two pieces of data. The skeleton $h$: one
+of the six ways to shuffle three letters, a finite list. And three
+numbers $\lambda_X, \lambda_Y, \lambda_Z$: one dial per axis. The
+requirement $T[I] = I$ is our standing rule that the centre stays
+fixed, nothing new. The dials, though, are less free than they look.
+A channel maps states to states, and since every Hermitian matrix is
+a real combination of states, it maps Hermitian to Hermitian; with
+all four basis matrices Hermitian, each $\lambda$ must be *real*.
+Feeding in the pure state $\tfrac12(I + X)$ produces
+$\tfrac12(I + \lambda_X\, h(X))$, which is a legal state only if
+$|\lambda_X| \leq 1$: dials live between $-1$ and $1$. Hold on to
+the reality of the dials, by the way. It looks like a convenience.
+At the end of the section it will reveal itself as a symmetry with a
+price tag attached.
+
+Necessary is not sufficient, and honesty requires the flag: the
+villain of the previous section, complete positivity, patrols this
+family too. Not every setting of skeleton and dials is a lawful
+channel, and no amount of tidy bookkeeping waives the entrance fee.
+What the small room changes is that the fee can actually be paid.
+For the one channel this section is hunting, we will exhibit
+lawfulness outright, no criterion needed.
 
 ::: {#fig-clifford-grid}
 
 {{< include figures/fig5-continuum-grid/interactive.qmd >}}
 
-Draft caption. A Clifford channel's structural core is finite. Left:
-the continuum of qubit states, the three Bloch axes carrying both
-their letters and their labels, with the identity's label $(0,0)$ at
-the fixed centre. Right: the label plane on its own, four points. The
-relabelling half $h$ of a Clifford channel is a map on this finite
-grid, drawn here as a 3-cycle of the three nonzero labels that leaves
-the centre untouched (keep an eye on this particular cycle: it
-returns when we design the root). The dials $\lambda$, the other half
-of the data, are deliberately not drawn: a Clifford channel is a
-relabelling *and* an amplitude per axis, never just a permutation.
+A Clifford channel's structural core is finite. On the left, the
+continuum of qubit states: the three Bloch axes carry both their
+letters and their labels, with the identity's label $(0,0)$ at the
+fixed centre. On the right, the label plane on its own: four points.
+The relabelling half $h$ of a Clifford channel is a map on this
+finite grid, drawn here as a 3-cycle of the three nonzero labels
+that leaves the centre untouched; keep an eye on this particular
+cycle, because it returns when we design the root. The dials
+$\lambda$, the other half of the data, are deliberately not drawn: a
+Clifford channel is a relabelling *and* an amplitude per axis, never
+just a permutation.
 
 :::
 
-- **Examples parade** (three short paragraphs; the family already
-  contains everything the post has met):
-  - Chapter 2's copier, lifted: flip the bit with probability $a$.
-    Then $h = \mathrm{id}$, $\lambda = (1,\, 1-2a,\, 1-2a)$, and on
-    the diameter this is exactly the bistochastic matrix of
-    chapter 2. The template beat pays off.
-  - Unitary members: conjugation by $X$ gives $h = \mathrm{id}$,
-    $\lambda = (1, -1, -1)$; conjugation by the Hadamard swaps
-    $X \leftrightarrow Z$ with $\lambda_Y = -1$. A nontrivial $h$,
-    and negative dials are legal.
-  - The CDC itself: $\lambda = (0, 0, 0)$, any $h$. The target of
-    the root hunt is a member, so roots have somewhere to live.
+The family is small, but everything this post has met so far is
+already inside it. Three exhibits.
 
-- **The reduction, by hand.** Apply $T$ twice:
-  $T^2[X] = \lambda_X\,\lambda_{h(X)}\,h^2(X)$. Each letter walks
-  along $h$, and the dials *multiply along the walk*. So $T^n = P$
-  exactly when every letter's $n$-step product has died. The channel
-  question has become bookkeeping about walks and products. Taught
-  here once, on three letters; the next chapter inherits it
-  unchanged.
+First, the classical copier, lifted. Flip the qubit with probability
+$a$: that is the channel $T[\rho] = (1-a)\,\rho + a\,X\rho X$.
+Conjugating by $X$ leaves $X$ itself alone and flips the sign of $Y$
+and of $Z$ (two quick visits to the multiplication table:
+$XYX = -Y$ and $XZX = -Z$), so the mixture has skeleton
+$h = \mathrm{id}$ and dials $(1,\; 1-2a,\; 1-2a)$. Restricted to the
+vertical diameter it multiplies $Z$ by $1 - 2a$: exactly the
+classical copier we translated at the start. The lift is faithful.
 
-- **Design the root.** Design-first, no hat. Products die fastest
-  through a single zero, so spend exactly one; make every walk reach
-  it as late as possible, so $h$ must be the 3-cycle. Set the
-  surviving dials to $\tfrac12$, modest enough to keep everything
-  legal, and out comes
-  $$
-  T[X] = 0, \qquad T[Y] = \tfrac12\,X, \qquad T[Z] = \tfrac12\,Y.
-  $$
-  Compute $T, T^2, T^3$ letter by letter: $X$ dies in one step, $Y$
-  in two, $Z$ in three, so $T^3 = P$ while $T^2 \neq P$: order
-  $3 = d^2 - 1$, the full quantum bound met inside the tiny family.
-  No new figure here: the example $h$ drawn on the right panel of
-  @fig-clifford-grid is exactly this 3-cycle, so the reader has
-  already seen the walk; the dials $(0, \tfrac12, \tfrac12)$ live in
-  the prose computation. Recognition: on Bloch vectors this is
-  $(r_1, r_2, r_3) \mapsto (r_2/2,\, r_3/2,\, 0)$, chapter 3's
-  mystery root, and the z, y, x stages of @fig-bloch-root are
-  literally the orbit walk. The hat trick was a two-line design all
-  along.
+Second, the reversible members. Conjugation by $X$ alone is the case
+$a = 1$: dials $(1, -1, -1)$, nothing shrunk, two axes reflected.
+Conjugation by the Hadamard gate $H = (X + Z)/\sqrt{2}$, the unitary
+that exchanges the roles of $X$ and $Z$, gives the first nontrivial
+skeleton: $h$ swaps $X \leftrightarrow Z$ and fixes $Y$, with dials
+$(1, -1, 1)$. Negative dials are legal, and reversible Clifford
+channels are precisely the famous Clifford gates, met here in
+channel clothing.
 
-- **Complete positivity, dissolved.** The payoff of chapter 3's
-  confession, given a full beat. The root is a coin flip among three
-  rotations: apply $U$, $XU$, or $YU$ with probabilities
-  $\tfrac12, \tfrac14, \tfrac14$, where $U$ is the rotation by a
-  third of a turn about the ball's diagonal axis, the one that
-  cycles the three coordinate axes. A random choice among unitaries
-  is manifestly a channel, so this member of the family is legal by
-  inspection, no Choi matrix needed. Aside: the derivation. Write
-  $T$ as that rotation followed by the shrink
-  $\mathrm{diag}(\tfrac12, \tfrac12, 0)$, realize the shrink as the
-  mixture "do nothing with probability $\tfrac12$, conjugate by $X$
-  or by $Y$ with probability $\tfrac14$ each" (a small linear system
-  for the weights), then compose.
+Third, the villain's target. Set every dial to zero. Each Pauli
+dies, every Bloch vector is sent to the origin, and $T$ is the
+completely depolarising channel $P$ itself, whatever the skeleton.
+The object we want roots of is a member of the family. The hunt can
+begin at home.
 
-- **Close: two seeds for the next chapter.** The linearity whisper:
-  a relabelling ought to respect the addition of labels; for three
-  letters every permutation happens to, so the condition was
-  invisible here. (The next chapter reveals the six permutations as
-  the six invertible $2 \times 2$ matrices over $\mathbb{F}_2$, and
-  in higher dimensions respecting addition becomes a real
-  constraint.) The cliffhanger: the label where $\lambda$ died is
-  its own negative, $-(1,0) = (1,0)$ mod 2. For odd $d$ a label and
-  its negative are different points, and zeros will be forced to
-  come in mirror pairs. That innocent coincidence is worth exactly a
-  factor of two, and it is the last thing the qubit gives us for
-  free.
+Apply a Clifford channel twice, and watch the bookkeeping run
+itself:
+$$
+T^2[X] \;=\; \lambda_X\, T[h(X)]
+\;=\; \lambda_X\, \lambda_{h(X)}\, h^2(X),
+$$
+and likewise for the other letters. Nothing new is ever created.
+Each letter *walks*, one step along $h$ per application of the
+channel. And the dials *multiply along the walk*: after $n$ steps a
+letter carries the product of the $n$ dials it paid on departure.
+Meanwhile $P$ is the channel that kills all three letters. So
+$$
+T^n = P
+\quad\Longleftrightarrow\quad
+\text{every letter's $n$-step product of dials has died.}
+$$
+The channel question has become a question about walks on three
+points and products of numbers along them. This is the reduction the
+whole post has been steering toward, and it will survive word for
+word when three letters become $d^2 - 1$.
 
-**Figure note.** The chapter's figure is @fig-clifford-grid
-(`figures/fig5-continuum-grid`, built, static, wired in above at the
-family beat): the continuum on the left, the finite label grid on
-the right, colour carrying the axis-to-point correspondence, and the
-example $h$ on its right panel is precisely the 3-cycle the root
-design picks. An earlier idea of a separate $d = 2$ orbit ring is
-dropped as redundant with that right panel. The orbit-ring figure
-(`figures/fig4-orbit-cycle`, the $d = 3$ eight-ring) comes later, in
-the next chapter's worked example.
+One consequence is immediate, and it echoes the classical bit. Dials
+are real numbers, and a product of nonzero numbers is never zero. A
+walk's product dies only by stepping on a *zero dial*. Erasure, in
+this family, is not a gradual conspiracy of small numbers. It
+happens exactly where the zeros are.
+
+And now the hunt fits in three short paragraphs, because a shuffle
+of three letters has only three possible shapes.
+
+The skeleton could fix all three letters. Then each letter walks in
+place, multiplying its own dial over and over, and dying forces that
+dial to *be* zero. All three dials zero means $T = P$ from the very
+start. This is the classical bit's tragedy, tripled: no roots live
+here.
+
+The skeleton could swap two letters and fix the third. The fixed
+letter needs its own zero, as before. The swapped pair walk into
+each other, so at least one of their two dials must vanish, and then
+both of those walks are dead within two steps. Order two at best: a
+square root of erasure, the quantum sibling of the classical
+$d = 3$ construction, and nothing more.
+
+Or the skeleton could cycle all three letters. Now a *single* zero
+serves everybody, because every walk eventually passes through it,
+and the walks reach it at different times. Put the zero on $X$, keep
+the other two dials alive at one half:
+$$
+T[X] = 0, \qquad T[Y] = \tfrac12\, X, \qquad T[Z] = \tfrac12\, Y .
+$$
+$X$ dies immediately. $Y$ steps onto $X$ and dies departing it: two
+steps. $Z$ takes the long way round, and it pays to compute it once
+in full:
+$$
+T[Z] = \tfrac12\, Y, \qquad
+T^2[Z] = \tfrac14\, X, \qquad
+T^3[Z] = 0 .
+$$
+So $T^3 = P$, while $T^2 \neq P$: the quarter of $X$ still alive at
+step two is the witness. Order exactly three.
+
+Three is the ceiling for the entire family, because the survey was
+exhaustive: no shuffle of three letters offers a longer walk to a
+zero. And three is $d^2 - 1$ at $d = 2$. Read that twice. The tiny,
+rigid family, six skeletons and three dials, reaches the same
+maximal order that the whole quantum machinery allows. Nothing was
+lost by retreating into the small room.
+
+You have seen this channel before. On Bloch vectors it sends
+$(r_1, r_2, r_3)$ to $(r_2/2,\; r_3/2,\; 0)$, which is the
+three-step eraser of @fig-bloch-root, the one the previous section
+produced without explanation. Its z, then y, then x stages are
+nothing but the walk around the cycle, one axis per step, and the
+cycle itself is the very one drawn on the right panel of
+@fig-clifford-grid. What arrived last section as a rabbit from a hat
+is, in coordinates, a two-line design: spend one zero, take the
+longest walk. (The halves are a choice with a ceiling of their own:
+the two surviving dials cannot sum to more than one, so ours sit
+exactly on the boundary of what is allowed.[^qubit-maps])
+
+[^qubit-maps]: Deciding exactly which dial settings yield a lawful
+channel is a solved problem for qubits: M. B. Ruskai, S. Szarek and
+E. Werner, "An analysis of completely-positive trace-preserving maps
+on $2 \times 2$ matrices", *Linear Algebra and its Applications*
+**347**, 159 (2002). For our root the criterion reduces to
+$\lambda_Y + \lambda_Z \leq 1$. The thesis works out the criterion
+for the whole Clifford family in §5.2.1.
+
+One debt remains, and it is the emotional one. The previous section
+confessed that a linear map of the right order is not yet a channel,
+and that the general construction resisted at exactly that point.
+Our $T$ is, so far, four tidy equations. Is it physical?
+
+Here is the same $T$ wearing different clothes. Let $U$ be the
+rotation of the Bloch ball by a third of a turn about the diagonal
+axis through $(1,1,1)$, oriented so that it carries the $x$-axis
+onto the $z$-axis, the $z$-axis onto the $y$-axis, and the $y$-axis
+onto the $x$-axis. Then
+$$
+T[\rho] \;=\; \tfrac12\; U \rho\, U^\dagger
+\;+\; \tfrac14\; (XU)\, \rho\, (XU)^\dagger
+\;+\; \tfrac14\; (YU)\, \rho\, (YU)^\dagger .
+$$
+In words: flip a three-sided coin with weights one half, one
+quarter, one quarter, and depending on the outcome apply one of
+three *rotations* to the qubit: $U$, or $U$ followed by an $X$-flip,
+or $U$ followed by a $Y$-flip. That is the entire channel. A mixture
+of unitaries is a channel beyond any possible doubt: each branch is
+reversible physics, and forgetting the outcome of a coin flip cannot
+break positivity, complete or otherwise. Lawfulness by inspection.
+The obstacle that stopped the Jordan block in the general problem
+dissolves, in the small room, into a coin and three rotations.
+
+```{=html}
+<details class="aside">
+<summary>The coin and the three rotations, worked out</summary>
+```
+
+Two steps: split $T$ into a rotation followed by a shrink, then
+write the shrink as a coin flip.
+
+*The rotation.* Define
+$$
+U \;=\; \tfrac12\bigl(I + i\,(X + Y + Z)\bigr).
+$$
+Unitarity is one line with the multiplication table: writing
+$S = X + Y + Z$, the product $(I + iS)(I - iS) = I + S^2$, and
+$S^2 = 3I$ because the six cross terms cancel in anticommuting
+pairs ($XY + YX = iZ - iZ = 0$, and likewise for the other two
+pairs). So $U U^\dagger = \tfrac14 (I + 3I) = I$. Conjugation by $U$
+cycles the Paulis,
+$$
+U X U^\dagger = Z, \qquad
+U Z U^\dagger = Y, \qquad
+U Y U^\dagger = X,
+$$
+each a patient exercise with the table. Write
+$V[\rho] = U \rho\, U^\dagger$ for this rotation: a lawful channel,
+because it is unitary.
+
+*The shrink.* Let $D$ be the map with $D[X] = \tfrac12 X$,
+$D[Y] = \tfrac12 Y$, $D[Z] = 0$: dials one half on the $x$ and $y$
+axes, zero on $z$, identity skeleton. Try a mixture of doing
+nothing, an $X$-flip, and a $Y$-flip, with weights $p_0, p_1, p_2$.
+Conjugation by $X$ has dials $(1, -1, -1)$ and conjugation by $Y$
+has dials $(-1, 1, -1)$, so the mixture has dials
+$$
+\bigl(p_0 + p_1 - p_2,\;\; p_0 - p_1 + p_2,\;\; p_0 - p_1 - p_2\bigr).
+$$
+Setting these equal to $(\tfrac12, \tfrac12, 0)$ together with
+$p_0 + p_1 + p_2 = 1$ solves to $p_0 = \tfrac12$ and
+$p_1 = p_2 = \tfrac14$.
+
+*The composite.* Applying $D$ after $V$ does exactly what $T$
+demands: $T[X] = D[Z] = 0$, $T[Y] = D[X] = \tfrac12 X$, and
+$T[Z] = D[Y] = \tfrac12 Y$. Substituting the mixture for $D$ and
+absorbing $U$ into each branch turns the composition into the
+three-term coin flip of the main text, with unitaries $U$, $XU$ and
+$YU$.
+
+```{=html}
+</details>
+```
+
+Two loose threads remain, both deliberately left dangling, both
+pointing straight at the next section.
+
+First, a free pass we quietly enjoyed. We called $h$ a shuffle and
+never demanded that it respect the labels' arithmetic. It did so
+anyway, automatically: send two of the three letters wherever you
+like, and their sum, which is always the third letter, has nowhere
+to go but the remaining slot. Every shuffle of three letters is
+compatible with the addition of labels. That is a coincidence of the
+smallest case, and it expires immediately. In the next section the
+label plane has eight nonzero points, and of the $40320$ ways to
+shuffle eight points, exactly $48$ respect the addition of labels.
+The relabelling will have to be *linear*, and that phrase, a linear
+map on a plane of labels, is the door through which the
+finite-field machinery enters.
+
+Second, look once more at where we spent the zero. It sits at the
+label $(1,0)$. What is the negative of that label? In arithmetic
+modulo $2$, where $1 + 1 = 0$, every label is its own negative:
+$-(1,0) = (1,0)$. That innocent-looking fact has been working for us
+all section. The general rule, visible in the next section, is that
+the dials at a label and at its negative are complex conjugates of
+one another; here every label is its own mirror, which is why our
+dials merely had to be real, and why a single zero came for the
+price of one. For odd $d$, a label and its negative are *different*
+points, and every zero will drag its mirror partner down with it:
+two zeros, minimum, cutting the longest walk short. That
+coincidence, quietly worth a factor of two, is the last thing the
+qubit gives us for free.
