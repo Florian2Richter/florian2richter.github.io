@@ -225,9 +225,30 @@ def build_svg():
     </marker>
   </defs>''')
 
-    # (Background wireframe removed for the animation: no purity field and no
-    # latitude/longitude gridlines. Only the silhouette and the coordinate axes
-    # survive, mirroring the stripped-down classical state-space sketch.)
+    # --- Wireframe: the same latitude/longitude guide lines as Figure 3, so
+    # the two balls read as the same object. The purity field stays off: the
+    # cloud carries the purity colouring here, and a tinted background would
+    # fight it. ---
+    parts.append('\n\n  <!-- Latitude circles -->')
+    parts.append('\n  <g>')
+    for z in LATITUDES:
+        if abs(z) < 1e-9:
+            parts.append(wire_runs(latitude_points(z), True,
+                                   EQUATOR_W, WIRE_BACK_W,
+                                   EQUATOR_FRONT_OPACITY, EQUATOR_BACK_OPACITY))
+        else:
+            parts.append(wire_runs(latitude_points(z), True,
+                                   WIRE_FRONT_W, WIRE_BACK_W,
+                                   WIRE_FRONT_OPACITY, WIRE_BACK_OPACITY))
+    parts.append('\n  </g>')
+
+    parts.append('\n\n  <!-- Longitude meridians -->')
+    parts.append('\n  <g>')
+    for k in range(N_MERIDIANS):
+        parts.append(wire_runs(meridian_points(2.0 * math.pi * k / N_MERIDIANS),
+                               False, WIRE_FRONT_W, WIRE_BACK_W,
+                               WIRE_FRONT_OPACITY, WIRE_BACK_OPACITY))
+    parts.append('\n  </g>')
 
     # --- Silhouette ---
     parts.append('\n\n  <!-- Silhouette (pure-state boundary) -->')
