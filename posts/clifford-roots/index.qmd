@@ -14,10 +14,10 @@ format:
 
 This post grew out of my diploma thesis in Quantum Information, which
 I wrote in Hannover in 2010. The thesis was about quantum memory
-channels, and in particular about how deep their memory runs. Somewhere
-inside that work a smaller, self-contained question fell out, one I
-have wanted to retell ever since: how finely can you divide the most
-destructive process there is?
+channels, and in particular about how deep their memory runs.
+Somewhere inside that work a smaller, self-contained question fell
+out: how finely can you divide the most destructive process there
+is?
 
 The original is written for examiners, not for curious readers. The
 arrival of large language models finally removed my last excuse. I
@@ -26,21 +26,12 @@ support, trading the terse notation of a thesis for pictures, worked
 examples, and a slower pace, so that a motivated undergraduate can
 follow every step.
 
-The heart of the post is that dividing question and its answer in the
-full quantum world, a result I published years ago and that the post
-reaches by the end of the quantum part. I could have stopped there.
-
-Instead the post keeps going, into a small and well-behaved corner of
-the quantum world called the Clifford channels. This last step is a
-bonus, a side result I never published, and it earns its place for one
-reason: it is beautiful. Restricting to Clifford channels turns the
-whole problem into simple, concrete group theory, a handful of finite
-states and the permutations that shuffle them, something you can work
-through by hand. The reward is that even this tiny corner reaches, in
-prime dimensions, asymptotically the same complexity as the full
-quantum machinery. Watching a question about a physical process turn
-into a question about lines over a finite field is the part I still
-find surprising.
+The route, roughly: devices with memory give the problem its
+physical face, the classical world gives a first answer, and the
+quantum world a quadratically bigger one. Along the way we settle
+into a small subclass of channels, simple enough to parameterize by
+hand, yet powerful enough to come within a factor of two of the full
+quantum answer: the Clifford channels.
 
 Enjoy your read :)
 

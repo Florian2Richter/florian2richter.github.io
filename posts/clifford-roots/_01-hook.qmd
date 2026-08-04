@@ -8,9 +8,9 @@ information about the original has been erased.
 This is a familiar form of loss. Each pass through the copier loses a
 little, the losses pile up, and eventually nothing remains. Heat works
 this way too. So does mixing dye into water, or scrambling a Rubik's
-cube, or letting milk cool in a glass. Everywhere you look, processes
-that destroy information are processes that destroy it in *steps*:
-many small irreversible nudges that add up.
+cube, or rain working on a pavement chalk drawing. Everywhere you
+look, processes that destroy information are processes that destroy
+it in *steps*: many small irreversible nudges that add up.
 
 Now think about how you'd design such a process. You have full control
 of the photocopier. The cheap thing you can do is make it violently
@@ -70,5 +70,5 @@ family with vastly less freedom than the general quantum case, and you
 might expect the bound to drop most of the way back down.
 
 It almost doesn't. The factor-of-2 gap that remains is the punchline.
-The reason it remains is a piece of finite-field bookkeeping that
-turns out, if you sit with it, to be unreasonably beautiful.
+The reason it remains is a piece of finite-field bookkeeping that is,
+if you sit with it, unreasonably beautiful.

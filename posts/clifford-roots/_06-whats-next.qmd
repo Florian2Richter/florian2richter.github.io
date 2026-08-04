@@ -21,5 +21,14 @@ costs a factor of two. The whole argument fits in the palm of your hand,
 and you can check the $d = 3$ case by stepping around an eight-point
 cycle with a pencil.
 
+There is one more way to read these numbers, and it closes a loop
+opened at the very start of the post: the device that carries a
+private memory from one use to the next, and is strictly forgetful
+when that memory is provably purged after finitely many uses. A
+qubit memory can survive for at most three uses. A Clifford memory
+of prime dimension $d$ can survive for $(d^2 - 1)/2$, and the most
+stubborn quantum memory of all for $d^2 - 1$. After that, the
+influence of how the memory began is not merely small. It is gone.
+
 The full development, including the classical and general quantum bounds
 and the Clifford channels above, is in my diploma thesis.
