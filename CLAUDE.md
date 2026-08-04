@@ -158,7 +158,8 @@ family at $d = 2$, the design-first root), `_05-clifford-higher-dimensions`
   `styles.css`): claim in the text, derivation one click away.
   `_04` has two (the forced-phase proof, the three-rotation
   decomposition); `_05` has five (the Weyl basis, the mirror rule,
-  primitive polynomials / cyclicity, why the $\varepsilon$ is free,
+  primitive polynomials / cyclicity, the CP criterion with the
+  Gershgorin loudness budget $\sum_{\eta\neq 0}|\lambda(\eta)| \le 1$,
   why nothing beats one half). Click-to-expand, not hover.
 - **Figures: all built and wired.** fig1 (classical simplex,
   interactive), fig2 (classical square root, animated), fig3 (Bloch
@@ -169,13 +170,14 @@ family at $d = 2$, the design-first root), `_05-clifford-higher-dimensions`
   pair, static, in `_05`). See `figures/README.md` for ids and the
   progressive-enhancement conventions.
 - **Citation TODOs (the remaining work):** the mixing-channels
-  footnote in the hook (candidates listed inline, need verifying);
-  the published paper for the general $d^2-1$ construction is
-  described but not yet cited in `_06`; the exact thesis title plus a
-  PDF link are still missing in `_06` (both `_04` and `_05` footnotes
-  point at thesis §5.2.1, so the thesis reference will be load-bearing).
-  The channels footnote in `_03` (Nielsen & Chuang ch. 8, Wolf notes)
-  is real.
+  footnote in the hook (candidates listed inline, need verifying),
+  and the published paper for the general $d^2-1$ construction,
+  described but not yet cited in `_06`. The thesis is now cited in
+  full in `_06` (F. Richter, *Finite Roots of Completely
+  Depolarizing Channels*, Diploma thesis, Hannover 2010); a public
+  PDF link is still to be added. `_04` and `_05` footnotes point at
+  its chapter 5 (Lemma 5.1, §§5.2.1, 5.4.1). The channels footnote
+  in `_03` (Nielsen & Chuang ch. 8, Wolf notes) is real.
 - **Worked example thread:** $d=3$ (qutrit) runs through `_05`.
   Primitive polynomial $x^2+x+2$, $g^2 = 2g+1$, $g^4 = -1$, companion
   matrix $h=\binom{0\ 1}{1\ 2}$, the explicit 8-cycle, mirror-pair

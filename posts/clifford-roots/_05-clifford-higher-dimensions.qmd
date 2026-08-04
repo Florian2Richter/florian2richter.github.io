@@ -395,59 +395,83 @@ $T^{(d^2-1)/2} = P$ while $T^{(d^2-1)/2 - 1} \neq P$: the token that
 started just after a zero is still alive, carrying
 $\varepsilon^{(d^2-1)/2 - 1} \neq 0$, as the witness. And complete
 positivity, the fee the qubit section paid with a coin flip of three
-rotations, is paid here with the *same coin the classical section
-used*: the completely depolarising channel does not sit on the edge
-of the space of channels but strictly inside it, so every
-sufficiently small nudge that respects the linear bookkeeping is
-still a channel, and the order of the root never depended on how
-small $\varepsilon$ is. The aside makes this precise; how *loud*
-the surviving dials can be pushed before legality fails is the
+rotations, is where the Clifford family shows its final virtue: here
+the villain has an explicit face. A Clifford channel is completely
+positive exactly when a single $d^2 \times d^2$ matrix assembled
+from the dials is positive semidefinite, and a classical eigenvalue
+theorem turns that condition into a plain *budget*: keep the total
+loudness of all the dials at most one,
+$$
+\sum_{\eta \neq 0} |\lambda(\eta)| \;\le\; 1,
+$$
+and the channel is lawful. Our root spends $\varepsilon$ on the
+$d^2 - 3$ surviving labels, so every
+$\varepsilon \le \tfrac{1}{d^2 - 3}$ passes, and the order of the
+root never cared how small $\varepsilon$ is. The aside shows the
+face and derives the budget; the *exact* boundary of legality is a
 genuinely harder computation, and for that the thesis does the
 honest work.[^clifford-criterion]
 
-[^clifford-criterion]: The exact criterion for which dial settings
-$(h, \lambda)$ give a completely positive map, and hence how large
-the surviving amplitudes may be, is worked out in the thesis,
-section 5.2.1. The $\varepsilon$ argument here deliberately trades
-sharpness for self-containedness.
+[^clifford-criterion]: The criterion, phases and all, is Lemma 5.1
+in chapter 5 of the thesis, following earlier work cited there; the
+diagonal-dominance argument behind the loudness budget appears in
+sections 5.2.1 and 5.4.1 there. The budget deliberately trades
+sharpness for self-containedness: the exact boundary of legality is
+the positive semidefiniteness of $M$ itself.
 
 ```{=html}
 <details class="aside">
-<summary>Why the $\varepsilon$ is free, quantumly</summary>
+<summary>The face of complete positivity, and the loudness budget</summary>
 ```
 
-Complete positivity has a compact certificate. Line up the channel's
-outputs on the matrix units $E_{ij}$ (the matrix with a lone $1$ in
-row $i$, column $j$; yet another basis) into one big
-$d^2 \times d^2$ block matrix, the *Choi matrix*
-$C(T) = \bigl[\,T[E_{ij}]\,\bigr]_{ij}$. Choi's theorem says $T$ is
-completely positive exactly when $C(T)$ is positive semidefinite;
-it is part of the structure theory referenced in the quantum
-section's footnote.
+Complete positivity always has a certificate: the structure theory
+referenced in the quantum section's footnote packages a channel into
+one big matrix (the Choi matrix) whose positive semidefiniteness is
+equivalent to complete positivity. For a general channel that
+matrix is an opaque block of numbers. For a Clifford channel,
+written in Weyl coordinates, it is anything but. Its rows and
+columns are indexed by the labels, one apiece, and its entries are
+*dial values in disguise*:
+$$
+M_{\eta\xi} \;=\; c_{\eta\xi}\; \lambda(\eta - \xi),
+\qquad |c_{\eta\xi}| = 1,
+$$
+where the phases $c_{\eta\xi}$ are bookkeeping determined by $h$ and
+the Weyl multiplication rule. Three features matter. Every diagonal
+entry is $\lambda(0) = 1$. The *sizes* of the entries,
+$|M_{\eta\xi}| = |\lambda(\eta - \xi)|$, do not see $h$ or the
+phases at all. And $M$ is Hermitian, precisely because of the mirror
+rule. So "is this Clifford channel lawful?" has become "is this one
+matrix of dial values positive semidefinite?", a condition you can
+actually get your hands on.
 
-Two computations finish the job. First, the certificate of $P$
-itself: $P[E_{ij}] = \operatorname{tr}(E_{ij})\, I/d =
-\delta_{ij}\, I/d$, so $C(P)$ is block diagonal with every diagonal
-block $I/d$. It is $\tfrac{1}{d}$ times the identity: not merely
-positive semidefinite but *strictly* positive, every eigenvalue
-$\tfrac{1}{d}$.
+Now the classical eigenvalue theorem: *Gershgorin's circle theorem*.
+Every eigenvalue of a matrix lies in one of its Gershgorin discs, a
+disc centred at a diagonal entry with radius the summed sizes of the
+other entries in that row. For our $M$ every centre is $1$, and
+every row has the same radius
+$R = \sum_{\zeta \neq 0} |\lambda(\zeta)|$, since as $\xi$ runs
+through the other labels the difference $\eta - \xi$ runs through
+every nonzero label exactly once. $M$ is Hermitian, so its
+eigenvalues are real and live in $[1 - R,\; 1 + R]$. If $R \le 1$,
+none of them can be negative: $M$ is positive semidefinite and the
+channel is lawful. That is the loudness budget.
 
-Second, the nudge. Our channel is $T = P + \varepsilon\, \Delta$,
-where $\Delta$ is the fixed map that carries the walk structure.
-The Choi construction is linear, so
-$C(T) = C(P) + \varepsilon\, C(\Delta)$, and $C(T)$ is Hermitian
-because the mirror rule makes $T$ Hermiticity-preserving. A
-Hermitian perturbation moves eigenvalues by at most its operator
-norm, so every eigenvalue of $C(T)$ is at least
-$\tfrac{1}{d} - \varepsilon \lVert C(\Delta)\rVert$, which is
-positive once $\varepsilon$ is small enough. Trace preservation and
-the fixed centre hold exactly, not approximately, since
-$\lambda(0,0) = 1$.
+Check it against everything we have built. The qubit root of the
+last section had dials $0, \tfrac12, \tfrac12$: total loudness
+exactly $1$, sitting right on the budget (and, at $d = 2$, on the
+true boundary of legality, as that section's footnote recorded).
+The root above spends $\varepsilon$ on $d^2 - 3$ surviving labels:
+budget met for every $\varepsilon \le \tfrac{1}{d^2-3}$, which for
+$d = 3$ allows $\varepsilon$ up to $\tfrac16$. And the budget
+explains, one level up, why the classical aside's $\varepsilon$ was
+free: the completely depolarising channel, all dials at zero, sits
+at the centre of the budget with maximal room in every direction.
 
-This is the quantum copy of the classical aside's closing move:
-there, every entry of $P$ was $\tfrac{1}{d}$, strictly positive, so
-a small enough $\varepsilon N$ could not break non-negativity. Same
-$P$, same $\varepsilon$, one level up.
+One honesty note. The budget is sufficient, not necessary: dial
+settings can overspend it and still describe a lawful channel. The
+exact boundary is the positive semidefiniteness of $M$ itself, and
+mapping that boundary is the thesis's work, not this post's.
 
 ```{=html}
 </details>

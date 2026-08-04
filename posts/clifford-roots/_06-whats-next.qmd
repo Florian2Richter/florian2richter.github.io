@@ -31,4 +31,9 @@ stubborn quantum memory of all for $d^2 - 1$. After that, the
 influence of how the memory began is not merely small. It is gone.
 
 The full development, including the classical and general quantum bounds
-and the Clifford channels above, is in my diploma thesis.
+and the Clifford channels above, is in my diploma thesis.[^thesis]
+
+[^thesis]: F. Richter, *Finite Roots of Completely Depolarizing
+Channels*, Diploma thesis, Institute for Theoretical Physics,
+Leibniz Universität Hannover, September 2010.
+<!-- TODO: add a link once the PDF has a public home. -->
