@@ -311,13 +311,23 @@ zero.)
 Second, cyclicity: the nonzero elements of *any* finite field form a
 single multiplicative cycle. That is, some element $g$ exists whose
 powers run through all of them. This is a genuinely substantive
-theorem, proved in every abstract algebra course; the crucial input
-is that a polynomial equation $x^m = 1$ can have at most $m$
-solutions in a field, which forces the multiplicative group to be as
-undivided as possible. For $d$ prime and the field $\mathbb{F}_{d^2}$
-it hands us an element of order $d^2 - 1$ on a plate. (For
-$\mathbb{F}_d$ itself the statement is the existence of primitive
-roots modulo a prime, which goes back to Gauss.)
+theorem, the *cyclicity of the multiplicative group of a finite
+field*, a classical result from the era of Lagrange and Gauss that
+every abstract algebra course still proves.[^finite-fields] The
+crucial input is a root-counting bound: a polynomial equation of
+degree $m$, here $x^m = 1$, can have at most $m$ solutions over a
+field, and that scarcity of roots forces the multiplicative group to
+be as undivided as possible. For $d$ prime and the field
+$\mathbb{F}_{d^2}$ it hands us an element of order $d^2 - 1$ on a
+plate.
+
+[^finite-fields]: The standard modern reference is R. Lidl and
+H. Niederreiter, *Finite Fields*, Cambridge University Press;
+chapter 2 covers the structure of finite fields, including the
+cyclicity of the multiplicative group and primitive polynomials. The
+prime-field case, the existence of primitive roots modulo a prime,
+is proved in Gauss's *Disquisitiones Arithmeticae* (1801), and the
+root-counting bound behind it goes back to Lagrange.
 
 A *primitive polynomial* is the minimal polynomial of such a
 generator, and its companion matrix is the multiplication-by-$g$ map
