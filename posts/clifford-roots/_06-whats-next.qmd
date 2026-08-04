@@ -8,7 +8,17 @@ of asking a single matrix $h$ to do all the work, one builds the root
 directly at the level of the channel's representation, nudging a Jordan
 block into exactly the shape the bound allows. That construction does
 not care about mirror pairs, so the factor of two disappears, and the
-gap to $d^2 - 1$ closes.
+gap to $d^2 - 1$ closes.[^paper] One caution against a wrong
+impression the nudging might leave: maximal roots are not condemned
+to huddle near total erasure. In every dimension there are maximal
+roots sitting at a distance from $P$ that does not shrink as the
+dimension grows, and our qubit root, with its two dials at one half,
+was never a small perturbation to begin with.
+
+[^paper]: A. Ahlbrecht, F. Richter and R. F. Werner, "How long can
+it take for a quantum channel to forget everything?",
+arXiv:1205.0693 (2012). The construction is Theorem 3.4 there; the
+maximal roots far from $P$ are Proposition 3.5.
 
 That more general result subsumes the Clifford one, which is why the
 Clifford construction does not appear in the final paper. I wanted to

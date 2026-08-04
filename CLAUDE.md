@@ -170,15 +170,19 @@ family at $d = 2$, the design-first root), `_05-clifford-higher-dimensions`
   3-cycle), fig4 (the $d=3$ orbit ring with the antipodal vanishing
   pair, static, in `_05`). See `figures/README.md` for ids and the
   progressive-enhancement conventions.
-- **Citation TODOs (the remaining work):** the mixing-channels
-  footnote in the hook (candidates listed inline, need verifying),
-  and the published paper for the general $d^2-1$ construction,
-  described but not yet cited in `_06`. The thesis is now cited in
-  full in `_06` (F. Richter, *Finite Roots of Completely
-  Depolarizing Channels*, Diploma thesis, Hannover 2010); a public
-  PDF link is still to be added. `_04` and `_05` footnotes point at
-  its chapter 5 (Lemma 5.1, §§5.2.1, 5.4.1). The channels footnote
-  in `_03` (Nielsen & Chuang ch. 8, Wolf notes) is real.
+- **Citation TODOs (the remaining work):** only the mixing-channels
+  footnote in the hook (candidates listed inline, need verifying).
+  The published paper is now cited in `_06` (Ahlbrecht, Richter,
+  Werner, *How long can it take for a quantum channel to forget
+  everything?*, arXiv:1205.0693, 2012), together with the
+  far-from-$P$ remark (its Prop. 3.5); its k-dependent-states
+  application and the all-maximal-qubit-roots classification were
+  deliberately left out. The thesis is cited in full in `_06`
+  (F. Richter, *Finite Roots of Completely Depolarizing Channels*,
+  Diploma thesis, Hannover 2010); a public PDF link is still to be
+  added. `_04` and `_05` footnotes point at its chapter 5
+  (Lemma 5.1, §§5.2.1, 5.4.1). The channels footnote in `_03`
+  (Nielsen & Chuang ch. 8, Wolf notes) is real.
 - **Worked example thread:** $d=3$ (qutrit) runs through `_05`.
   Primitive polynomial $x^2+x+2$, $g^2 = 2g+1$, $g^4 = -1$, companion
   matrix $h=\binom{0\ 1}{1\ 2}$, the explicit 8-cycle, mirror-pair
