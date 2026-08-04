@@ -159,8 +159,9 @@ family at $d = 2$, the design-first root), `_05-clifford-higher-dimensions`
   `_04` has two (the forced-phase proof, the three-rotation
   decomposition); `_05` has five (the Weyl basis, the mirror rule,
   primitive polynomials / cyclicity, the CP criterion with the
-  Gershgorin loudness budget $\sum_{\eta\neq 0}|\lambda(\eta)| \le 1$,
-  why nothing beats one half). Click-to-expand, not hover.
+  Gershgorin sufficient condition $\sum_{\eta\neq 0}|\lambda(\eta)| \le 1$,
+  why nothing beats one half; mathematical terms only for this, no
+  "loudness budget" metaphor, per Florian). Click-to-expand, not hover.
 - **Figures: all built and wired.** fig1 (classical simplex,
   interactive), fig2 (classical square root, animated), fig3 (Bloch
   ball, interactive), fig3b (qubit root collapsing a Bloch cloud in

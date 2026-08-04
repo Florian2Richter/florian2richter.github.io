@@ -399,29 +399,30 @@ rotations, is where the Clifford family shows its final virtue: here
 the villain has an explicit face. A Clifford channel is completely
 positive exactly when a single $d^2 \times d^2$ matrix assembled
 from the dials is positive semidefinite, and a classical eigenvalue
-theorem turns that condition into a plain *budget*: keep the total
-loudness of all the dials at most one,
+theorem turns that condition into a simple *sufficient condition* on
+the absolute values of the amplitudes:
 $$
-\sum_{\eta \neq 0} |\lambda(\eta)| \;\le\; 1,
+\sum_{\eta \neq 0} |\lambda(\eta)| \;\le\; 1 .
 $$
-and the channel is lawful. Our root spends $\varepsilon$ on the
-$d^2 - 3$ surviving labels, so every
-$\varepsilon \le \tfrac{1}{d^2 - 3}$ passes, and the order of the
-root never cared how small $\varepsilon$ is. The aside shows the
-face and derives the budget; the *exact* boundary of legality is a
+If the absolute values of the dials sum to at most one, the channel
+is lawful. Our root sets $\lambda = \varepsilon$ on the $d^2 - 3$
+surviving labels, so every $\varepsilon \le \tfrac{1}{d^2 - 3}$
+satisfies the condition, and the order of the root never cared how
+small $\varepsilon$ is. The aside shows the criterion and derives
+the sufficient condition; the *exact* boundary of legality is a
 genuinely harder computation, and for that the thesis does the
 honest work.[^clifford-criterion]
 
 [^clifford-criterion]: The criterion, phases and all, is Lemma 5.1
 in chapter 5 of the thesis, following earlier work cited there; the
-diagonal-dominance argument behind the loudness budget appears in
-sections 5.2.1 and 5.4.1 there. The budget deliberately trades
+diagonal-dominance argument behind the sufficient condition appears
+in sections 5.2.1 and 5.4.1 there. The condition deliberately trades
 sharpness for self-containedness: the exact boundary of legality is
 the positive semidefiniteness of $M$ itself.
 
 ```{=html}
 <details class="aside">
-<summary>The face of complete positivity, and the loudness budget</summary>
+<summary>The complete positivity criterion for Clifford channels</summary>
 ```
 
 Complete positivity always has a certificate: the structure theory
@@ -455,23 +456,28 @@ through the other labels the difference $\eta - \xi$ runs through
 every nonzero label exactly once. $M$ is Hermitian, so its
 eigenvalues are real and live in $[1 - R,\; 1 + R]$. If $R \le 1$,
 none of them can be negative: $M$ is positive semidefinite and the
-channel is lawful. That is the loudness budget.
+channel is lawful. That is the sufficient condition
+$\sum_{\eta \neq 0} |\lambda(\eta)| \le 1$ of the main text.
 
 Check it against everything we have built. The qubit root of the
-last section had dials $0, \tfrac12, \tfrac12$: total loudness
-exactly $1$, sitting right on the budget (and, at $d = 2$, on the
-true boundary of legality, as that section's footnote recorded).
-The root above spends $\varepsilon$ on $d^2 - 3$ surviving labels:
-budget met for every $\varepsilon \le \tfrac{1}{d^2-3}$, which for
-$d = 3$ allows $\varepsilon$ up to $\tfrac16$. And the budget
-explains, one level up, why the classical aside's $\varepsilon$ was
-free: the completely depolarising channel, all dials at zero, sits
-at the centre of the budget with maximal room in every direction.
+last section had dials $0, \tfrac12, \tfrac12$: the absolute values
+sum to exactly $1$, so the condition holds with equality (and, at
+$d = 2$, this sits on the true boundary of legality, as that
+section's footnote recorded). The root above sets
+$\lambda = \varepsilon$ on $d^2 - 3$ surviving labels: the condition
+holds for every $\varepsilon \le \tfrac{1}{d^2-3}$, which for
+$d = 3$ allows $\varepsilon$ up to $\tfrac16$. And it explains, one
+level up, why the classical aside's $\varepsilon$ was free: for the
+completely depolarising channel every $\lambda(\eta)$ with
+$\eta \neq 0$ vanishes, the sum is $0$, and there is maximal room in
+every direction.
 
-One honesty note. The budget is sufficient, not necessary: dial
-settings can overspend it and still describe a lawful channel. The
-exact boundary is the positive semidefiniteness of $M$ itself, and
-mapping that boundary is the thesis's work, not this post's.
+One honesty note. The condition is sufficient, not necessary:
+amplitudes can violate it and still describe a lawful channel (the
+identity channel, with every $\lambda(\eta) = 1$, violates it
+grossly and is lawful all the same). The exact boundary is the
+positive semidefiniteness of $M$ itself, and mapping that boundary
+is the thesis's work, not this post's.
 
 ```{=html}
 </details>
