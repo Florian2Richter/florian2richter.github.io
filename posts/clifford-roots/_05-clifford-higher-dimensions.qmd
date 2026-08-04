@@ -1,56 +1,520 @@
 ## Clifford channels in higher dimensions {#sec-higher-d}
 
-The qubit was an interesting case, where we reached the maximal level. However, in order to take it to higher dimensions, we have to consider a generalization of the pauli matrices into higher dimensions and it's consquences for the consturction on channels in those class.
+The qubit section ended by flagging two pieces of luck: every shuffle
+of three letters respected the label arithmetic on its own, and every
+label was its own mirror. Neither survives in higher dimensions, and
+this section is where both bills arrive. Paying them is not a chore.
+The first payment turns the relabelling into a linear map on a finite
+plane, which is where the finite fields promised at the very start of
+the post finally walk on stage. The second cuts the achievable order
+cleanly in half, and that factor of two is the punchline the whole
+post has been walking toward.
 
-TODO: write this chapter. The beats, in order:
+The play itself you have already watched. Build labelled matrices,
+keep the channels that respect the labels, reduce to walks and dials,
+then design the slowest possible eraser. Only the stage grows.
 
-- **Weyl operators.** The four Paulis grow into $d^2$ operators
-  $\mathbf{w}(\eta)$, labelled by pairs $\eta = (a,b)$ with entries
-  running $0, \ldots, d-1$. They still form a basis of every
-  $d \times d$ matrix, so a channel is fixed by what it does to them;
-  they still multiply by adding labels, now modulo $d$; and they still
-  do so only up to a trailing phase, now a $d$-th root of unity
-  $\omega = e^{2\pi i/d}$ in place of a sign. The labels fill the plane
-  $\mathbb{F}_d^2$.
+Start with the cast. A system with $d$ levels has a $d \times d$
+density matrix, and the counting from the quantum section says a
+basis of everything needs $d^2$ matrices. So we need $d^2$ labels:
+pairs $(a, b)$, each coordinate now running $0, 1, \ldots, d-1$ and
+wrapping around, addition modulo $d$ in both slots. The labels fill a
+$d \times d$ grid, the *label plane*, and we write $\eta$ for a
+point $(a,b)$ of it when the pair travels as one thing. Note what
+the count buys: the $d^2 - 1$ nonzero labels are exactly one per
+traceless direction, the directions the CDC has to kill. Nothing is
+wasted and nothing is missing.
 
-- **Why $d$ must be prime.** The integers modulo a prime form a field,
-  where division works as cleanly as addition. We need to divide once
-  the labels start moving. Aside: the explicit shift-and-phase recipe,
-  $\mathbf{w}(a,b) \sim X^a Z^b$, with $X$ the cyclic shift and $Z$ the
-  phase kick.
+The two generators grow up along with the labels. For a bit, the
+flip $X$ swapped two states; for $d$ levels the natural move is *add
+one and wrap around*, the odometer step. Its companion $Z$ kicks in
+phases instead of positions. For $d = 3$:
+$$
+X = \begin{pmatrix} 0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{pmatrix},
+\qquad
+Z = \begin{pmatrix} 1 & 0 & 0 \\ 0 & \omega & 0 \\ 0 & 0 & \omega^2 \end{pmatrix},
+\qquad
+\omega = e^{2\pi i / 3},
+$$
+with $\omega$ a corner of the unit triangle in the complex plane, a
+cube root of one. For general $d$ the same recipes run with $d$
+slots and $\omega = e^{2\pi i / d}$, and $X^d = Z^d = I$: $d$
+applications of either is a full lap. The matrix at label $(a,b)$ is
+the product $X^a Z^b$, just as it was for the qubit.
 
-- **The reduction carries over unchanged.** $T^n$ acts on labels by
-  $h^n$ and accumulates a product of $\lambda$'s along the orbit,
-  exactly as for the qubit. The question is still "how long before the
-  orbit steps on a marked square?"
+Multiply the generators in both orders and watch the qubit's sign
+grow up too:
+$$
+XZ = \begin{pmatrix} 0 & 0 & \omega^2 \\ 1 & 0 & 0 \\ 0 & \omega & 0 \end{pmatrix},
+\qquad
+ZX = \begin{pmatrix} 0 & 0 & 1 \\ \omega & 0 & 0 \\ 0 & \omega^2 & 0 \end{pmatrix}
+\;=\; \omega\, XZ .
+$$
+Same matrix, and the memory of the order is now a full $d$-th root
+of unity rather than a sign: the trailing phase has become a
+$d$-hour clock. Everything else holds: the $d^2$ products multiply
+by adding labels, up to such a phase, and they form a basis of all
+$d \times d$ matrices, so a channel is still pinned down by what it
+does to them.
 
-- **Ingredient 1: the order of $h$.** The longest possible orbit is
-  $d^2 - 1$, and it is reached. The plane $\mathbb{F}_d^2$ is also the
-  field $\mathbb{F}_{d^2}$, whose nonzero elements form a single
-  multiplicative cycle; multiplication by a generator is
-  $\mathbb{F}_d$-linear, and as a matrix it is the companion matrix of
-  a primitive polynomial. Aside: primitive polynomials, and why the
-  order is exactly $d^2 - 1$.
+```{=html}
+<details class="aside">
+<summary>Why the $d^2$ products form a basis</summary>
+```
 
-- **Ingredient 2: where $\lambda$ vanishes.** This is where the qubit's
-  gift is withdrawn. Hermiticity still forces
-  $\lambda(-\eta) = \overline{\lambda(\eta)}$, so $|\lambda|$ agrees on
-  mirror labels and zeros come in pairs. For odd $d$, $\eta$ and
-  $-\eta$ are distinct points, and the mirror map sends you exactly
-  halfway around the grand cycle. The two paired zeros sit at opposite
-  poles and cut the cycle into two arcs of length $(d^2-1)/2$.
+First, traces. The matrix $X^a$ shifts every basis vector $a$ slots,
+so for $a \not\equiv 0$ its diagonal is empty and
+$\operatorname{tr}(X^a Z^b) = 0$. For $a = 0$ the trace of $Z^b$ is
+$1 + \omega^b + \omega^{2b} + \cdots + \omega^{(d-1)b}$, the sum of
+all $d$-th roots of unity taken $b$ at a time, which vanishes unless
+$b \equiv 0$ (the terms are the corners of a regular polygon centred
+at the origin). So every labelled matrix is traceless except the
+identity at $(0,0)$, whose trace is $d$.
 
-- **The bound.** $k = (d^2-1)/2$, a factor of two below the general
-  quantum bound. Flag honestly: choosing where $\lambda$ vanishes is
-  not the same as proving the result is completely positive. Complete
-  positivity asks a matrix built from the $\lambda$ values to be
-  positive semidefinite, and the mirror pairing alone does not deliver
-  it. It can be met by keeping the surviving amplitudes modest. The
-  thesis works the criterion out in full (§5.2.1).
+Now take two different labels $\eta \neq \eta'$. The product
+$(X^a Z^b)^\dagger (X^{a'} Z^{b'})$ is, by the multiplication rule, a
+phase times the matrix at label $\eta' - \eta \neq (0,0)$, so its
+trace vanishes. In the trace inner product
+$\langle A, B\rangle = \operatorname{tr}(A^\dagger B)$ the $d^2$
+matrices are mutually orthogonal, hence linearly independent, and
+$d^2$ independent matrices in a $d^2$-dimensional space are a basis.
 
-- **Worked example, $d = 3$.** Primitive polynomial $x^2 + x + 2$,
-  companion matrix $h = \left(\begin{smallmatrix} 0 & 1 \\ 1 & 2\end{smallmatrix}\right)$,
-  the explicit eight-cycle
-  $(1,0) \to (0,1) \to (1,2) \to (2,2) \to (2,0) \to (0,2) \to (2,1) \to (1,1) \to (1,0)$,
-  mirror-pair zeros at $(1,0)$ and $(2,0)$, giving a root of order $4$.
-  Needs `figures/orbit-d3.svg`, still a placeholder.
+```{=html}
+</details>
+```
+
+One piece of grooming, and it is the same grooming as before. At the
+qubit stage we multiplied the odd sibling $XZ$ by $i$ to restore the
+family resemblance. The general recipe sprinkles a *square root* of
+$\omega$ in front:
+$$
+\mathbf{w}(a, b) \;=\; \tau^{ab}\, X^a Z^b,
+\qquad
+\tau = \omega^{(d+1)/2},
+\qquad
+\tau^2 = \omega .
+$$
+Read $\tau^{ab}$ as "half of the label product $ab$, on the
+$\omega$-clock", which makes sense because $2$ can be divided away
+modulo an odd number. For odd $d$ this square root already sits on
+the $d$-hour clock; at $d = 2$ it does not, which is why the qubit
+had to borrow $i$ from outside. The mysterious grooming $i$ of the
+last section was this convention all along.
+
+What the grooming buys has changed, though. For $d > 2$ no phase
+makes $X^a Z^b$ Hermitian, so the qubit's luxury of an all-Hermitian
+basis is simply gone. What survives is the next best thing, a
+*mirror symmetry*:
+$$
+\mathbf{w}(\eta)^\dagger \;=\; \mathbf{w}(-\eta),
+$$
+the adjoint of the matrix at $\eta$ is the matrix at the opposite
+label $-\eta = (-a, -b)$, on the nose, no stray phase (checked in
+the aside below). Keep that mirror in view. It is the second debt
+from the qubit section, and it will collect at the very end.
+
+And now the fine print that has been riding along quietly: from here
+on, $d$ must be a *prime*. The grooming already divided by $2$;
+everything below divides by worse. Modulo a prime, every nonzero
+number can be divided away, and the integers modulo $d$ form a
+*field*, written $\mathbb{F}_d$, an arithmetic where division works
+as cleanly as addition. Modulo a composite the floor gives way: mod
+$4$, for instance, $2 \cdot 2 = 0$, and a "plane" over such an
+arithmetic has lines that collapse. So the label plane is
+$\mathbb{F}_d^2$, a plane over a field, and the linear algebra we
+are about to do on it can be trusted. (Prime *powers* have a
+parallel story over their own finite fields; genuinely composite
+$d$ is murkier territory, and the theorem below is a prime-$d$
+theorem.)
+
+Here is the family, at full scale. A *Clifford channel* in dimension
+$d$ sends each labelled matrix to a multiple of one labelled matrix:
+$$
+T[\mathbf{w}(\eta)] \;=\; \lambda(\eta)\, \mathbf{w}(h(\eta)),
+\qquad \lambda(0,0) = 1,
+$$
+with $h$ a relabelling of the plane fixing $(0,0)$, and one dial
+$\lambda(\eta)$ per label, complex now, sizes at most one. But here
+the first debt falls due. For three letters, any shuffle respected
+addition on its own. On a bigger plane that is spectacularly false,
+and respecting the group structure,
+$h(\eta + \eta') = h(\eta) + h(\eta')$, forces $h$ to be *linear*:
+an invertible $2 \times 2$ matrix with entries in $\mathbb{F}_d$,
+acting on label pairs. (Invertible, because a relabelling worthy of
+the name must not crush two directions into one. The count: the
+first column can be any of the $d^2 - 1$ nonzero pairs, the second
+anything off the line through the first, $d^2 - d$ choices. For
+$d = 2$ that is $3 \cdot 2 = 6$ maps for $6$ shuffles, which is why
+every qubit shuffle passed for free. For $d = 3$ it is
+$8 \cdot 6 = 48$, against $8! = 40320$ shuffles of the eight nonzero
+labels: the collapse promised last section.)
+
+The dials are constrained the same way they were for the qubit, with
+the mirror doing the work Hermiticity used to do. A channel maps
+Hermitian to Hermitian (real combinations of states, as before), and
+chasing that through the mirror symmetry gives the *mirror rule*:
+$$
+\lambda(-\eta) \;=\; \overline{\lambda(\eta)} .
+$$
+The dial at a label and the dial at its mirror are complex
+conjugates. At $d = 2$, where $-\eta = \eta$, this collapses to
+"dials are real", which is exactly what we found. And the villain
+still patrols: not every $(h, \lambda)$ is a lawful channel. The fee
+gets paid at the end of the section, with the same $\varepsilon$
+coin that paid it classically.
+
+```{=html}
+<details class="aside">
+<summary>The mirror rule, derived</summary>
+```
+
+First the mirror symmetry of the basis itself. Taking the adjoint of
+$\mathbf{w}(a,b) = \tau^{ab} X^a Z^b$ gives
+$\overline{\tau^{ab}}\, Z^{-b} X^{-a}$. Slide $X^{-a}$ back past
+$Z^{-b}$ with the commutation rule ($ZX = \omega XZ$, applied
+$ab$ times in the exponents):
+$Z^{-b} X^{-a} = \omega^{ab}\, X^{-a} Z^{-b}$. The accumulated phase
+is $\overline{\tau^{ab}}\,\omega^{ab} = \tau^{-ab}\,\tau^{2ab} =
+\tau^{ab}$, and since $ab = (-a)(-b)$ this is precisely the grooming
+phase belonging to the label $(-a, -b)$:
+$$
+\mathbf{w}(a,b)^\dagger
+= \tau^{(-a)(-b)}\, X^{-a} Z^{-b}
+= \mathbf{w}(-a,-b) .
+$$
+This is what the square-root grooming was for: the raw products
+$X^aZ^b$ obey the same law only up to a trailing phase, and the
+$\tau$ soaks it up exactly.
+
+Now the rule for the dials. A channel preserves Hermitian matrices,
+hence adjoints: $T[A^\dagger] = T[A]^\dagger$ for every $A$. Apply
+both sides to $A = \mathbf{w}(\eta)$. The left side is
+$T[\mathbf{w}(-\eta)] = \lambda(-\eta)\,\mathbf{w}(h(-\eta))
+= \lambda(-\eta)\,\mathbf{w}(-h(\eta))$, using linearity of $h$ in
+the last step. The right side is
+$\overline{\lambda(\eta)}\,\mathbf{w}(h(\eta))^\dagger
+= \overline{\lambda(\eta)}\,\mathbf{w}(-h(\eta))$. The matrices
+match, so the coefficients must:
+$\lambda(-\eta) = \overline{\lambda(\eta)}$.
+
+```{=html}
+</details>
+```
+
+The reduction now carries over word for word, as promised. Apply $T$
+repeatedly and nothing new is ever created: each label walks, one
+step of $h$ per application, and the dials multiply along the walk:
+$$
+T^{\,n}[\mathbf{w}(\eta)]
+\;=\;
+\lambda(\eta)\,\lambda(h\eta)\cdots\lambda(h^{n-1}\eta)\;
+\mathbf{w}(h^{n}\eta) .
+$$
+$P$ is the channel that kills every nonzero label, so $T^n = P$
+exactly when every label's $n$-step product has died, and a product
+of nonzero numbers never dies, so every walk must step on a *zero*
+of $\lambda$. Since $h$ is invertible it chops the $d^2 - 1$ nonzero
+labels into closed cycles, and the game is suddenly a board game:
+mark some squares with zeros, subject to the rules, and ask how many
+turns the luckiest token can survive before it is forced onto a
+marked square. Two questions decide everything. How long can a cycle
+be? And how few marked squares can we get away with?
+
+Take the cycle question first. The best imaginable $h$ would sweep
+all $d^2 - 1$ nonzero labels in one grand cycle, and it is not
+obvious such a linear map exists: linearity is a strong leash. The
+reason it exists is the loveliest structural fact in this post: *the
+label plane is secretly a number system*. Recall how the complex
+numbers are built from the reals: the equation $x^2 + 1 = 0$ has no
+solution, so you adjoin a symbol $i$ that solves it, and pairs
+$a + b\,i$ close up into a field. Now run the same construction over
+$\mathbb{F}_3$. The polynomial $x^2 + x + 2$ has no root there (its
+values at $x = 0, 1, 2$ are $2, 1, 2$), so adjoin a symbol $g$
+that solves it,
+$$
+g^2 \;=\; -g - 2 \;=\; 2g + 1,
+$$
+and consider all expressions $a + b\,g$ with $a, b \in \mathbb{F}_3$.
+There are nine of them, they add and multiply like ordinary numbers
+(reducing $g^2$ via the rule above), and they form a field with nine
+elements, written $\mathbb{F}_9$. But *pairs $(a,b)$ are exactly our
+labels*: the label plane $\mathbb{F}_3^2$ and the field
+$\mathbb{F}_9$ are the same set. The plane we have been drawing
+points on all along can secretly *multiply*.
+
+That changes everything, because now "multiply by $g$" is a
+candidate relabelling. It is linear in $(a, b)$, since
+multiplication distributes over addition. Its matrix is read off
+column by column: $g \cdot 1 = g$ sends $(1,0)$ to $(0,1)$, and
+$g \cdot g = 2g + 1$ sends $(0,1)$ to $(1,2)$, so
+$$
+h \;=\; \begin{pmatrix} 0 & 1 \\ 1 & 2 \end{pmatrix} .
+$$
+And its cycle structure is a question about *powers of $g$*. Compute
+them, reducing with $g^2 = 2g + 1$ as you go:
+$$
+g^2 = 2g + 1, \qquad
+g^3 = g \cdot g^2 = 2g^2 + g = 2g + 2, \qquad
+g^4 = g \cdot g^3 = 2g^2 + 2g = 2 .
+$$
+Pause on that last line. In $\mathbb{F}_3$, the number $2$ *is*
+$-1$: four multiplications by $g$ amount to a single overall sign
+flip. Squaring once more, $g^8 = 1$, and no earlier power returns to
+$1$ (the powers $g, g^2, g^3$ visibly involve $g$, and $g^4 = -1$).
+So $g$ has order exactly $8 = d^2 - 1$: its powers
+$g^0, g^1, \ldots, g^7$ are eight *different* nonzero elements, and
+there are only eight to be had. The powers of $g$ visit every
+nonzero label exactly once. Translated back to pairs, the matrix $h$
+drives the whole plane around one grand cycle,
+$$
+(1,0) \to (0,1) \to (1,2) \to (2,2) \to (2,0) \to (0,2) \to (2,1)
+\to (1,1) \to (1,0),
+$$
+which is the ring drawn in @fig-orbit. An element like $g$, whose
+powers exhaust every nonzero element, is called a *generator*, its
+minimal polynomial $x^2 + x + 2$ is called a *primitive polynomial*,
+and the matrix $h$ built from it is that polynomial's *companion
+matrix*. Generators exist for every prime $d$, not just $d = 3$
+(aside), so a grand cycle of length $d^2 - 1$ is always available.
+
+::: {#fig-orbit}
+
+{{< include figures/fig4-orbit-cycle/interactive.qmd >}}
+
+The grand cycle for $d = 3$. The companion matrix
+$h = \bigl(\begin{smallmatrix} 0 & 1 \\ 1 & 2 \end{smallmatrix}\bigr)$
+of the primitive polynomial $x^2 + x + 2$ steps the eight nonzero
+labels of the plane $\mathbb{F}_3^2$ around a single ring. The two
+highlighted labels, $(1,0)$ and $(2,0)$, are a mirror pair, $\eta$
+and $-\eta$, and they sit at exactly opposite points of the ring:
+advancing four steps is multiplication by $g^4 = -1$. A Clifford
+root spends its two zeros there, cutting the ring into two arcs of
+four steps each, and four steps is the order of the root: the
+$(d^2-1)/2$ bound, drawn.
+
+:::
+
+```{=html}
+<details class="aside">
+<summary>Primitive polynomials and the single long cycle</summary>
+```
+
+Two facts from algebra stand behind the construction, both classical.
+
+First, the quotient construction: if a quadratic polynomial has no
+root over a field, adjoining a formal root produces a field with
+$d^2$ elements, by exactly the argument that makes the complex
+numbers a field. (For a quadratic, "no root" is the same as "does
+not factor", so no product of two nonzero expressions can reduce to
+zero.)
+
+Second, cyclicity: the nonzero elements of *any* finite field form a
+single multiplicative cycle. That is, some element $g$ exists whose
+powers run through all of them. This is a genuinely substantive
+theorem, proved in every abstract algebra course; the crucial input
+is that a polynomial equation $x^m = 1$ can have at most $m$
+solutions in a field, which forces the multiplicative group to be as
+undivided as possible. For $d$ prime and the field $\mathbb{F}_{d^2}$
+it hands us an element of order $d^2 - 1$ on a plate. (For
+$\mathbb{F}_d$ itself the statement is the existence of primitive
+roots modulo a prime, which goes back to Gauss.)
+
+A *primitive polynomial* is the minimal polynomial of such a
+generator, and its companion matrix is the multiplication-by-$g$ map
+in the coordinates $(a, b) \leftrightarrow a + b\,g$, which is why
+the matrix has order $d^2 - 1$: its powers track the powers of $g$.
+For the worked example none of this machinery was needed on faith:
+$x^2 + x + 2$ was checked to be irreducible by trying all three
+arguments, and $g$ was checked to be a generator by computing
+$g^4 = -1 \neq 1$, which rules out every proper divisor of $8$ as
+its order.
+
+```{=html}
+</details>
+```
+
+So cycles can be as long as $d^2 - 1$, and one marked square per
+cycle is the least the rules could possibly demand. If that were the
+end of the story, the Clifford family would match the full quantum
+bound $d^2 - 1$ in every dimension: put the single zero on the grand
+cycle, and the slowest token, starting just after it, survives
+$d^2 - 1$ turns. For the qubit, that is exactly what happened.
+
+Here the second debt falls due. Zeros of $\lambda$ cannot be placed
+one at a time, because the mirror rule pairs the dials up:
+$|\lambda(-\eta)| = |\lambda(\eta)|$, so where one dial dies its
+mirror dies with it. For the qubit this cost nothing, since every
+label was its own mirror. But for odd $d$, a nonzero label and its
+mirror are always *different* points ($\eta = -\eta$ would mean
+$2\eta = 0$, and modulo an odd prime you can divide the $2$ away,
+leaving $\eta = 0$). Zeros now come in genuine pairs: mark one
+square and a second square is marked for you, whether you wanted it
+or not.
+
+And the geometry of the grand cycle decides where that unwanted
+second zero lands. The mirror map is multiplication by $-1$, and on
+the cycle of $g$ we have already met $-1$: it is $g^{(d^2-1)/2}$,
+the *halfway* point. (That is no accident of $d = 3$: the element
+$c = g^{(d^2-1)/2}$ satisfies $c^2 = 1$ while $c \neq 1$, and in a
+field the equation $x^2 = 1$ has no room for solutions beyond $1$
+and $-1$.) So the mirror of any label sits exactly half a cycle
+away, diametrically opposite on the ring, just as @fig-orbit shows.
+Mark the square $z$, and the rules mark $-z$: not adjacent, not
+random, but precisely antipodal, cutting the grand cycle into two
+arcs of length exactly $\tfrac{d^2-1}{2}$ each. The slowest token,
+starting just after either zero, now survives
+$$
+k \;=\; \frac{d^2 - 1}{2}
+$$
+turns and not one more. The mirror rule has taken the qubit's gift
+back, and it has taken exactly a factor of two.
+
+Assemble the channel and settle its legality. Take $h$ the companion
+matrix of a primitive polynomial, and set the dials to
+$$
+\lambda(0,0) = 1,
+\qquad
+\lambda(z) = \lambda(-z) = 0 \;\ \text{for one mirror pair,}
+\qquad
+\lambda(\eta) = \varepsilon \;\ \text{everywhere else,}
+$$
+with $\varepsilon$ a small positive number. The mirror rule holds
+($\varepsilon$ is real, and mirrors carry equal dials), the walk
+products die exactly as the arcs dictate, so
+$T^{(d^2-1)/2} = P$ while $T^{(d^2-1)/2 - 1} \neq P$: the token that
+started just after a zero is still alive, carrying
+$\varepsilon^{(d^2-1)/2 - 1} \neq 0$, as the witness. And complete
+positivity, the fee the qubit section paid with a coin flip of three
+rotations, is paid here with the *same coin the classical section
+used*: the completely depolarising channel does not sit on the edge
+of the space of channels but strictly inside it, so every
+sufficiently small nudge that respects the linear bookkeeping is
+still a channel, and the order of the root never depended on how
+small $\varepsilon$ is. The aside makes this precise; how *loud*
+the surviving dials can be pushed before legality fails is the
+genuinely harder computation, and for that the thesis does the
+honest work.[^clifford-criterion]
+
+[^clifford-criterion]: The exact criterion for which dial settings
+$(h, \lambda)$ give a completely positive map, and hence how large
+the surviving amplitudes may be, is worked out in the thesis,
+section 5.2.1. The $\varepsilon$ argument here deliberately trades
+sharpness for self-containedness.
+
+```{=html}
+<details class="aside">
+<summary>Why the $\varepsilon$ is free, quantumly</summary>
+```
+
+Complete positivity has a compact certificate. Line up the channel's
+outputs on the matrix units $E_{ij}$ (the matrix with a lone $1$ in
+row $i$, column $j$; yet another basis) into one big
+$d^2 \times d^2$ block matrix, the *Choi matrix*
+$C(T) = \bigl[\,T[E_{ij}]\,\bigr]_{ij}$. Choi's theorem says $T$ is
+completely positive exactly when $C(T)$ is positive semidefinite;
+it is part of the structure theory referenced in the quantum
+section's footnote.
+
+Two computations finish the job. First, the certificate of $P$
+itself: $P[E_{ij}] = \operatorname{tr}(E_{ij})\, I/d =
+\delta_{ij}\, I/d$, so $C(P)$ is block diagonal with every diagonal
+block $I/d$. It is $\tfrac{1}{d}$ times the identity: not merely
+positive semidefinite but *strictly* positive, every eigenvalue
+$\tfrac{1}{d}$.
+
+Second, the nudge. Our channel is $T = P + \varepsilon\, \Delta$,
+where $\Delta$ is the fixed map that carries the walk structure.
+The Choi construction is linear, so
+$C(T) = C(P) + \varepsilon\, C(\Delta)$, and $C(T)$ is Hermitian
+because the mirror rule makes $T$ Hermiticity-preserving. A
+Hermitian perturbation moves eigenvalues by at most its operator
+norm, so every eigenvalue of $C(T)$ is at least
+$\tfrac{1}{d} - \varepsilon \lVert C(\Delta)\rVert$, which is
+positive once $\varepsilon$ is small enough. Trace preservation and
+the fixed centre hold exactly, not approximately, since
+$\lambda(0,0) = 1$.
+
+This is the quantum copy of the classical aside's closing move:
+there, every entry of $P$ was $\tfrac{1}{d}$, strictly positive, so
+a small enough $\varepsilon N$ could not break non-negativity. Same
+$P$, same $\varepsilon$, one level up.
+
+```{=html}
+</details>
+```
+
+One suspicion should still be nagging. The construction used a very
+particular $h$ and the stingiest legal set of zeros. Could a
+cleverer $h$, or a cleverer placement, beat one half? It cannot, and
+the reason is pleasantly structural: however the board is set up,
+*either the two zeros of a pair share a cycle, and symmetry pins
+them opposite each other, or they sit in two different cycles, and
+then each cycle is at most half the plane anyway.* Both roads cap
+the survival time at $\tfrac{d^2-1}{2}$.
+
+```{=html}
+<details class="aside">
+<summary>Why nothing beats one half</summary>
+```
+
+Let $T$ be any Clifford root of $P$ in odd prime dimension $d$, with
+relabelling $h$ and zero set
+$Z = \{\eta \neq 0 : \lambda(\eta) = 0\}$. Every cycle of $h$ on the
+nonzero labels must contain a point of $Z$ (walks die only on
+zeros), and the mirror rule forces $-Z = Z$. One structural fact
+does the rest: negation commutes with $h$, since $h$ is linear,
+$h(-\eta) = -h(\eta)$. So negation maps cycles of $h$ to cycles of
+$h$, either exchanging two cycles or preserving one.
+
+Case one: a cycle $C$, of length $L$, is preserved by negation. Pick
+a zero $z \in C \cap Z$; then $-z$ is also in $C$, and $-z \neq z$
+for odd $d$. On a cycle, a symmetry that commutes with the step map
+acts as a fixed rotation: if $-z = h^m z$, then negating any point
+$h^j z$ gives $h^{j+m} z$, the same shift $m$ for all of them.
+Negating twice returns home, so $2m$ is a multiple of $L$, and $m$
+is neither $0$ nor $L$, forcing $m = L/2$: *the mirror of every
+point of $C$ sits exactly opposite it.* The cycle carries zeros at
+$z$ and $h^{L/2} z$ at least, so no token in $C$ survives more than
+$L/2 \le \tfrac{d^2-1}{2}$ turns.
+
+Case two: a cycle $C$ and its negation $-C$ are different cycles.
+They have the same length $L$ and no points in common, and both live
+among the $d^2 - 1$ nonzero labels, so $2L \le d^2 - 1$. A token in
+$C$ survives at most $L \le \tfrac{d^2-1}{2}$ turns, zero or no
+zero to spare.
+
+Every cycle falls under one case or the other, so the slowest token
+on any legal board survives at most $\tfrac{d^2-1}{2}$ turns:
+$k \le \tfrac{d^2-1}{2}$ for every Clifford root. (Extra zeros only
+ever shorten survival, which is why the stingiest board is the best
+one.)
+
+```{=html}
+</details>
+```
+
+That is the theorem this post set out to retell. For every odd prime
+$d$ there is a Clifford channel whose order is exactly
+$\tfrac{d^2-1}{2}$, and no Clifford channel does better. The qubit
+stays the lone exception: there the mirror degenerates, the pairing
+costs nothing, and the family reaches the full $d^2 - 1 = 3$, as we
+watched it do.
+
+Line the three answers up for a three-level system. A classical
+copier can stretch erasure to $2$ steps. The full quantum bound is
+$8$. And the Clifford family, rigid as it is, manages $4$: half of
+everything quantum mechanics allows, from a corner of it that you
+can hold in your hand.
+
+Step back and look at where the room came from. We began with the
+full space of quantum channels, a space whose dimension grows like
+$d^4$, and found the bound $d^2 - 1$. We then threw essentially all
+of that freedom away. What survived was one invertible $2 \times 2$
+matrix over a finite field and a handful of dials, and the
+achievable order fell only from $d^2 - 1$ to $\tfrac{d^2-1}{2}$. The
+room to divide erasure slowly never lived in the richness of the
+channel family. It lives in the orbit structure of a linear map on a
+tiny plane: in how long one matrix can wander $d^2 - 1$ labels
+before a mirror-forced pair of zeros cuts the journey in half. Slow
+forgetting is not an exotic quantum resource. It is finite-field
+bookkeeping, and you can check every step of it with a pencil.

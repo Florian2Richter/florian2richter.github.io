@@ -1,10 +1,11 @@
 # Figure 4: the d = 3 orbit cycle of h
 
-**Status:** PLANNED. Not built yet, and it comes later in the post:
-it belongs to the higher-dimensions chapter
-(`_05-clifford-higher-dimensions.qmd`), not the qubit chapter.
-Nothing is wired in at the moment (no `{{< include >}}` and no live
-`@fig-orbit` reference); wire it in once the SVG exists.
+**Status:** DONE, static. Built by `orbit_cycle_figure.py` and wired
+into the higher-dimensions chapter
+(`_05-clifford-higher-dimensions.qmd`) as `#fig-orbit`, referenced
+from the prose as `@fig-orbit`, placed right after the grand cycle is
+derived. The caption covers both the cycle (Ingredient 1) and the
+antipodal vanishing pair (Ingredient 2).
 
 **No d = 2 sibling is needed.** The qubit chapter's figure is
 `fig5-continuum-grid` (`@fig-clifford-grid`), whose right panel
@@ -58,9 +59,15 @@ finite-field combinatorics, the geometry here is a layout choice
 rather than a projection, so the "single source of truth" can be the
 list of labels in cycle order emitted by the generator.
 
-## When building
+## To modify
 
-Follow the conventions in `../README.md`. Captions live in the
-chapter partials (no manual "Figure N" prefix). The d = 3 worked
-material (matrix, orbit, mirror pair) is in the higher-dimensions
-chapter's "Ingredient 1" and "Ingredient 2" sections.
+Edit the constants at the top of `orbit_cycle_figure.py`,
+regenerate, and re-inline the SVG body into `interactive.qmd`:
+
+```bash
+python orbit_cycle_figure.py orbit-d3.svg
+# then re-copy the <svg>...</svg> body into interactive.qmd
+```
+
+No script to keep in sync (static figure). Captions live in the
+chapter partial (no manual "Figure N" prefix).

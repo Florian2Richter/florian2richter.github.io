@@ -101,6 +101,14 @@ above. The rule:
 
 ## Structural plan for the Clifford post
 
+The plan below is the original arc; it is now realized in six
+partials included by `index.qmd`: `_01-hook` (1), `_02-classical-setup`
+(2), `_03-quantum-upgrade` (3), `_04-paulis` "Rebuilding the qubit
+from the bit" (4, 5, 6 at the qubit level, restructured bottom-up:
+$\mathbb{Z}_2 \to \mathbb{Z}_2^2$, the forced phase, the Clifford
+family at $d = 2$, the design-first root), `_05-clifford-higher-dimensions`
+(4 through 9 at general prime $d$), `_06-whats-next` (10).
+
 1. **Hook.** Photocopy-of-a-photocopy framing. No math.
 2. **The classical setup.** Simplex, stochastic matrices, the
    bistochastic CDC, divisibility, the $d - 1$ bound, $d = 3$ worked
@@ -137,37 +145,42 @@ above. The rule:
 
 ## Current state
 
-- **Drafted:** all nine sections (1 through 9). Full first draft,
-  awaiting Florian's revision pass.
+- **Prose complete: all six partials.** Full first draft end to end,
+  awaiting Florian's revision pass. `_04` rebuilds the qubit bottom-up
+  and ends with the CP resolution as a coin flip among three
+  rotations; `_05` delivers the $(d^2-1)/2$ theorem self-contained:
+  the $\tau$-groomed Weyl operators, the mirror rule, the
+  companion-matrix grand cycle, antipodal mirror-pair zeros, an
+  $\varepsilon$/Choi legality aside, and a two-case proof that no
+  Clifford channel beats one half. `_06` closes the memory-device
+  loop from the hook.
 - **Inline expandable asides** (`<details class="aside">`, styled in
-  `styles.css`) hide the heavier derivations: the linearity argument,
-  the row-sum computation, the $d^2-1$ parameter count, the explicit
-  Weyl operators / why $d$ is prime, primitive polynomials, and the
-  $\lambda(-\eta)=\overline{\lambda(\eta)}$ derivation. Claim stays in
-  the text, derivation one click away. Click-to-expand, not hover
-  (hover fails on touch and can't hold display math).
-- **Figures.** Built and wired in: fig1 (classical simplex, static,
-  red/green/blue corners and a grey centre), fig2 (the classical square
-  root, an **animation** of the simplex collapsing 2D->1D->0D, plays on
-  scroll, tap to replay), fig3 (Bloch ball, **interactive**: click-to-pick
-  a state + Purity slider + a plain-words "certain question" readout),
-  fig3b/fig4 (the qubit root, now an **animation** of a Bloch-vector cloud
-  collapsing to $I/2$ in stages z->y->x->0, play-on-scroll, tap-to-replay,
-  reduced-motion fallback to the resting axis orbits). The interactive
-  state-space pick lives in fig3, the animation in fig4 (mirroring the
-  classical fig1 static / fig2 animated split, but with fig3 interactive).
-  Still a placeholder: `figures/orbit-d3.svg` (section 7, the eight-point
-  $d=3$ cycle), which renders as a broken image until built.
-- **Citation TODOs:** mixing-channels footnote in the hook (candidates
-  to verify), classical-bound footnote (section 2), the general
-  $d^2-1$ construction (section 9, working title only), and confirm
-  the exact thesis title + add a PDF link (section 9). The channels
-  footnote in section 3 (Nielsen & Chuang ch. 8, Wolf notes) is a real
-  citation.
-- **Worked example thread:** $d=3$ (qutrit) runs through sections 6-8.
-  Primitive polynomial $x^2+x+2$, companion matrix $h=\binom{0\ 1}{1\ 2}$,
-  the explicit 8-cycle, mirror-pair zeros at $(1,0)/(2,0)$, root of
-  order 4. The three bounds for $d=3$ are 2 / 4 / 8.
+  `styles.css`): claim in the text, derivation one click away.
+  `_04` has two (the forced-phase proof, the three-rotation
+  decomposition); `_05` has five (the Weyl basis, the mirror rule,
+  primitive polynomials / cyclicity, why the $\varepsilon$ is free,
+  why nothing beats one half). Click-to-expand, not hover.
+- **Figures: all built and wired.** fig1 (classical simplex,
+  interactive), fig2 (classical square root, animated), fig3 (Bloch
+  ball, interactive), fig3b (qubit root collapsing a Bloch cloud in
+  stages z->y->x->0, animated), fig5 (continuum vs. finite label
+  grid, static, in `_04`; its example $h$ is exactly the root's
+  3-cycle), fig4 (the $d=3$ orbit ring with the antipodal vanishing
+  pair, static, in `_05`). See `figures/README.md` for ids and the
+  progressive-enhancement conventions.
+- **Citation TODOs (the remaining work):** the mixing-channels
+  footnote in the hook (candidates listed inline, need verifying);
+  the published paper for the general $d^2-1$ construction is
+  described but not yet cited in `_06`; the exact thesis title plus a
+  PDF link are still missing in `_06` (both `_04` and `_05` footnotes
+  point at thesis §5.2.1, so the thesis reference will be load-bearing).
+  The channels footnote in `_03` (Nielsen & Chuang ch. 8, Wolf notes)
+  is real.
+- **Worked example thread:** $d=3$ (qutrit) runs through `_05`.
+  Primitive polynomial $x^2+x+2$, $g^2 = 2g+1$, $g^4 = -1$, companion
+  matrix $h=\binom{0\ 1}{1\ 2}$, the explicit 8-cycle, mirror-pair
+  zeros at $(1,0)/(2,0)$, root of order 4. The three bounds for
+  $d=3$, stated at the end of `_05`: 2 / 4 / 8.
 - **`draft: true`** is set on the post frontmatter. With
   `draft-mode: unlinked` in `_quarto.yml`, the post renders in full at
   its direct URL but stays out of the blog index, feed, and search.

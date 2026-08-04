@@ -13,7 +13,9 @@ figures/
   fig1-state-space/         <- Figure 1: classical 2-simplex (DONE, interactive)
   fig2-simplex-root/        <- Figure 2: square-root channel, animated (DONE)
   fig3-bloch-ball/          <- Figure 3: Bloch ball (DONE, interactive)
-  fig4-orbit-cycle/         <- Figure 4: the d=3 orbit cycle (PLANNED)
+  fig3b-bloch-root/         <- Figure 3b: the qubit root, animated (DONE)
+  fig4-orbit-cycle/         <- Figure 4: the d=3 orbit cycle (DONE, static)
+  fig5-continuum-grid/      <- Figure 5: continuum vs. finite grid (DONE, static)
 ```
 
 Each finished figure folder contains, by convention:
@@ -111,7 +113,9 @@ The caption goes here, with math like $p_0$ if needed.
   them automatically.
 
 The figure ids currently in use: `#fig-simplex-d3` (1), `#fig-root-d3`
-(2), `#fig-bloch` (3), `#fig-orbit` (4).
+(2), `#fig-bloch` (3), `#fig-bloch-root` (3b), `#fig-orbit` (4),
+`#fig-clifford-grid` (5). Figures 1 through 3b live in `_02` and
+`_03`; figure 5 lives in `_04`; figure 4 lives in `_05`.
 
 ## To modify a figure
 
@@ -133,11 +137,9 @@ See each figure's own `README.md` for the specifics.
 | 1 | classical state space (2-simplex) | `fig-simplex-d3` | done, interactive |
 | 2 | square-root channel collapsing the simplex | `fig-root-d3` | done, animated |
 | 3 | Bloch ball (qubit state space) | `fig-bloch` | done, interactive |
-| 4 | the d=3 orbit cycle of h | `fig-orbit` | **planned** (no generator yet; placeholder image) |
-
-Figure 4 currently renders as a broken-image placeholder in the post
-(its SVG does not exist yet). Its folder holds a README sketching what it
-should become.
+| 3b | the qubit root collapsing the Bloch cloud | `fig-bloch-root` | done, animated |
+| 4 | the d=3 orbit cycle of h | `fig-orbit` | done, static |
+| 5 | continuum vs. finite grid | `fig-clifford-grid` | done, static |
 
 ## A note on CSS
 
