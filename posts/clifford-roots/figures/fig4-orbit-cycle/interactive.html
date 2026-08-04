@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Florian’s Blog</title>
+<title>interactive – Florian's Blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,25 +29,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-63180c5dda01c187c33bc16bc49fe53e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-63180c5dda01c187c33bc16bc49fe53e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,82 +73,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="Florian's Blog" href="index.xml" data-external="1"></head>
+<link rel="stylesheet" href="../../../../styles.css">
+</head>
 
 <body class="nav-fixed quarto-light">
 
@@ -159,7 +85,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">Florian’s Blog</span>
     </a>
   </div>
@@ -170,11 +96,11 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../../../index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -197,139 +123,83 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Florian’s Blog</h1>
+
+
+
+<!-- Figure: the d=3 orbit cycle of h. Static SVG inlined verbatim from
+     orbit_cycle_figure.py (regenerate and re-copy on changes). No
+     interactive layer: the orbit is finite combinatorics and the static
+     ring is the whole content. Point-grid styling matches
+     fig5-continuum-grid's right panel. -->
+<style>
+.orbit-cycle{max-width:520px;margin:1.25rem auto;}
+.orbit-cycle svg{width:100%;height:auto;display:block;}
+.orbit-cycle .oc-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+</style>
+
+<div class="orbit-cycle">
+  <p class="oc-vh">The eight nonzero labels of the three-by-three label plane, arranged on a ring in the order the matrix h visits them: (1,0), (0,1), (1,2), (2,2), (2,0), (0,2), (2,1), (1,1), and back to (1,0). Arrows step from each label to the next around the ring. The labels (1,0) and (2,0) sit at opposite ends of a dashed horizontal diameter labelled eta maps to minus eta; both are highlighted in a warm accent and tagged lambda equals zero. That pair splits the ring into an upper arc of four steps and a lower arc of four steps.</p>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 560 400" font-family="Georgia, 'Times New Roman', serif" role="img" aria-label="The eight nonzero labels of the plane F_3^2 on a ring, stepped around a single cycle by the matrix h. The mirror pair (1,0) and (2,0), where lambda vanishes, sits at opposite ends of a dashed diameter, splitting the ring into two arcs of four steps each.">
+  <defs>
+    <marker id="arrowOcA" viewbox="0 0 10 10" refx="8.5" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#233746"></path></marker>
+    <marker id="arrowOcT" viewbox="0 0 10 10" refx="8.5" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2d6f8f"></path></marker>
+  </defs>
+  <circle cx="280" cy="190" r="130" fill="none" stroke="#829aa6" stroke-width="1" stroke-opacity="0.18"></circle>
+
+  <!-- mirror diameter: advancing half the cycle is multiplication by -1 -->
+  <line x1="170.00" y1="190.00" x2="390.00" y2="190.00" stroke="#7d8a91" stroke-width="1.2" stroke-dasharray="3,4" stroke-opacity="0.6"></line>
+  <text x="280.00" y="180.00" text-anchor="middle" font-size="13" fill="#7d8a91" font-style="italic">η ↦ −η</text>
+
+  <!-- the grand cycle of h: upper arc, then lower arc -->
+  <path d="M 150.97 174.16 A 130 130 0 0 1 177.56 109.96" fill="none" stroke="#233746" stroke-width="1.8" stroke-linecap="round" marker-end="url(#arrowOcA)"></path>
+  <path d="M 199.96 87.56 A 130 130 0 0 1 264.16 60.97" fill="none" stroke="#233746" stroke-width="1.8" stroke-linecap="round" marker-end="url(#arrowOcA)"></path>
+  <path d="M 295.84 60.97 A 130 130 0 0 1 360.04 87.56" fill="none" stroke="#233746" stroke-width="1.8" stroke-linecap="round" marker-end="url(#arrowOcA)"></path>
+  <path d="M 382.44 109.96 A 130 130 0 0 1 409.03 174.16" fill="none" stroke="#233746" stroke-width="1.8" stroke-linecap="round" marker-end="url(#arrowOcA)"></path>
+  <path d="M 409.03 205.84 A 130 130 0 0 1 382.44 270.04" fill="none" stroke="#2d6f8f" stroke-width="1.8" stroke-linecap="round" marker-end="url(#arrowOcT)"></path>
+  <path d="M 360.04 292.44 A 130 130 0 0 1 295.84 319.03" fill="none" stroke="#2d6f8f" stroke-width="1.8" stroke-linecap="round" marker-end="url(#arrowOcT)"></path>
+  <path d="M 264.16 319.03 A 130 130 0 0 1 199.96 292.44" fill="none" stroke="#2d6f8f" stroke-width="1.8" stroke-linecap="round" marker-end="url(#arrowOcT)"></path>
+  <path d="M 177.56 270.04 A 130 130 0 0 1 150.97 205.84" fill="none" stroke="#2d6f8f" stroke-width="1.8" stroke-linecap="round" marker-end="url(#arrowOcT)"></path>
+  <text x="339.70" y="50.87" text-anchor="middle" font-size="18" fill="#233746" font-style="italic">h</text>
+
+  <!-- the eight labels -->
+  <circle cx="150.00" cy="190.00" r="12.5" fill="none" stroke="#c25b4e" stroke-width="1.6" stroke-opacity="0.55"></circle>
+  <circle cx="150.00" cy="190.00" r="7" fill="#c25b4e"></circle>
+  <text x="124.00" y="195.00" text-anchor="end" font-size="14" fill="#c25b4e">(1,0)</text>
+  <circle cx="188.08" cy="98.08" r="7" fill="#233746"></circle>
+  <text x="169.69" y="84.69" text-anchor="end" font-size="14" fill="#233746">(0,1)</text>
+  <circle cx="280.00" cy="60.00" r="7" fill="#233746"></circle>
+  <text x="280.00" y="39.00" text-anchor="middle" font-size="14" fill="#233746">(1,2)</text>
+  <circle cx="371.92" cy="98.08" r="7" fill="#233746"></circle>
+  <text x="390.31" y="84.69" text-anchor="start" font-size="14" fill="#233746">(2,2)</text>
+  <circle cx="410.00" cy="190.00" r="12.5" fill="none" stroke="#c25b4e" stroke-width="1.6" stroke-opacity="0.55"></circle>
+  <circle cx="410.00" cy="190.00" r="7" fill="#c25b4e"></circle>
+  <text x="436.00" y="195.00" text-anchor="start" font-size="14" fill="#c25b4e">(2,0)</text>
+  <circle cx="371.92" cy="281.92" r="7" fill="#233746"></circle>
+  <text x="390.31" y="305.31" text-anchor="start" font-size="14" fill="#233746">(0,2)</text>
+  <circle cx="280.00" cy="320.00" r="7" fill="#233746"></circle>
+  <text x="280.00" y="351.00" text-anchor="middle" font-size="14" fill="#233746">(2,1)</text>
+  <circle cx="188.08" cy="281.92" r="7" fill="#233746"></circle>
+  <text x="169.69" y="305.31" text-anchor="end" font-size="14" fill="#233746">(1,1)</text>
+  <text x="124.00" y="217.00" text-anchor="end" font-size="13" fill="#c25b4e" font-style="italic">λ = 0</text>
+  <text x="436.00" y="217.00" text-anchor="start" font-size="13" fill="#c25b4e" font-style="italic">λ = 0</text>
+  <text x="280.00" y="385.00" text-anchor="middle" font-size="15" fill="#233746" font-style="italic">the grand cycle of h on the labels, d = 3</text>
+</svg>
+
 </div>
 
 
 
-<div class="quarto-title-meta column-page-left">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1785832261039" data-listing-reading-time-sort="51" data-listing-word-count-sort="10046">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig1-state-space/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig1-state-space/interactive.html" class="no-external">
-Probability simplex over three outcomes, coloured by purity (blue-teal at the pure corners, fading to a soft blue-grey centre at the maximally mixed distribution p0, which…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig1-state-space/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1785832261040" data-listing-reading-time-sort="6" data-listing-word-count-sort="1104">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig2-simplex-root/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig2-simplex-root/interactive.html" class="no-external">
-Animation of the square-root channel S on the probability simplex. A cloud of states, coloured by its red-green-blue mixture, is mapped by S onto a line segment (the 2D…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig2-simplex-root/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1785832261041" data-listing-reading-time-sort="23" data-listing-word-count-sort="4401">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig3-bloch-ball/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig3-bloch-ball/interactive.html" class="no-external">
-Interactive Bloch ball, the qubit state space. Click the front of the ball to pick a direction; the Purity slider moves the state from the pure surface inward toward the…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig3-bloch-ball/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-file-modified-sort="1785832261041" data-listing-reading-time-sort="19" data-listing-word-count-sort="3710">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig3b-bloch-root/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig3b-bloch-root/interactive.html" class="no-external">
-Animation of the maximal qubit root S on the Bloch ball. A cloud of Bloch vectors is driven by S to the maximally mixed centre I/2 in stages, each step shrinking and…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig3b-bloch-root/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-listing-file-modified-sort="1785832261042" data-listing-reading-time-sort="4" data-listing-word-count-sort="644">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig4-orbit-cycle/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig4-orbit-cycle/interactive.html" class="no-external">
-The eight nonzero labels of the three-by-three label plane, arranged on a ring in the order the matrix h visits them: (1,0), (0,1), (1,2), (2,2), (2,0), (0,2), (2,1), (1,1)…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig4-orbit-cycle/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-listing-file-modified-sort="1785832261042" data-listing-reading-time-sort="17" data-listing-word-count-sort="3271">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig5-continuum-grid/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig5-continuum-grid/interactive.html" class="no-external">
-Two panels. On the left, a Bloch ball, the continuum of qubit states, shaded by purity with a latitude and longitude wireframe, carrying three coloured coordinate axes: X =…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig5-continuum-grid/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
