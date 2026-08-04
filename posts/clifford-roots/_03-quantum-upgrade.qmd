@@ -78,11 +78,15 @@ arbitrary: they are exactly what it takes to still be describing
 probabilities. The matrix is Hermitian, so its eigenvalues are real;
 those eigenvalues are non-negative and sum to one. That last clause is
 the point, because non-negative numbers summing to one are a probability
-distribution. A density matrix is a classical probability distribution in
-disguise: its eigenvalues are the probabilities, and its eigenvectors say
-which mutually exclusive pure states they are spread across. The
-classical simplex from the first half of this post is the special case
-where the axes have already been chosen for you.
+distribution. So each density matrix carries a classical probability
+distribution inside it: the eigenvalues are the probabilities, and the
+eigenvectors say which mutually exclusive pure states they are spread
+across. But the basis belongs to the *state*, and that is where the
+quantum content lives: two density matrices need not agree about which
+alternatives they are distributions over, and when they disagree they
+do not commute. The classical simplex from the first half of this post
+is the special case where one common set of axes has been fixed once
+and for all.
 
 Now we can count. A quantum state in dimension $d$ is pinned down by
 $d^2 - 1$ real numbers.

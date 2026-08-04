@@ -263,7 +263,12 @@ backbone of the stabilizer formalism of quantum error correction
 (Nielsen and Chuang, chapter 10). The channels here are the
 open-system version of the same idea. Not to be confused with
 Clifford *algebras*, another legacy of the same nineteenth-century
-geometer, William Kingdon Clifford.
+geometer, William Kingdon Clifford. One further caution: in recent
+literature "Clifford channel" often means a channel implementable by
+stabilizer (Clifford) circuits, a related but different class;
+throughout this post the term is used in the thesis's sense, a
+channel sending each labelled matrix to a scalar multiple of a
+single labelled matrix.
 
 So a Clifford channel is two pieces of data. The skeleton $h$: one
 of the six ways to shuffle three letters, a finite list. And three

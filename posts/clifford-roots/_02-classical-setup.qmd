@@ -297,8 +297,10 @@ non-negative, with every row and column summing to one. By construction
 $S^2 = P + N^2 = P$ while $S \ne P$, so this $S$ is a genuine square root
 of total erasure: a copier that erases a three-state image in two equal
 steps rather than one, funnelling every point along a two-step path to
-the grey centre (@fig-root-d3). Up to relabelling the three states it is
-the only such root, which is why the same matrix appears in the figure.
+the grey centre (@fig-root-d3). It is one especially simple member of
+a continuous family of such roots (any orthogonal pair of zero-sum
+vectors, scaled gently enough, gives another), and it is the member
+drawn in the figure.
 
 That same split hands us the general bound for free. For any $S = P + N$
 in our class the cross terms always die, so $S^k = P + N^k$, and

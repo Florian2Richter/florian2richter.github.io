@@ -46,4 +46,4 @@ and the Clifford channels above, is in my diploma thesis.[^thesis]
 [^thesis]: F. Richter, *Finite Roots of Completely Depolarizing
 Channels*, Diploma thesis, Institute for Theoretical Physics,
 Leibniz Universität Hannover, September 2010.
-<!-- TODO: add a link once the PDF has a public home. -->
+[PDF in this site's repository](https://github.com/Florian2Richter/florian2richter.github.io/blob/main/reference/Diplomarbeit_Florian.pdf).

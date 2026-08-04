@@ -33,11 +33,16 @@ Concretely: among all copy-of-a-copy operations that erase the
 original after some exact number $k$ of identical applications, how
 large can $k$ be?
 
-[^mixing-ref]: TODO: pick one of the candidate references suggested in
-chat (e.g. Burgarth et al. 2013 on ergodic/mixing channels, or Sanz et
-al. 2010 on the quantum Wielandt inequality), or Michael Wolf's
-*Quantum Channels & Operations: Guided Tour* lecture notes for a more
-pedagogical entry point.
+[^mixing-ref]: The systematic treatment of this asymptotic question
+is D. Burgarth, G. Chiribella, V. Giovannetti, P. Perinotti and
+K. Yuasa, "Ergodic and mixing quantum channels in finite dimensions",
+*New Journal of Physics* **15**, 073045 (2013). A sharp cousin is
+the quantum Wielandt inequality, bounding how many steps it can take
+a channel before every output state has full rank: M. Sanz,
+D. Pérez-García, M. M. Wolf and J. I. Cirac, *IEEE Transactions on
+Information Theory* **56**, 4668 (2010). For a pedagogical entry
+point, Michael Wolf's lecture notes *Quantum Channels & Operations:
+Guided Tour* (2012).
 
 There's a second way to picture the same question, and it's the one
 that makes the problem feel physical. A quantum device you use over and
