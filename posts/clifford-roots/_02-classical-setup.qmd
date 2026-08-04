@@ -200,7 +200,18 @@ steps; the second pins $k$ down as the *exact* number, the erasure
 landing at step $k$ and not one sooner. Everything from here on is the
 hunt for such an $S$ with $k$ as large as possible, and the difficulty
 (and the beauty) is finding a *non-trivial* one, an $S$ that is not
-simply $P$ itself. How large can $k$ be?
+simply $P$ itself.
+
+Before hunting, notice where the teeth of the problem are. Finding
+some matrix with $S^k = P$ is a linear-algebra exercise. The demand
+with teeth is that $S$ must be a *lawful copier*: entries
+non-negative, every column summing to one, and, by our standing
+rule, every row as well. The hunt is always for the largest order
+*inside* the set of lawful matrices, and it is worth marking the
+non-negativity half of that checklist now. It looks like the tamest
+of the conditions. It returns in every setting of this post, wearing
+a different name each time, and in the quantum world it will grow
+into the main obstacle of the whole story. How large can $k$ be?
 
 The smallest case settles itself. A two-state bistochastic matrix has a
 single free number,

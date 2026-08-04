@@ -112,10 +112,17 @@ The rest of the cast carries over almost unchanged. A quantum copier is
 a *channel*: a linear map that turns density matrices into density
 matrices. It has to be linear for exactly the reason it was classically,
 that a coin-flip mixture of inputs must come out as the same coin-flip
-mixture of outputs. There is one extra demand with no classical echo,
-called *complete positivity*, which insists the map keeps sending valid
-states to valid states even when it acts on only part of a larger
-entangled system. Channels are well understood objects with a clean
+mixture of outputs. And the classical lawfulness checklist survives
+the upgrade, renamed. Non-negative entries grow into *positivity*: a
+channel must keep the density matrix's eigenvalues non-negative, so
+that they can stay probabilities. Columns summing to one grow into
+*trace preservation*, the matrix version of "the outcomes still add
+up to one". (Row sums, our standing fixed-centre rule, return in a
+moment.) Only one word of the checklist is genuinely new. The
+positivity demand sharpens to *complete positivity*: the map must
+keep sending valid states to valid states even when it acts on only
+part of a larger entangled system, a failure mode classical
+probability simply does not have. Channels are well understood objects with a clean
 structure theory.[^channels] For us they are simply the right notion of
 "physically allowed operation," and we will not pry them open.
 
@@ -192,7 +199,8 @@ build it here.
 
 Here is the honest chronology. I did not find that construction until
 the very end of my thesis, and for a long time it stayed out of reach.
-The obstacle has a name: complete positivity. A Jordan block hands you
+The obstacle has a name: complete positivity, the sharpened
+positivity half of the old checklist. A Jordan block hands you
 a *linear map* of the right order, but a linear map is not yet a
 channel, and it was not at all clear to me then that a bound-saturating
 block could be shrunk into a legal one without losing its order. So I

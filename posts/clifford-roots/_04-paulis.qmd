@@ -86,6 +86,8 @@ $$
 \mathbb{Z}_2 \;\longrightarrow\; \mathbb{Z}_2 \times \mathbb{Z}_2 ,
 $$
 labels $(a, b)$ with each coordinate adding modulo $2$ on its own.
+(The doubled group has a name of its own, the *Klein four-group*; we
+will simply keep writing $\mathbb{Z}_2 \times \mathbb{Z}_2$.)
 
 Where should the second generator come from? We have used the
 *states* of the bit; we have barely used its one interesting
@@ -280,9 +282,12 @@ price tag attached.
 
 Necessary is not sufficient, and honesty requires the flag: the
 villain of the previous section, complete positivity, patrols this
-family too. Not every setting of skeleton and dials is a lawful
-channel, and no amount of tidy bookkeeping waives the entrance fee.
-What the small room changes is that the fee can actually be paid.
+family too. The old checklist splits here exactly as it always has:
+normalization is built in ($T[I] = I$, and traces are preserved by
+the label bookkeeping), while the positivity half is the fee. Not
+every setting of skeleton and dials is a lawful channel, and no
+amount of tidy bookkeeping waives that fee. What the small room
+changes is that the fee can actually be paid.
 For the one channel this section is hunting, we will exhibit
 lawfulness outright, no criterion needed.
 
