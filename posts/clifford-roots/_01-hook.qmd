@@ -43,7 +43,7 @@ survivor's endurance are the same number. Beyond that, I will not
 pretend this post is engineering. It chases that number for the
 beauty of where the chase leads; stay to the end and you will watch
 the question turn into the arithmetic of finite groups and finite
-fields, of all things.
+fields, applied to a single particle quantum system.
 
 [^mixing-ref]: The systematic treatment of this asymptotic question
 is D. Burgarth, G. Chiribella, V. Giovannetti, P. Perinotti and
