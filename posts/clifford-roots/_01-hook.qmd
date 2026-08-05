@@ -33,6 +33,18 @@ Concretely: among all copy-of-a-copy operations that erase the
 original after some exact number $k$ of identical applications, how
 large can $k$ be?
 
+If you build things for a living, this question may sound backwards.
+Surely the practical art is *protecting* information from noise, not
+erasing it slowly on purpose? But the two are one question wearing
+opposite uniforms. A bound on how slowly erasure can finish is
+exactly a bound on how long information can *survive* inside a
+process that is guaranteed to kill it: the eraser's patience and the
+survivor's endurance are the same number. Beyond that, I will not
+pretend this post is engineering. It chases that number for the
+beauty of where the chase leads; stay to the end and you will watch
+the question turn into the arithmetic of finite groups and finite
+fields, of all things.
+
 [^mixing-ref]: The systematic treatment of this asymptotic question
 is D. Burgarth, G. Chiribella, V. Giovannetti, P. Perinotti and
 K. Yuasa, "Ergodic and mixing quantum channels in finite dimensions",
