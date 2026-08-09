@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig4-orbit-cycle/interactive.html</loc>
-    <lastmod>2026-08-09T10:02:05.662Z</lastmod>
-  </url>
-  <url>
-    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig3-bloch-ball/interactive.html</loc>
-    <lastmod>2026-08-09T10:02:05.661Z</lastmod>
-  </url>
-  <url>
-    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig1-state-space/interactive.html</loc>
-    <lastmod>2026-08-09T10:02:05.660Z</lastmod>
-  </url>
-  <url>
-    <loc>https://florian2richter.github.io/index.html</loc>
-    <lastmod>2026-08-09T10:02:05.658Z</lastmod>
-  </url>
-  <url>
-    <loc>https://florian2richter.github.io/about.html</loc>
-    <lastmod>2026-08-09T10:02:05.658Z</lastmod>
-  </url>
-  <url>
-    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig2-simplex-root/interactive.html</loc>
-    <lastmod>2026-08-09T10:02:05.661Z</lastmod>
+    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig5-continuum-grid/interactive.html</loc>
+    <lastmod>2026-08-09T10:12:56.249Z</lastmod>
   </url>
   <url>
     <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig3b-bloch-root/interactive.html</loc>
-    <lastmod>2026-08-09T10:02:05.662Z</lastmod>
+    <lastmod>2026-08-09T10:12:56.248Z</lastmod>
   </url>
   <url>
-    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig5-continuum-grid/interactive.html</loc>
-    <lastmod>2026-08-09T10:02:05.663Z</lastmod>
+    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig2-simplex-root/interactive.html</loc>
+    <lastmod>2026-08-09T10:12:56.247Z</lastmod>
+  </url>
+  <url>
+    <loc>https://florian2richter.github.io/about.html</loc>
+    <lastmod>2026-08-09T10:12:56.244Z</lastmod>
+  </url>
+  <url>
+    <loc>https://florian2richter.github.io/index.html</loc>
+    <lastmod>2026-08-09T10:12:56.244Z</lastmod>
+  </url>
+  <url>
+    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig1-state-space/interactive.html</loc>
+    <lastmod>2026-08-09T10:12:56.246Z</lastmod>
+  </url>
+  <url>
+    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig3-bloch-ball/interactive.html</loc>
+    <lastmod>2026-08-09T10:12:56.247Z</lastmod>
+  </url>
+  <url>
+    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig4-orbit-cycle/interactive.html</loc>
+    <lastmod>2026-08-09T10:12:56.248Z</lastmod>
+  </url>
+  <url>
+    <loc>https://florian2richter.github.io/posts/clifford-roots/figures/fig6-clifford-bouquet/interactive.html</loc>
+    <lastmod>2026-08-09T10:12:56.249Z</lastmod>
   </url>
 </urlset>

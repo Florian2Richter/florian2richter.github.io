@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Florian’s Blog</title>
+<title>interactive – Florian's Blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,25 +29,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-63180c5dda01c187c33bc16bc49fe53e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-63180c5dda01c187c33bc16bc49fe53e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,82 +73,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="Florian's Blog" href="index.xml" data-external="1"></head>
+<link rel="stylesheet" href="../../../../styles.css">
+</head>
 
 <body class="nav-fixed quarto-light">
 
@@ -159,7 +85,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">Florian’s Blog</span>
     </a>
   </div>
@@ -170,11 +96,11 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../../../index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -197,155 +123,55 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Florian’s Blog</h1>
+
+
+
+<!-- Figure 6: the Clifford bouquet. Static SVG inlined verbatim from clifford_bouquet_figure.py. No interactivity: it is a conceptual sketch (the blob of all unital qubit channels, with the six Clifford skeleton-sheets drawn as needles through P). P reuses the grey of the maximally mixed dot in Figures 1, 3 and 5; the needles and the identity tip take the quantum-structure teal. The SVG defines no ids, so nothing needed prefixing. -->
+<style>
+.clifford-bouquet{max-width:680px;margin:1.25rem auto;}
+.clifford-bouquet svg{width:100%;height:auto;display:block;}
+.clifford-bouquet .cb-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+</style>
+
+<div class="clifford-bouquet">
+  <p class="cb-vh">A large, gently irregular convex blob, the nine-parameter continuum of unital qubit channels. Through the grey point P inside it, the completely depolarizing channel, runs a bouquet of six thin straight teal needles, the Clifford channels: one sheet per skeleton, with the dials varying continuously along each, all sheets meeting at P. The needles extend further toward positive dials than negative ones, and the identity channel sits at the tip of the identity-skeleton needle, marked id.</p>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 680 372" font-family="Georgia, 'Times New Roman', serif" role="img" aria-label="A large convex blob, the nine-parameter continuum of unital qubit channels. Through the grey point P at its centre, the completely depolarizing channel, runs a bouquet of six thin straight needles, the Clifford channels: one sheet per skeleton, dials varying along each, all sheets meeting at P. The identity channel sits at the tip of one needle, marked id.">
+
+  <!-- The ambient space: all unital qubit channels, a gently irregular convex blob -->
+  <path d="M 608.20 190.00 L 608.74 193.47 L 609.11 196.95 L 609.32 200.44 L 609.36 203.94 L 609.23 207.46 L 608.92 210.98 L 608.42 214.50 L 607.73 218.03 L 606.85 221.55 L 605.78 225.08 L 604.51 228.59 L 603.03 232.09 L 601.34 235.58 L 599.45 239.05 L 597.34 242.50 L 595.02 245.92 L 592.48 249.31 L 589.72 252.67 L 586.74 255.99 L 583.55 259.26 L 580.14 262.48 L 576.51 265.65 L 572.66 268.76 L 568.60 271.80 L 564.33 274.78 L 559.86 277.69 L 555.18 280.52 L 550.30 283.27 L 545.24 285.93 L 539.99 288.50 L 534.56 290.98 L 528.96 293.37 L 523.20 295.65 L 517.28 297.83 L 511.22 299.90 L 505.02 301.87 L 498.70 303.73 L 492.26 305.48 L 485.71 307.11 L 479.06 308.63 L 472.32 310.04 L 465.51 311.33 L 458.64 312.51 L 451.70 313.57 L 444.72 314.52 L 437.70 315.36 L 430.66 316.10 L 423.59 316.72 L 416.52 317.24 L 409.44 317.65 L 402.37 317.96 L 395.32 318.18 L 388.28 318.30 L 381.27 318.33 L 374.29 318.27 L 367.34 318.13 L 360.44 317.91 L 353.58 317.60 L 346.76 317.23 L 340.00 316.78 L 333.29 316.26 L 326.63 315.68 L 320.02 315.04 L 313.47 314.34 L 306.97 313.58 L 300.52 312.78 L 294.12 311.92 L 287.78 311.01 L 281.48 310.06 L 275.23 309.06 L 269.03 308.01 L 262.87 306.93 L 256.74 305.80 L 250.66 304.63 L 244.62 303.42 L 238.61 302.16 L 232.64 300.87 L 226.69 299.53 L 220.78 298.15 L 214.90 296.72 L 209.06 295.25 L 203.24 293.73 L 197.46 292.15 L 191.71 290.53 L 185.99 288.86 L 180.32 287.13 L 174.68 285.34 L 169.09 283.49 L 163.55 281.58 L 158.07 279.61 L 152.64 277.57 L 147.28 275.47 L 141.99 273.29 L 136.79 271.05 L 131.67 268.74 L 126.64 266.35 L 121.72 263.89 L 116.91 261.36 L 112.21 258.75 L 107.65 256.07 L 103.23 253.32 L 98.96 250.49 L 94.84 247.59 L 90.89 244.63 L 87.12 241.59 L 83.53 238.49 L 80.14 235.32 L 76.94 232.10 L 73.96 228.81 L 71.20 225.48 L 68.66 222.09 L 66.35 218.65 L 64.28 215.17 L 62.45 211.65 L 60.88 208.10 L 59.55 204.52 L 58.48 200.91 L 57.66 197.29 L 57.11 193.65 L 56.82 190.00 L 56.78 186.35 L 57.01 182.70 L 57.50 179.05 L 58.25 175.41 L 59.25 171.80 L 60.51 168.20 L 62.01 164.62 L 63.76 161.08 L 65.74 157.57 L 67.96 154.10 L 70.41 150.67 L 73.08 147.28 L 75.96 143.95 L 79.05 140.66 L 82.33 137.43 L 85.81 134.26 L 89.48 131.15 L 93.32 128.09 L 97.33 125.10 L 101.50 122.18 L 105.82 119.32 L 110.29 116.52 L 114.89 113.80 L 119.63 111.14 L 124.49 108.55 L 129.47 106.03 L 134.55 103.58 L 139.74 101.19 L 145.03 98.87 L 150.42 96.62 L 155.89 94.44 L 161.44 92.33 L 167.08 90.28 L 172.79 88.29 L 178.57 86.38 L 184.41 84.52 L 190.33 82.74 L 196.30 81.01 L 202.34 79.36 L 208.44 77.76 L 214.59 76.23 L 220.79 74.77 L 227.05 73.37 L 233.36 72.03 L 239.72 70.76 L 246.13 69.56 L 252.59 68.42 L 259.09 67.36 L 265.64 66.36 L 272.23 65.43 L 278.86 64.57 L 285.53 63.79 L 292.24 63.08 L 298.98 62.45 L 305.76 61.90 L 312.56 61.42 L 319.39 61.03 L 326.24 60.72 L 333.11 60.49 L 340.00 60.35 L 346.90 60.30 L 353.80 60.33 L 360.70 60.46 L 367.60 60.68 L 374.48 60.99 L 381.36 61.39 L 388.21 61.88 L 395.03 62.48 L 401.83 63.16 L 408.58 63.94 L 415.28 64.82 L 421.94 65.79 L 428.54 66.86 L 435.07 68.01 L 441.53 69.27 L 447.92 70.61 L 454.22 72.05 L 460.44 73.57 L 466.56 75.19 L 472.59 76.89 L 478.51 78.67 L 484.33 80.54 L 490.03 82.48 L 495.61 84.51 L 501.08 86.60 L 506.42 88.78 L 511.64 91.02 L 516.73 93.33 L 521.69 95.70 L 526.51 98.14 L 531.21 100.63 L 535.76 103.18 L 540.18 105.79 L 544.47 108.45 L 548.61 111.16 L 552.62 113.91 L 556.50 116.71 L 560.23 119.56 L 563.84 122.44 L 567.30 125.36 L 570.63 128.32 L 573.83 131.32 L 576.89 134.35 L 579.81 137.41 L 582.61 140.50 L 585.27 143.63 L 587.80 146.78 L 590.19 149.96 L 592.46 153.17 L 594.59 156.40 L 596.58 159.66 L 598.44 162.94 L 600.16 166.25 L 601.74 169.58 L 603.19 172.93 L 604.49 176.31 L 605.64 179.70 L 606.64 183.12 L 607.50 186.55 Z" fill="#d6e5ea" fill-opacity="0.35" stroke="#829aa6" stroke-width="1.6" stroke-linejoin="round"></path>
+  <text x="340.00" y="96.00" text-anchor="middle" font-size="15" fill="#233746">all unital qubit channels</text>
+  <text x="340.00" y="117.00" text-anchor="middle" font-size="15" fill="#7d8a91">a nine-parameter continuum</text>
+
+  <!-- The Clifford channels: one needle per skeleton h, dials varying along each, all through P -->
+  <line x1="249.65" y1="241.36" x2="520.70" y2="153.29" stroke="#2d6f8f" stroke-width="2.6" stroke-opacity="0.85" stroke-linecap="round"></line>
+  <line x1="290.48" y1="266.99" x2="401.56" y2="143.63" stroke="#2d6f8f" stroke-width="2.6" stroke-opacity="0.85" stroke-linecap="round"></line>
+  <line x1="351.11" y1="275.03" x2="327.15" y2="139.12" stroke="#2d6f8f" stroke-width="2.6" stroke-opacity="0.85" stroke-linecap="round"></line>
+  <line x1="419.47" y1="254.25" x2="207.56" y2="141.58" stroke="#2d6f8f" stroke-width="2.6" stroke-opacity="0.85" stroke-linecap="round"></line>
+  <line x1="445.64" y1="189.55" x2="175.67" y2="246.93" stroke="#2d6f8f" stroke-width="2.6" stroke-opacity="0.85" stroke-linecap="round"></line>
+  <line x1="366.97" y1="145.24" x2="302.54" y2="304.72" stroke="#2d6f8f" stroke-width="2.6" stroke-opacity="0.85" stroke-linecap="round"></line>
+
+  <!-- P (the CDC, shared grey of the maximally mixed point) and the identity channel at one needle tip -->
+  <circle cx="520.70" cy="153.29" r="4.5" fill="#2d6f8f"></circle>
+  <circle cx="340.00" cy="212.00" r="5.5" fill="#7d8a91"></circle>
+  <text x="354.00" y="236.00" text-anchor="start" font-size="15" fill="#7d8a91" font-style="italic">P</text>
+  <text x="531.70" y="149.29" text-anchor="start" font-size="15" fill="#2d6f8f" font-style="italic">id</text>
+  <text x="340.00" y="354.00" text-anchor="middle" font-size="15" fill="#233746" font-style="italic">the Clifford channels: finitely many sheets through P</text>
+</svg>
 </div>
 
 
 
-<div class="quarto-title-meta column-page-left">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1786270376246" data-listing-reading-time-sort="51" data-listing-word-count-sort="10046">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig1-state-space/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig1-state-space/interactive.html" class="no-external">
-Probability simplex over three outcomes, coloured by purity (blue-teal at the pure corners, fading to a soft blue-grey centre at the maximally mixed distribution p0, which…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig1-state-space/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1786270376247" data-listing-reading-time-sort="6" data-listing-word-count-sort="1104">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig2-simplex-root/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig2-simplex-root/interactive.html" class="no-external">
-Animation of the square-root channel S on the probability simplex. A cloud of states, coloured by its red-green-blue mixture, is mapped by S onto a line segment (the 2D…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig2-simplex-root/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1786270376247" data-listing-reading-time-sort="23" data-listing-word-count-sort="4401">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig3-bloch-ball/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig3-bloch-ball/interactive.html" class="no-external">
-Interactive Bloch ball, the qubit state space. Click the front of the ball to pick a direction; the Purity slider moves the state from the pure surface inward toward the…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig3-bloch-ball/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-file-modified-sort="1786270376248" data-listing-reading-time-sort="19" data-listing-word-count-sort="3710">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig3b-bloch-root/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig3b-bloch-root/interactive.html" class="no-external">
-Animation of the maximal qubit root S on the Bloch ball. A cloud of Bloch vectors is driven by S to the maximally mixed centre I/2 in stages, each step shrinking and…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig3b-bloch-root/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-listing-file-modified-sort="1786270376248" data-listing-reading-time-sort="4" data-listing-word-count-sort="644">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig4-orbit-cycle/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig4-orbit-cycle/interactive.html" class="no-external">
-The eight nonzero labels of the three-by-three label plane, arranged on a ring in the order the matrix h visits them: (1,0), (0,1), (1,2), (2,2), (2,0), (0,2), (2,1), (1,1)…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig4-orbit-cycle/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-listing-file-modified-sort="1786270376249" data-listing-reading-time-sort="17" data-listing-word-count-sort="3271">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig5-continuum-grid/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig5-continuum-grid/interactive.html" class="no-external">
-Two panels. On the left, a Bloch ball, the continuum of qubit states, shaded by purity with a latitude and longitude wireframe, carrying three coloured coordinate axes: X =…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig5-continuum-grid/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-listing-file-modified-sort="1786270376249" data-listing-reading-time-sort="6" data-listing-word-count-sort="1127">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig6-clifford-bouquet/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig6-clifford-bouquet/interactive.html" class="no-external">
-A large, gently irregular convex blob, the nine-parameter continuum of unital qubit channels. Through the grey point P inside it, the completely depolarizing channel, runs a…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig6-clifford-bouquet/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
