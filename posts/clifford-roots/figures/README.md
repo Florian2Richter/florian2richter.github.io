@@ -16,6 +16,7 @@ figures/
   fig3b-bloch-root/         <- Figure 3b: the qubit root, animated (DONE)
   fig4-orbit-cycle/         <- Figure 4: the d=3 orbit cycle (DONE, static)
   fig5-continuum-grid/      <- Figure 5: continuum vs. finite grid (DONE, static)
+  fig6-clifford-bouquet/    <- Figure 6: the Clifford bouquet (DONE, static)
 ```
 
 Each finished figure folder contains, by convention:

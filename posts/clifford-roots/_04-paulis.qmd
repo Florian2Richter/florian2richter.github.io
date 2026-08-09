@@ -407,7 +407,26 @@ exhaustive: no shuffle of three letters offers a longer walk to a
 zero. And three is $d^2 - 1$ at $d = 2$. Read that twice. The tiny,
 rigid family, six skeletons and three dials, reaches the same
 maximal order that the whole quantum machinery allows. Nothing was
-lost by retreating into the small room.
+lost by retreating into the small room (@fig-clifford-bouquet).
+
+::: {#fig-clifford-bouquet}
+
+{{< include figures/fig6-clifford-bouquet/interactive.qmd >}}
+
+The Clifford family, sketched inside the space it lives in. The blob
+is the full continuum of unital qubit channels, nine parameters
+wide. The Clifford channels are not a discrete scatter of points
+inside it but finitely many low-dimensional sheets, one per
+skeleton, six for a qubit, with the dials varying continuously along
+each; every sheet passes through $P$, since any skeleton with all
+its dials at zero is total erasure, and the identity channel sits at
+the tip of the identity-skeleton sheet. The sketch is idealized in
+two ways: each sheet is drawn as a line but is really
+three-dimensional, one dial per axis, and distinct sheets can share
+more than the point $P$, because once a dial is zero the dead letter
+no longer remembers which skeleton moved it.
+
+:::
 
 You have seen this channel before. On Bloch vectors it sends
 $(r_1, r_2, r_3)$ to $(r_2/2,\; r_3/2,\; 0)$, which is the
