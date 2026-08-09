@@ -48,7 +48,8 @@ the wrong question and the answer turns random; that, and not fuzziness,
 is what the surface is encoding.
 
 The object that bookkeeps this arrow is a small matrix, the *density
-matrix*, but you need only its shape here, not its inner workings.
+matrix*, and for a qubit it is small enough that we will shortly
+write it out whole and watch the ball fall out of it.
 
 [^qcvc]: We meet qubits, density matrices, and channels here at the
 level of pictures, not bra-ket algebra, so you can follow along cold. If
@@ -67,15 +68,76 @@ The Bloch ball, the state space of a single qubit: pure states live on the surfa
 :::
 
 Notice what happened to the dimension. The classical bit lived on a
-line, one dimension; the qubit fills a ball, *three*. That jump is the
-pattern worth chasing, but to count it for any number of levels we first
-have to say what a quantum state even is beyond the qubit.
+line, one dimension; the qubit fills a ball, *three*. Where does
+three come from? For a qubit, nothing has to be taken on faith,
+because the promised bookkeeping matrix is small enough to write out
+entry by entry, with the arrow $(x, y, z)$ filed inside it:
+$$
+\rho \;=\;
+\begin{pmatrix}
+\dfrac{1 + z}{2} & \dfrac{x - iy}{2} \\[6pt]
+\dfrac{x + iy}{2} & \dfrac{1 - z}{2}
+\end{pmatrix}.
+$$
+Look at how little freedom the grid has. The two diagonal entries are
+real and sum to one, so a single number, $z$, fixes both. The two
+off-diagonal entries are mirror images of each other across the
+diagonal (complex conjugates), so a single complex number, worth two
+real ones, fixes that pair. Three free real numbers in all, and they
+are exactly the coordinates of the arrow. The ball's three dimensions
+are not a metaphor. They are the room this matrix has.
 
-We met the qubit's state as an arrow, bookkept by a small matrix. For
-$d$ levels the bookkeeping object is the same kind of thing, a
-$d \times d$ matrix called the *density matrix*, and its rules are not
-arbitrary: they are exactly what it takes to still be describing
-probabilities. The matrix is Hermitian, so its eigenvalues are real;
+The matrix even knows the ball is *round*. Its two eigenvalues work
+out to $\tfrac12(1 \pm \ell)$, with
+$\ell = \sqrt{x^2 + y^2 + z^2}$ the length of the arrow (a two-line
+computation, done in the aside below), and the eigenvalues of a
+density matrix are the probabilities it carries, a point made
+precise in a moment. Probabilities cannot go negative, so
+$\ell \le 1$: one inequality, and it carves the solid ball out of
+space. The surface is $\ell = 1$, eigenvalues $1$ and $0$, some
+question answered with certainty, which is why the certain states
+live exactly there; the zero-length arrow at the centre has
+eigenvalues $\tfrac12$ and $\tfrac12$, the fair coin. And file one
+promise away as you look at the grid: in the next section each of
+the three directions will get a matrix of its own, and the way those
+matrices multiply carries the rest of the post.
+
+```{=html}
+<details class="aside">
+<summary>The two eigenvalues, computed</summary>
+```
+
+Two numbers pin down two eigenvalues: their sum and their product.
+The sum is the trace, $1$ by inspection of the diagonal. The product
+is the determinant,
+$$
+\det \rho
+\;=\; \frac{(1 + z)(1 - z)}{4} - \frac{(x - iy)(x + iy)}{4}
+\;=\; \frac{1 - (x^2 + y^2 + z^2)}{4}
+\;=\; \frac{1 - \ell^2}{4}.
+$$
+The matrix is Hermitian, so both eigenvalues are real, and the pair
+with sum $1$ and product $\tfrac14(1 - \ell^2)$ is
+$$
+\lambda_\pm \;=\; \frac{1 \pm \ell}{2},
+$$
+as multiplying them back out confirms. Demanding
+$\lambda_- \ge 0$ is exactly demanding $\ell \le 1$: the ball.
+
+```{=html}
+</details>
+```
+
+That jump, one dimension to three, is the pattern worth chasing, but
+to count it for any number of levels we first have to say what a
+quantum state even is beyond the qubit.
+
+For $d$ levels the bookkeeping object is the same kind of thing as
+the grid we just unpacked: a $d \times d$ matrix, the *density
+matrix* at full size, and its rules are not arbitrary. They are
+exactly what it takes to still be describing probabilities. The
+matrix is Hermitian, mirror-conjugate across the diagonal just like
+the qubit's, so its eigenvalues are real;
 those eigenvalues are non-negative and sum to one. That last clause is
 the point, because non-negative numbers summing to one are a probability
 distribution. So each density matrix carries a classical probability
@@ -89,7 +151,7 @@ is the special case where one common set of axes has been fixed once
 and for all.
 
 Now we can count. A quantum state in dimension $d$ is pinned down by
-$d^2 - 1$ real numbers.
+$d^2 - 1$ real numbers, the qubit's three being the case $d = 2$.
 
 ```{=html}
 <details class="aside">
