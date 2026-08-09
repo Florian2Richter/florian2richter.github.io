@@ -2,7 +2,7 @@
 title: "How finely can you divide a depolarizing channel?"
 description: "Clifford channels are a tiny corner of the space of quantum channels, and yet they let you divide the most destructive channel of all into nearly as many discrete steps as the full quantum machinery allows. The room to do this lives in a surprising place."
 author: "Florian Richter"
-date: "2026-07-15 20:00"
+date: "2026-08-08"
 date-format: "YYYY-MM-DD HH:mm"
 categories: [quantum, channels, clifford, finite-fields]
 draft: true
@@ -19,21 +19,22 @@ Somewhere inside that work a smaller, self-contained question fell
 out: how finely can you divide the most destructive process there
 is?
 
-The original is written for examiners, not for curious readers. The
-arrival of large language models finally removed my last excuse. I
-could not resist the temptation to rewrite the thing with agentic
-support, trading the terse notation of a thesis for pictures, worked
-examples, and a slower pace, so that a motivated undergraduate can
-follow every step.
+The original is written for examiners, not for curious readers.
+LLMs have made rewriting an old piece of mathematics a far smaller
+job than it used to be, and I could not resist the temptation. So
+here is the result again, redone with agentic support: the terse
+notation of a thesis traded for pictures, worked examples, and a
+slower pace, so that a motivated undergraduate can follow every
+step.
 
 The route, roughly: devices with memory give the problem its
 physical face, the classical world gives a first answer, and the
-quantum world a quadratically bigger one. Along the way we settle
-into a small subclass of channels, simple enough to parameterize by
-hand, yet powerful enough to come within a factor of two of the full
-quantum answer: the Clifford channels.
+quantum world a quadratically bigger one. Finally, we settle into a
+small subclass of channels, simple enough to parameterize by hand,
+yet powerful enough that in prime dimensions it comes within a
+factor of two of the full quantum answer: the Clifford channels.
 
-Enjoy your read :)
+Enjoy the read.
 
 ***
 

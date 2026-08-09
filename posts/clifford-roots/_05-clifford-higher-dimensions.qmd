@@ -134,7 +134,12 @@ T[\mathbf{w}(\eta)] \;=\; \lambda(\eta)\, \mathbf{w}(h(\eta)),
 \qquad \lambda(0,0) = 1,
 $$
 with $h$ a relabelling of the plane fixing $(0,0)$, and one dial
-$\lambda(\eta)$ per label, complex now, sizes at most one. But here
+$\lambda(\eta)$ per label, complex now, sizes at most one. (At the
+qubit stage we earned that size bound by feeding a state through the
+channel. Here the labelled matrices are no longer Hermitian, and that
+trick only delivers a slightly weaker bound. The sharp one is
+complete positivity's doing, and the aside on the CP criterion later
+in this section records the one-line argument.) But here
 the first debt falls due. For three letters, any shuffle respected
 addition on its own. On a bigger plane that is spectacularly false,
 and respecting the group structure,
@@ -215,10 +220,11 @@ exactly when every label's $n$-step product has died, and a product
 of nonzero numbers never dies, so every walk must step on a *zero*
 of $\lambda$. Since $h$ is invertible it chops the $d^2 - 1$ nonzero
 labels into closed cycles, and the game is suddenly a board game:
-mark some squares with zeros, subject to the rules, and ask how many
-turns the luckiest token can survive before it is forced onto a
-marked square. Two questions decide everything. How long can a cycle
-be? And how few marked squares can we get away with?
+mark some squares with zeros, subject to the rules, and ask how long
+the luckiest token stays alive, where a token dies on the turn it
+departs a marked square, since the dial is paid on departure. Two
+questions decide everything. How long can a cycle be? And how few
+marked squares can we get away with?
 
 Take the cycle question first. The best imaginable $h$ would sweep
 all $d^2 - 1$ nonzero labels in one grand cycle, and it is not
@@ -347,8 +353,9 @@ So cycles can be as long as $d^2 - 1$, and one marked square per
 cycle is the least the rules could possibly demand. If that were the
 end of the story, the Clifford family would match the full quantum
 bound $d^2 - 1$ in every dimension: put the single zero on the grand
-cycle, and the slowest token, starting just after it, survives
-$d^2 - 1$ turns. For the qubit, that is exactly what happened.
+cycle, and the slowest token, starting just after it, walks the whole
+ring and dies only on turn $d^2 - 1$, the turn it must depart the
+zero itself. For the qubit, that is exactly what happened.
 
 Here the second debt falls due. Zeros of $\lambda$ cannot be placed
 one at a time, because the mirror rule pairs the dials up:
@@ -371,13 +378,15 @@ and $-1$.) So the mirror of any label sits exactly half a cycle
 away, diametrically opposite on the ring, just as @fig-orbit shows.
 Mark the square $z$, and the rules mark $-z$: not adjacent, not
 random, but precisely antipodal, cutting the grand cycle into two
-arcs of length exactly $\tfrac{d^2-1}{2}$ each. The slowest token,
-starting just after either zero, now survives
+arcs of length exactly $\tfrac{d^2-1}{2}$ each. The slowest token
+starts just after either zero and walks the far arc, alive after
+every turn but the last, dying exactly on turn
 $$
-k \;=\; \frac{d^2 - 1}{2}
+k \;=\; \frac{d^2 - 1}{2},
 $$
-turns and not one more. The mirror rule has taken the qubit's gift
-back, and it has taken exactly a factor of two.
+the turn it must depart the other zero, and not one sooner. The
+mirror rule has taken the qubit's gift back, and it has taken
+exactly a factor of two.
 
 Assemble the channel and settle its legality. Take $h$ the companion
 matrix of a primitive polynomial, and set the dials to
@@ -446,6 +455,16 @@ rule. So "is this Clifford channel lawful?" has become "is this one
 matrix of dial values positive semidefinite?", a condition you can
 actually get your hands on.
 
+One dividend arrives before any theorem. A positive semidefinite
+matrix with ones on its diagonal cannot hold an entry of size above
+one: the $2 \times 2$ principal submatrix
+$\bigl(\begin{smallmatrix} 1 & m \\ \bar m & 1 \end{smallmatrix}\bigr)$
+must itself be positive semidefinite, and its determinant is
+$1 - |m|^2$. Every dial value appears as such an entry ($\lambda(\zeta)$
+sits wherever $\eta - \xi = \zeta$), so $|\lambda(\zeta)| \le 1$ for
+every label. That is where the main text's "sizes at most one" comes
+from, and it is complete positivity's doing, not mere positivity's.
+
 Now the classical eigenvalue theorem: *Gershgorin's circle theorem*.
 Every eigenvalue of a matrix lies in one of its Gershgorin discs, a
 disc centred at a diagonal entry with radius the summed sizes of the
@@ -468,7 +487,7 @@ $\lambda = \varepsilon$ on $d^2 - 3$ surviving labels: the condition
 holds for every $\varepsilon \le \tfrac{1}{d^2-3}$, which for
 $d = 3$ allows $\varepsilon$ up to $\tfrac16$. And it explains, one
 level up, why the classical aside's $\varepsilon$ was free: for the
-completely depolarising channel every $\lambda(\eta)$ with
+completely depolarizing channel every $\lambda(\eta)$ with
 $\eta \neq 0$ vanishes, the sum is $0$, and there is maximal room in
 every direction.
 
@@ -514,17 +533,17 @@ $h^j z$ gives $h^{j+m} z$, the same shift $m$ for all of them.
 Negating twice returns home, so $2m$ is a multiple of $L$, and $m$
 is neither $0$ nor $L$, forcing $m = L/2$: *the mirror of every
 point of $C$ sits exactly opposite it.* The cycle carries zeros at
-$z$ and $h^{L/2} z$ at least, so no token in $C$ survives more than
-$L/2 \le \tfrac{d^2-1}{2}$ turns.
+$z$ and $h^{L/2} z$ at least, so every token in $C$ is dead by turn
+$L/2 \le \tfrac{d^2-1}{2}$.
 
 Case two: a cycle $C$ and its negation $-C$ are different cycles.
 They have the same length $L$ and no points in common, and both live
-among the $d^2 - 1$ nonzero labels, so $2L \le d^2 - 1$. A token in
-$C$ survives at most $L \le \tfrac{d^2-1}{2}$ turns, zero or no
-zero to spare.
+among the $d^2 - 1$ nonzero labels, so $2L \le d^2 - 1$. Every token
+in $C$ is dead by turn $L \le \tfrac{d^2-1}{2}$, zero or no zero to
+spare.
 
-Every cycle falls under one case or the other, so the slowest token
-on any legal board survives at most $\tfrac{d^2-1}{2}$ turns:
+Every cycle falls under one case or the other, so every token on any
+legal board is dead by turn $\tfrac{d^2-1}{2}$:
 $k \le \tfrac{d^2-1}{2}$ for every Clifford root. (Extra zeros only
 ever shorten survival, which is why the stingiest board is the best
 one.)

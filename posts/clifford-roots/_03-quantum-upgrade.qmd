@@ -146,10 +146,18 @@ we should ask of a process whose only job is to forget. (Such channels
 have a name, *unital*, but the name matters less than the picture.)
 
 Total erasure is the same idea as before, too. The *completely
-depolarising channel* sends every input, no exceptions, to the maximally
+depolarizing channel* sends every input, no exceptions, to the maximally
 mixed state. The whole Bloch ball collapses to its centre point in a
 single step. This is the quantum CDC, and it is the operator we now want
 to take roots of.
+
+The classical bonus survives the upgrade word for word. The argument
+that any stochastic root of the classical $P$ fixes the uniform
+distribution used nothing but $SP = PS$ and the fact that $P$ erases
+everything, and both survive here. So any trace-preserving channel
+root of the quantum CDC fixes the maximally mixed state of its own
+accord: unitality, like bistochasticity before it, is not a
+restriction on the hunt but a property every candidate brings along.
 
 Here is where that quadratic shows up where it counts. Ask the same
 question as in the classical case: how large can $k$ be, if a channel
@@ -178,7 +186,7 @@ A maximal qubit root $S$ acting on the Bloch ball (others exist). It
 sends a Bloch vector $(r_1, r_2, r_3)$ to $(r_2/2,\, r_3/2,\, 0)$,
 driving every state
 to the centre $I/2$ in at most three steps, and the $z$-pole takes all
-three, realising the order-3 bound ($d^2 - 1 = 3$ at $d = 2$). As with
+three, realizing the order-3 bound ($d^2 - 1 = 3$ at $d = 2$). As with
 the classical square root in @fig-root-d3, erasure happens in stages:
 each step both shrinks the vector and rotates it onto the next axis.
 Directions already in the channel's kernel (here the $x$-axis) collapse
@@ -196,7 +204,7 @@ argument: on the $d^2 - 1$ traceless directions, place the longest
 nilpotent Jordan block that fits, and its powers take exactly
 $d^2 - 1$ steps to vanish. And the bound is not only a ceiling. It is
 *reached*, in every dimension. Take that same nilpotent block, shrink
-it until it sits a hair away from the completely depolarising channel,
+it until it sits a hair away from the completely depolarizing channel,
 and what you get is a genuine channel whose order is exactly
 $d^2 - 1$. That is the real answer to the question. I am not going to
 build it here.

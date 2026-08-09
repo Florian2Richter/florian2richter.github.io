@@ -337,7 +337,7 @@ channel clothing.
 
 Third, the villain's target. Set every dial to zero. Each Pauli
 dies, every Bloch vector is sent to the origin, and $T$ is the
-completely depolarising channel $P$ itself, whatever the skeleton.
+completely depolarizing channel $P$ itself, whatever the skeleton.
 The object we want roots of is a member of the family. The hunt can
 begin at home.
 

@@ -20,7 +20,7 @@ one step. Done.
 You can also build copiers that never quite finish in any finite number
 of passes, and only erase everything in the infinite limit of repeated
 copying. This is a genuinely interesting region of design space.
-Characterising which copiers really do erase everything in the limit
+Characterizing which copiers really do erase everything in the limit
 (as opposed to settling onto some non-trivial steady image, or
 oscillating, or simply slowing to a crawl) is the subject of a
 substantial literature on ergodic and mixing channels.[^mixing-ref] It
@@ -43,7 +43,7 @@ survivor's endurance are the same number. Beyond that, I will not
 pretend this post is engineering. It chases that number for the
 beauty of where the chase leads; stay to the end and you will watch
 the question turn into the arithmetic of finite groups and finite
-fields, applied to a single particle quantum system.
+fields, applied to a single-particle quantum system.
 
 [^mixing-ref]: The systematic treatment of this asymptotic question
 is D. Burgarth, G. Chiribella, V. Giovannetti, P. Perinotti and

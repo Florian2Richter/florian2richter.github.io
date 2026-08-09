@@ -111,8 +111,8 @@ every column summing to one, is called a *stochastic matrix*: exactly
 the linear maps that send probability distributions to probability
 distributions.
 
-There is one more restriction we will impose, and it turns out to
-be the most interesting one in retrospect. We will only consider
+There is one more restriction we will impose, and in retrospect it
+is the most interesting one. We will only consider
 copiers that leave the *uniform distribution* untouched, the grey
 centre of the triangle from a moment ago: the flat distribution that
 puts equal weight on every state has to come back out exactly as it
@@ -127,8 +127,9 @@ sharper image. A copier that instead turned "no information" into "some
 information" would be generating knowledge out of nothing, and leaving
 the grey centre fixed is the natural way to forbid that. (In the
 quantum upgrade later in the post, the analogous restriction is more
-than just natural, it is the standard convention. For now, take it as a
-sensible thing to ask for.)
+than just natural, it is the standard convention. For now, take it as
+a sensible thing to ask for; in a moment it will reveal itself as no
+restriction at all.)
 
 This small demand has a tidy consequence. We already know the columns
 of $S$ sum to one. Insisting that the uniform distribution survives
@@ -162,7 +163,7 @@ to be a question about powers of matrices that stay safely inside
 our chosen class.
 
 Now we can say precisely what "total erasure" means. The most
-depolarising copier you can write down is the one whose every column
+depolarizing copier you can write down is the one whose every column
 is the uniform distribution. Every input state, no matter which one,
 produces the same uniform output:
 $$
@@ -179,7 +180,7 @@ information about the input has been thrown away in a single step.
 Apply $P$ again and nothing changes: the simplex has contracted to
 a single point, the centre, and $P$ just keeps mapping it there.
 This $P$ is bistochastic by inspection (every row sums to one as
-well), and it is the *completely depolarising channel* in dimension
+well), and it is the *completely depolarizing channel* in dimension
 $d$, or CDC for short.
 
 With $P$ pinned down, the question we opened with stops being a story
@@ -191,16 +192,26 @@ $$
 \boxed{\; S^k = P, \qquad S^j \neq P \ \text{ for every integer } 1 \le j < k. \;}
 $$
 Spelled out: apply the copier $S$ exactly $k$ times and you get $P$,
-total erasure; apply it any smaller whole number of times, one pass, two,
-up to $k-1$, and the erasure has not happened yet. Both $k$ and $j$ count
-applications, so they are positive integers, and the second condition
-runs over every one of them below $k$. The first equation is the whole
-post in miniature, a single copier that erases totally in $k$ identical
-steps; the second pins $k$ down as the *exact* number, the erasure
-landing at step $k$ and not one sooner. Everything from here on is the
-hunt for such an $S$ with $k$ as large as possible, and the difficulty
-(and the beauty) is finding a *non-trivial* one, an $S$ that is not
-simply $P$ itself.
+total erasure; apply it any smaller number of times and the erasure
+has not happened yet. The first equation is the whole post in
+miniature, a single copier that erases totally in $k$ identical
+steps; the second pins $k$ down as the *exact* number. Everything
+from here on is the hunt for such an $S$ with $k$ as large as
+possible, and the difficulty (and the beauty) is finding a
+*non-trivial* one, an $S$ that is not simply $P$ itself.
+
+And here the restriction we imposed by hand grants itself. Suppose
+$S$ were merely stochastic, columns summing to one, rows
+unconstrained, and satisfied $S^k = P$. Multiply one more copy of $S$
+onto that equation, once on each side: both products are $S^{k+1}$,
+so $SP = PS$. Now feed any distribution $p$ through both sides. The
+right side copies first and then erases, $P(Sp) = u$, the uniform
+distribution, no matter what $Sp$ was. The left side erases first and
+then copies once more, $S(Pp) = Su$. So $Su = u$: every stochastic
+root of $P$ fixes the uniform distribution of its own accord, rows
+summing to one and all. Bistochasticity is not a fence we built
+around the hunt. It is a property every candidate already has, and
+demanding it up front just names the terrain honestly.
 
 Before hunting, notice where the teeth of the problem are. Finding
 some matrix with $S^k = P$ is a linear-algebra exercise. The demand
@@ -235,7 +246,7 @@ write
 $$
 S = P + N,
 $$
-with $P$ the completely depolarising channel and $N$ whatever is left
+with $P$ the completely depolarizing channel and $N$ whatever is left
 over. Two facts about $P$ make this split pay off. It is idempotent,
 $P^2 = P$, and it absorbs $N$ from both sides, $PN = NP = 0$ (the columns
 of $N$ sum to zero because those of $S$ and $P$ both sum to one, and its
