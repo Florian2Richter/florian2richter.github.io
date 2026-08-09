@@ -10,9 +10,50 @@ figcaption,
   color: #555;
 }
 
-/* KaTeX display equations: a touch more breathing room */
+/* KaTeX display equations: a touch more breathing room, and wide
+   equations scroll inside their own box instead of stretching the
+   page sideways on narrow screens */
 .katex-display {
   margin: 1.2em 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.2em 0;
+}
+
+/* Post overview cards, after colah.github.io: white card, thin dark
+   border, the figure on top, a centred serif title underneath */
+.quarto-grid-item.card {
+  background: #fff;
+  border: 1px solid #2b2b2b;
+  border-radius: 10px;
+  transition: box-shadow 0.15s ease;
+}
+
+.quarto-grid-item.card:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+
+.quarto-grid-item img.thumbnail-image {
+  /* Quarto's listing CSS loads after this file and sets cover;
+     the two-panel figure must letterbox, not crop */
+  object-fit: contain !important;
+  padding: 1rem 1rem 0 1rem;
+  background: #fff;
+}
+
+.quarto-grid-item .card-body {
+  text-align: center;
+}
+
+.quarto-grid-item .card-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+  color: #222;
+}
+
+.quarto-grid-item a,
+.quarto-grid-item a:hover {
+  text-decoration: none;
 }
 
 /* Inline expandable asides: a claim stays in the text, the

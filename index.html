@@ -85,9 +85,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-image','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -200,11 +200,11 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -213,7 +213,7 @@ window.Quarto = {
 
 
 
-<div class="quarto-title-meta column-page-left">
+<div class="quarto-title-meta column-page">
 
     
   
@@ -229,119 +229,20 @@ window.Quarto = {
 
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1786270376246" data-listing-reading-time-sort="51" data-listing-word-count-sort="10046">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig1-state-space/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig1-state-space/interactive.html" class="no-external">
-Probability simplex over three outcomes, coloured by purity (blue-teal at the pure corners, fading to a soft blue-grey centre at the maximally mixed distribution p0, which…
-</a></div>
+<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-categories="cXVhbnR1bSUyQ2NoYW5uZWxzJTJDY2xpZmZvcmQlMkNmaW5pdGUtZmllbGRz" data-listing-date-sort="1786147200000" data-listing-file-modified-sort="1786288864109" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="310">
+<a href="./posts/clifford-roots/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/clifford-roots/figures/fig5-continuum-grid/continuum-grid-d2.svg" class="thumbnail-image card-img" style="height: 12rem;" alt="The Bloch ball with its three labelled axes beside the finite four-point label plane of a Clifford channel">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+How finely can you divide a depolarizing channel?
+</h5>
 </div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig1-state-space/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1786270376247" data-listing-reading-time-sort="6" data-listing-word-count-sort="1104">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig2-simplex-root/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig2-simplex-root/interactive.html" class="no-external">
-Animation of the square-root channel S on the probability simplex. A cloud of states, coloured by its red-green-blue mixture, is mapped by S onto a line segment (the 2D…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig2-simplex-root/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1786270376247" data-listing-reading-time-sort="23" data-listing-word-count-sort="4401">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig3-bloch-ball/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig3-bloch-ball/interactive.html" class="no-external">
-Interactive Bloch ball, the qubit state space. Click the front of the ball to pick a direction; the Purity slider moves the state from the pure surface inward toward the…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig3-bloch-ball/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-file-modified-sort="1786270376248" data-listing-reading-time-sort="19" data-listing-word-count-sort="3710">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig3b-bloch-root/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig3b-bloch-root/interactive.html" class="no-external">
-Animation of the maximal qubit root S on the Bloch ball. A cloud of Bloch vectors is driven by S to the maximally mixed centre I/2 in stages, each step shrinking and…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig3b-bloch-root/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-listing-file-modified-sort="1786270376248" data-listing-reading-time-sort="4" data-listing-word-count-sort="644">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig4-orbit-cycle/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig4-orbit-cycle/interactive.html" class="no-external">
-The eight nonzero labels of the three-by-three label plane, arranged on a ring in the order the matrix h visits them: (1,0), (0,1), (1,2), (2,2), (2,0), (0,2), (2,1), (1,1)…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig4-orbit-cycle/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-listing-file-modified-sort="1786270376249" data-listing-reading-time-sort="17" data-listing-word-count-sort="3271">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig5-continuum-grid/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig5-continuum-grid/interactive.html" class="no-external">
-Two panels. On the left, a Bloch ball, the continuum of qubit states, shaded by purity with a latitude and longitude wireframe, carrying three coloured coordinate axes: X =…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig5-continuum-grid/interactive.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-listing-file-modified-sort="1786270376249" data-listing-reading-time-sort="6" data-listing-word-count-sort="1127">
-<div class="thumbnail"><a href="./posts/clifford-roots/figures/fig6-clifford-bouquet/interactive.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<div class="delink listing-description"><a href="./posts/clifford-roots/figures/fig6-clifford-bouquet/interactive.html" class="no-external">
-A large, gently irregular convex blob, the nine-parameter continuum of unital qubit channels. Through the grey point P inside it, the completely depolarizing channel, runs a…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/clifford-roots/figures/fig6-clifford-bouquet/interactive.html" class="no-external">
-</a>
-</div>
+</div></a>
 </div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>

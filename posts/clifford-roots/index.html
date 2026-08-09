@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Florian Richter">
+<meta name="dcterms.date" content="2026-08-08">
 <meta name="description" content="Clifford channels are a tiny corner of the space of quantum channels, and yet they let you divide the most destructive channel of all into nearly as many discrete steps as the full quantum machinery allows. The room to do this lives in a surprising place.">
 
 <title>How finely can you divide a depolarizing channel? – Florian’s Blog</title>
@@ -75,7 +76,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<meta name="quarto:status" content="draft">
 
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -127,7 +127,7 @@ window.Quarto = {
 <body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -218,7 +218,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026-08-08 00:00</p>
+      <p class="date">2026-08-08</p>
     </div>
   </div>
   
@@ -233,6 +233,7 @@ window.Quarto = {
 <p>This post grew out of my diploma thesis in Quantum Information, which I wrote in Hannover in 2010. The thesis was about quantum memory channels, and in particular about how deep their memory runs. Somewhere inside that work a smaller, self-contained question fell out: how finely can you divide the most destructive process there is?</p>
 <p>The original is written for examiners, not for curious readers. LLMs have made rewriting an old piece of mathematics a far smaller job than it used to be, and I could not resist the temptation. So here is the result again, redone with agentic support: the terse notation of a thesis traded for pictures, worked examples, and a slower pace, so that a motivated undergraduate can follow every step.</p>
 <p>The route, roughly: devices with memory give the problem its physical face, the classical world gives a first answer, and the quantum world a quadratically bigger one. Finally, we settle into a small subclass of channels, simple enough to parameterize by hand, yet powerful enough that in prime dimensions it comes within a factor of two of the full quantum answer: the Clifford channels.</p>
+<p>Worth flagging in advance: the room for slow erasure does not come from the size of the space of quantum channels. It comes from a small plane with finitely many points that secretly knows how to multiply, and from a single matrix that drives every point of that plane, except the centre, around one grand cycle. A mirror symmetry cuts that cycle in half; that is the factor of two.</p>
 <p>Enjoy the read.</p>
 <hr>
 <!-- The body of this post is split into per-section partials so each
@@ -1219,6 +1220,7 @@ N \;\cong\;
     function showInitial(){buildAnim();renderFrame(0);showMode(true);}
     function animate(){
       if(running)return;running=true;showMode(true);
+      if(hint)hint.textContent='Tap to replay.';
       var t0=null;
       function frame(now){
         if(t0===null)t0=now;var t=now-t0;if(t>DUR)t=DUR;var i,st,c;
@@ -1231,13 +1233,25 @@ N \;\cong\;
       requestAnimationFrame(frame);
     }
 
+    var hint=root.querySelector('.anim-hint');
     var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(reduce){
       buildResting();showMode(false);
+      if(hint)hint.style.display='none';
     }else{
       showInitial();
       svg.style.cursor='pointer';
       svg.addEventListener('click',animate);
+      // Autoplay once when the figure first scrolls into view; taps replay.
+      if('IntersectionObserver' in window){
+        var seen=false;
+        var obs=new IntersectionObserver(function(entries){
+          for(var j=0;j<entries.length;j++){
+            if(entries[j].isIntersecting&&!seen){seen=true;obs.disconnect();animate();break;}
+          }
+        },{threshold:0.35});
+        obs.observe(svg);
+      }
     }
   }
   function init(){var rs=document.querySelectorAll('.trajectory-animated');for(var i=0;i<rs.length;i++)setup(rs[i]);}
@@ -1363,7 +1377,7 @@ Figure&nbsp;2: One square root <span class="math inline">S</span> of the <span c
     <div class="bl-slider-row">
       <span class="bl-slabel">Purity</span>
       <input type="range" min="0" max="1" step="0.01" value="1" data-bl="purity" aria-label="Purity of the state" disabled="">
-      <span class="bl-rval" data-bl="rval">r = —</span>
+      <span class="bl-rval" data-bl="rval">r = ?</span>
     </div>
     <p class="bl-say" data-bl="say">Pick a direction on the ball to read off the one measurement it answers with certainty.</p>
   </div>
@@ -1449,7 +1463,7 @@ Figure&nbsp;2: One square root <span class="math inline">S</span> of the <span c
     function reset() {
       dir = null; rVal = 1;
       clearLayer();
-      slider.disabled = true; slider.value = 1; rvalEl.textContent = 'r = —';
+      slider.disabled = true; slider.value = 1; rvalEl.textContent = 'r = ?';
       hint.textContent = 'click the front of the ball'; hint.classList.remove('is-set');
       say();
     }
@@ -1681,7 +1695,9 @@ k \;\leq\; d^2 - 1.
     // Rest on the initial state: a fresh, uncollapsed cloud at t=0.
     function showInitial(){buildAnim();renderFrame(0);showMode(true);}
     function animate(){
-      if(running)return;running=true;showMode(true);var t0=null;
+      if(running)return;running=true;showMode(true);
+      if(hint)hint.textContent='Tap to replay.';
+      var t0=null;
       function frame(now){if(t0===null)t0=now;var t=now-t0;if(t>DUR)t=DUR;var i,st,pr;
         for(i=0;i<cloud.length;i++){st=stateAt(cloud[i].s,t);pr=project(st);cloud[i].dot.setAttribute('cx',pr[0]);cloud[i].dot.setAttribute('cy',pr[1]);cloud[i].dot.setAttribute('fill',colof(st));cloud[i].dot.setAttribute('fill-opacity',frontOp(pr[2]).toFixed(3));}
         for(i=0;i<hl.length;i++){st=stateAt(hl[i].o,t);pr=project(st);hl[i].path.push(pr[0]+','+pr[1]);hl[i].trail.setAttribute('points',hl[i].path.join(' '));hl[i].dot.setAttribute('cx',pr[0]);hl[i].dot.setAttribute('cy',pr[1]);}
@@ -1691,13 +1707,25 @@ k \;\leq\; d^2 - 1.
       requestAnimationFrame(frame);
     }
 
+    var hint=root.querySelector('.bl-hint');
     var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(reduce){
       buildResting();showMode(false);
+      if(hint)hint.style.display='none';
     }else{
       showInitial();
       svg.style.cursor='pointer';
       svg.addEventListener('click',animate);
+      // Autoplay once when the figure first scrolls into view; taps replay.
+      if('IntersectionObserver' in window){
+        var seen=false;
+        var obs=new IntersectionObserver(function(entries){
+          for(var j=0;j<entries.length;j++){
+            if(entries[j].isIntersecting&&!seen){seen=true;obs.disconnect();animate();break;}
+          }
+        },{threshold:0.35});
+        obs.observe(svg);
+      }
     }
   }
   function init(){var rs=document.querySelectorAll('.bloch-root-animated');for(var i=0;i<rs.length;i++)setup(rs[i]);}
