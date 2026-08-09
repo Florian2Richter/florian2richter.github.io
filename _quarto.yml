@@ -5,6 +5,9 @@ project:
     - "index.qmd"
     - "about.qmd"
     - "posts/**/*.qmd"
+    # Figure partials are included into the posts, never pages of
+    # their own; keep them out of the render (and the listing).
+    - "!posts/**/figures/**"
 
 website:
   draft-mode: unlinked

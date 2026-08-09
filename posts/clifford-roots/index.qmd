@@ -3,9 +3,10 @@ title: "How finely can you divide a depolarizing channel?"
 description: "Clifford channels are a tiny corner of the space of quantum channels, and yet they let you divide the most destructive channel of all into nearly as many discrete steps as the full quantum machinery allows. The room to do this lives in a surprising place."
 author: "Florian Richter"
 date: "2026-08-08"
-date-format: "YYYY-MM-DD HH:mm"
+date-format: "YYYY-MM-DD"
 categories: [quantum, channels, clifford, finite-fields]
-draft: true
+image: figures/fig5-continuum-grid/continuum-grid-d2.svg
+image-alt: "The Bloch ball with its three labelled axes beside the finite four-point label plane of a Clifford channel"
 format:
   html:
     toc: true
@@ -33,6 +34,13 @@ quantum world a quadratically bigger one. Finally, we settle into a
 small subclass of channels, simple enough to parameterize by hand,
 yet powerful enough that in prime dimensions it comes within a
 factor of two of the full quantum answer: the Clifford channels.
+
+Worth flagging in advance: the room for slow erasure does not come
+from the size of the space of quantum channels. It comes from a
+small plane with finitely many points that secretly knows how to
+multiply, and from a single matrix that drives every point of that
+plane, except the centre, around one grand cycle. A mirror symmetry
+cuts that cycle in half; that is the factor of two.
 
 Enjoy the read.
 

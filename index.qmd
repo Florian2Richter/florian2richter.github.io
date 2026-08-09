@@ -2,9 +2,11 @@
 title: "Florian's Blog"
 listing:
   contents: posts
-  type: default
+  type: grid
+  grid-columns: 3
+  fields: [image, title]
+  image-height: "12rem"
   sort: "date desc"
-  categories: true
   feed: true
 page-layout: full
 title-block-banner: false
