@@ -280,8 +280,9 @@ which is the ring drawn in @fig-orbit. An element like $g$, whose
 powers exhaust every nonzero element, is called a *generator*, its
 minimal polynomial $x^2 + x + 2$ is called a *primitive polynomial*,
 and the matrix $h$ built from it is that polynomial's *companion
-matrix*. Generators exist for every prime $d$, not just $d = 3$
-(aside), so a grand cycle of length $d^2 - 1$ is always available.
+matrix*. Generators exist for every prime $d$, not just $d = 3$, and
+the aside below proves it from scratch, so a grand cycle of length
+$d^2 - 1$ is always available.
 
 ::: {#fig-orbit}
 
@@ -305,45 +306,125 @@ $(d^2-1)/2$ bound, drawn.
 <summary>Primitive polynomials and the single long cycle</summary>
 ```
 
-Two facts from algebra stand behind the construction, both classical.
+Two facts from algebra stand behind the construction: a quadratic
+with no root always exists, so that a field with $d^2$ elements can
+be built at all, and the nonzero elements of that field form a
+single multiplicative cycle, so that a generator exists. Both are
+classical.[^finite-fields] Neither needs to be taken on faith: this
+aside proves both, with a pencil, from things the post already uses.
 
-First, the quotient construction: if a quadratic polynomial has no
-root over a field, adjoining a formal root produces a field with
-$d^2$ elements, by exactly the argument that makes the complex
-numbers a field. (For a quadratic, "no root" is the same as "does
-not factor", so no product of two nonzero expressions can reduce to
-zero.)
+*A rootless quadratic exists.* Square every nonzero element of
+$\mathbb{F}_d$. The elements $a$ and $-a$ always land on the same
+square, and for odd $d$ they are genuinely different elements, so
+squaring is two-to-one: at most $\tfrac{d-1}{2}$ of the $d - 1$
+nonzero values are squares. Non-squares exist. Pick one, call it
+$s$, and the quadratic $x^2 - s$ has no root, by the very meaning of
+"non-square". Two things are worth savoring here. This is exactly
+how the complex numbers arise: $-1$ is a non-square of the reals,
+and $i$ is the adjoined root of $x^2 + 1$. And look at which fact
+did the work. "$a \neq -a$ for odd $d$" is the mirror fact, the same
+arithmetic that will shortly force zeros of $\lambda$ to come in
+genuine mirror pairs. The odd-$d$ arithmetic that halves the
+achievable order is also the arithmetic that guarantees the label
+plane can multiply. (At $d = 2$ every element is its own negative,
+squaring is one-to-one, and the non-square well is dry; there the
+lone irreducible quadratic $x^2 + x + 1$ is checked by hand, since
+neither $0$ nor $1$ is a root.)
 
-Second, cyclicity: the nonzero elements of *any* finite field form a
-single multiplicative cycle. That is, some element $g$ exists whose
-powers run through all of them. This is a genuinely substantive
-theorem, the *cyclicity of the multiplicative group of a finite
-field*, a classical result from the era of Lagrange and Gauss that
-every abstract algebra course still proves.[^finite-fields] The
-crucial input is a root-counting bound: a polynomial equation of
-degree $m$, here $x^m = 1$, can have at most $m$ solutions over a
-field, and that scarcity of roots forces the multiplicative group to
-be as undivided as possible. For $d$ prime and the field
-$\mathbb{F}_{d^2}$ it hands us an element of order $d^2 - 1$ on a
-plate.
+*Adjoining the root gives a field.* The pairs $a + b\,g$, with every
+$g^2$ that appears reduced by the quadratic's rule, add and multiply
+like ordinary numbers, and "no root" is the same as "does not
+factor" for a quadratic, so no product of two nonzero expressions
+can reduce to zero. Inverses then come from finiteness for free:
+multiplying the $d^2 - 1$ nonzero expressions by a fixed nonzero one
+is injective (nothing collapses to zero), and an injective
+reshuffling of a finite set hits everything, including $1$. So every
+nonzero expression has an inverse, and the $d^2$ expressions form
+the field $\mathbb{F}_{d^2}$.
 
-[^finite-fields]: The standard modern reference is R. Lidl and
-H. Niederreiter, *Finite Fields*, Cambridge University Press;
-chapter 2 covers the structure of finite fields, including the
-cyclicity of the multiplicative group and primitive polynomials. The
-prime-field case, the existence of primitive roots modulo a prime,
-is proved in Gauss's *Disquisitiones Arithmeticae* (1801), and the
-root-counting bound behind it goes back to Lagrange.
+*Every nonzero element is a root of $x^n = 1$, where $n = d^2 - 1$.*
+Fix a nonzero $x$ and multiply every nonzero element by it. That map
+is injective, so it merely reshuffles the $n$ nonzero elements.
+Multiply all $n$ of them together, before and after the reshuffle:
+as a set the product is unchanged, but factor by factor it has
+picked up $x$ exactly $n$ times. So $x^n$ times the product equals
+the product, and cancelling the nonzero product leaves $x^n = 1$.
+The *order* of $x$, the first exponent at which its powers return to
+$1$, then divides $n$: write $n = qe + r$ with $0 \le r < e$, and
+$1 = x^n = (x^e)^q\, x^r = x^r$ forces $r = 0$.
 
-A *primitive polynomial* is the minimal polynomial of such a
-generator, and its companion matrix is the multiplication-by-$g$ map
-in the coordinates $(a, b) \leftrightarrow a + b\,g$, which is why
-the matrix has order $d^2 - 1$: its powers track the powers of $g$.
+*Root scarcity.* A polynomial of degree $m$ has at most $m$ roots
+over a field. A root $a$ can be divided out: dividing by $x - a$
+leaves a constant remainder, and evaluating at $a$ shows that
+remainder to be zero, so the polynomial is $(x - a)$ times something
+of degree $m - 1$. In a field a product vanishes only if a factor
+does, so every further root is a root of the quotient, and the
+degrees run out after $m$ steps. In particular $x^e = 1$ has at most
+$e$ solutions.
+
+*Elements of equal order come in batches.* Suppose some element $a$
+has order $e$. Its powers $1, a, \ldots, a^{e-1}$ are $e$ distinct
+solutions of $x^e = 1$, and scarcity says they are *all* the
+solutions. Any element of order $e$ solves that equation, so it is
+one of these powers. Which powers have order exactly $e$? Precisely
+the $a^k$ whose exponent shares no factor with $e$: a shared factor
+$t > 1$ gives the early return $(a^k)^{e/t} = (a^e)^{k/t} = 1$,
+while if $k$ shares no factor with $e$, then $(a^k)^m = 1$ means $e$
+divides $km$, and with nothing to find in $k$, all of $e$ must
+divide $m$: the first return is at $m = e$. The count of such
+exponents is written $\varphi(e)$, Euler's function. So for every
+divisor $e$ of $n$, the elements of order $e$ number either zero or
+exactly $\varphi(e)$, never anything else.
+
+*The batches must all be full.* Here is the counting identity that
+closes the trap:
+$$
+\sum_{e \mid n} \varphi(e) \;=\; n .
+$$
+To see it, write the $n$ fractions
+$\tfrac1n, \tfrac2n, \ldots, \tfrac nn$ and reduce each to lowest
+terms. Every reduced denominator is a divisor $e$ of $n$; the
+reduced fractions with denominator $e$ are exactly the $\varphi(e)$
+fractions $\tfrac ke$ with $k$ sharing no factor with $e$; and each
+arises from exactly one fraction on the original list. Counting the
+list both ways proves the identity. Now sort the $n$ nonzero field
+elements into batches by their order, which is always a divisor of
+$n$. Each batch holds at most $\varphi(e)$ elements, and the
+capacities $\varphi(e)$ sum to exactly $n$, the number of elements
+to be sorted. There is no slack: every batch is full. In particular
+the batch $e = n$ is not empty, and an element of order
+$n = d^2 - 1$ exists. That is the generator, and root scarcity did
+all the pushing: $x^e = 1$ has too few solutions for the group to
+splinter, so it stays in one cycle.
+
+*From generator to matrix.* A generator $g$ cannot lie in the base
+field: nonzero elements of $\mathbb{F}_d$ satisfy $x^{d-1} = 1$ (the
+same reshuffling trick, run inside $\mathbb{F}_d$), and $g$'s order
+$d^2 - 1$ is larger than $d - 1$. So $1$ and $g$ are linearly
+independent over $\mathbb{F}_d$, they span the plane, and $1, g,
+g^2$ must be linearly dependent: $g$ satisfies a monic quadratic
+with coefficients in $\mathbb{F}_d$ (the $g^2$ coefficient cannot
+vanish, or $1$ and $g$ would already be dependent), irreducible
+because a factorization would hand $g$ a linear equation and put it
+in the base field. That quadratic is the *primitive polynomial*, and
+its companion matrix is the multiplication-by-$g$ map in the
+coordinates $(a, b) \leftrightarrow a + b\,g$, which is why the
+matrix has order $d^2 - 1$: its powers track the powers of $g$.
+
 For the worked example none of this machinery was needed on faith:
 $x^2 + x + 2$ was checked to be irreducible by trying all three
 arguments, and $g$ was checked to be a generator by computing
 $g^4 = -1 \neq 1$, which rules out every proper divisor of $8$ as
 its order.
+
+[^finite-fields]: The textbook road through everything in this aside
+is R. Lidl and H. Niederreiter, *Finite Fields*, Cambridge
+University Press; chapter 2 covers the structure of finite fields,
+including the cyclicity of the multiplicative group and primitive
+polynomials. The prime-field case, the existence of primitive roots
+modulo a prime, is proved in Gauss's *Disquisitiones Arithmeticae*
+(1801), and the root-counting bound goes back to Lagrange. The
+proofs given here are the classical ones, retold.
 
 ```{=html}
 </details>
