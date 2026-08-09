@@ -431,7 +431,7 @@ no longer remembers which skeleton moved it.
 You have seen this channel before. On Bloch vectors it sends
 $(r_1, r_2, r_3)$ to $(r_2/2,\; r_3/2,\; 0)$, which is the
 three-step eraser of @fig-bloch-root, the one the previous section
-produced without explanation. Its z, then y, then x stages are
+produced without explanation. Its $z$, then $y$, then $x$ stages are
 nothing but the walk around the cycle, one axis per step, and the
 cycle itself is the very one drawn on the right panel of
 @fig-clifford-grid. What arrived last section as a rabbit from a hat

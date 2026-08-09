@@ -35,16 +35,8 @@ step.
 The route, roughly: devices with memory give the problem its
 physical face, the classical world gives a first answer, and the
 quantum world a quadratically bigger one. Finally, we settle into a
-small subclass of channels, simple enough to parameterize by hand,
-yet powerful enough that in prime dimensions it comes within a
+small subclass of all possible channels, simple enough to parameterize by hand, yet powerful enough that in prime dimensions it comes within a
 factor of two of the full quantum answer: the Clifford channels.
-
-Worth flagging in advance: the room for slow erasure does not come
-from the size of the space of quantum channels. It comes from a
-small plane with finitely many points that secretly knows how to
-multiply, and from a single matrix that drives every point of that
-plane, except the centre, around one grand cycle. A mirror symmetry
-cuts that cycle in half; that is the factor of two.
 
 Enjoy the read.
 

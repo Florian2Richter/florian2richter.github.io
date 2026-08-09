@@ -188,7 +188,7 @@ moment.) Only one word of the checklist is genuinely new. The
 positivity demand sharpens to *complete positivity*: the map must
 keep sending valid states to valid states even when it acts on only
 part of a larger entangled system, a failure mode classical
-probability simply does not have. Channels are well understood objects with a clean
+probability simply does not have. Channels are well-understood objects with a clean
 structure theory.[^channels] For us they are simply the right notion of
 "physically allowed operation," and we will not pry them open.
 

@@ -86,6 +86,7 @@ copier to a tightly constrained, low-parameter family of operations, a
 family with vastly less freedom than the general quantum case, and you
 might expect the bound to drop most of the way back down.
 
-It almost doesn't. The factor-of-2 gap that remains is the punchline.
-The reason it remains is a piece of finite-field bookkeeping that is,
-if you sit with it, unreasonably beautiful.
+It almost doesn't. The constrained family gives up a factor of two,
+and nothing more. Why so little freedom costs so little is the most
+instructive part of the whole story, and the answer sits in the
+structure of finite fields and how they are represented by matrices.
