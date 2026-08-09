@@ -15,6 +15,9 @@ website:
   description: "Notes on quantum information, Clifford channels, and the corners of math that make them tick."
   site-url: "https://florian2richter.github.io"
   repo-url: "https://github.com/Florian2Richter/florian2richter.github.io"
+  open-graph: true
+  twitter-card:
+    card-style: summary_large_image
   navbar:
     background: dark
     left:

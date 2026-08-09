@@ -7,6 +7,10 @@ date-format: "YYYY-MM-DD"
 categories: [quantum, channels, clifford, finite-fields]
 image: figures/teaser-art/clifford-teaser-card.png
 image-alt: "Thousands of faint teal chords trace Bloch vectors spiralling into a glowing grey core inside a dark sphere silhouette"
+open-graph:
+  image: figures/teaser-art/clifford-teaser-og.png
+twitter-card:
+  image: figures/teaser-art/clifford-teaser-og.png
 format:
   html:
     toc: true
