@@ -1242,16 +1242,6 @@ N \;\cong\;
       showInitial();
       svg.style.cursor='pointer';
       svg.addEventListener('click',animate);
-      // Autoplay once when the figure first scrolls into view; taps replay.
-      if('IntersectionObserver' in window){
-        var seen=false;
-        var obs=new IntersectionObserver(function(entries){
-          for(var j=0;j<entries.length;j++){
-            if(entries[j].isIntersecting&&!seen){seen=true;obs.disconnect();animate();break;}
-          }
-        },{threshold:0.35});
-        obs.observe(svg);
-      }
     }
   }
   function init(){var rs=document.querySelectorAll('.trajectory-animated');for(var i=0;i<rs.length;i++)setup(rs[i]);}
@@ -1261,7 +1251,7 @@ N \;\cong\;
 </script>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-root-d3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: One square root <span class="math inline">S</span> of the <span class="math inline">d = 3</span> bistochastic CDC (others exist), animated on the simplex. A cloud of states, coloured by its red-green-blue mixture, is sent to the centre in two equal steps: one application of <span class="math inline">S</span> collapses the filled triangle onto a line segment, a second collapses that segment onto the grey maximally mixed centre <span class="math inline">p_0</span>, since <span class="math inline">S^2 = P</span>, and the colours drain toward grey as it goes. The three pure corners trace highlighted paths; <span class="math inline">e_1</span> and <span class="math inline">e_2</span> land on the same intermediate point <span class="math inline">Se_1 = Se_2</span>, the merge that erases information in a stage. The animation plays once when it scrolls into view; tap to replay.
+Figure&nbsp;2: One square root <span class="math inline">S</span> of the <span class="math inline">d = 3</span> bistochastic CDC (others exist), animated on the simplex. A cloud of states, coloured by its red-green-blue mixture, is sent to the centre in two equal steps: one application of <span class="math inline">S</span> collapses the filled triangle onto a line segment, a second collapses that segment onto the grey maximally mixed centre <span class="math inline">p_0</span>, since <span class="math inline">S^2 = P</span>, and the colours drain toward grey as it goes. The three pure corners trace highlighted paths; <span class="math inline">e_1</span> and <span class="math inline">e_2</span> land on the same intermediate point <span class="math inline">Se_1 = Se_2</span>, the merge that erases information in a stage. Tap the figure to play the animation.
 </figcaption>
 </figure>
 </div>
@@ -1716,16 +1706,6 @@ k \;\leq\; d^2 - 1.
       showInitial();
       svg.style.cursor='pointer';
       svg.addEventListener('click',animate);
-      // Autoplay once when the figure first scrolls into view; taps replay.
-      if('IntersectionObserver' in window){
-        var seen=false;
-        var obs=new IntersectionObserver(function(entries){
-          for(var j=0;j<entries.length;j++){
-            if(entries[j].isIntersecting&&!seen){seen=true;obs.disconnect();animate();break;}
-          }
-        },{threshold:0.35});
-        obs.observe(svg);
-      }
     }
   }
   function init(){var rs=document.querySelectorAll('.bloch-root-animated');for(var i=0;i<rs.length;i++)setup(rs[i]);}
@@ -1735,7 +1715,7 @@ k \;\leq\; d^2 - 1.
 </script>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bloch-root-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: A maximal qubit root <span class="math inline">S</span> acting on the Bloch ball (others exist). It sends a Bloch vector <span class="math inline">(r_1, r_2, r_3)</span> to <span class="math inline">(r_2/2,\, r_3/2,\, 0)</span>, driving every state to the centre <span class="math inline">I/2</span> in at most three steps, and the <span class="math inline">z</span>-pole takes all three, realizing the order-3 bound (<span class="math inline">d^2 - 1 = 3</span> at <span class="math inline">d = 2</span>). As with the classical square root in <a href="#fig-root-d3" class="quarto-xref">Figure&nbsp;2</a>, erasure happens in stages: each step both shrinks the vector and rotates it onto the next axis. Directions already in the channel’s kernel (here the <span class="math inline">x</span>-axis) collapse sooner; the slowest direction sets the order. The animation drives a whole cloud of Bloch vectors to <span class="math inline">I/2</span> through these stages and picks out the three axis orbits (the blue <span class="math inline">z</span>-pole is the hero that takes all three steps); it plays once when it scrolls into view, and you can tap to replay.
+Figure&nbsp;4: A maximal qubit root <span class="math inline">S</span> acting on the Bloch ball (others exist). It sends a Bloch vector <span class="math inline">(r_1, r_2, r_3)</span> to <span class="math inline">(r_2/2,\, r_3/2,\, 0)</span>, driving every state to the centre <span class="math inline">I/2</span> in at most three steps, and the <span class="math inline">z</span>-pole takes all three, realizing the order-3 bound (<span class="math inline">d^2 - 1 = 3</span> at <span class="math inline">d = 2</span>). As with the classical square root in <a href="#fig-root-d3" class="quarto-xref">Figure&nbsp;2</a>, erasure happens in stages: each step both shrinks the vector and rotates it onto the next axis. Directions already in the channel’s kernel (here the <span class="math inline">x</span>-axis) collapse sooner; the slowest direction sets the order. The animation drives a whole cloud of Bloch vectors to <span class="math inline">I/2</span> through these stages and picks out the three axis orbits (the blue <span class="math inline">z</span>-pole is the hero that takes all three steps); tap the figure to play it.
 </figcaption>
 </figure>
 </div>

@@ -984,16 +984,6 @@ Figure&nbsp;1: The classical state space for three outcomes: the probability sim
       showInitial();
       svg.style.cursor='pointer';
       svg.addEventListener('click',animate);
-      // Autoplay once when the figure first scrolls into view; taps replay.
-      if('IntersectionObserver' in window){
-        var seen=false;
-        var obs=new IntersectionObserver(function(entries){
-          for(var j=0;j<entries.length;j++){
-            if(entries[j].isIntersecting&&!seen){seen=true;obs.disconnect();animate();break;}
-          }
-        },{threshold:0.35});
-        obs.observe(svg);
-      }
     }
   }
   function init(){var rs=document.querySelectorAll('.trajectory-animated');for(var i=0;i<rs.length;i++)setup(rs[i]);}
@@ -1003,7 +993,7 @@ Figure&nbsp;1: The classical state space for three outcomes: the probability sim
 </script>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-root-d3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: One square root <img src="https://latex.codecogs.com/png.latex?S"> of the <img src="https://latex.codecogs.com/png.latex?d%20=%203"> bistochastic CDC (others exist), animated on the simplex. A cloud of states, coloured by its red-green-blue mixture, is sent to the centre in two equal steps: one application of <img src="https://latex.codecogs.com/png.latex?S"> collapses the filled triangle onto a line segment, a second collapses that segment onto the grey maximally mixed centre <img src="https://latex.codecogs.com/png.latex?p_0">, since <img src="https://latex.codecogs.com/png.latex?S%5E2%20=%20P">, and the colours drain toward grey as it goes. The three pure corners trace highlighted paths; <img src="https://latex.codecogs.com/png.latex?e_1"> and <img src="https://latex.codecogs.com/png.latex?e_2"> land on the same intermediate point <img src="https://latex.codecogs.com/png.latex?Se_1%20=%20Se_2">, the merge that erases information in a stage. The animation plays once when it scrolls into view; tap to replay.
+Figure&nbsp;2: One square root <img src="https://latex.codecogs.com/png.latex?S"> of the <img src="https://latex.codecogs.com/png.latex?d%20=%203"> bistochastic CDC (others exist), animated on the simplex. A cloud of states, coloured by its red-green-blue mixture, is sent to the centre in two equal steps: one application of <img src="https://latex.codecogs.com/png.latex?S"> collapses the filled triangle onto a line segment, a second collapses that segment onto the grey maximally mixed centre <img src="https://latex.codecogs.com/png.latex?p_0">, since <img src="https://latex.codecogs.com/png.latex?S%5E2%20=%20P">, and the colours drain toward grey as it goes. The three pure corners trace highlighted paths; <img src="https://latex.codecogs.com/png.latex?e_1"> and <img src="https://latex.codecogs.com/png.latex?e_2"> land on the same intermediate point <img src="https://latex.codecogs.com/png.latex?Se_1%20=%20Se_2">, the merge that erases information in a stage. Tap the figure to play the animation.
 </figcaption>
 </figure>
 </div>
@@ -1443,16 +1433,6 @@ Figure&nbsp;3: The Bloch ball, the state space of a single qubit: pure states li
       showInitial();
       svg.style.cursor='pointer';
       svg.addEventListener('click',animate);
-      // Autoplay once when the figure first scrolls into view; taps replay.
-      if('IntersectionObserver' in window){
-        var seen=false;
-        var obs=new IntersectionObserver(function(entries){
-          for(var j=0;j<entries.length;j++){
-            if(entries[j].isIntersecting&&!seen){seen=true;obs.disconnect();animate();break;}
-          }
-        },{threshold:0.35});
-        obs.observe(svg);
-      }
     }
   }
   function init(){var rs=document.querySelectorAll('.bloch-root-animated');for(var i=0;i<rs.length;i++)setup(rs[i]);}
@@ -1462,7 +1442,7 @@ Figure&nbsp;3: The Bloch ball, the state space of a single qubit: pure states li
 </script>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bloch-root-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: A maximal qubit root <img src="https://latex.codecogs.com/png.latex?S"> acting on the Bloch ball (others exist). It sends a Bloch vector <img src="https://latex.codecogs.com/png.latex?(r_1,%20r_2,%20r_3)"> to <img src="https://latex.codecogs.com/png.latex?(r_2/2,%5C,%20r_3/2,%5C,%200)">, driving every state to the centre <img src="https://latex.codecogs.com/png.latex?I/2"> in at most three steps, and the <img src="https://latex.codecogs.com/png.latex?z">-pole takes all three, realizing the order-3 bound (<img src="https://latex.codecogs.com/png.latex?d%5E2%20-%201%20=%203"> at <img src="https://latex.codecogs.com/png.latex?d%20=%202">). As with the classical square root in Figure&nbsp;2, erasure happens in stages: each step both shrinks the vector and rotates it onto the next axis. Directions already in the channel’s kernel (here the <img src="https://latex.codecogs.com/png.latex?x">-axis) collapse sooner; the slowest direction sets the order. The animation drives a whole cloud of Bloch vectors to <img src="https://latex.codecogs.com/png.latex?I/2"> through these stages and picks out the three axis orbits (the blue <img src="https://latex.codecogs.com/png.latex?z">-pole is the hero that takes all three steps); it plays once when it scrolls into view, and you can tap to replay.
+Figure&nbsp;4: A maximal qubit root <img src="https://latex.codecogs.com/png.latex?S"> acting on the Bloch ball (others exist). It sends a Bloch vector <img src="https://latex.codecogs.com/png.latex?(r_1,%20r_2,%20r_3)"> to <img src="https://latex.codecogs.com/png.latex?(r_2/2,%5C,%20r_3/2,%5C,%200)">, driving every state to the centre <img src="https://latex.codecogs.com/png.latex?I/2"> in at most three steps, and the <img src="https://latex.codecogs.com/png.latex?z">-pole takes all three, realizing the order-3 bound (<img src="https://latex.codecogs.com/png.latex?d%5E2%20-%201%20=%203"> at <img src="https://latex.codecogs.com/png.latex?d%20=%202">). As with the classical square root in Figure&nbsp;2, erasure happens in stages: each step both shrinks the vector and rotates it onto the next axis. Directions already in the channel’s kernel (here the <img src="https://latex.codecogs.com/png.latex?x">-axis) collapse sooner; the slowest direction sets the order. The animation drives a whole cloud of Bloch vectors to <img src="https://latex.codecogs.com/png.latex?I/2"> through these stages and picks out the three axis orbits (the blue <img src="https://latex.codecogs.com/png.latex?z">-pole is the hero that takes all three steps); tap the figure to play it.
 </figcaption>
 </figure>
 </div>
