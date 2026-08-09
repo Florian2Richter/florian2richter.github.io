@@ -5,8 +5,8 @@ author: "Florian Richter"
 date: "2026-08-08"
 date-format: "YYYY-MM-DD"
 categories: [quantum, channels, clifford, finite-fields]
-image: figures/fig5-continuum-grid/continuum-grid-d2.svg
-image-alt: "The Bloch ball with its three labelled axes beside the finite four-point label plane of a Clifford channel"
+image: figures/teaser-art/clifford-teaser-card.png
+image-alt: "Thousands of faint teal chords trace Bloch vectors spiralling into a glowing grey core inside a dark sphere silhouette"
 format:
   html:
     toc: true

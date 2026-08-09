@@ -34,11 +34,9 @@ figcaption,
 }
 
 .quarto-grid-item img.thumbnail-image {
-  /* Quarto's listing CSS loads after this file and sets cover;
-     the two-panel figure must letterbox, not crop */
-  object-fit: contain !important;
-  padding: 1rem 1rem 0 1rem;
-  background: #fff;
+  /* The teaser artwork has a uniform dark ground, so it fills the
+     image box edge to edge; only the card's top corners round it */
+  border-radius: 9px 9px 0 0;
 }
 
 .quarto-grid-item .card-body {
