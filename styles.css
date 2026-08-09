@@ -10,9 +10,14 @@ figcaption,
   color: #555;
 }
 
-/* KaTeX display equations: a touch more breathing room */
+/* KaTeX display equations: a touch more breathing room, and wide
+   equations scroll inside their own box instead of stretching the
+   page sideways on narrow screens */
 .katex-display {
   margin: 1.2em 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.2em 0;
 }
 
 /* Inline expandable asides: a claim stays in the text, the

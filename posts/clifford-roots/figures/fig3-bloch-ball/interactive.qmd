@@ -99,7 +99,7 @@
     <div class="bl-slider-row">
       <span class="bl-slabel">Purity</span>
       <input type="range" min="0" max="1" step="0.01" value="1" data-bl="purity" aria-label="Purity of the state" disabled>
-      <span class="bl-rval" data-bl="rval">r = &#8212;</span>
+      <span class="bl-rval" data-bl="rval">r = ?</span>
     </div>
     <p class="bl-say" data-bl="say">Pick a direction on the ball to read off the one measurement it answers with certainty.</p>
   </div>
@@ -185,7 +185,7 @@
     function reset() {
       dir = null; rVal = 1;
       clearLayer();
-      slider.disabled = true; slider.value = 1; rvalEl.textContent = 'r = —';
+      slider.disabled = true; slider.value = 1; rvalEl.textContent = 'r = ?';
       hint.textContent = 'click the front of the ball'; hint.classList.remove('is-set');
       say();
     }

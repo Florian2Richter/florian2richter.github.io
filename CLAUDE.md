@@ -9,7 +9,8 @@ post on Clifford channels as finite roots of the depolarizing channel.
 - **Static site, built with Quarto.** Source files are `.qmd`. Generated
   HTML goes to `docs/`, served by GitHub Pages via the `gh-pages`
   branch (deployed by `.github/workflows/publish.yml`).
-- **Math rendering** is MathJax (Quarto default).
+- **Math rendering** is KaTeX (`html-math-method: katex` in
+  `_quarto.yml`).
 - **The current post in progress** is `posts/clifford-roots/index.qmd`,
   working title *"How finely can you divide a depolarizing channel?"*.
 - **`PROJECT.md`** at the repo root is the original project brief:
