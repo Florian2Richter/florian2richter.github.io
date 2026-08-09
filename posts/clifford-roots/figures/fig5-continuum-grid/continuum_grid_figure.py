@@ -237,6 +237,7 @@ def build_svg():
     parts.append(
         f'<?xml version="1.0" encoding="UTF-8"?>\n'
         f'<svg xmlns="http://www.w3.org/2000/svg" '
+        f'width="{width}" height="{height}" '
         f'viewBox="0 0 {width} {height}" '
         f'font-family="{FONT_FAMILY}" '
         f'role="img" aria-label="Left: the continuum of qubit states with three '

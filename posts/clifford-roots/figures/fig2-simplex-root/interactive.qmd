@@ -146,16 +146,6 @@
       showInitial();
       svg.style.cursor='pointer';
       svg.addEventListener('click',animate);
-      // Autoplay once when the figure first scrolls into view; taps replay.
-      if('IntersectionObserver' in window){
-        var seen=false;
-        var obs=new IntersectionObserver(function(entries){
-          for(var j=0;j<entries.length;j++){
-            if(entries[j].isIntersecting&&!seen){seen=true;obs.disconnect();animate();break;}
-          }
-        },{threshold:0.35});
-        obs.observe(svg);
-      }
     }
   }
   function init(){var rs=document.querySelectorAll('.trajectory-animated');for(var i=0;i<rs.length;i++)setup(rs[i]);}

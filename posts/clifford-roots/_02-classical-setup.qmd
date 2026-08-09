@@ -377,8 +377,8 @@ $S$ collapses the filled triangle onto a line segment, a second collapses
 that segment onto the grey maximally mixed centre $p_0$, since $S^2 = P$,
 and the colours drain toward grey as it goes. The three pure corners
 trace highlighted paths; $e_1$ and $e_2$ land on the same intermediate
-point $Se_1 = Se_2$, the merge that erases information in a stage. The
-animation plays once when it scrolls into view; tap to replay.
+point $Se_1 = Se_2$, the merge that erases information in a stage. Tap
+the figure to play the animation.
 
 :::
 
