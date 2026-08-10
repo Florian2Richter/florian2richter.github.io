@@ -195,7 +195,8 @@ Spelled out: apply the copier $S$ exactly $k$ times and you get $P$,
 total erasure; apply it any smaller number of times and the erasure
 has not happened yet. The first equation is the whole post in
 miniature, a single copier that erases totally in $k$ identical
-steps; the second pins $k$ down as the *exact* number. Everything
+steps; the second pins $k$ down as the *exact* number, and that
+exact $k$ is called the *order* of the root. Everything
 from here on is the hunt for such an $S$ with $k$ as large as
 possible, and the difficulty (and the beauty) is finding a
 *non-trivial* one, an $S$ that is not simply $P$ itself.

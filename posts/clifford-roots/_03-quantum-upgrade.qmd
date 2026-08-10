@@ -224,9 +224,10 @@ restriction on the hunt but a property every candidate brings along.
 Here is where that quadratic shows up where it counts. Ask the same
 question as in the classical case: how large can $k$ be, if a channel
 $S$ satisfies $S^k = P$ but no smaller power does? The argument has the
-same skeleton. The quantum CDC is again a rank-one map: it sends the
-entire space of traceless operators, the directions away from the
-maximally mixed state, to zero. Any $S$ powering to it must carry a
+same skeleton. The quantum CDC is again a rank-one map, rank one as
+a linear map on the $d^2$-dimensional space of operators: it sends
+the entire space of traceless operators, the directions away from
+the maximally mixed state, to zero. Any $S$ powering to it must carry a
 *nilpotent* part on that space, and a single nilpotent block on a space
 of dimension $D$ takes at most $D$ steps to wind down. Only now
 $D = d^2 - 1$ rather than $d - 1$, so
@@ -268,7 +269,14 @@ $d^2 - 1$ steps to vanish. And the bound is not only a ceiling. It is
 it until it sits a hair away from the completely depolarizing channel,
 and what you get is a genuine channel whose order is exactly
 $d^2 - 1$. That is the real answer to the question. I am not going to
-build it here.
+build it here.[^arw]
+
+[^arw]: The shrinking is not the hard part; choosing a
+bound-saturating block that survives it is. The construction that
+does it is Theorem 3.4 of A. Ahlbrecht, F. Richter and R. F. Werner,
+"How long can it take for a quantum channel to forget everything?",
+arXiv:1205.0693 (2012). The closing section of this post says how it
+relates to the construction built here.
 
 Here is the honest chronology. I did not find that construction until
 the very end of my thesis, and for a long time it stayed out of reach.
