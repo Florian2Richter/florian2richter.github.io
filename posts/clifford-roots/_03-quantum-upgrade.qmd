@@ -235,6 +235,64 @@ $$
 k \;\leq\; d^2 - 1.
 $$
 
+```{=html}
+<details class="aside">
+<summary>Why the bound is reached in every dimension</summary>
+```
+
+Work with operators instead of probability vectors. Let
+$D = d^2 - 1$ and pick a basis of Hermitian matrices
+$I/\sqrt{d},\, F_1, \ldots, F_D$ with every $F_j$ traceless,
+orthonormal in the trace inner product
+$\langle A, B \rangle = \operatorname{tr}(A^\dagger B)$. Let $N$
+shift the list:
+$$
+N(I) = N(F_1) = 0, \qquad N(F_j) = F_{j-1} \quad (2 \le j \le D),
+$$
+so $N^D = 0$ while $N^{D-1} \neq 0$: the operator $F_D$ survives
+$D - 1$ steps. Set $S_\varepsilon = P + \varepsilon N$. Trace
+preservation and unitality hold by construction, since $N$ kills the
+identity and outputs only traceless operators, and the same two
+facts give $PN = NP = 0$. The cross terms die exactly as they did
+classically,
+$$
+S_\varepsilon^k \;=\; P + \varepsilon^k N^k,
+$$
+so every nonzero admissible $\varepsilon$ keeps the maximal order $D$.
+
+Only complete positivity can still fail, and the check mirrors the
+classical non-negativity argument. Complete positivity of a map is
+the positive semidefiniteness of a single matrix assembled from it,
+its *Choi matrix* $J$ (part of the structure theory in the footnote
+above), and $J$ depends linearly on the map:
+$$
+J(S_\varepsilon) \;=\; J(P) + \varepsilon\, J(N).
+$$
+In the convention
+$J(T) = \sum_{ij} T(|i\rangle\langle j|) \otimes |i\rangle\langle j|$,
+the completely depolarizing channel has $J(P) = I/d$: strictly
+positive definite, the quantum counterpart of "every entry of $P$ is
+$1/d$". A Hermitian perturbation cannot drag an eigenvalue below
+zero while
+$$
+|\varepsilon| \;\le\; \frac{\lambda_{\min}(J(P))}{\|J(N)\|_{\mathrm{op}}} .
+$$
+With the basis above, $\|J(N)\|_{\mathrm{op}} \le d^2 - 2$: the Choi
+matrix of the shift is a sum of $d^2 - 2$ blocks
+$F_{j-1} \otimes \overline{F_j}$, each of operator norm at most one,
+because a Hermitian matrix of unit Hilbert-Schmidt norm has operator
+norm at most one. So the dimension-only choice
+$$
+|\varepsilon| \;\le\; \frac{1}{d\,(d^2 - 2)}
+$$
+suffices, and the shifted block, shrunk gently, is a lawful channel
+of order exactly $d^2 - 1$ in every dimension. The polished version
+of this construction is Theorem 3.4 of the paper.[^arw]
+
+```{=html}
+</details>
+```
+
 Set $d = 2$. The classical bound was $k \leq 1$: a single bit could not
 be erased in more than one step. The quantum bound is $k \leq 3$. Three
 gentle steps to forget one qubit (@fig-bloch-root), where one classical
