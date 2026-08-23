@@ -25,8 +25,8 @@ and that shape is a triangle. Its three corners are the sure things,
 one per colour: $(1,0,0)$ is definitely red, $(0,1,0)$ definitely
 green, $(0,0,1)$ definitely blue. Walk along an edge joining two
 corners and the third colour stays impossible while the other two trade
-off. Drift inward and all three grow likelier together, until at the
-dead centre you reach $(\tfrac13, \tfrac13, \tfrac13)$: an even wash of
+off. Drift inward and the three probabilities become more balanced,
+until at the dead centre you reach $(\tfrac13, \tfrac13, \tfrac13)$: an even wash of
 red, green, and blue with no colour favoured, the state that could have
 come from anything. That even wash is exactly the grey noise from the
 start of this post, the worn-out photocopy written as a vector, and
@@ -118,14 +118,15 @@ centre of the triangle from a moment ago: the flat distribution that
 puts equal weight on every state has to come back out exactly as it
 went in.
 
-Why? The uniform distribution represents *no information* about the
-state of the image: every outcome equally likely. It is also the
-destination. The grey centre is exactly where an erasing copier is
-trying to send everything, so a process whose job is to forget should
-come to rest there once it arrives, not stir the grey back into a
-sharper image. A copier that instead turned "no information" into "some
-information" would be generating knowledge out of nothing, and leaving
-the grey centre fixed is the natural way to forbid that. (In the
+Why? The uniform distribution is the symmetric point of the simplex,
+the one distribution that treats every colour exactly alike. It is
+also the destination. The grey centre is exactly where an erasing
+copier is trying to send everything, so a process whose job is to
+forget should come to rest there once it arrives, not stir the grey
+back into a sharper image. A copier that moved the centre would be
+privileging some outcomes over others, a bias built into the
+dynamics rather than read from the input, and leaving the grey
+centre fixed is the natural way to rule that out. (In the
 quantum upgrade later in the post, the analogous restriction is more
 than just natural, it is the standard convention. For now, take it as
 a sensible thing to ask for; in a moment it will reveal itself as no

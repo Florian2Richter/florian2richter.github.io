@@ -24,7 +24,7 @@ Somewhere inside that work a smaller, self-contained question fell
 out: how finely can you divide the most destructive process there
 is?
 
-The original is written for examiners, not for curious readers. I
+The original was written for examiners, not for curious readers. I
 had long meant to rewrite it, and the advent of LLMs finally
 removed my last excuse. I used them as editorial tools while
 reorganizing the material, developing examples, and trying out

@@ -29,8 +29,8 @@ it passes the photon every time, a filter at right angles blocks it, and
 one at $45^\circ$ lets it through half the time. So is the spin of an
 electron: point a detector along the spin and you always read the same
 way, turn the detector sideways and the outcome goes random. In each, the
-certain states are not two but a whole continuum, one for every angle you
-could set the filter or the detector to.
+certain states are not two but a whole continuum, one for every
+direction on the Bloch sphere.
 
 That continuum is the surface of the qubit's state space, the *Bloch
 ball* (@fig-bloch). Picture a state as an arrow inside the ball, with a
@@ -202,9 +202,9 @@ We make the same restriction we made classically. Out of all channels
 we keep the ones that leave the state of total ignorance untouched.
 Classically that was the uniform distribution. Here it is the *maximally
 mixed state*, the centre of the Bloch ball, written $I/d$ with $I$ the
-identity matrix. A channel that fixes it invents no information from
-nothing and secretly prefers no state to any other, which is the least
-we should ask of a process whose only job is to forget. (Such channels
+identity matrix. A channel that fixes it prefers no state to any
+other, which is the least we should ask of a process whose only job
+is to forget. (Such channels
 have a name, *unital*, but the name matters less than the picture.)
 
 Total erasure is the same idea as before, too. The *completely
