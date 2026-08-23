@@ -1,35 +1,42 @@
 ## What's next {#sec-closing}
 
-One loose thread remains: the factor of two. Is $(d^2 - 1)/2$ the end of
-the story, or just the end of the *Clifford* story? It is only the
-Clifford story. The full quantum bound $d^2 - 1$ really can be reached,
-by a channel that gives up the tidy Weyl structure we leaned on. Instead
-of asking a single matrix $h$ to do all the work, one builds the root
-directly at the level of the channel's representation, nudging a Jordan
-block into exactly the shape the bound allows. That construction does
-not care about mirror pairs, so the factor of two disappears, and the
-gap to $d^2 - 1$ closes.[^paper] One caution against a wrong
-impression the nudging might leave: maximal roots are not condemned
-to huddle near total erasure. In every dimension there are maximal
-roots sitting at a distance from $P$ that does not shrink as the
-dimension grows, and our qubit root, with its two dials at one half,
-was never a small perturbation to begin with.
+One loose thread remains: the factor of two. Is $(d^2 - 1)/2$ the
+end of the story, or just the end of the *Clifford* story? It is
+only the Clifford story, and the post has already shown as much: the
+aside in the quantum section shrinks a nilpotent block into a lawful
+channel of the full order $d^2 - 1$, in every dimension. That
+construction gives up the tidy Weyl structure we leaned on, works
+directly at the level of the channel's representation, and never
+meets a mirror pair, which is why no factor of two appears in
+it.[^paper] One caution against a wrong impression the shrinking
+might leave: maximal roots are not condemned to huddle near total
+erasure. In every dimension there are maximal roots sitting at a
+distance from $P$ that does not shrink as the dimension grows, and
+our qubit root, with its two dials at one half, was never a small
+perturbation to begin with.
 
 [^paper]: A. Ahlbrecht, F. Richter and R. F. Werner, "How long can
 it take for a quantum channel to forget everything?",
 arXiv:1205.0693 (2012). The construction is Theorem 3.4 there; the
 maximal roots far from $P$ are Proposition 3.5.
 
-That more general result subsumes the Clifford one, which is why the
-Clifford construction does not appear in the final paper. I wanted to
-write it up anyway, because it is the cleanest place I know to actually
-*see* the finite-field representation theory at work. In the general
-construction the orbit structure is buried inside linear algebra over
-$\mathbb{C}$. Here it sits on the surface: a point hopping around a plane
-of $d^2$ labels, a matrix of order $d^2 - 1$, and a single symmetry that
-costs a factor of two. The whole argument fits in the palm of your hand,
-and you can check the $d = 3$ case by stepping around an eight-point
-cycle with a pencil.
+Historically the discoveries ran in the opposite order from this
+post. Complete positivity kept the general construction out of reach
+for most of my thesis: a Jordan block hands you a linear map of the
+right order, and it was long unclear that a bound-saturating block
+could be shrunk into a lawful channel without losing its order. The
+Clifford family was the smaller room where the question first
+yielded, and the general root arrived only at the very end. That
+more general result subsumes the Clifford one, which is why the
+Clifford construction does not appear in the final paper. I wanted
+to write it up anyway, because it is the cleanest place I know to
+actually *see* the finite-field representation theory at work. In
+the general construction the orbit structure is buried inside linear
+algebra over $\mathbb{C}$. Here it sits on the surface: a point
+hopping around a plane of $d^2$ labels, a matrix of order
+$d^2 - 1$, and a single symmetry that costs a factor of two. The
+whole argument fits in the palm of your hand, and you can check the
+$d = 3$ case by stepping around an eight-point cycle with a pencil.
 
 There is one more way to read these numbers, and it closes a loop
 opened at the very start of the post: the device that carries a

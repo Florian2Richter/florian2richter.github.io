@@ -515,12 +515,13 @@ the positive semidefiniteness of $M$ itself.
 <summary>The complete positivity criterion for Clifford channels</summary>
 ```
 
-Complete positivity always has a certificate: the structure theory
-referenced in the quantum section's footnote packages a channel into
-one big matrix (the Choi matrix) whose positive semidefiniteness is
-equivalent to complete positivity. For a general channel that
-matrix is an opaque block of numbers. For a Clifford channel,
-written in Weyl coordinates, it is anything but. Its rows and
+Complete positivity always has a certificate, and we have met it
+once already: the Choi matrix, which the aside in the quantum
+section used purely as a black box, one big matrix assembled from
+the channel, positive semidefinite exactly when the channel is
+completely positive. For a general channel that matrix is an opaque
+block of numbers. For a Clifford channel, written in Weyl
+coordinates, its entries become explicit. Its rows and
 columns are indexed by the labels, one apiece, and its entries are
 *dial values in disguise*:
 $$

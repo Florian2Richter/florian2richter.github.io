@@ -270,15 +270,16 @@ J(S_\varepsilon) \;=\; J(P) + \varepsilon\, J(N).
 $$
 In the convention
 $J(T) = \sum_{ij} T(|i\rangle\langle j|) \otimes |i\rangle\langle j|$,
-the completely depolarizing channel has $J(P) = I/d$: strictly
-positive definite, the quantum counterpart of "every entry of $P$ is
-$1/d$". A Hermitian perturbation cannot drag an eigenvalue below
+the completely depolarizing channel has $J(P) = I_{d^2}/d$, with
+$I_{d^2}$ the identity on the doubled, $d^2$-dimensional space:
+strictly positive definite, the quantum counterpart of "every entry
+of $P$ is $1/d$". A Hermitian perturbation cannot drag an eigenvalue below
 zero while
 $$
 |\varepsilon| \;\le\; \frac{\lambda_{\min}(J(P))}{\|J(N)\|_{\mathrm{op}}} .
 $$
 With the basis above, $\|J(N)\|_{\mathrm{op}} \le d^2 - 2$: the Choi
-matrix of the shift is a sum of $d^2 - 2$ blocks
+matrix of the shift is a sum of $d^2 - 2$ terms
 $F_{j-1} \otimes \overline{F_j}$, each of operator norm at most one,
 because a Hermitian matrix of unit Hilbert-Schmidt norm has operator
 norm at most one. So the dimension-only choice
@@ -318,36 +319,19 @@ three steps); tap the figure to play it.
 
 :::
 
-One honest word before we move on, because it seeds the rest of the
-post. That $d^2 - 1$ is an *upper* bound. It comes from a structural
-argument: on the $d^2 - 1$ traceless directions, place the longest
-nilpotent Jordan block that fits, and its powers take exactly
-$d^2 - 1$ steps to vanish. And the bound is not only a ceiling. It is
-*reached*, in every dimension. Take that same nilpotent block, shrink
-it until it sits a hair away from the completely depolarizing channel,
-and what you get is a genuine channel whose order is exactly
-$d^2 - 1$. That is the real answer to the question. I am not going to
-build it here.[^arw]
+[^arw]: A. Ahlbrecht, F. Richter and R. F. Werner, "How long can it
+take for a quantum channel to forget everything?", arXiv:1205.0693
+(2012); the construction is Theorem 3.4 there. The closing section
+of this post says how the Clifford story below relates to that
+paper.
 
-[^arw]: The shrinking is not the hard part; choosing a
-bound-saturating block that survives it is. The construction that
-does it is Theorem 3.4 of A. Ahlbrecht, F. Richter and R. F. Werner,
-"How long can it take for a quantum channel to forget everything?",
-arXiv:1205.0693 (2012). The closing section of this post says how it
-relates to the construction built here.
-
-Here is the honest chronology. I did not find that construction until
-the very end of my thesis, and for a long time it stayed out of reach.
-The obstacle has a name: complete positivity, the sharpened
-positivity half of the old checklist. A Jordan block hands you
-a *linear map* of the right order, but a linear map is not yet a
-channel, and it was not at all clear to me then that a bound-saturating
-block could be shrunk into a legal one without losing its order. So I
-did what you do when the general problem resists. I looked for a
-smaller room to think in: a corner of the quantum world with far less
-freedom, but one that has proved fruitful before across quantum
-information. Inside that corner the question turns concrete and yields
-to direct computation. Building the room takes a little construction
-work, and the construction starts further back than you might expect.
-How large can the order grow when the room is this constrained?
-Answering that is where the rest of the post lives.
+The unrestricted answer is therefore $d^2 - 1$, ceiling and
+construction both: the aside above delivers a channel of exactly
+that order in every dimension. How much of that quadratic scaling
+survives inside a far more rigid family? That is the question with
+life left in it, and the rest of the post lives in a smaller room: a
+family of channels with a handful of parameters in place of the full
+continuum, one that has proved fruitful before across quantum
+information, and simple enough that the question yields to direct
+computation. Building the room takes a little construction work, and
+the construction starts further back than you might expect.

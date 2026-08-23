@@ -449,10 +449,10 @@ $\lambda_Y + \lambda_Z \leq 1$. The thesis works out the criterion
 for the whole Clifford family in its chapter 5 (Lemma 5.1); the
 next section of this post shows its face.
 
-One debt remains, and it is the emotional one. The previous section
-confessed that a linear map of the right order is not yet a channel,
-and that the general construction resisted at exactly that point.
-Our $T$ is, so far, four tidy equations. Is it physical?
+One debt remains, and it is the decisive one. A linear map of the
+right order is not yet a channel: complete positivity still has to
+be checked. Our $T$ is, so far, four tidy equations. Is it
+physical?
 
 Here is the same $T$ wearing different clothes. Let $U$ be the
 rotation of the Bloch ball by a third of a turn about the diagonal
