@@ -25,11 +25,13 @@ out: how finely can you divide the most destructive process there
 is?
 
 The original is written for examiners, not for curious readers. I
-had long meant to redo it, and the advent of LLMs removed my last
-excuse: rewriting a nice piece of mathematics is a far smaller job
-than it used to be. So here is the result again, the terse notation
-of a thesis traded for pictures, worked examples, and a slower
-pace, so that a motivated undergraduate can follow every step.
+had long meant to rewrite it, and the advent of LLMs finally
+removed my last excuse. I used them as editorial tools while
+reorganizing the material, developing examples, and trying out
+clearer explanations; the mathematical argument comes from the
+original work, and I checked every derivation myself. The result
+trades the terse notation of a thesis for pictures, worked
+examples, and a slower pace intended for motivated undergraduates.
 
 The route, roughly: devices with memory give the problem its
 physical face, the classical world gives a first answer, and the

@@ -34,38 +34,6 @@ Posts live at `posts/<slug>/index.qmd`. Figures and figure scripts go
 in `posts/<slug>/figures/` (see the README in
 `posts/clifford-roots/figures/` for the convention).
 
-## Audience and voice
-
-The Clifford post is written for **an undergraduate in physics, math,
-or engineering**, not a colleague reading in one sitting. That is the
-"very curious" reader Quantum Country addresses: comfortable with
-linear algebra and probability, but meeting quantum channels, Weyl
-operators, and finite fields here for the first time. Pedagogy wins
-over brevity; length is a result, not a target, and the depth and
-worked-example density of Quantum Country is the model to aim for. A
-two-post split at the reduction (section 5) is on the table only if
-the single post grows well past about 12000 to 15000 words.
-
-The voice target is **Matuschak and Nielsen's
-[Quantum Country](https://quantum.country/qcvc)**. Specifically:
-
-- Short sentences, short paragraphs, variable rhythm.
-- Concrete before abstract: show a specific matrix doing a specific
-  thing before naming the category.
-- Explicit signposting ("Here's the question that sounds silly until
-  you take it seriously"), conversational confusion-acknowledgments
-  ("That perhaps sounds strange!").
-- First-person plural ("we") for the math journey, first-person
-  singular ("I") sparingly for honest asides.
-- Italics for emphasis, sparingly, on the conceptually loaded word.
-- Equations framed by prose before and after, not displayed in
-  isolation.
-- Story-first openings; no math in the hook of a section.
-
-Avoid thesis-prose crutches: "Furthermore," "We observe that," "In
-what follows," "It turns out that." If a paragraph starts reading like
-a textbook chapter, rewrite it.
-
 ## Hard rules
 
 - **NO EM-DASHES.** Never. Use commas, colons, parentheses,
