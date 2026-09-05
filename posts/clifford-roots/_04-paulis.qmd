@@ -25,29 +25,29 @@ the nilpotent part until the check went through.
 section's and the next one's to fill. {#tbl-scoreboard}
 
 So why open a third column when the second is closed? Because the
-quantum construction proves the number and hides the reason. A
-Jordan block on the traceless operators, shrunk by a factor small
-enough to keep the Choi matrix positive, is an existence proof. It
-says that $d^2 - 1$ steps of room are there and nothing about where
-they come from: you cannot watch the erasure take one axis at a
-time, and past the qubit you cannot write the channel down by hand.
-The family this section builds, the Clifford channels, is the
-smallest room in which the mechanism sits in plain view. Inside it
-the non-commutativity of quantum mechanics is packaged as
-bookkeeping on a finite grid of labels, the root problem turns into
-a board game on that grid, and complete positivity, the condition
-that separates channels from mere linear maps, becomes the
-positivity of one matrix whose entries you can read off the channel. Nor is the family a toy
-invented for the occasion. The bit-flip, dephasing and depolarizing
-noise models that quantum error correction is built to fight are
-all members, so the question of how slowly such noise can erase has
-standing of its own. (It is also where the question first gave way,
-historically; the closing section tells that story.) And the reason
-to care is the surprise promised in the hook. Rigidity turns out to
-cost almost nothing: in prime dimensions the family gives up a
-factor of two against the full quantum bound, and nothing more.
-Watching where that factor comes from, and why it is not a factor
-of a hundred, is the rest of the post.
+quantum construction settles the number and shows no structure. A
+Jordan block on the traceless operators, in any orthonormal basis
+you care to pick, shrunk until the Choi matrix stays positive, is an
+existence proof. It certifies that $d^2 - 1$ steps of room are there
+and is indifferent to everything else: the axes are arbitrary, and
+lawfulness is settled by an inequality rather than seen. The family
+this section builds, the Clifford channels, is a room small enough
+for the mechanism to sit in plain view. Inside it the
+non-commutativity of quantum mechanics is packaged as bookkeeping on
+a finite grid of labels, the root problem turns into a board game on
+that grid, and complete positivity, the condition that separates
+channels from mere linear maps, becomes the positivity of one matrix
+whose entries are the channel's own parameters.
+
+Nor is the family a toy invented for the occasion. The bit-flip,
+dephasing and depolarizing noise models that quantum error
+correction is built to fight are all members, so the question of how
+slowly such noise can erase has standing of its own. And the payoff
+is the surprise promised in the hook. Rigidity turns out to cost
+almost nothing: in prime dimensions the family gives up a factor of
+two against the full quantum bound, and nothing more. Where that
+factor comes from, and why the drop is not most of the way back to
+the classical $d - 1$, is the rest of the post.
 
 Where should the building start? Look once more at the Bloch ball
 of @fig-bloch, because something classical is hiding in plain
