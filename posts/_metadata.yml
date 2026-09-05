@@ -1,0 +1,16 @@
+# Applies to every post under posts/. The comment thread lives in the
+# repo's GitHub Discussions (category "Blog comments") via giscus;
+# Hypothesis adds inline annotation of the text itself.
+comments:
+  giscus:
+    repo: Florian2Richter/florian2richter.github.io
+    repo-id: R_kgDOOaEx5g
+    category: Blog comments
+    category-id: DIC_kwDOOaEx5s4DE9vu
+    mapping: pathname
+    reactions-enabled: true
+    loading: lazy
+    input-position: bottom
+    theme: light
+    language: en
+  hypothesis: true

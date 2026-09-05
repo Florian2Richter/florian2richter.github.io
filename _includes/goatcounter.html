@@ -1,0 +1,10 @@
+<!-- GoatCounter page-view counting (no cookies). The path callback folds
+     /index.html into its directory so both URL forms of a page count as
+     one; count.js skips localhost on its own, so previews do not count. -->
+<script>
+  window.goatcounter = {
+    path: function (p) { return p.replace(/\/index\.html$/, '/'); }
+  };
+</script>
+<script data-goatcounter="https://florian2richter.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>

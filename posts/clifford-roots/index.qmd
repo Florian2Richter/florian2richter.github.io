@@ -41,8 +41,10 @@ small subclass of all possible channels, simple enough to parameterize by hand, 
 factor of two of the full quantum answer: the Clifford channels.
 
 This is a draft under review. If you find an error, a gap, or a
-passage that does not land, please tell me; the envelope in the
-navigation bar reaches me.
+passage that does not land, please tell me: in the comments at the
+end of the post, by highlighting the passage itself with the
+annotation sidebar at the right edge of the page, or by email through
+the envelope in the navigation bar.
 
 Enjoy the read.
 
@@ -64,3 +66,17 @@ Enjoy the read.
 {{< include _05-clifford-higher-dimensions.qmd >}}
 
 {{< include _06-whats-next.qmd >}}
+
+```{=html}
+<p class="view-counter">Page views: <span id="view-count">&hellip;</span></p>
+<script>
+  (function () {
+    var el = document.getElementById('view-count');
+    if (!el || !window.fetch) { return; }
+    fetch('https://florian2richter.goatcounter.com/counter//posts/clifford-roots/.json')
+      .then(function (r) { return r.json(); })
+      .then(function (d) { el.textContent = d.count; })
+      .catch(function () { el.parentNode.hidden = true; });
+  })();
+</script>
+```

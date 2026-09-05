@@ -99,3 +99,10 @@ details.aside[open] {
 details.aside > summary:hover {
   color: #1a4f85;
 }
+
+/* Page-view counter at the foot of a post, quiet like a caption */
+.view-counter {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 2.5rem;
+}

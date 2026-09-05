@@ -6,3 +6,6 @@
 .DS_Store
 
 **/*.quarto_ipynb
+
+# Header snippets under _includes/ are sources, not build output
+!_includes/*.html
