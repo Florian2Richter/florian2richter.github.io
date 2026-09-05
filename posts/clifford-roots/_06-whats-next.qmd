@@ -47,6 +47,12 @@ of odd prime dimension $d$ can survive for $(d^2 - 1)/2$, and the most
 stubborn quantum memory of all for $d^2 - 1$. After that, the
 influence of how the memory began is not merely small. It is gone.
 
+One thread I never pulled: the Clifford result is a prime-$d$
+result. Prime powers should tell a parallel story over their own
+finite fields, and genuinely composite $d$, where the label plane is
+no longer a plane over a field, is territory I never found the time
+to look at.
+
 The full development, including the classical and general quantum bounds
 and the Clifford channels above, is in my diploma thesis.[^thesis]
 
