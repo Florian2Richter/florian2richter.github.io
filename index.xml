@@ -23,7 +23,7 @@
 <p>This post grew out of my diploma thesis in Quantum Information, which I wrote in Hannover in 2010. The thesis was about quantum memory channels, and in particular about how deep their memory runs. Somewhere inside that work a smaller, self-contained question fell out: how finely can you divide the most destructive process there is?</p>
 <p>The original was written for examiners, not for curious readers. I had long meant to rewrite it, and the advent of LLMs finally removed my last excuse. I used them as editorial tools while reorganizing the material, developing examples, and trying out clearer explanations; the mathematical argument comes from the original work, and I checked every derivation myself. The result trades the terse notation of a thesis for pictures, worked examples, and a slower pace intended for motivated undergraduates.</p>
 <p>The route, roughly: devices with memory give the problem its physical face, the classical world gives a first answer, and the quantum world a quadratically bigger one. Finally, we settle into a small subclass of all possible channels, simple enough to parameterize by hand, yet powerful enough that in prime dimensions it comes within a factor of two of the full quantum answer: the Clifford channels.</p>
-<p>This is a draft under review. If you find an error, a gap, or a passage that does not land, please tell me; the envelope in the navigation bar reaches me.</p>
+<p>This is a draft under review. If you find an error, a gap, or a passage that does not land, please tell me: in the comments at the end of the post, by highlighting the passage itself with the annotation sidebar at the right edge of the page, or by email through the envelope in the navigation bar.</p>
 <p>Enjoy the read.</p>
 <hr>
 <!-- The body of this post is split into per-section partials so each
@@ -1954,6 +1954,17 @@ Table&nbsp;2: The scoreboard completed. One entry stays open, and the next parag
 </div>
 <p>One thread I never pulled: the Clifford result is a prime-<img src="https://latex.codecogs.com/png.latex?d"> result. Prime powers should tell a parallel story over their own finite fields, and genuinely composite <img src="https://latex.codecogs.com/png.latex?d">, where the label plane is no longer a plane over a field, is territory I never found the time to look at.</p>
 <p>The full development, including the classical and general quantum bounds and the Clifford channels above, is in my diploma thesis.<sup>11</sup></p>
+<p class="view-counter">Page views: <span id="view-count">…</span></p>
+<script>
+  (function () {
+    var el = document.getElementById('view-count');
+    if (!el || !window.fetch) { return; }
+    fetch('https://florian2richter.goatcounter.com/counter//posts/clifford-roots/.json')
+      .then(function (r) { return r.json(); })
+      .then(function (d) { el.textContent = d.count; })
+      .catch(function () { el.parentNode.hidden = true; });
+  })();
+</script>
 
 
 </section>

@@ -76,6 +76,21 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
+<!-- GoatCounter page-view counting (no cookies). The path callback folds
+     /index.html into its directory so both URL forms of a page count as
+     one; count.js skips localhost on its own, so previews do not count. -->
+<script>
+  window.goatcounter = {
+    path: function (p) { return p.replace(/\/index\.html$/, '/'); }
+  };
+</script>
+<script data-goatcounter="https://florian2richter.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -248,7 +263,7 @@ window.Quarto = {
 <p>This post grew out of my diploma thesis in Quantum Information, which I wrote in Hannover in 2010. The thesis was about quantum memory channels, and in particular about how deep their memory runs. Somewhere inside that work a smaller, self-contained question fell out: how finely can you divide the most destructive process there is?</p>
 <p>The original was written for examiners, not for curious readers. I had long meant to rewrite it, and the advent of LLMs finally removed my last excuse. I used them as editorial tools while reorganizing the material, developing examples, and trying out clearer explanations; the mathematical argument comes from the original work, and I checked every derivation myself. The result trades the terse notation of a thesis for pictures, worked examples, and a slower pace intended for motivated undergraduates.</p>
 <p>The route, roughly: devices with memory give the problem its physical face, the classical world gives a first answer, and the quantum world a quadratically bigger one. Finally, we settle into a small subclass of all possible channels, simple enough to parameterize by hand, yet powerful enough that in prime dimensions it comes within a factor of two of the full quantum answer: the Clifford channels.</p>
-<p>This is a draft under review. If you find an error, a gap, or a passage that does not land, please tell me; the envelope in the navigation bar reaches me.</p>
+<p>This is a draft under review. If you find an error, a gap, or a passage that does not land, please tell me: in the comments at the end of the post, by highlighting the passage itself with the annotation sidebar at the right edge of the page, or by email through the envelope in the navigation bar.</p>
 <p>Enjoy the read.</p>
 <hr>
 <!-- The body of this post is split into per-section partials so each
@@ -2381,6 +2396,17 @@ Table&nbsp;2: The scoreboard completed. One entry stays open, and the next parag
 </div>
 <p>One thread I never pulled: the Clifford result is a prime-<span class="math inline">d</span> result. Prime powers should tell a parallel story over their own finite fields, and genuinely composite <span class="math inline">d</span>, where the label plane is no longer a plane over a field, is territory I never found the time to look at.</p>
 <p>The full development, including the classical and general quantum bounds and the Clifford channels above, is in my diploma thesis.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+<p class="view-counter">Page views: <span id="view-count">…</span></p>
+<script>
+  (function () {
+    var el = document.getElementById('view-count');
+    if (!el || !window.fetch) { return; }
+    fetch('https://florian2richter.goatcounter.com/counter//posts/clifford-roots/.json')
+      .then(function (r) { return r.json(); })
+      .then(function (d) { el.textContent = d.count; })
+      .catch(function () { el.parentNode.hidden = true; });
+  })();
+</script>
 
 
 </section>
@@ -2807,6 +2833,35 @@ Table&nbsp;2: The scoreboard completed. One entry stays open, and the next parag
     }
   });
   </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "Florian2Richter/florian2richter.github.io";
+    script.dataset.repoId = "R_kgDOOaEx5g";
+    script.dataset.category = "Blog comments";
+    script.dataset.categoryId = "DIC_kwDOOaEx5s4DE9vu";
+    script.dataset.mapping = "pathname";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "bottom";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
