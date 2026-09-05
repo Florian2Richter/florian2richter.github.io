@@ -1887,6 +1887,70 @@ Figure&nbsp;7: The grand cycle for <img src="https://latex.codecogs.com/png.late
 <p>One loose thread remains: the factor of two. Is <img src="https://latex.codecogs.com/png.latex?(d%5E2%20-%201)/2"> the end of the story, or just the end of the <em>Clifford</em> story? It is only the Clifford story, and the post has already shown as much: the aside in the quantum section shrinks a nilpotent block into a lawful channel of the full order <img src="https://latex.codecogs.com/png.latex?d%5E2%20-%201">, in every dimension. That construction gives up the tidy Weyl structure we leaned on, works directly at the level of the channel’s representation, and never meets a mirror pair, which is why no factor of two appears in it.<sup>10</sup> One caution against a wrong impression the shrinking might leave: maximal roots are not condemned to huddle near total erasure. In every dimension there are maximal roots sitting at a distance from <img src="https://latex.codecogs.com/png.latex?P"> that does not shrink as the dimension grows, and our qubit root, with its two scale factors at one half, was never a small perturbation to begin with.</p>
 <p>Historically the discoveries ran in the opposite order from this post. Complete positivity kept the general construction out of reach for most of my thesis: a Jordan block hands you a linear map of the right order, and it was long unclear that a bound-saturating block could be shrunk into a lawful channel without losing its order. The Clifford family was the smaller room where the question first yielded, and the general root arrived only at the very end. That more general result subsumes the Clifford one, which is why the Clifford construction does not appear in the final paper. I wanted to write it up anyway, because it is the cleanest place I know to actually <em>see</em> the finite-field representation theory at work. In the general construction the orbit structure is buried inside linear algebra over <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BC%7D">. Here it sits on the surface: a point hopping around a plane of <img src="https://latex.codecogs.com/png.latex?d%5E2"> labels, a matrix of order <img src="https://latex.codecogs.com/png.latex?d%5E2%20-%201">, and a single symmetry that costs a factor of two. The whole argument fits in the palm of your hand, and you can check the <img src="https://latex.codecogs.com/png.latex?d%20=%203"> case by stepping around an eight-point cycle with a pencil.</p>
 <p>There is one more way to read these numbers, and it closes a loop opened at the very start of the post: the device that carries a private memory from one use to the next, and is strictly forgetful when that memory is provably purged after finitely many uses. A qubit memory can survive for at most three uses. A Clifford memory of odd prime dimension <img src="https://latex.codecogs.com/png.latex?d"> can survive for <img src="https://latex.codecogs.com/png.latex?(d%5E2%20-%201)/2">, and the most stubborn quantum memory of all for <img src="https://latex.codecogs.com/png.latex?d%5E2%20-%201">. After that, the influence of how the memory began is not merely small. It is gone.</p>
+<p>Here is the scoreboard of Table&nbsp;1 with its third column filled in.</p>
+<div id="tbl-scoreboard-final" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-scoreboard-final-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: The scoreboard completed. One entry stays open, and the next paragraph owns up to it.
+</figcaption>
+<div aria-describedby="tbl-scoreboard-final-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Classical</th>
+<th style="text-align: left;">Quantum</th>
+<th style="text-align: left;">Clifford</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Copiers considered</td>
+<td style="text-align: left;">bistochastic matrices</td>
+<td style="text-align: left;">channels fixing the centre <img src="https://latex.codecogs.com/png.latex?I/d"></td>
+<td style="text-align: left;">channels sending each labelled matrix to a multiple of one labelled matrix</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Free parameters</td>
+<td style="text-align: left;"><img src="https://latex.codecogs.com/png.latex?(d-1)%5E2"></td>
+<td style="text-align: left;"><img src="https://latex.codecogs.com/png.latex?(d%5E2-1)%5E2"></td>
+<td style="text-align: left;">one invertible <img src="https://latex.codecogs.com/png.latex?2%20%5Ctimes%202"> matrix over <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BF%7D_d">, plus <img src="https://latex.codecogs.com/png.latex?d%5E2%20-%201"> scale factors</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">The condition with teeth</td>
+<td style="text-align: left;">non-negative entries</td>
+<td style="text-align: left;">complete positivity</td>
+<td style="text-align: left;">complete positivity, as positivity of one <img src="https://latex.codecogs.com/png.latex?d%5E2%20%5Ctimes%20d%5E2"> matrix of scale factors; sufficient: their absolute values sum to at most one</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Largest order <img src="https://latex.codecogs.com/png.latex?k"></td>
+<td style="text-align: left;"><img src="https://latex.codecogs.com/png.latex?d%20-%201"></td>
+<td style="text-align: left;"><img src="https://latex.codecogs.com/png.latex?d%5E2%20-%201"></td>
+<td style="text-align: left;"><img src="https://latex.codecogs.com/png.latex?(d%5E2%20-%201)/2"> for odd prime <img src="https://latex.codecogs.com/png.latex?d">; <img src="https://latex.codecogs.com/png.latex?d%5E2%20-%201%20=%203"> at <img src="https://latex.codecogs.com/png.latex?d%20=%202">; open for composite <img src="https://latex.codecogs.com/png.latex?d"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Reached by</td>
+<td style="text-align: left;">a nilpotent <img src="https://latex.codecogs.com/png.latex?N"> on the deviations, scaled gently</td>
+<td style="text-align: left;">a nilpotent <img src="https://latex.codecogs.com/png.latex?N"> on the traceless operators, shrunk until the Choi matrix stays positive</td>
+<td style="text-align: left;">a grand cycle of the label plane with zeros on one mirror pair, a small <img src="https://latex.codecogs.com/png.latex?%5Cvarepsilon"> everywhere else</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Seen in action</td>
+<td style="text-align: left;"><img src="https://latex.codecogs.com/png.latex?d%20=%203">, two steps (Figure&nbsp;2)</td>
+<td style="text-align: left;"><img src="https://latex.codecogs.com/png.latex?d%20=%202">, three steps (Figure&nbsp;4)</td>
+<td style="text-align: left;"><img src="https://latex.codecogs.com/png.latex?d%20=%202">, three steps (Figure&nbsp;4); <img src="https://latex.codecogs.com/png.latex?d%20=%203">, the eight-point ring (Figure&nbsp;7)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
 <p>One thread I never pulled: the Clifford result is a prime-<img src="https://latex.codecogs.com/png.latex?d"> result. Prime powers should tell a parallel story over their own finite fields, and genuinely composite <img src="https://latex.codecogs.com/png.latex?d">, where the label plane is no longer a plane over a field, is territory I never found the time to look at.</p>
 <p>The full development, including the classical and general quantum bounds and the Clifford channels above, is in my diploma thesis.<sup>11</sup></p>
 
