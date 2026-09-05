@@ -163,8 +163,9 @@ $$
 $$
 The dial at a label and the dial at its mirror are complex
 conjugates. At $d = 2$, where $-\eta = \eta$, this collapses to
-"dials are real", which is exactly what we found. And the villain
-still patrols: not every $(h, \lambda)$ is a lawful channel. The fee
+"dials are real", which is exactly what we found. And complete
+positivity is still to be checked: not every $(h, \lambda)$ is a
+lawful channel. The fee
 gets paid at the end of the section, with the same $\varepsilon$
 coin that paid it classically.
 
@@ -486,7 +487,7 @@ started just after a zero is still alive, carrying
 $\varepsilon^{(d^2-1)/2 - 1} \neq 0$, as the witness. And complete
 positivity, the fee the qubit section paid with a coin flip of three
 rotations, is where the Clifford family shows its final virtue: here
-the villain has an explicit face. A Clifford channel is completely
+the condition has an explicit face. A Clifford channel is completely
 positive exactly when a single $d^2 \times d^2$ matrix assembled
 from the dials is positive semidefinite, and a classical eigenvalue
 theorem turns that condition into a simple *sufficient condition* on

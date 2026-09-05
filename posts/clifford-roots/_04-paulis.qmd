@@ -35,9 +35,9 @@ The family this section builds, the Clifford channels, is the
 smallest room in which the mechanism sits in plain view. Inside it
 the non-commutativity of quantum mechanics is packaged as
 bookkeeping on a finite grid of labels, the root problem turns into
-a board game on that grid, and the villain acquires a face:
-complete positivity becomes the positivity of one matrix whose
-entries you can read off the channel. Nor is the family a toy
+a board game on that grid, and complete positivity, the condition
+that separates channels from mere linear maps, becomes the
+positivity of one matrix whose entries you can read off the channel. Nor is the family a toy
 invented for the occasion. The bit-flip, dephasing and depolarizing
 noise models that quantum error correction is built to fight are
 all members, so the question of how slowly such noise can erase has
@@ -335,9 +335,9 @@ the reality of the dials, by the way. It looks like a convenience.
 At the end of the section it will reveal itself as a symmetry with a
 price tag attached.
 
-Necessary is not sufficient, and honesty requires the flag: the
-villain of the previous section, complete positivity, patrols this
-family too. The old checklist splits here exactly as it always has:
+Necessary is not sufficient, and honesty requires the flag:
+complete positivity, the condition that makes a linear map a
+channel, applies to this family as it did to the whole space. The old checklist splits here exactly as it always has:
 normalization is built in ($T[I] = I$, and traces are preserved by
 the label bookkeeping), while the positivity half is the fee. Not
 every setting of skeleton and dials is a lawful channel, and no
@@ -385,7 +385,7 @@ $(1, -1, 1)$. Negative dials are legal, and reversible Clifford
 channels are precisely the famous Clifford gates, met here in
 channel clothing.
 
-Third, the villain's target. Set every dial to zero. Each Pauli
+Third, total erasure itself. Set every dial to zero. Each Pauli
 dies, every Bloch vector is sent to the origin, and $T$ is the
 completely depolarizing channel $P$ itself, whatever the skeleton.
 The object we want roots of is a member of the family. The hunt can
