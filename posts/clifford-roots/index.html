@@ -48,7 +48,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-d1f9d6778f1c126e43da7fea03df6f67.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-2b00583592e815700529758077e730d0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1753,8 +1753,73 @@ Figure&nbsp;4: A maximal qubit root <span class="math inline">S</span> acting on
 </section>
 <section id="sec-paulis" class="level2">
 <h2 class="anchored" data-anchor-id="sec-paulis">Rebuilding the qubit from the bit</h2>
-<p>Look once more at the Bloch ball of <a href="#fig-bloch" class="quarto-xref">Figure&nbsp;3</a>, because something classical is hiding in plain sight. The two states of an ordinary bit sit at the poles. The straight line between them, running through the centre, is the entire state space of the classical bit: the segment from the very start of this post, with its two certain ends and its ignorant middle. The quantum ball did not replace the classical picture. It grew <em>around</em> it.</p>
-<p>That is worth taking seriously, because it suggests a way into the smaller room the previous section went looking for. Attacking the space of all quantum channels head-on earned us an upper bound and a villain, complete positivity. So this time we go the other way around. Start from the classical bit, the smallest state space we own, and take the smallest step that turns it quantum, keeping both hands on the algebra the whole way. By the end of the section that small step will have produced a coordinate system for the qubit, a family of channels that respects those coordinates, and a rederivation of the three-step eraser of <a href="#fig-bloch-root" class="quarto-xref">Figure&nbsp;4</a>: not pulled from a hat this time, but designed, with every choice visible.</p>
+<p>Two settings are closed, and it is worth reading the scoreboard before opening a third. Both times the same skeleton carried the argument: split the copier as <span class="math inline">P + N</span>, watch the cross terms die, and read the largest order off the size of the space <span class="math inline">N</span> has to wander in. Classically that space was the set of deviations from the grey centre, of dimension <span class="math inline">d - 1</span>. Quantum mechanically it was the traceless operators, of dimension <span class="math inline">d^2 - 1</span>. Both bounds were reached, and both times the part of the argument with teeth was not the order but the lawfulness check, non-negative entries in one world and complete positivity in the other, paid off by shrinking the nilpotent part until the check went through.</p>
+<div id="tbl-scoreboard" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-scoreboard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: The scoreboard after two settings. The third column is this section’s and the next one’s to fill.
+</figcaption>
+<div aria-describedby="tbl-scoreboard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Classical</th>
+<th style="text-align: left;">Quantum</th>
+<th style="text-align: left;">Clifford</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Copiers considered</td>
+<td style="text-align: left;">bistochastic matrices</td>
+<td style="text-align: left;">channels fixing the centre <span class="math inline">I/d</span></td>
+<td style="text-align: left;">a rigid subfamily, built below</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Free parameters</td>
+<td style="text-align: left;"><span class="math inline">(d-1)^2</span></td>
+<td style="text-align: left;"><span class="math inline">(d^2-1)^2</span></td>
+<td style="text-align: left;">a finite choice, plus <span class="math inline">d^2 - 1</span> dials</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">The condition with teeth</td>
+<td style="text-align: left;">non-negative entries</td>
+<td style="text-align: left;">complete positivity</td>
+<td style="text-align: left;">complete positivity, as one explicit matrix</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Largest order <span class="math inline">k</span></td>
+<td style="text-align: left;"><span class="math inline">d - 1</span></td>
+<td style="text-align: left;"><span class="math inline">d^2 - 1</span></td>
+<td style="text-align: left;">?</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Reached by</td>
+<td style="text-align: left;">a nilpotent <span class="math inline">N</span> on the deviations, scaled gently</td>
+<td style="text-align: left;">a nilpotent <span class="math inline">N</span> on the traceless operators, shrunk until the Choi matrix stays positive</td>
+<td style="text-align: left;">?</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Seen in action</td>
+<td style="text-align: left;"><span class="math inline">d = 3</span>, two steps (<a href="#fig-root-d3" class="quarto-xref">Figure&nbsp;2</a>)</td>
+<td style="text-align: left;"><span class="math inline">d = 2</span>, three steps (<a href="#fig-bloch-root" class="quarto-xref">Figure&nbsp;4</a>)</td>
+<td style="text-align: left;">?</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>So why open a third column when the second is closed? Because the quantum construction proves the number and hides the reason. A Jordan block on the traceless operators, shrunk by a factor small enough to keep the Choi matrix positive, is an existence proof. It says that <span class="math inline">d^2 - 1</span> steps of room are there and nothing about where they come from: you cannot watch the erasure take one axis at a time, and past the qubit you cannot write the channel down by hand. The family this section builds, the Clifford channels, is the smallest room in which the mechanism sits in plain view. Inside it the non-commutativity of quantum mechanics is packaged as bookkeeping on a finite grid of labels, the root problem turns into a board game on that grid, and the villain acquires a face: complete positivity becomes the positivity of one matrix whose entries you can read off the channel. Nor is the family a toy invented for the occasion. The bit-flip, dephasing and depolarizing noise models that quantum error correction is built to fight are all members, so the question of how slowly such noise can erase has standing of its own. (It is also where the question first gave way, historically; the closing section tells that story.) And the reason to care is the surprise promised in the hook. Rigidity turns out to cost almost nothing: in prime dimensions the family gives up a factor of two against the full quantum bound, and nothing more. Watching where that factor comes from, and why it is not a factor of a hundred, is the rest of the post.</p>
+<p>Where should the building start? Look once more at the Bloch ball of <a href="#fig-bloch" class="quarto-xref">Figure&nbsp;3</a>, because something classical is hiding in plain sight. The two states of an ordinary bit sit at the poles. The straight line between them, running through the centre, is the entire state space of the classical bit: the segment from the very start of this post, with its two certain ends and its ignorant middle. The quantum ball did not replace the classical picture. It grew <em>around</em> it.</p>
+<p>That is worth taking seriously, because it says which way round to build. The previous section went at the space of all quantum channels from the top and got its number by shrinking a block until an inequality held. This time we go the other way around. Start from the classical bit, the smallest state space we own, and take the smallest step that turns it quantum, keeping both hands on the algebra the whole way. By the end of the section that small step will have produced a coordinate system for the qubit, a family of channels that respects those coordinates, and a rederivation of the three-step eraser of <a href="#fig-bloch-root" class="quarto-xref">Figure&nbsp;4</a>: not pulled from a hat this time, but designed, with every choice visible.</p>
 <p>Begin with the bit, dressed in matrix clothes. A classical bit is a probability <span class="math inline">p</span> of reading <span class="math inline">0</span> and <span class="math inline">1 - p</span> of reading <span class="math inline">1</span>, and its density matrix is diagonal: <span class="math display">
 \rho \;=\; \begin{pmatrix} p &amp; 0 \\ 0 &amp; 1-p \end{pmatrix}
 \;=\; \tfrac12\bigl(I + r\,Z\bigr),
@@ -1857,7 +1922,7 @@ T[Y] = \lambda_Y\, h(Y), \qquad
 T[Z] = \lambda_Z\, h(Z),
 </span> where <span class="math inline">h</span> shuffles the three letters and each <span class="math inline">\lambda</span> is a plain number. In group language: the channel leaves the structure we built invariant, mapping the representation onto itself instead of dissolving it. Geometrically: axes go to axes, possibly shrunk, never smeared. These are the <em>Clifford channels</em>.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
 <p>So a Clifford channel is two pieces of data. The skeleton <span class="math inline">h</span>: one of the six ways to shuffle three letters, a finite list. And three numbers <span class="math inline">\lambda_X, \lambda_Y, \lambda_Z</span>: one dial per axis. The requirement <span class="math inline">T[I] = I</span> is our standing rule that the centre stays fixed, nothing new. The dials, though, are less free than they look. A channel maps states to states, and since every Hermitian matrix is a real combination of states, it maps Hermitian to Hermitian; with all four basis matrices Hermitian, each <span class="math inline">\lambda</span> must be <em>real</em>. Feeding in the pure state <span class="math inline">\tfrac12(I + X)</span> produces <span class="math inline">\tfrac12(I + \lambda_X\, h(X))</span>, which is a legal state only if <span class="math inline">|\lambda_X| \leq 1</span>: dials live between <span class="math inline">-1</span> and <span class="math inline">1</span>. Hold on to the reality of the dials, by the way. It looks like a convenience. At the end of the section it will reveal itself as a symmetry with a price tag attached.</p>
-<p>Necessary is not sufficient, and honesty requires the flag: the villain of the previous section, complete positivity, patrols this family too. The old checklist splits here exactly as it always has: normalization is built in (<span class="math inline">T[I] = I</span>, and traces are preserved by the label bookkeeping), while the positivity half is the fee. Not every setting of skeleton and dials is a lawful channel, and no amount of tidy bookkeeping waives that fee. What the small room changes is that the fee can actually be paid. For the one channel this section is hunting, we will exhibit lawfulness outright, no criterion needed.</p>
+<p>Necessary is not sufficient, and honesty requires the flag: the villain of the previous section, complete positivity, patrols this family too. The old checklist splits here exactly as it always has: normalization is built in (<span class="math inline">T[I] = I</span>, and traces are preserved by the label bookkeeping), while the positivity half is the fee. Not every setting of skeleton and dials is a lawful channel, and no amount of tidy bookkeeping waives that fee. What the small room changes is how the fee gets paid: by inspection, not by an estimate. For the one channel this section is hunting, we will exhibit lawfulness outright, no criterion needed.</p>
 <div id="fig-clifford-grid" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-clifford-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -2028,7 +2093,7 @@ Figure&nbsp;6: The Clifford family, sketched inside the space it lives in. The b
 T[\rho] \;=\; \tfrac12\; U \rho\, U^\dagger
 \;+\; \tfrac14\; (XU)\, \rho\, (XU)^\dagger
 \;+\; \tfrac14\; (YU)\, \rho\, (YU)^\dagger .
-</span> In words: flip a three-sided coin with weights one half, one quarter, one quarter, and depending on the outcome apply one of three <em>rotations</em> to the qubit: <span class="math inline">U</span>, or <span class="math inline">U</span> followed by an <span class="math inline">X</span>-flip, or <span class="math inline">U</span> followed by a <span class="math inline">Y</span>-flip. That is the entire channel. A mixture of unitaries is a channel beyond any possible doubt: each branch is reversible physics, and forgetting the outcome of a coin flip cannot break positivity, complete or otherwise. Lawfulness by inspection. The obstacle that stopped the Jordan block in the general problem dissolves, in the small room, into a coin and three rotations.</p>
+</span> In words: flip a three-sided coin with weights one half, one quarter, one quarter, and depending on the outcome apply one of three <em>rotations</em> to the qubit: <span class="math inline">U</span>, or <span class="math inline">U</span> followed by an <span class="math inline">X</span>-flip, or <span class="math inline">U</span> followed by a <span class="math inline">Y</span>-flip. That is the entire channel. A mixture of unitaries is a channel beyond any possible doubt: each branch is reversible physics, and forgetting the outcome of a coin flip cannot break positivity, complete or otherwise. Lawfulness by inspection. The fee the general construction paid with a shrinking factor and a Choi-matrix estimate is paid here, in the small room, with a coin and three rotations.</p>
 <details class="aside">
 <summary>The coin and the three rotations, worked out</summary>
 <p>Two steps: split <span class="math inline">T</span> into a rotation followed by a shrink, then write the shrink as a coin flip.</p>
