@@ -1,24 +1,74 @@
 ## Rebuilding the qubit from the bit {#sec-paulis}
 
-Look once more at the Bloch ball of @fig-bloch, because something
-classical is hiding in plain sight. The two states of an ordinary
-bit sit at the poles. The straight line between them, running
-through the centre, is the entire state space of the classical bit:
-the segment from the very start of this post, with its two certain
-ends and its ignorant middle. The quantum ball did not replace the
-classical picture. It grew *around* it.
+Two settings are closed, and it is worth reading the scoreboard
+before opening a third. Both times the same skeleton carried the
+argument: split the copier as $P + N$, watch the cross terms die,
+and read the largest order off the size of the space $N$ has to
+wander in. Classically that space was the set of deviations from
+the grey centre, of dimension $d - 1$. Quantum mechanically it was
+the traceless operators, of dimension $d^2 - 1$. Both bounds were
+reached, and both times the part of the argument with teeth was not
+the order but the lawfulness check, non-negative entries in one
+world and complete positivity in the other, paid off by shrinking
+the nilpotent part until the check went through.
 
-That is worth taking seriously, because it suggests a way into the
-smaller room the previous section went looking for. Attacking the
-space of all quantum channels head-on earned us an upper bound and a
-villain, complete positivity. So this time we go the other way
-around. Start from the classical bit, the smallest state space we
-own, and take the smallest step that turns it quantum, keeping both
-hands on the algebra the whole way. By the end of the section that
-small step will have produced a coordinate system for the qubit, a
-family of channels that respects those coordinates, and a
-rederivation of the three-step eraser of @fig-bloch-root: not pulled
-from a hat this time, but designed, with every choice visible.
+|  | Classical | Quantum | Clifford |
+|:--|:--|:--|:--|
+| Copiers considered | bistochastic matrices | channels fixing the centre $I/d$ | a rigid subfamily, built below |
+| Free parameters | $(d-1)^2$ | $(d^2-1)^2$ | a finite choice, plus $d^2 - 1$ dials |
+| The condition with teeth | non-negative entries | complete positivity | complete positivity, as one explicit matrix |
+| Largest order $k$ | $d - 1$ | $d^2 - 1$ | ? |
+| Reached by | a nilpotent $N$ on the deviations, scaled gently | a nilpotent $N$ on the traceless operators, shrunk until the Choi matrix stays positive | ? |
+| Seen in action | $d = 3$, two steps (@fig-root-d3) | $d = 2$, three steps (@fig-bloch-root) | ? |
+
+: The scoreboard after two settings. The third column is this
+section's and the next one's to fill. {#tbl-scoreboard}
+
+So why open a third column when the second is closed? Because the
+quantum construction proves the number and hides the reason. A
+Jordan block on the traceless operators, shrunk by a factor small
+enough to keep the Choi matrix positive, is an existence proof. It
+says that $d^2 - 1$ steps of room are there and nothing about where
+they come from: you cannot watch the erasure take one axis at a
+time, and past the qubit you cannot write the channel down by hand.
+The family this section builds, the Clifford channels, is the
+smallest room in which the mechanism sits in plain view. Inside it
+the non-commutativity of quantum mechanics is packaged as
+bookkeeping on a finite grid of labels, the root problem turns into
+a board game on that grid, and the villain acquires a face:
+complete positivity becomes the positivity of one matrix whose
+entries you can read off the channel. Nor is the family a toy
+invented for the occasion. The bit-flip, dephasing and depolarizing
+noise models that quantum error correction is built to fight are
+all members, so the question of how slowly such noise can erase has
+standing of its own. (It is also where the question first gave way,
+historically; the closing section tells that story.) And the reason
+to care is the surprise promised in the hook. Rigidity turns out to
+cost almost nothing: in prime dimensions the family gives up a
+factor of two against the full quantum bound, and nothing more.
+Watching where that factor comes from, and why it is not a factor
+of a hundred, is the rest of the post.
+
+Where should the building start? Look once more at the Bloch ball
+of @fig-bloch, because something classical is hiding in plain
+sight. The two states of an ordinary bit sit at the poles. The
+straight line between them, running through the centre, is the
+entire state space of the classical bit: the segment from the very
+start of this post, with its two certain ends and its ignorant
+middle. The quantum ball did not replace the classical picture. It
+grew *around* it.
+
+That is worth taking seriously, because it says which way round to
+build. The previous section went at the space of all quantum
+channels from the top and got its number by shrinking a block until
+an inequality held. This time we go the other way around. Start
+from the classical bit, the smallest state space we own, and take
+the smallest step that turns it quantum, keeping both hands on the
+algebra the whole way. By the end of the section that small step
+will have produced a coordinate system for the qubit, a family of
+channels that respects those coordinates, and a rederivation of the
+three-step eraser of @fig-bloch-root: not pulled from a hat this
+time, but designed, with every choice visible.
 
 Begin with the bit, dressed in matrix clothes. A classical bit is a
 probability $p$ of reading $0$ and $1 - p$ of reading $1$, and its
@@ -292,7 +342,7 @@ normalization is built in ($T[I] = I$, and traces are preserved by
 the label bookkeeping), while the positivity half is the fee. Not
 every setting of skeleton and dials is a lawful channel, and no
 amount of tidy bookkeeping waives that fee. What the small room
-changes is that the fee can actually be paid.
+changes is how the fee gets paid: by inspection, not by an estimate.
 For the one channel this section is hunting, we will exhibit
 lawfulness outright, no criterion needed.
 
@@ -471,8 +521,9 @@ or $U$ followed by a $Y$-flip. That is the entire channel. A mixture
 of unitaries is a channel beyond any possible doubt: each branch is
 reversible physics, and forgetting the outcome of a coin flip cannot
 break positivity, complete or otherwise. Lawfulness by inspection.
-The obstacle that stopped the Jordan block in the general problem
-dissolves, in the small room, into a coin and three rotations.
+The fee the general construction paid with a shrinking factor and
+a Choi-matrix estimate is paid here, in the small room, with a coin
+and three rotations.
 
 ```{=html}
 <details class="aside">
