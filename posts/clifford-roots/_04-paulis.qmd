@@ -97,8 +97,14 @@ multiply the matrices and watch the labels. $Z \cdot Z = I$, which
 is $1 + 1 = 0$. $I \cdot Z = Z$, which is $0 + 1 = 1$.
 Multiplication upstairs is addition downstairs, exactly, with
 nothing left over. An assignment with this property is called a
-*representation* of the group. For the moment this is idle
-bookkeeping. It is also the seed of everything below.
+*representation* of the group. Nor is the label on $Z$ a choice we
+made. Read down its diagonal: $+1$ at the outcome $0$, $-1$ at the
+outcome $1$, the *parity* $(-1)^x$ of the outcome $x$, while the
+diagonal of $I$ is the constant $(-1)^{0 \cdot x}$. The label is the
+exponent $b$ in $(-1)^{bx}$, and multiplying the matrices multiplies
+these entries, which adds the exponents. The representation was
+handed to us by the bit. For the moment this is idle bookkeeping.
+It is also the seed of everything below.
 
 To watch the bookkeeping earn its keep, take the one copier family
 we have already solved and translate it. The two-state copier from
@@ -125,41 +131,60 @@ coordinates is a rule for the labels plus a number per label*. The
 rest of the section is that sentence, rerun with better
 ingredients.
 
-Now count what the qubit needs. The previous section counted
-$d^2 - 1 = 3$ real numbers for a qubit state, and the count came
-from the $d^2 = 4$ real dimensions of Hermitian $2 \times 2$
-matrices, with one dimension spent on fixing the trace. A basis for
-*everything*, then, needs four matrices, and if the label
-bookkeeping is to keep working, the label set needs four elements.
-The smallest possible step is to double the group,
-$$
-\mathbb{Z}_2 \;\longrightarrow\; \mathbb{Z}_2 \times \mathbb{Z}_2 ,
-$$
-labels $(a, b)$ with each coordinate adding modulo $2$ on its own.
-(The doubled group has a name of its own, the *Klein four-group*; we
-will simply keep writing $\mathbb{Z}_2 \times \mathbb{Z}_2$.)
-
-Where should the second generator come from? We have used the
-*states* of the bit; we have barely used its one interesting
-*operation*. The flip. In the classical family above it sits at the
-corner $a = 1$, the copier that flips every bit with certainty, and
-its matrix is
+Is this the only way $\mathbb{Z}_2$ can sit inside the $2 \times 2$
+matrices? It is not, and the second way needs no new ingredient. So
+far the addition table of $\mathbb{Z}_2$ has been applied to the
+labels. Apply it to the *outcomes* instead: adding $1$ sends the
+outcome $0$ to $1$ and the outcome $1$ to $0$. That is the flip. On
+a probability vector it moves the weight of each outcome onto the
+other, $(p_0, p_1) \mapsto (p_1, p_0)$, and the matrix that does
+this is
 $$
 X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix},
 $$
 a plain permutation matrix. It is Hermitian, and $X^2 = I$: flipping
-twice is doing nothing. A second matrix of order two, independent of
-the first. So the four labels get their candidate matrices in the
-obvious way,
+twice is doing nothing, which is $1 + 1 = 0$ once more. So
+$a \mapsto X^a$ is a second representation of the very same group,
+and it was there from the start, in the group law itself. In the
+classical family above it sits at the corner $a = 1$, the copier
+that flips every bit with certainty.
+
+Notice how the two representations kept apart in the classical
+world. The states of the bit live in the span of $I$ and $Z$. The
+copiers live in the span of $I$ and $X$: the two-state copier $S$
+is the matrix $(1 - a)\, I + a\, X$, a mixture of doing nothing and
+flipping. One representation spans what the bit *is*, the other
+what can be *done* to it, and the classical world never puts the
+two side by side. The qubit is where they meet as equals: both
+become operators on the same two-dimensional space, and both are
+Hermitian, so both become observables too. Put them together and
+the labels pair up,
+$$
+\mathbb{Z}_2 \;\longrightarrow\; \mathbb{Z}_2 \times \mathbb{Z}_2 ,
+$$
+a label $(a, b)$ that says whether to flip and whether to read the
+parity, each coordinate adding modulo $2$ on its own. (Physicists
+call this product the *phase space* of the bit, by analogy with the
+position-and-momentum pairs of mechanics, and the symplectic form
+that a phase space carries is about to show up as a sign. The
+doubled group also has a name of its own, the *Klein four-group*; we
+will simply keep writing $\mathbb{Z}_2 \times \mathbb{Z}_2$.) The
+four labels get their candidate matrices in the obvious way,
 $$
 \sigma(a, b) = X^a Z^b :
 \qquad
 \sigma(0,0) = I, \quad \sigma(1,0) = X, \quad \sigma(0,1) = Z,
 \quad \sigma(1,1) = XZ ,
 $$
-and only one of the four, the product $XZ$, is genuinely new.
-Before writing it out, though, there is a question that sounds
-pedantic until you take it seriously.
+and only one of the four, the product $XZ$, is genuinely new. Now
+count. The previous section counted $d^2 - 1 = 3$ real numbers for
+a qubit state, and the count came from the $d^2 = 4$ real
+dimensions of Hermitian $2 \times 2$ matrices, with one dimension
+spent on fixing the trace. A basis for *everything* needs four
+matrices, and four is exactly what the two representations produced
+between them. Nothing had to be added, and nothing is left over.
+Before writing the new matrix out, though, there is a question that
+sounds pedantic until you take it seriously.
 
 Could the luck of the classical stage hold? There, multiplication
 matched addition perfectly. Could four matrices be chosen, these or
@@ -214,7 +239,10 @@ same reason (powers of a single matrix always commute with each
 other). Nothing was special about $2 \times 2$ either: in any
 dimension, a phase-free representation of an abelian label set can
 never supply a full operator basis. The phase is compulsory,
-everywhere.
+everywhere. In the language of the two representations: had $X$ and
+$Z$ commuted, the four products $X^a Z^b$ would span a commutative
+algebra, and no commutative algebra is all of the $2 \times 2$
+matrices.
 
 ```{=html}
 </details>
@@ -235,7 +263,9 @@ ZX =
 $$
 The same matrix, with opposite signs: $XZ = -ZX$. The labels added
 the same way both times, $(1,0) + (0,1) = (1,1)$, but the matrices
-remember the *order*, and they file that memory in a sign.
+remember the *order*, and they file that memory in a sign. (That
+sign is the symplectic form the phase space was promised. For a bit
+it is the whole of it: two labels either commute or they do not.)
 
 One cosmetic decision before the full table. The fourth matrix $XZ$
 is the odd sibling: $X$ and $Z$ are Hermitian, but transposing and
