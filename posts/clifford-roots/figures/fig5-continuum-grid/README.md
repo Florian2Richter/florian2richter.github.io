@@ -45,7 +45,7 @@ the left is the same colour as its matching point on the right
 identity neutral grey), so the axis<->point map is read off by colour.
 
 **Caveat honoured:** the figure illustrates only `h` (the relabelling).
-The other half of a Clifford channel, the amplitudes $\lambda$ that
+The other half of a Clifford channel, the scale factors $\lambda$ that
 stretch and kill coordinates, is not drawn, so neither figure nor
 caption implies a Clifford channel is *just* an axis permutation. This is
 the `d = 2` instance; the right panel generalises to a `d x d` grid of

@@ -11,7 +11,7 @@ cleanly in half, and that factor of two is the punchline the whole
 post has been walking toward.
 
 The play itself you have already watched. Build labelled matrices,
-keep the channels that respect the labels, reduce to walks and dials,
+keep the channels that respect the labels, reduce to walks and scale factors,
 then design the slowest possible eraser. Only the stage grows.
 
 Start with the cast. A system with $d$ levels has a $d \times d$
@@ -133,7 +133,7 @@ $$
 T[\mathbf{w}(\eta)] \;=\; \lambda(\eta)\, \mathbf{w}(h(\eta)),
 \qquad \lambda(0,0) = 1,
 $$
-with $h$ a relabelling of the plane fixing $(0,0)$, and one dial
+with $h$ a relabelling of the plane fixing $(0,0)$, and one scale factor
 $\lambda(\eta)$ per label, complex now, sizes at most one. (At the
 qubit stage we earned that size bound by feeding a state through the
 channel. Here the labelled matrices are no longer Hermitian, and that
@@ -154,16 +154,16 @@ every qubit shuffle passed for free. For $d = 3$ it is
 $8 \cdot 6 = 48$, against $8! = 40320$ shuffles of the eight nonzero
 labels: the collapse promised last section.)
 
-The dials are constrained the same way they were for the qubit, with
+The scale factors are constrained the same way they were for the qubit, with
 the mirror doing the work Hermiticity used to do. A channel maps
 Hermitian to Hermitian (real combinations of states, as before), and
 chasing that through the mirror symmetry gives the *mirror rule*:
 $$
 \lambda(-\eta) \;=\; \overline{\lambda(\eta)} .
 $$
-The dial at a label and the dial at its mirror are complex
+The scale factor at a label and the scale factor at its mirror are complex
 conjugates. At $d = 2$, where $-\eta = \eta$, this collapses to
-"dials are real", which is exactly what we found. And complete
+"scale factors are real", which is exactly what we found. And complete
 positivity is still to be checked: not every $(h, \lambda)$ is a
 lawful channel. The fee
 gets paid at the end of the section, with the same $\varepsilon$
@@ -192,7 +192,7 @@ This is what the square-root grooming was for: the raw products
 $X^aZ^b$ obey the same law only up to a trailing phase, and the
 $\tau$ soaks it up exactly.
 
-Now the rule for the dials. A channel preserves Hermitian matrices,
+Now the rule for the scale factors. A channel preserves Hermitian matrices,
 hence adjoints: $T[A^\dagger] = T[A]^\dagger$ for every $A$. Apply
 both sides to $A = \mathbf{w}(\eta)$. The left side is
 $T[\mathbf{w}(-\eta)] = \lambda(-\eta)\,\mathbf{w}(h(-\eta))
@@ -209,7 +209,7 @@ $\lambda(-\eta) = \overline{\lambda(\eta)}$.
 
 The reduction now carries over word for word, as promised. Apply $T$
 repeatedly and nothing new is ever created: each label walks, one
-step of $h$ per application, and the dials multiply along the walk:
+step of $h$ per application, and the scale factors multiply along the walk:
 $$
 T^{\,n}[\mathbf{w}(\eta)]
 \;=\;
@@ -223,7 +223,7 @@ of $\lambda$. Since $h$ is invertible it chops the $d^2 - 1$ nonzero
 labels into closed cycles, and the game is suddenly a board game:
 mark some squares with zeros, subject to the rules, and ask how long
 the luckiest token stays alive, where a token dies on the turn it
-departs a marked square, since the dial is paid on departure. Two
+departs a marked square, since the scale factor is applied on departure. Two
 questions decide everything. How long can a cycle be? And how few
 marked squares can we get away with?
 
@@ -440,8 +440,8 @@ ring and dies only on turn $d^2 - 1$, the turn it must depart the
 zero itself. For the qubit, that is exactly what happened.
 
 Here the second debt falls due. Zeros of $\lambda$ cannot be placed
-one at a time, because the mirror rule pairs the dials up:
-$|\lambda(-\eta)| = |\lambda(\eta)|$, so where one dial dies its
+one at a time, because the mirror rule pairs the scale factors up:
+$|\lambda(-\eta)| = |\lambda(\eta)|$, so where one scale factor dies its
 mirror dies with it. For the qubit this cost nothing, since every
 label was its own mirror. But for odd $d$, a nonzero label and its
 mirror are always *different* points ($\eta = -\eta$ would mean
@@ -471,7 +471,7 @@ mirror rule has taken the qubit's gift back, and it has taken
 exactly a factor of two.
 
 Assemble the channel and settle its legality. Take $h$ the companion
-matrix of a primitive polynomial, and set the dials to
+matrix of a primitive polynomial, and set the scale factors to
 $$
 \lambda(0,0) = 1,
 \qquad
@@ -480,7 +480,7 @@ $$
 \lambda(\eta) = \varepsilon \;\ \text{everywhere else,}
 $$
 with $\varepsilon$ a small positive number. The mirror rule holds
-($\varepsilon$ is real, and mirrors carry equal dials), the walk
+($\varepsilon$ is real, and mirrors carry equal scale factors), the walk
 products die exactly as the arcs dictate, so
 $T^{(d^2-1)/2} = P$ while $T^{(d^2-1)/2 - 1} \neq P$: the token that
 started just after a zero is still alive, carrying
@@ -489,13 +489,13 @@ positivity, the fee the qubit section paid with a coin flip of three
 rotations, is where the Clifford family shows its final virtue: here
 the condition has an explicit face. A Clifford channel is completely
 positive exactly when a single $d^2 \times d^2$ matrix assembled
-from the dials is positive semidefinite, and a classical eigenvalue
+from the scale factors is positive semidefinite, and a classical eigenvalue
 theorem turns that condition into a simple *sufficient condition* on
-the absolute values of the amplitudes:
+the absolute values of the scale factors:
 $$
 \sum_{\eta \neq 0} |\lambda(\eta)| \;\le\; 1 .
 $$
-If the absolute values of the dials sum to at most one, the channel
+If the absolute values of the scale factors sum to at most one, the channel
 is lawful. Our root sets $\lambda = \varepsilon$ on the $d^2 - 3$
 surviving labels, so every $\varepsilon \le \tfrac{1}{d^2 - 3}$
 satisfies the condition, and the order of the root never cared how
@@ -524,7 +524,7 @@ completely positive. For a general channel that matrix is an opaque
 block of numbers. For a Clifford channel, written in Weyl
 coordinates, its entries become explicit. Its rows and
 columns are indexed by the labels, one apiece, and its entries are
-*dial values in disguise*:
+*scale factors in disguise*:
 $$
 M_{\eta\xi} \;=\; c_{\eta\xi}\; \lambda(\eta - \xi),
 \qquad |c_{\eta\xi}| = 1,
@@ -535,7 +535,7 @@ entry is $\lambda(0) = 1$. The *sizes* of the entries,
 $|M_{\eta\xi}| = |\lambda(\eta - \xi)|$, do not see $h$ or the
 phases at all. And $M$ is Hermitian, precisely because of the mirror
 rule. So "is this Clifford channel lawful?" has become "is this one
-matrix of dial values positive semidefinite?", a condition you can
+matrix of scale factors positive semidefinite?", a condition you can
 actually get your hands on.
 
 One dividend arrives before any theorem. A positive semidefinite
@@ -543,7 +543,7 @@ matrix with ones on its diagonal cannot hold an entry of size above
 one: the $2 \times 2$ principal submatrix
 $\bigl(\begin{smallmatrix} 1 & m \\ \bar m & 1 \end{smallmatrix}\bigr)$
 must itself be positive semidefinite, and its determinant is
-$1 - |m|^2$. Every dial value appears as such an entry ($\lambda(\zeta)$
+$1 - |m|^2$. Every scale factor appears as such an entry ($\lambda(\zeta)$
 sits wherever $\eta - \xi = \zeta$), so $|\lambda(\zeta)| \le 1$ for
 every label. That is where the main text's "sizes at most one" comes
 from, and it is complete positivity's doing, not mere positivity's.
@@ -562,7 +562,7 @@ channel is lawful. That is the sufficient condition
 $\sum_{\eta \neq 0} |\lambda(\eta)| \le 1$ of the main text.
 
 Check it against everything we have built. The qubit root of the
-last section had dials $0, \tfrac12, \tfrac12$: the absolute values
+last section had scale factors $0, \tfrac12, \tfrac12$: the absolute values
 sum to exactly $1$, so the condition holds with equality (and, at
 $d = 2$, this sits on the true boundary of legality, as that
 section's footnote recorded). The root above sets
@@ -575,7 +575,7 @@ $\eta \neq 0$ vanishes, the sum is $0$, and there is maximal room in
 every direction.
 
 One honesty note. The condition is sufficient, not necessary:
-amplitudes can violate it and still describe a lawful channel (the
+scale factors can violate it and still describe a lawful channel (the
 identity channel, with every $\lambda(\eta) = 1$, violates it
 grossly and is lawful all the same). The exact boundary is the
 positive semidefiniteness of $M$ itself, and mapping that boundary
@@ -652,7 +652,7 @@ Step back and look at where the room came from. We began with the
 full space of quantum channels, a space whose dimension grows like
 $d^4$, and found the bound $d^2 - 1$. We then threw essentially all
 of that freedom away. What survived was one invertible $2 \times 2$
-matrix over a finite field and a handful of dials, and the
+matrix over a finite field and a handful of scale factors, and the
 achievable order fell only from $d^2 - 1$ to $\tfrac{d^2-1}{2}$. The
 room to divide erasure slowly never lived in the richness of the
 channel family. It lives in the orbit structure of a linear map on a

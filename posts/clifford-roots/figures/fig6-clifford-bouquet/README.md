@@ -6,17 +6,17 @@ nine-parameter continuum). Through the point $P$ inside it (the
 completely depolarizing channel, drawn in the same neutral grey as
 the maximally mixed dot in Figures 1, 3 and 5) runs a bouquet of six
 thin teal needles: the Clifford channels, one sheet per skeleton
-$h$, dials varying continuously along each. All needles pass through
-$P$ because every skeleton with all dials zero is $P$. The identity
+$h$, scale factors varying continuously along each. All needles pass through
+$P$ because every skeleton with all scale factors zero is $P$. The identity
 channel sits at the tip of the identity-skeleton needle, marked
-"id". Needles are longer toward positive dials than negative ones
-(all dials $+1$ is the lawful identity; all dials $-1$ is not
+"id". Needles are longer toward positive scale factors than negative ones
+(all scale factors $+1$ is the lawful identity; all scale factors $-1$ is not
 completely positive).
 
 **Deliberate idealizations** (both carried by the post's caption):
 each sheet is drawn as a 1D needle but is really three-dimensional
-(one dial per axis), and distinct sheets really intersect in more
-than $P$ (once a dial is zero, more than one skeleton describes the
+(one scale factor per axis), and distinct sheets really intersect in more
+than $P$ (once a scale factor is zero, more than one skeleton describes the
 same channel).
 
 **Build.**

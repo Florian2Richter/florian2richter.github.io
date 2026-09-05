@@ -12,7 +12,7 @@ it.[^paper] One caution against a wrong impression the shrinking
 might leave: maximal roots are not condemned to huddle near total
 erasure. In every dimension there are maximal roots sitting at a
 distance from $P$ that does not shrink as the dimension grows, and
-our qubit root, with its two dials at one half, was never a small
+our qubit root, with its two scale factors at one half, was never a small
 perturbation to begin with.
 
 [^paper]: A. Ahlbrecht, F. Richter and R. F. Werner, "How long can

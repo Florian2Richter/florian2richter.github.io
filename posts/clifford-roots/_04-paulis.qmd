@@ -15,7 +15,7 @@ the nilpotent part until the check went through.
 |  | Classical | Quantum | Clifford |
 |:--|:--|:--|:--|
 | Copiers considered | bistochastic matrices | channels fixing the centre $I/d$ | a rigid subfamily, built below |
-| Free parameters | $(d-1)^2$ | $(d^2-1)^2$ | a finite choice, plus $d^2 - 1$ dials |
+| Free parameters | $(d-1)^2$ | $(d^2-1)^2$ | a finite choice, plus $d^2 - 1$ scale factors |
 | The condition with teeth | non-negative entries | complete positivity | complete positivity, as one explicit matrix |
 | Largest order $k$ | $d - 1$ | $d^2 - 1$ | ? |
 | Reached by | a nilpotent $N$ on the deviations, scaled gently | a nilpotent $N$ on the traceless operators, shrunk until the Choi matrix stays positive | ? |
@@ -322,16 +322,16 @@ single labelled matrix.
 
 So a Clifford channel is two pieces of data. The skeleton $h$: one
 of the six ways to shuffle three letters, a finite list. And three
-numbers $\lambda_X, \lambda_Y, \lambda_Z$: one dial per axis. The
+numbers $\lambda_X, \lambda_Y, \lambda_Z$: one scale factor per axis. The
 requirement $T[I] = I$ is our standing rule that the centre stays
-fixed, nothing new. The dials, though, are less free than they look.
+fixed, nothing new. The scale factors, though, are less free than they look.
 A channel maps states to states, and since every Hermitian matrix is
 a real combination of states, it maps Hermitian to Hermitian; with
 all four basis matrices Hermitian, each $\lambda$ must be *real*.
 Feeding in the pure state $\tfrac12(I + X)$ produces
 $\tfrac12(I + \lambda_X\, h(X))$, which is a legal state only if
-$|\lambda_X| \leq 1$: dials live between $-1$ and $1$. Hold on to
-the reality of the dials, by the way. It looks like a convenience.
+$|\lambda_X| \leq 1$: scale factors live between $-1$ and $1$. Hold on to
+the reality of the scale factors, by the way. It looks like a convenience.
 At the end of the section it will reveal itself as a symmetry with a
 price tag attached.
 
@@ -340,7 +340,7 @@ complete positivity, the condition that makes a linear map a
 channel, applies to this family as it did to the whole space. The old checklist splits here exactly as it always has:
 normalization is built in ($T[I] = I$, and traces are preserved by
 the label bookkeeping), while the positivity half is the fee. Not
-every setting of skeleton and dials is a lawful channel, and no
+every setting of skeleton and scale factors is a lawful channel, and no
 amount of tidy bookkeeping waives that fee. What the small room
 changes is how the fee gets paid: by inspection, not by an estimate.
 For the one channel this section is hunting, we will exhibit
@@ -357,9 +357,9 @@ fixed centre. On the right, the label plane on its own: four points.
 The relabelling half $h$ of a Clifford channel is a map on this
 finite grid, drawn here as a 3-cycle of the three nonzero labels
 that leaves the centre untouched; keep an eye on this particular
-cycle, because it returns when we design the root. The dials
+cycle, because it returns when we design the root. The scale factors
 $\lambda$, the other half of the data, are deliberately not drawn: a
-Clifford channel is a relabelling *and* an amplitude per axis, never
+Clifford channel is a relabelling *and* a scale factor per axis, never
 just a permutation.
 
 :::
@@ -372,20 +372,20 @@ $a$: that is the channel $T[\rho] = (1-a)\,\rho + a\,X\rho X$.
 Conjugating by $X$ leaves $X$ itself alone and flips the sign of $Y$
 and of $Z$ (two quick visits to the multiplication table:
 $XYX = -Y$ and $XZX = -Z$), so the mixture has skeleton
-$h = \mathrm{id}$ and dials $(1,\; 1-2a,\; 1-2a)$. Restricted to the
+$h = \mathrm{id}$ and scale factors $(1,\; 1-2a,\; 1-2a)$. Restricted to the
 vertical diameter it multiplies $Z$ by $1 - 2a$: exactly the
 classical copier we translated at the start. The lift is faithful.
 
 Second, the reversible members. Conjugation by $X$ alone is the case
-$a = 1$: dials $(1, -1, -1)$, nothing shrunk, two axes reflected.
+$a = 1$: scale factors $(1, -1, -1)$, nothing shrunk, two axes reflected.
 Conjugation by the Hadamard gate $H = (X + Z)/\sqrt{2}$, the unitary
 that exchanges the roles of $X$ and $Z$, gives the first nontrivial
-skeleton: $h$ swaps $X \leftrightarrow Z$ and fixes $Y$, with dials
-$(1, -1, 1)$. Negative dials are legal, and reversible Clifford
+skeleton: $h$ swaps $X \leftrightarrow Z$ and fixes $Y$, with scale factors
+$(1, -1, 1)$. Negative scale factors are legal, and reversible Clifford
 channels are precisely the famous Clifford gates, met here in
 channel clothing.
 
-Third, total erasure itself. Set every dial to zero. Each Pauli
+Third, total erasure itself. Set every scale factor to zero. Each Pauli
 dies, every Bloch vector is sent to the origin, and $T$ is the
 completely depolarizing channel $P$ itself, whatever the skeleton.
 The object we want roots of is a member of the family. The hunt can
@@ -399,22 +399,22 @@ T^2[X] \;=\; \lambda_X\, T[h(X)]
 $$
 and likewise for the other letters. Nothing new is ever created.
 Each letter *walks*, one step along $h$ per application of the
-channel. And the dials *multiply along the walk*: after $n$ steps a
-letter carries the product of the $n$ dials it paid on departure.
+channel. And the scale factors *multiply along the walk*: after $n$ steps a
+letter carries the product of the $n$ scale factors it collected on departure.
 Meanwhile $P$ is the channel that kills all three letters. So
 $$
 T^n = P
 \quad\Longleftrightarrow\quad
-\text{every letter's $n$-step product of dials has died.}
+\text{every letter's $n$-step product of scale factors has died.}
 $$
 The channel question has become a question about walks on three
 points and products of numbers along them. This is the reduction the
 whole post has been steering toward, and it will survive word for
 word when three letters become $d^2 - 1$.
 
-One consequence is immediate, and it echoes the classical bit. Dials
+One consequence is immediate, and it echoes the classical bit. Scale factors
 are real numbers, and a product of nonzero numbers is never zero. A
-walk's product dies only by stepping on a *zero dial*. Erasure, in
+walk's product dies only by stepping on a *zero scale factor*. Erasure, in
 this family, is not a gradual conspiracy of small numbers. It
 happens exactly where the zeros are.
 
@@ -422,14 +422,14 @@ And now the hunt fits in three short paragraphs, because a shuffle
 of three letters has only three possible shapes.
 
 The skeleton could fix all three letters. Then each letter walks in
-place, multiplying its own dial over and over, and dying forces that
-dial to *be* zero. All three dials zero means $T = P$ from the very
+place, multiplying its own scale factor over and over, and dying forces that
+scale factor to *be* zero. All three scale factors zero means $T = P$ from the very
 start. This is the classical bit's tragedy, tripled: no roots live
 here.
 
 The skeleton could swap two letters and fix the third. The fixed
 letter needs its own zero, as before. The swapped pair walk into
-each other, so at least one of their two dials must vanish, and then
+each other, so at least one of their two scale factors must vanish, and then
 both of those walks are dead within two steps. Order two at best: a
 square root of erasure, the quantum sibling of the classical
 $d = 3$ construction, and nothing more.
@@ -437,7 +437,7 @@ $d = 3$ construction, and nothing more.
 Or the skeleton could cycle all three letters. Now a *single* zero
 serves everybody, because every walk eventually passes through it,
 and the walks reach it at different times. Put the zero on $X$, keep
-the other two dials alive at one half:
+the other two scale factors alive at one half:
 $$
 T[X] = 0, \qquad T[Y] = \tfrac12\, X, \qquad T[Z] = \tfrac12\, Y .
 $$
@@ -455,7 +455,7 @@ step two is the witness. Order exactly three.
 Three is the ceiling for the entire family, because the survey was
 exhaustive: no shuffle of three letters offers a longer walk to a
 zero. And three is $d^2 - 1$ at $d = 2$. Read that twice. The tiny,
-rigid family, six skeletons and three dials, reaches the same
+rigid family, six skeletons and three scale factors, reaches the same
 maximal order that the whole quantum machinery allows. Nothing was
 lost by retreating into the small room (@fig-clifford-bouquet).
 
@@ -467,13 +467,13 @@ The Clifford family, sketched inside the space it lives in. The blob
 is the full continuum of unital qubit channels, nine parameters
 wide. The Clifford channels are not a discrete scatter of points
 inside it but finitely many low-dimensional sheets, one per
-skeleton, six for a qubit, with the dials varying continuously along
+skeleton, six for a qubit, with the scale factors varying continuously along
 each; every sheet passes through $P$, since any skeleton with all
-its dials at zero is total erasure, and the identity channel sits at
+its scale factors at zero is total erasure, and the identity channel sits at
 the tip of the identity-skeleton sheet. The sketch is idealized in
 two ways: each sheet is drawn as a line but is really
-three-dimensional, one dial per axis, and distinct sheets can share
-more than the point $P$, because once a dial is zero the dead letter
+three-dimensional, one scale factor per axis, and distinct sheets can share
+more than the point $P$, because once a scale factor is zero the dead letter
 no longer remembers which skeleton moved it.
 
 :::
@@ -487,10 +487,10 @@ cycle itself is the very one drawn on the right panel of
 @fig-clifford-grid. What arrived last section as a rabbit from a hat
 is, in coordinates, a two-line design: spend one zero, take the
 longest walk. (The halves are a choice with a ceiling of their own:
-the two surviving dials cannot sum to more than one, so ours sit
+the two surviving scale factors cannot sum to more than one, so ours sit
 exactly on the boundary of what is allowed.[^qubit-maps])
 
-[^qubit-maps]: Deciding exactly which dial settings yield a lawful
+[^qubit-maps]: Deciding exactly which scale factors yield a lawful
 channel is a solved problem for qubits: M. B. Ruskai, S. Szarek and
 E. Werner, "An analysis of completely-positive trace-preserving maps
 on $2 \times 2$ matrices", *Linear Algebra and its Applications*
@@ -553,11 +553,11 @@ $V[\rho] = U \rho\, U^\dagger$ for this rotation: a lawful channel,
 because it is unitary.
 
 *The shrink.* Let $D$ be the map with $D[X] = \tfrac12 X$,
-$D[Y] = \tfrac12 Y$, $D[Z] = 0$: dials one half on the $x$ and $y$
+$D[Y] = \tfrac12 Y$, $D[Z] = 0$: scale factors one half on the $x$ and $y$
 axes, zero on $z$, identity skeleton. Try a mixture of doing
 nothing, an $X$-flip, and a $Y$-flip, with weights $p_0, p_1, p_2$.
-Conjugation by $X$ has dials $(1, -1, -1)$ and conjugation by $Y$
-has dials $(-1, 1, -1)$, so the mixture has dials
+Conjugation by $X$ has scale factors $(1, -1, -1)$ and conjugation by $Y$
+has scale factors $(-1, 1, -1)$, so the mixture has scale factors
 $$
 \bigl(p_0 + p_1 - p_2,\;\; p_0 - p_1 + p_2,\;\; p_0 - p_1 - p_2\bigr).
 $$
@@ -597,9 +597,9 @@ label $(1,0)$. What is the negative of that label? In arithmetic
 modulo $2$, where $1 + 1 = 0$, every label is its own negative:
 $-(1,0) = (1,0)$. That innocent-looking fact has been working for us
 all section. The general rule, visible in the next section, is that
-the dials at a label and at its negative are complex conjugates of
+the scale factors at a label and at its negative are complex conjugates of
 one another; here every label is its own mirror, which is why our
-dials merely had to be real, and why a single zero came for the
+scale factors merely had to be real, and why a single zero came for the
 price of one. For odd $d$, a label and its negative are *different*
 points, and every zero will drag its mirror partner down with it:
 two zeros, minimum, cutting the longest walk short. That
