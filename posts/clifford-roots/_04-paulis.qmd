@@ -186,11 +186,12 @@ between them. Nothing had to be added, and nothing is left over.
 Before writing the new matrix out, though, there is a question that
 sounds pedantic until you take it seriously.
 
-Could the luck of the classical stage hold? There, multiplication
-matched addition perfectly. Could four matrices be chosen, these or
-any others, so that the match stays perfect *and* the four still
-span everything? The answer is no, and the reason is a counting
-argument, not bad luck. Labels commute:
+Each representation on its own was exact: multiplication matched
+addition with nothing left over. Can the pair stay exact together?
+Could four matrices be chosen, these or any others, so that the
+match stays perfect *and* the four still span everything? The
+answer is no, and the reason is a counting argument, not an
+accident of $X$ and $Z$. Labels commute:
 $(a,b) + (a',b') = (a',b') + (a,b)$. If multiplication upstairs
 copied addition downstairs exactly, the four matrices would have to
 commute with one another too. But commuting is contagious: a matrix
