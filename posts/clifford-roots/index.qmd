@@ -63,9 +63,11 @@ Enjoy the read.
 
 {{< include _04-paulis.qmd >}}
 
-{{< include _05-clifford-higher-dimensions.qmd >}}
+{{< include _05-clifford-qubit.qmd >}}
 
-{{< include _06-whats-next.qmd >}}
+{{< include _06-clifford-higher-dimensions.qmd >}}
+
+{{< include _07-whats-next.qmd >}}
 
 ```{=html}
 <p class="view-counter">Page views: <span id="view-count">&hellip;</span></p>

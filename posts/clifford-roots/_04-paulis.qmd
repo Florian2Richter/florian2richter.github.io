@@ -21,8 +21,8 @@ the nilpotent part until the check went through.
 | Reached by | a nilpotent $N$ on the deviations, scaled gently | a nilpotent $N$ on the traceless operators, shrunk until the Choi matrix stays positive | ? |
 | Seen in action | $d = 3$, two steps (@fig-root-d3) | $d = 2$, three steps (@fig-bloch-root) | ? |
 
-: The scoreboard after two settings. The third column is this
-section's and the next one's to fill. {#tbl-scoreboard}
+: The scoreboard after two settings. The third column is for the
+two sections that follow. {#tbl-scoreboard}
 
 So why open a third column when the second is closed? Because the
 quantum construction settles the number and shows no structure. A
@@ -31,9 +31,9 @@ you care to pick, shrunk until the Choi matrix stays positive, is an
 existence proof. It certifies that $d^2 - 1$ steps of room are there
 and is indifferent to everything else: the axes are arbitrary, and
 lawfulness is settled by an inequality rather than seen. The family
-this section builds, the Clifford channels, is a room small enough
-for the mechanism to sit in plain view. Inside it the
-non-commutativity of quantum mechanics is packaged as bookkeeping on
+this section and the next one build, the Clifford channels, is a
+room small enough for the mechanism to sit in plain view. Inside it
+the non-commutativity of quantum mechanics is packaged as bookkeeping on
 a finite grid of labels, the root problem turns into a board game on
 that grid, and complete positivity, the condition that separates
 channels from mere linear maps, becomes the positivity of one matrix
@@ -64,11 +64,11 @@ channels from the top and got its number by shrinking a block until
 an inequality held. This time we go the other way around. Start
 from the classical bit, the smallest state space we own, and take
 the smallest step that turns it quantum, keeping both hands on the
-algebra the whole way. By the end of the section that small step
-will have produced a coordinate system for the qubit, a family of
-channels that respects those coordinates, and a rederivation of the
-three-step eraser of @fig-bloch-root: not pulled from a hat this
-time, but designed, with every choice visible.
+algebra the whole way. By the end of this section that small step
+will have produced a coordinate system for the qubit; the next one
+hangs a family of channels on those coordinates and rederives the
+three-step eraser of @fig-bloch-root, not pulled from a hat this
+time but designed, with every choice visible.
 
 Begin with the bit, dressed in matrix clothes. A classical bit is a
 probability $p$ of reading $0$ and $1 - p$ of reading $1$, and its
@@ -190,23 +190,18 @@ Each representation on its own was exact: multiplication matched
 addition with nothing left over. Can the pair stay exact together?
 Could four matrices be chosen, these or any others, so that the
 match stays perfect *and* the four still span everything? The
-answer is no, and the reason is a counting argument, not an
-accident of $X$ and $Z$. Labels commute:
-$(a,b) + (a',b') = (a',b') + (a,b)$. If multiplication upstairs
-copied addition downstairs exactly, the four matrices would have to
-commute with one another too. But commuting is contagious: a matrix
-that commutes with all four basis matrices commutes with everything
-they span, and their span was supposed to be *all* $2 \times 2$
-matrices. A matrix that commutes with every matrix can only be a
-multiple of the identity. So all four would be stretched copies of
-$I$, spanning a single dimension rather than four. Phase-free
-multiplication and a full basis cannot coexist. Something has to
-give, and in quantum mechanics exactly one thing is allowed to give:
-a number out front. The matrices may multiply like the labels *up
-to a scalar factor*. That factor is not a blemish on an otherwise
-clean story. It is the mechanism by which four commuting labels
-manage to span a non-commuting world, and by the end of the post it
-will be carrying the answer.
+answer is no, and the obstruction is a counting argument rather
+than an accident of $X$ and $Z$. Labels commute, so an exact match
+would force the four matrices to commute with one another as well,
+and four commuting matrices are far too tame to span everything;
+the aside below runs that out. Phase-free multiplication and a full
+basis cannot coexist, so something has to give, and in quantum
+mechanics exactly one thing is allowed to give: a number out front.
+The matrices may multiply like the labels *up to a scalar factor*.
+That factor is not a blemish on an otherwise clean story. It is the
+mechanism by which four commuting labels manage to span a
+non-commuting world, and by the end of the post it will be carrying
+the answer.
 
 ```{=html}
 <details class="aside">
@@ -315,324 +310,3 @@ phase is the native quantum notion of realizing a symmetry, not a
 defect of our particular matrices. And the aside above says the
 projective escape hatch is not merely permitted here. It is the one
 door that counting left open.
-
-Coordinates in hand, we can finally say which copiers deserve them.
-A channel is linear, so it is pinned down by what it does to a
-basis; this is the move we used on the corners of the simplex, and
-we now use it on the quartet. A generic qubit channel that fixes the
-centre sprays each Pauli across all three Pauli directions, a
-$3 \times 3$ grid of numbers, nine parameters with no structure to
-hold on to, and the coordinates we just built play no role in it
-whatsoever. The channels worth keeping are the ones that *respect
-the labels*, sending each Pauli to a multiple of a single Pauli:
-$$
-T[I] = I, \qquad
-T[X] = \lambda_X\, h(X), \qquad
-T[Y] = \lambda_Y\, h(Y), \qquad
-T[Z] = \lambda_Z\, h(Z),
-$$
-where $h$ shuffles the three letters and each $\lambda$ is a plain
-number. In group language: the channel leaves the structure we built
-invariant, mapping the representation onto itself instead of
-dissolving it. Geometrically: axes go to axes, possibly shrunk,
-never smeared. These are the *Clifford channels*.[^clifford-name]
-
-[^clifford-name]: The name comes from their reversible cousins: the
-Clifford gates of quantum computing are the unitaries that map Pauli
-operators to Pauli operators under conjugation, and they are the
-backbone of the stabilizer formalism of quantum error correction
-(Nielsen and Chuang, chapter 10). The channels here are the
-open-system version of the same idea. Not to be confused with
-Clifford *algebras*, another legacy of the same nineteenth-century
-geometer, William Kingdon Clifford. One further caution: in recent
-literature "Clifford channel" often means a channel implementable by
-stabilizer (Clifford) circuits, a related but different class;
-throughout this post the term is used in the thesis's sense, a
-channel sending each labelled matrix to a scalar multiple of a
-single labelled matrix.
-
-So a Clifford channel is two pieces of data. The skeleton $h$: one
-of the six ways to shuffle three letters, a finite list. And three
-numbers $\lambda_X, \lambda_Y, \lambda_Z$: one scale factor per axis. The
-requirement $T[I] = I$ is our standing rule that the centre stays
-fixed, nothing new. The scale factors, though, are less free than they look.
-A channel maps states to states, and since every Hermitian matrix is
-a real combination of states, it maps Hermitian to Hermitian; with
-all four basis matrices Hermitian, each $\lambda$ must be *real*.
-Feeding in the pure state $\tfrac12(I + X)$ produces
-$\tfrac12(I + \lambda_X\, h(X))$, which is a legal state only if
-$|\lambda_X| \leq 1$: scale factors live between $-1$ and $1$. Hold on to
-the reality of the scale factors, by the way. It looks like a convenience.
-At the end of the section it will reveal itself as a symmetry with a
-price tag attached.
-
-Necessary is not sufficient, and honesty requires the flag:
-complete positivity, the condition that makes a linear map a
-channel, applies to this family as it did to the whole space. The old checklist splits here exactly as it always has:
-normalization is built in ($T[I] = I$, and traces are preserved by
-the label bookkeeping), while the positivity half is the fee. Not
-every setting of skeleton and scale factors is a lawful channel, and no
-amount of tidy bookkeeping waives that fee. What the small room
-changes is how the fee gets paid: by inspection, not by an estimate.
-For the one channel this section is hunting, we will exhibit
-lawfulness outright, no criterion needed.
-
-::: {#fig-clifford-grid}
-
-{{< include figures/fig5-continuum-grid/interactive.qmd >}}
-
-A Clifford channel's structural core is finite. On the left, the
-continuum of qubit states: the three Bloch axes carry both their
-letters and their labels, with the identity's label $(0,0)$ at the
-fixed centre. On the right, the label plane on its own: four points.
-The relabelling half $h$ of a Clifford channel is a map on this
-finite grid, drawn here as a 3-cycle of the three nonzero labels
-that leaves the centre untouched; keep an eye on this particular
-cycle, because it returns when we design the root. The scale factors
-$\lambda$, the other half of the data, are deliberately not drawn: a
-Clifford channel is a relabelling *and* a scale factor per axis, never
-just a permutation.
-
-:::
-
-The family is small, but everything this post has met so far is
-already inside it. Three exhibits.
-
-First, the classical copier, lifted. Flip the qubit with probability
-$a$: that is the channel $T[\rho] = (1-a)\,\rho + a\,X\rho X$.
-Conjugating by $X$ leaves $X$ itself alone and flips the sign of $Y$
-and of $Z$ (two quick visits to the multiplication table:
-$XYX = -Y$ and $XZX = -Z$), so the mixture has skeleton
-$h = \mathrm{id}$ and scale factors $(1,\; 1-2a,\; 1-2a)$. Restricted to the
-vertical diameter it multiplies $Z$ by $1 - 2a$: exactly the
-classical copier we translated at the start. The lift is faithful.
-
-Second, the reversible members. Conjugation by $X$ alone is the case
-$a = 1$: scale factors $(1, -1, -1)$, nothing shrunk, two axes reflected.
-Conjugation by the Hadamard gate $H = (X + Z)/\sqrt{2}$, the unitary
-that exchanges the roles of $X$ and $Z$, gives the first nontrivial
-skeleton: $h$ swaps $X \leftrightarrow Z$ and fixes $Y$, with scale factors
-$(1, -1, 1)$. Negative scale factors are legal, and reversible Clifford
-channels are precisely the famous Clifford gates, met here in
-channel clothing.
-
-Third, total erasure itself. Set every scale factor to zero. Each Pauli
-dies, every Bloch vector is sent to the origin, and $T$ is the
-completely depolarizing channel $P$ itself, whatever the skeleton.
-The object we want roots of is a member of the family. The hunt can
-begin at home.
-
-Apply a Clifford channel twice, and watch the bookkeeping run
-itself:
-$$
-T^2[X] \;=\; \lambda_X\, T[h(X)]
-\;=\; \lambda_X\, \lambda_{h(X)}\, h^2(X),
-$$
-and likewise for the other letters. Nothing new is ever created.
-Each letter *walks*, one step along $h$ per application of the
-channel. And the scale factors *multiply along the walk*: after $n$ steps a
-letter carries the product of the $n$ scale factors it collected on departure.
-Meanwhile $P$ is the channel that kills all three letters. So
-$$
-T^n = P
-\quad\Longleftrightarrow\quad
-\text{every letter's $n$-step product of scale factors has died.}
-$$
-The channel question has become a question about walks on three
-points and products of numbers along them. This is the reduction the
-whole post has been steering toward, and it will survive word for
-word when three letters become $d^2 - 1$.
-
-One consequence is immediate, and it echoes the classical bit. Scale factors
-are real numbers, and a product of nonzero numbers is never zero. A
-walk's product dies only by stepping on a *zero scale factor*. Erasure, in
-this family, is not a gradual conspiracy of small numbers. It
-happens exactly where the zeros are.
-
-And now the hunt fits in three short paragraphs, because a shuffle
-of three letters has only three possible shapes.
-
-The skeleton could fix all three letters. Then each letter walks in
-place, multiplying its own scale factor over and over, and dying forces that
-scale factor to *be* zero. All three scale factors zero means $T = P$ from the very
-start. This is the classical bit's tragedy, tripled: no roots live
-here.
-
-The skeleton could swap two letters and fix the third. The fixed
-letter needs its own zero, as before. The swapped pair walk into
-each other, so at least one of their two scale factors must vanish, and then
-both of those walks are dead within two steps. Order two at best: a
-square root of erasure, the quantum sibling of the classical
-$d = 3$ construction, and nothing more.
-
-Or the skeleton could cycle all three letters. Now a *single* zero
-serves everybody, because every walk eventually passes through it,
-and the walks reach it at different times. Put the zero on $X$, keep
-the other two scale factors alive at one half:
-$$
-T[X] = 0, \qquad T[Y] = \tfrac12\, X, \qquad T[Z] = \tfrac12\, Y .
-$$
-$X$ dies immediately. $Y$ steps onto $X$ and dies departing it: two
-steps. $Z$ takes the long way round, and it pays to compute it once
-in full:
-$$
-T[Z] = \tfrac12\, Y, \qquad
-T^2[Z] = \tfrac14\, X, \qquad
-T^3[Z] = 0 .
-$$
-So $T^3 = P$, while $T^2 \neq P$: the quarter of $X$ still alive at
-step two is the witness. Order exactly three.
-
-Three is the ceiling for the entire family, because the survey was
-exhaustive: no shuffle of three letters offers a longer walk to a
-zero. And three is $d^2 - 1$ at $d = 2$. Read that twice. The tiny,
-rigid family, six skeletons and three scale factors, reaches the same
-maximal order that the whole quantum machinery allows. Nothing was
-lost by retreating into the small room (@fig-clifford-bouquet).
-
-::: {#fig-clifford-bouquet}
-
-{{< include figures/fig6-clifford-bouquet/interactive.qmd >}}
-
-The Clifford family, sketched inside the space it lives in. The blob
-is the full continuum of unital qubit channels, nine parameters
-wide. The Clifford channels are not a discrete scatter of points
-inside it but finitely many low-dimensional sheets, one per
-skeleton, six for a qubit, with the scale factors varying continuously along
-each; every sheet passes through $P$, since any skeleton with all
-its scale factors at zero is total erasure, and the identity channel sits at
-the tip of the identity-skeleton sheet. The sketch is idealized in
-two ways: each sheet is drawn as a line but is really
-three-dimensional, one scale factor per axis, and distinct sheets can share
-more than the point $P$, because once a scale factor is zero the dead letter
-no longer remembers which skeleton moved it.
-
-:::
-
-You have seen this channel before. On Bloch vectors it sends
-$(r_1, r_2, r_3)$ to $(r_2/2,\; r_3/2,\; 0)$, which is the
-three-step eraser of @fig-bloch-root, the one the previous section
-produced without explanation. Its $z$, then $y$, then $x$ stages are
-nothing but the walk around the cycle, one axis per step, and the
-cycle itself is the very one drawn on the right panel of
-@fig-clifford-grid. What arrived last section as a rabbit from a hat
-is, in coordinates, a two-line design: spend one zero, take the
-longest walk. (The halves are a choice with a ceiling of their own:
-the two surviving scale factors cannot sum to more than one, so ours sit
-exactly on the boundary of what is allowed.[^qubit-maps])
-
-[^qubit-maps]: Deciding exactly which scale factors yield a lawful
-channel is a solved problem for qubits: M. B. Ruskai, S. Szarek and
-E. Werner, "An analysis of completely-positive trace-preserving maps
-on $2 \times 2$ matrices", *Linear Algebra and its Applications*
-**347**, 159 (2002). For our root the criterion reduces to
-$\lambda_Y + \lambda_Z \leq 1$. The thesis works out the criterion
-for the whole Clifford family in its chapter 5 (Lemma 5.1); the
-next section of this post shows its face.
-
-One debt remains, and it is the decisive one. A linear map of the
-right order is not yet a channel: complete positivity still has to
-be checked. Our $T$ is, so far, four tidy equations. Is it
-physical?
-
-Here is the same $T$ wearing different clothes. Let $U$ be the
-rotation of the Bloch ball by a third of a turn about the diagonal
-axis through $(1,1,1)$, oriented so that it carries the $x$-axis
-onto the $z$-axis, the $z$-axis onto the $y$-axis, and the $y$-axis
-onto the $x$-axis. Then
-$$
-T[\rho] \;=\; \tfrac12\; U \rho\, U^\dagger
-\;+\; \tfrac14\; (XU)\, \rho\, (XU)^\dagger
-\;+\; \tfrac14\; (YU)\, \rho\, (YU)^\dagger .
-$$
-In words: flip a three-sided coin with weights one half, one
-quarter, one quarter, and depending on the outcome apply one of
-three *rotations* to the qubit: $U$, or $U$ followed by an $X$-flip,
-or $U$ followed by a $Y$-flip. That is the entire channel. A mixture
-of unitaries is a channel beyond any possible doubt: each branch is
-reversible physics, and forgetting the outcome of a coin flip cannot
-break positivity, complete or otherwise. Lawfulness by inspection.
-The fee the general construction paid with a shrinking factor and
-a Choi-matrix estimate is paid here, in the small room, with a coin
-and three rotations.
-
-```{=html}
-<details class="aside">
-<summary>The coin and the three rotations, worked out</summary>
-```
-
-Two steps: split $T$ into a rotation followed by a shrink, then
-write the shrink as a coin flip.
-
-*The rotation.* Define
-$$
-U \;=\; \tfrac12\bigl(I + i\,(X + Y + Z)\bigr).
-$$
-Unitarity is one line with the multiplication table: writing
-$S = X + Y + Z$, the product $(I + iS)(I - iS) = I + S^2$, and
-$S^2 = 3I$ because the six cross terms cancel in anticommuting
-pairs ($XY + YX = iZ - iZ = 0$, and likewise for the other two
-pairs). So $U U^\dagger = \tfrac14 (I + 3I) = I$. Conjugation by $U$
-cycles the Paulis,
-$$
-U X U^\dagger = Z, \qquad
-U Z U^\dagger = Y, \qquad
-U Y U^\dagger = X,
-$$
-each a patient exercise with the table. Write
-$V[\rho] = U \rho\, U^\dagger$ for this rotation: a lawful channel,
-because it is unitary.
-
-*The shrink.* Let $D$ be the map with $D[X] = \tfrac12 X$,
-$D[Y] = \tfrac12 Y$, $D[Z] = 0$: scale factors one half on the $x$ and $y$
-axes, zero on $z$, identity skeleton. Try a mixture of doing
-nothing, an $X$-flip, and a $Y$-flip, with weights $p_0, p_1, p_2$.
-Conjugation by $X$ has scale factors $(1, -1, -1)$ and conjugation by $Y$
-has scale factors $(-1, 1, -1)$, so the mixture has scale factors
-$$
-\bigl(p_0 + p_1 - p_2,\;\; p_0 - p_1 + p_2,\;\; p_0 - p_1 - p_2\bigr).
-$$
-Setting these equal to $(\tfrac12, \tfrac12, 0)$ together with
-$p_0 + p_1 + p_2 = 1$ solves to $p_0 = \tfrac12$ and
-$p_1 = p_2 = \tfrac14$.
-
-*The composite.* Applying $D$ after $V$ does exactly what $T$
-demands: $T[X] = D[Z] = 0$, $T[Y] = D[X] = \tfrac12 X$, and
-$T[Z] = D[Y] = \tfrac12 Y$. Substituting the mixture for $D$ and
-absorbing $U$ into each branch turns the composition into the
-three-term coin flip of the main text, with unitaries $U$, $XU$ and
-$YU$.
-
-```{=html}
-</details>
-```
-
-Two loose threads remain, both deliberately left dangling, both
-pointing straight at the next section.
-
-First, a free pass we quietly enjoyed. We called $h$ a shuffle and
-never demanded that it respect the labels' arithmetic. It did so
-anyway, automatically: send two of the three letters wherever you
-like, and their sum, which is always the third letter, has nowhere
-to go but the remaining slot. Every shuffle of three letters is
-compatible with the addition of labels. That is a coincidence of the
-smallest case, and it expires immediately. In the next section the
-label plane has eight nonzero points, and of the $40320$ ways to
-shuffle eight points, exactly $48$ respect the addition of labels.
-The relabelling will have to be *linear*, and that phrase, a linear
-map on a plane of labels, is the door through which the
-finite-field machinery enters.
-
-Second, look once more at where we spent the zero. It sits at the
-label $(1,0)$. What is the negative of that label? In arithmetic
-modulo $2$, where $1 + 1 = 0$, every label is its own negative:
-$-(1,0) = (1,0)$. That innocent-looking fact has been working for us
-all section. The general rule, visible in the next section, is that
-the scale factors at a label and at its negative are complex conjugates of
-one another; here every label is its own mirror, which is why our
-scale factors merely had to be real, and why a single zero came for the
-price of one. For odd $d$, a label and its negative are *different*
-points, and every zero will drag its mirror partner down with it:
-two zeros, minimum, cutting the longest walk short. That
-coincidence, quietly worth a factor of two, is the last thing the
-qubit gives us for free.

@@ -98,8 +98,8 @@ Read $\tau^{ab}$ as "half of the label product $ab$, on the
 $\omega$-clock", which makes sense because $2$ can be divided away
 modulo an odd number. For odd $d$ this square root already sits on
 the $d$-hour clock; at $d = 2$ it does not, which is why the qubit
-had to borrow $i$ from outside. The mysterious grooming $i$ of the
-last section was this convention all along.
+had to borrow $i$ from outside. The mysterious grooming $i$ that
+turned $XZ$ into $Y$ was this convention all along.
 
 What the grooming buys has changed, though. For $d > 2$ no phase
 makes $X^a Z^b$ Hermitian, so the qubit's luxury of an all-Hermitian
