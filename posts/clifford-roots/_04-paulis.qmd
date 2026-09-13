@@ -18,8 +18,6 @@ the nilpotent part until the check went through.
 | Free parameters | $(d-1)^2$ | $(d^2-1)^2$ | a finite choice, plus $d^2 - 1$ scale factors |
 | The condition with teeth | non-negative entries | complete positivity | complete positivity, as one explicit matrix |
 | Largest order $k$ | $d - 1$ | $d^2 - 1$ | ? |
-| Reached by | a nilpotent $N$ on the deviations, scaled gently | a nilpotent $N$ on the traceless operators, shrunk until the Choi matrix stays positive | ? |
-| Seen in action | $d = 3$, two steps (@fig-root-d3) | $d = 2$, three steps (@fig-bloch-root) | ? |
 
 : The scoreboard after two settings. The third column is for the
 two sections that follow. {#tbl-scoreboard}
