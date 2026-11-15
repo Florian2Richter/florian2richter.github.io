@@ -1,8 +1,10 @@
 name: Publish to GitHub Pages
 
+# Automatic deploy on push to main is switched off while the site is
+# offline (2026-11-15). To publish again, restore:
+#   push:
+#     branches: [main]
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
