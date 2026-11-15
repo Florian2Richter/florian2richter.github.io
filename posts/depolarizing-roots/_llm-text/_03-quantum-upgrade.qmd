@@ -87,6 +87,11 @@ real ones, fixes that pair. Three free real numbers in all, and they
 are exactly the coordinates of the arrow. The ball's three dimensions
 are not a metaphor. They are the room this matrix has.
 
+<!-- TODO(Florian): der letzte Satz dieses Absatzes ("file one promise
+     away ... in the next section each of the three directions will get
+     a matrix of its own") verweist auf die Pauli-Matrizen, die jetzt
+     in Teil 2 stehen. Streichen oder als Ausblick auf Teil 2 fassen. -->
+
 The matrix even knows the ball is *round*. Its two eigenvalues work
 out to $\tfrac12(1 \pm \ell)$, with
 $\ell = \sqrt{x^2 + y^2 + z^2}$ the length of the arrow (a two-line
@@ -319,11 +324,23 @@ three steps); tap the figure to play it.
 
 :::
 
+<!-- TODO(Florian): in der Fussnote [^arw] verweist der letzte Satz
+     auf "the Clifford story below", die jetzt in Teil 2 steht. -->
+
 [^arw]: A. Ahlbrecht, F. Richter and R. F. Werner, "How long can it
 take for a quantum channel to forget everything?", arXiv:1205.0693
 (2012); the construction is Theorem 3.4 there. The closing section
 of this post says how the Clifford story below relates to that
 paper.
+
+<!-- TODO(Florian): der folgende Schlussabsatz leitet in die Clifford-
+     Kapitel ueber, die jetzt Teil 2 sind. Neu als Uebergang in den
+     Schluss von Teil 1 (_04-close.qmd).
+     Inhaltliche Luecke: Die Qubit-Wurzel in @fig-bloch-root (Faktoren
+     1/2) wird in Teil 1 nicht als Kanal nachgewiesen. Das Aside oben
+     liefert nur eine kleine Wurzel mit epsilon <= 1/4. Entweder ein
+     Satz "dass das ein Kanal ist, zeigt Teil 2", oder das
+     Legalitaets-Aside aus Teil 2 (1/2 U rho U^dagger + ...) auch hier. -->
 
 The unrestricted answer is therefore $d^2 - 1$, ceiling and
 construction both: the aside above delivers a channel of exactly

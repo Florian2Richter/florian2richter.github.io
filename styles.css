@@ -106,3 +106,22 @@ details.aside > summary:hover {
   color: #555;
   margin-top: 2.5rem;
 }
+
+/* Working skeleton (temporary): German keyword boxes that mark prose
+   still to be written by hand. Remove this block with the last box. */
+.skeleton {
+  border: 2px dashed #d4a72c;
+  border-radius: 6px;
+  background: #fffaeb;
+  padding: 0.6rem 1rem;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+.skeleton > :last-child {
+  margin-bottom: 0;
+}
+
+.skeleton ul {
+  padding-left: 1.2rem;
+}

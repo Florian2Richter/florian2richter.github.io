@@ -1,0 +1,59 @@
+::: {.skeleton}
+**Picture**
+
+- Photocopy of a photocopy of a photocopy …
+- In the end grey noise; the original can no longer be recovered
+- Information lost step by step (one everyday example is enough)
+:::
+
+::: {.skeleton}
+**Two extremes, neither of them the topic**
+
+- One step: a brutal copier that erases everything at once
+- Infinitely many steps: erasure only in the limit; has its own
+  literature (ergodic and mixing channels)[^mixing-ref]
+:::
+
+::: {.skeleton}
+**The question**
+
+- In between: erasure in finitely many identical steps
+- Exactly $k$ applications of the same operation give total erasure,
+  fewer do not. How large can $k$ be?
+- Why this is not backwards: a bound on slow erasure is a bound on how
+  long information survives inside a process certain to destroy it
+:::
+
+::: {.skeleton}
+**Physical reading, one or two sentences**
+
+- Device with an internal memory (gate, fibre), used over and over
+- *strictly forgetful*: the influence of the initial memory is exactly
+  gone after finitely many uses[^memory-channels]
+- Seen without input: exactly a $k$-th root of total erasure; largest
+  $k$ = deepest memory
+:::
+
+::: {.skeleton}
+**Preview of part 1**
+
+- classical: $k \le d - 1$
+- quantum: $k \le d^2 - 1$, quadratically more
+- part 2 in one sentence only: a rigid family loses just a factor of
+  two
+:::
+
+[^mixing-ref]: The systematic treatment of this asymptotic question
+is D. Burgarth, G. Chiribella, V. Giovannetti, P. Perinotti and
+K. Yuasa, "Ergodic and mixing quantum channels in finite dimensions",
+*New Journal of Physics* **15**, 073045 (2013). A sharp cousin is
+the quantum Wielandt inequality, bounding how many steps it can take
+a channel before every output state has full rank: M. Sanz,
+D. Pérez-García, M. M. Wolf and J. I. Cirac, *IEEE Transactions on
+Information Theory* **56**, 4668 (2010). For a pedagogical entry
+point, Michael Wolf's lecture notes *Quantum Channels & Operations:
+Guided Tour* (2012).
+
+[^memory-channels]: The framework of quantum channels with memory is due
+to D. Kretschmann and R. F. Werner, "Quantum channels with memory,"
+*Phys. Rev. A* **72**, 062323 (2005); arXiv:quant-ph/0502106.

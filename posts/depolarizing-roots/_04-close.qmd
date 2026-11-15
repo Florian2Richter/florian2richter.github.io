@@ -1,0 +1,28 @@
+## Closing {#sec-close}
+
+::: {.skeleton}
+*Final heading to come.*
+
+- Where we stand: classical $d - 1$, quantum $d^2 - 1$, both reached.
+  Same proof, quadratically larger space
+- Close the memory reading: a qubit memory survives at most three
+  uses, in general $d^2 - 1$; after that it forgets exactly
+- Maximal roots need not sit close to $P$
+  (Proposition 3.5[^prop35]). Example: the qubit root with factors
+  $\tfrac12$
+- Optional, personal: the history in the thesis. Complete positivity
+  held up the general construction for a long time; the Clifford
+  channels came first
+- Outlook on part 2: a rigid family with few parameters. How much of
+  $d^2 - 1$ survives? Almost all of it, up to a factor of two
+- The thesis as the source[^thesis]
+:::
+
+[^prop35]: A. Ahlbrecht, F. Richter and R. F. Werner, "How long can
+it take for a quantum channel to forget everything?",
+arXiv:1205.0693 (2012), Proposition 3.5.
+
+[^thesis]: F. Richter, *Finite Roots of Completely Depolarizing
+Channels*, Diploma thesis, Institute for Theoretical Physics,
+Leibniz Universität Hannover, September 2010.
+[PDF in this site's repository](https://github.com/Florian2Richter/florian2richter.github.io/blob/main/reference/Diplomarbeit_Florian.pdf).

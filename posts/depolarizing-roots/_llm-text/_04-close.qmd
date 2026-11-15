@@ -1,0 +1,21 @@
+<!-- TODO(Florian): Schluss von Teil 1, neu zu schreiben. Diese Datei
+     ist absichtlich leer, bis der Text von dir kommt.
+
+     Stichpunkte:
+     - Zwischenstand: klassisch k <= d - 1, quantenmechanisch
+       k <= d^2 - 1, beide Schranken erreicht.
+     - Speicher-Lesart schliessen (Rueckgriff auf den Hook): ein Qubit-
+       Speicher ueberlebt hoechstens drei Benutzungen, allgemein d^2 - 1.
+     - Maximale Wurzeln muessen nicht nahe bei P liegen
+       (Proposition 3.5 im Paper). Die Qubit-Wurzel aus der Figur mit
+       den beiden Faktoren 1/2 ist dafuer schon ein Beispiel.
+     - Historie, falls sie hier stehen soll: die allgemeine Konstruktion
+       kam erst am Ende der Diplomarbeit, die Clifford-Kanaele zuerst.
+     - Ausblick auf Teil 2: eine starre Familie mit wenigen Parametern,
+       die im Primzahlfall bis auf einen Faktor zwei herankommt. Link
+       auf ../clifford-roots/, sobald Teil 2 nicht mehr Entwurf ist.
+     - Fussnote zur Diplomarbeit (steht bisher nur in Teil 2).
+
+     Rohmaterial (englisch, LLM-Text, nur als Steinbruch):
+     posts/clifford-roots/_04-whats-next.qmd, Absaetze 1 bis 3 und
+     die Fussnoten [^paper] und [^thesis]. -->

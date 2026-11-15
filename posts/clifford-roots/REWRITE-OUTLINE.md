@@ -1,74 +1,62 @@
-# Gerüst für die Neufassung
+# Gerüst für die Neufassung, Teil 2
 
 Arbeitsdatei, wird nicht gerendert (die Site rendert nur `.qmd`).
 Bewusst auf Deutsch und nur in Stichpunkten: Der englische Text der
 Neufassung soll von Florian selbst kommen. Formeln, Figuren und
 Reihenfolge stehen fest, Formulierungen nicht.
 
+Teil 1 (klassisch und allgemein quantenmechanisch) liegt in
+`posts/depolarizing-roots/`, sein Gerüst samt Prosa-Befund in
+`posts/depolarizing-roots/REWRITE-OUTLINE.md`. Die Muster-Liste dort
+gilt hier genauso. Ein eigener Prosa-Befund für Teil 2 folgt, wenn
+Teil 1 steht.
+
+## Stand nach der Trennung (2026-11-08)
+
+- `draft: true`: wird gerendert und ist unter
+  `/posts/clifford-roots/` erreichbar (die URL, die bisher den ganzen
+  Post zeigte), steht aber nicht in der Liste.
+- Die Kapitel sind umnummeriert: `_01-paulis` (früher 4),
+  `_02-clifford-qubit` (5), `_03-clifford-higher-dimensions` (6),
+  `_04-whats-next` (7).
+- Verweise auf die Bloch-Kugel und die Qubit-Wurzel sind jetzt Links
+  auf Teil 1 (`../depolarizing-roots/#fig-bloch`, `#fig-bloch-root`).
+- Am Anfang jedes Kapitels steht ein `TODO(Florian)` mit den
+  Rückverweisen auf Teil 1, die angepasst werden müssen ("the previous
+  section", "the quantum section", "the hook", "the very start of
+  this post").
+- Neu nötig: Einleitung von Teil 2 (TODO in `index.qmd`), eigener
+  Titel (bisher Arbeitstitel), Teaserbild, Datum.
+
 ## Ziel und Budget
 
-Fließtext heute rund 12.000 Wörter, dazu 4.200 in Asides. Ziel: rund
-6.500 Wörter Fließtext, Asides etwa halbiert.
-
-| Teil | heute | Ziel | Eingriff |
+| Teil | vorher | Ziel | Eingriff |
 |:--|--:|--:|:--|
-| Vorwort | 260 | 150 | neu schreiben, LLM-Satz ehrlich fassen |
-| 1 Hook | 710 | 500 | neu schreiben, Speicher-Bild kürzen |
-| 2 Klassisch | 2.130 | 1.500 | Struktur bleibt, Pointen und Rückverweise raus |
-| 3 Quanten | 1.800 | 1.300 | Struktur bleibt |
-| 4 Qubit aus dem Bit | 2.070 | 1.300 | Kern bleibt, Einleitung kürzen |
-| 5 Clifford am Qubit | 1.720 | 900 | nur Definition, Reduktion, Konstruktion |
-| 6 Höhere Dimensionen | 2.730 | 900 | Aufbau zitieren statt herleiten |
-| 7 Schluss | 540 | 300 | Tabelle, Historie, offene Frage |
+| Einleitung | 0 | 150 | neu: was Teil 1 geliefert hat, was jetzt kommt |
+| 1 Qubit aus dem Bit | 2.070 | 1.300 | Kern bleibt, Einleitung kürzen |
+| 2 Clifford am Qubit | 1.720 | 900 | nur Definition, Reduktion, Konstruktion |
+| 3 Höhere Dimensionen | 2.730 | 900 | Aufbau zitieren statt herleiten |
+| 4 Schluss | 540 | 300 | Tabelle, Historie, offene Frage |
 
-## Vorwort
+## Einleitung (neu)
 
-- Diplomarbeit Hannover 2010, Speicherkanäle, daraus die Teilfrage.
-- Wer hat was gemacht: Mathematik und Text von Florian, Grammatik
-  maschinell geprüft, Figuren mit LLM-Hilfe gebaut.
-- Route in einem Satz.
+- Teil 2 von 2, Link auf Teil 1.
+- Rückblick in zwei Sätzen: d − 1 klassisch, d² − 1 quantenmechanisch.
+- Die Frage dieses Teils: was bleibt in einer starren Familie?
 
-## 1 Hook
-
-- Kopie der Kopie, Information geht in Schritten verloren.
-- Zwei Extreme: ein Schritt; erst im Grenzwert (Fußnote Burgarth et
-  al., Sanz et al., Wolf). Nicht das Thema.
-- Die Frage: genau k gleiche Schritte bis zur totalen Löschung, wie
-  groß kann k sein?
-- Ein Satz zur Speicher-Lesart (Kretschmann und Werner).
-- Vorschau: d − 1, d² − 1, (d² − 1)/2.
-
-## 2 Klassisch (bleibt im Aufbau)
-
-- Zustand als Wahrscheinlichkeitsvektor, Simplex. Figur 1.
-- Linear, also Matrix; stochastisch; Mitte fest, also bistochastisch.
-- P und die Definition: S^k = P, S^j ≠ P für j < k.
-- Jede stochastische Wurzel fixiert die Mitte (SP = PS).
-- Ein Bit: S v = (1 − 2a) v, also k = 1.
-- S = P + N, PN = NP = 0, S^k = P + N^k. Wurzel heißt N nilpotent.
-- Beispiel d = 3 mit u = (1, −1, 0), v = (1, 1, −2). Figur 2.
-- Schranke k ≤ d − 1, erreicht (Aside: Jordan-Block, ε ≤ 1/d).
-
-## 3 Quanten (bleibt im Aufbau)
-
-- Bloch-Kugel, Länge und Richtung. Figur 3.
-- ρ ausgeschrieben, Eigenwerte ½(1 ± ℓ).
-- d² − 1 Parameter gegen d − 1.
-- Kanal: linear, spurerhaltend, vollständig positiv; unital.
-- Gleiches Skelett, k ≤ d² − 1, erreicht (Aside: Choi-Matrix,
-  ε ≤ 1/(d(d² − 2)), Theorem 3.4 im Paper). Figur 4.
-- Überleitung: was bleibt in einer starren Familie?
-
-## 4 Das Qubit aus dem Bit (Kern bleibt)
+## 1 Das Qubit aus dem Bit (Kern bleibt)
 
 Der Gedankengang, der bleiben soll: Bit, Gruppe, Darstellung,
 zweite Darstellung, Phasenraum, Phase erzwungen.
 
 - Tabelle mit offener dritter Spalte. Ein kurzer Absatz, warum
-  Clifford.
-- Bit als ρ = ½(I + rZ). Labels 0, 1. Z ist die Parität (−1)^x.
-  b ↦ Z^b ist Darstellung von Z₂.
-- Kopierer in dieser Sprache: T[Z] = (1 − 2a) Z.
+  Clifford. Der Rückblick "Two settings are closed" passt jetzt gut
+  als Einstieg in Teil 2.
+- Bit als ρ = ½(I + rZ) und der Kopierer T[Z] = (1 − 2a) Z stehen
+  jetzt in Teil 1 (Kapitel 3). Hier nur ein Satz Rückverweis, dann
+  direkt mit den Labels beginnen.
+- Labels 0, 1. Z ist die Parität (−1)^x. b ↦ Z^b ist Darstellung
+  von Z₂.
 - Zweite Darstellung: Addition auf die Ergebnisse anwenden, das ist
   der Flip X. a ↦ X^a.
 - Klassisch getrennt: Zustände in span{I, Z}, Kopierer in
@@ -77,7 +65,7 @@ zweite Darstellung, Phasenraum, Phase erzwungen.
 - XZ = −ZX, Y = iXZ, Pauli-Tafel, projektive Darstellung.
   Das Vorzeichen ist die symplektische Form.
 
-## 5 Clifford am Qubit (auf die Konstruktion reduzieren)
+## 2 Clifford am Qubit (auf die Konstruktion reduzieren)
 
 - Definition: T[σ] = λ_σ h(σ), h Permutation von X, Y, Z.
 - λ reell, |λ| ≤ 1. Vollständige Positivität bleibt zu prüfen.
@@ -85,13 +73,15 @@ zweite Darstellung, Phasenraum, Phase erzwungen.
   T^n = P genau dann, wenn jede Wanderung eine Null trifft.
 - Drei Fälle für h in je einem Satz. Nur der Dreierzyklus gibt 3.
 - Die Wurzel: T[X] = 0, T[Y] = ½X, T[Z] = ½Y. Figur 5 (Gitter).
+- Das ist die Wurzel aus Figur 4 von Teil 1. Teil 1 zeigt sie ohne
+  Nachweis, dass sie ein Kanal ist; der Nachweis steht hier.
 - Legalität: ½ UρU† + ¼ (XU)ρ(XU)† + ¼ (YU)ρ(YU)† (Aside).
-- Zwei Fäden für Kapitel 6: h linear; η = −η nur bei d = 2.
+- Zwei Fäden für Kapitel 3: h linear; η = −η nur bei d = 2.
 
 Streichkandidaten: die drei Exponate (Bitflip, Hadamard, P), die
-Bouquet-Figur samt Unterschrift, der Rückblick auf Kapitel 3.
+Bouquet-Figur samt Unterschrift, der Rückblick auf Teil 1.
 
-## 6 Höhere Dimensionen (zitieren statt herleiten)
+## 3 Höhere Dimensionen (zitieren statt herleiten)
 
 Was im Text bleibt:
 
@@ -145,9 +135,12 @@ Beweisskizze in vier Schritten:
 Zwei Fakten werden zitiert statt bewiesen: Existenz von K und
 Σ φ(e) = n (Gauß).
 
-## 7 Schluss
+## 4 Schluss
 
 - Faktor zwei ist nur Clifford (Theorem 3.4, Proposition 3.5).
+  Teile davon (allgemeine Konstruktion, Proposition 3.5, Speicher-
+  Lesart) wandern eventuell in den Schluss von Teil 1; dann hier nur
+  noch kurz darauf verweisen.
 - Ein Satz Historie: Clifford kam zuerst.
 - Ausgefüllte Tabelle.
 - Offen: d nicht prim.

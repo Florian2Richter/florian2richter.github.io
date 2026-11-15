@@ -1,5 +1,12 @@
 ## Clifford channels in higher dimensions {#sec-higher-d}
 
+<!-- TODO(Florian): Rueckverweise auf Teil 1 anpassen. Betroffen:
+     "the finite fields promised at the very start of the post" (das
+     Versprechen steht im Hook von Teil 1 und soll dort raus),
+     "the counting from the quantum section", und im Aside zur
+     vollstaendigen Positivitaet "the aside in the quantum section". -->
+
+
 The qubit section ended by flagging two pieces of luck: every shuffle
 of three letters respected the label arithmetic on its own, and every
 label was its own mirror. Neither survives in higher dimensions, and

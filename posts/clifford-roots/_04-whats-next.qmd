@@ -1,5 +1,14 @@
 ## What's next {#sec-closing}
 
+<!-- TODO(Florian): Rueckverweise auf Teil 1 anpassen. Betroffen:
+     Absatz 1 ("the aside in the quantum section"), Absatz 3 ("closes
+     a loop opened at the very start of the post", der Hook steht in
+     Teil 1), die Tabelle "Here is the scoreboard" (Spalten Klassisch
+     und Quanten stammen aus Teil 1). Absaetze 1 bis 3 sind ausserdem
+     Rohmaterial fuer den Schluss von Teil 1, siehe
+     posts/depolarizing-roots/_04-close.qmd. -->
+
+
 One loose thread remains: the factor of two. Is $(d^2 - 1)/2$ the
 end of the story, or just the end of the *Clifford* story? It is
 only the Clifford story, and the post has already shown as much: the

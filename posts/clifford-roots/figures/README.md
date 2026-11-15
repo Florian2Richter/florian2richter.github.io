@@ -1,4 +1,9 @@
-# Figures for the clifford-roots post
+# Figures for the clifford-roots post (part 2)
+
+The blog post was split in two. Figures 1 to 3b and the teaser art
+belong to part 1 (`posts/depolarizing-roots/figures/`), figures 4 to 6
+to part 2 (`posts/clifford-roots/figures/`). The folder names keep
+their old numbers; the conventions below apply to both posts.
 
 This directory holds the figures for `posts/clifford-roots/index.qmd`,
 organised so that **each figure is self-contained and can be developed
@@ -10,13 +15,9 @@ or modified on its own, without touching the blog post**. The post only
 ```
 figures/
   README.md                 <- this file (the system + status)
-  fig1-state-space/         <- Figure 1: classical 2-simplex (DONE, interactive)
-  fig2-simplex-root/        <- Figure 2: square-root channel, animated (DONE)
-  fig3-bloch-ball/          <- Figure 3: Bloch ball (DONE, interactive)
-  fig3b-bloch-root/         <- Figure 3b: the qubit root, animated (DONE)
-  fig4-orbit-cycle/         <- Figure 4: the d=3 orbit cycle (DONE, static)
-  fig5-continuum-grid/      <- Figure 5: continuum vs. finite grid (DONE, static)
-  fig6-clifford-bouquet/    <- Figure 6: the Clifford bouquet (DONE, static)
+  fig4-orbit-cycle/         <- the d=3 orbit cycle (DONE, static)
+  fig5-continuum-grid/      <- continuum vs. finite grid (DONE, static)
+  fig6-clifford-bouquet/    <- the Clifford bouquet (DONE, static)
 ```
 
 Each finished figure folder contains, by convention:
@@ -113,10 +114,11 @@ The caption goes here, with math like $p_0$ if needed.
 - Captions are **not** manually prefixed with "Figure N"; Quarto numbers
   them automatically.
 
-The figure ids currently in use: `#fig-simplex-d3` (1), `#fig-root-d3`
-(2), `#fig-bloch` (3), `#fig-bloch-root` (3b), `#fig-orbit` (4),
-`#fig-clifford-grid` (5). Figures 1 through 3b live in `_02` and
-`_03`; figure 5 lives in `_04`; figure 4 lives in `_05`.
+The figure ids in this post: `#fig-clifford-grid` and
+`#fig-clifford-bouquet` (both in `_02`), `#fig-orbit` (in `_03`).
+The Bloch ball and the qubit root are figures of part 1; part 2 links
+to them as `../depolarizing-roots/#fig-bloch` and
+`../depolarizing-roots/#fig-bloch-root`.
 
 ## To modify a figure
 
@@ -135,12 +137,9 @@ See each figure's own `README.md` for the specifics.
 
 | # | figure | id | state |
 |---|--------|----|-------|
-| 1 | classical state space (2-simplex) | `fig-simplex-d3` | done, interactive |
-| 2 | square-root channel collapsing the simplex | `fig-root-d3` | done, animated |
-| 3 | Bloch ball (qubit state space) | `fig-bloch` | done, interactive |
-| 3b | the qubit root collapsing the Bloch cloud | `fig-bloch-root` | done, animated |
 | 4 | the d=3 orbit cycle of h | `fig-orbit` | done, static |
 | 5 | continuum vs. finite grid | `fig-clifford-grid` | done, static |
+| 6 | the Clifford bouquet | `fig-clifford-bouquet` | done, static |
 
 ## A note on CSS
 

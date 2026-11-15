@@ -1,5 +1,13 @@
 ## Rebuilding the qubit from the bit {#sec-paulis}
 
+<!-- TODO(Florian): Rueckverweise auf Teil 1 anpassen. Betroffen:
+     "Two settings are closed" (Rueckblick, gut als Einstieg in Teil 2),
+     "the surprise promised in the hook", "the segment from the very
+     start of this post", "The previous section went at the space of
+     all quantum channels", "The previous section counted d^2 - 1".
+     All das steht jetzt in Teil 1. -->
+
+
 Two settings are closed, and it is worth reading the scoreboard
 before opening a third. Both times the same skeleton carried the
 argument: split the copier as $P + N$, watch the cross terms die,
@@ -48,7 +56,7 @@ factor comes from, and why the drop is not most of the way back to
 the classical $d - 1$, is the rest of the post.
 
 Where should the building start? Look once more at the Bloch ball
-of @fig-bloch, because something classical is hiding in plain
+of [Figure 3 in part 1](../depolarizing-roots/#fig-bloch), because something classical is hiding in plain
 sight. The two states of an ordinary bit sit at the poles. The
 straight line between them, running through the centre, is the
 entire state space of the classical bit: the segment from the very
@@ -65,7 +73,7 @@ the smallest step that turns it quantum, keeping both hands on the
 algebra the whole way. By the end of this section that small step
 will have produced a coordinate system for the qubit; the next one
 hangs a family of channels on those coordinates and rederives the
-three-step eraser of @fig-bloch-root, not pulled from a hat this
+three-step eraser of [Figure 4 in part 1](../depolarizing-roots/#fig-bloch-root), not pulled from a hat this
 time but designed, with every choice visible.
 
 Begin with the bit, dressed in matrix clothes. A classical bit is a

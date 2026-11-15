@@ -11,7 +11,7 @@ listing:
 page-layout: full
 title-block-banner: false
 open-graph:
-  image: posts/clifford-roots/figures/teaser-art/clifford-teaser-og.png
+  image: posts/depolarizing-roots/figures/teaser-art/clifford-teaser-og.png
 twitter-card:
-  image: posts/clifford-roots/figures/teaser-art/clifford-teaser-og.png
+  image: posts/depolarizing-roots/figures/teaser-art/clifford-teaser-og.png
 ---

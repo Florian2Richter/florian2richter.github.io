@@ -33,6 +33,10 @@ Concretely: among all copy-of-a-copy operations that erase the
 original after some exact number $k$ of identical applications, how
 large can $k$ be?
 
+<!-- TODO(Florian): durch die Trennung veraltet. Der letzte Satz
+     verspricht "the arithmetic of finite groups and finite fields",
+     das kommt erst in Teil 2. -->
+
 If you build things for a living, this question may sound backwards.
 Surely the practical art is *protecting* information from noise, not
 erasing it slowly on purpose? But the two are one question wearing
@@ -77,6 +81,11 @@ memory a device of this kind can hold.
 [^memory-channels]: The framework of quantum channels with memory is due
 to D. Kretschmann and R. F. Werner, "Quantum channels with memory,"
 *Phys. Rev. A* **72**, 062323 (2005); arXiv:quant-ph/0502106.
+
+<!-- TODO(Florian): durch die Trennung veraltet. Die beiden letzten
+     Absaetze kuendigen die Clifford-Familie und den Faktor zwei an.
+     Teil 1 liefert nur d - 1 und d^2 - 1; die Clifford-Vorschau
+     hoechstens als ein Satz Ausblick auf Teil 2. -->
 
 That largest $k$ is where this post lives, and it has different answers
 in different settings. If the copier has to behave like a classical

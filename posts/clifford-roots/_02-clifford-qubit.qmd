@@ -1,5 +1,11 @@
 ## Clifford channels on a qubit {#sec-clifford-qubit}
 
+<!-- TODO(Florian): Rueckverweise auf Teil 1 anpassen. Betroffen:
+     "the move we used on the corners of the simplex", "the one the
+     previous section produced without explanation", "What arrived
+     last section as a rabbit from a hat" (gemeint ist jeweils Teil 1). -->
+
+
 Coordinates in hand, we can finally say which copiers deserve them.
 A channel is linear, so it is pinned down by what it does to a
 basis; this is the move we used on the corners of the simplex, and
@@ -222,7 +228,7 @@ no longer remembers which skeleton moved it.
 
 You have seen this channel before. On Bloch vectors it sends
 $(r_1, r_2, r_3)$ to $(r_2/2,\; r_3/2,\; 0)$, which is the
-three-step eraser of @fig-bloch-root, the one the previous section
+three-step eraser of [Figure 4 in part 1](../depolarizing-roots/#fig-bloch-root), the one the previous section
 produced without explanation. Its $z$, then $y$, then $x$ stages are
 nothing but the walk around the cycle, one axis per step, and the
 cycle itself is the very one drawn on the right panel of

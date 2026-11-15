@@ -1,0 +1,82 @@
+---
+title: "How finely can you divide a depolarizing channel?"
+# TODO(Florian): description neu schreiben. Die alte Beschreibung war
+# auf die Clifford-Kanaele zugeschnitten und steht jetzt in Teil 2
+# (posts/clifford-roots/index.qmd). Inhalt fuer Teil 1: klassisch d - 1,
+# quantenmechanisch d^2 - 1, Teil 2 folgt.
+author: "Florian Richter"
+subtitle: "Draft under review. Corrections and comments welcome."
+date: "2026-08-08"
+date-format: "YYYY-MM-DD"
+categories: [quantum, channels]
+image: figures/teaser-art/clifford-teaser-card.png
+image-alt: "Thousands of faint teal chords trace Bloch vectors spiralling into a glowing grey core inside a dark sphere silhouette"
+open-graph:
+  image: figures/teaser-art/clifford-teaser-og.png
+twitter-card:
+  image: figures/teaser-art/clifford-teaser-og.png
+format:
+  html:
+    toc: true
+    toc-depth: 2
+---
+
+::: {.skeleton}
+**Skeleton mode.** The dashed boxes hold keywords for prose still to
+be written by hand. Everything outside them (math, figures, asides,
+footnotes) stays. The previous LLM text is kept in `_llm-text/` and
+is not rendered.
+:::
+
+::: {.skeleton}
+**Preface**
+
+- Origin: diploma thesis, Hannover 2010, quantum memory channels, how
+  deep their memory runs
+- One small, self-contained question out of it: how finely can total
+  erasure be divided?
+- Who did what, honest and brief: math from the thesis, text by me,
+  the LLM share named as it actually was
+- Audience: curious readers without background; pictures and examples
+  instead of thesis notation
+- Route: memory as the physical picture → classical → quantum
+- Part 1 of 2; part 2: a rigid family of channels (Clifford)
+:::
+
+This is a draft under review. If you find an error, a gap, or a
+passage that does not land, please tell me: in the comments at the
+end of the post, by highlighting the passage itself with the
+annotation sidebar at the right edge of the page, or by email through
+the envelope in the navigation bar.
+
+Enjoy the read.
+
+***
+
+<!-- The body of this post is split into per-section partials so each
+     can be edited on its own. Order and content live in the _NN-*.qmd
+     files below; this index just stitches them together. Leading
+     underscores keep Quarto from rendering them as standalone pages.
+     Part 2 (the Clifford channels) lives in posts/clifford-roots/. -->
+
+{{< include _01-hook.qmd >}}
+
+{{< include _02-classical-setup.qmd >}}
+
+{{< include _03-quantum-upgrade.qmd >}}
+
+{{< include _04-close.qmd >}}
+
+```{=html}
+<p class="view-counter">Page views: <span id="view-count">&hellip;</span></p>
+<script>
+  (function () {
+    var el = document.getElementById('view-count');
+    if (!el || !window.fetch) { return; }
+    fetch('https://florian2richter.goatcounter.com/counter//posts/depolarizing-roots/.json')
+      .then(function (r) { return r.json(); })
+      .then(function (d) { el.textContent = d.count; })
+      .catch(function () { el.parentNode.hidden = true; });
+  })();
+</script>
+```

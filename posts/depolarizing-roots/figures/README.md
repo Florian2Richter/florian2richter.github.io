@@ -1,0 +1,152 @@
+# Figures for the depolarizing-roots post (part 1)
+
+The blog post was split in two. Figures 1 to 3b and the teaser art
+belong to part 1 (`posts/depolarizing-roots/figures/`), figures 4 to 6
+to part 2 (`posts/clifford-roots/figures/`). The folder names keep
+their old numbers; the conventions below apply to both posts.
+
+This directory holds the figures for `posts/depolarizing-roots/index.qmd`,
+organised so that **each figure is self-contained and can be developed
+or modified on its own, without touching the blog post**. The post only
+*includes* a finished figure; it never carries the figure's source.
+
+## Layout: one folder per figure
+
+```
+figures/
+  README.md                 <- this file (the system + status)
+  fig1-state-space/         <- Figure 1: classical 2-simplex (DONE, interactive)
+  fig2-simplex-root/        <- Figure 2: square-root channel, animated (DONE)
+  fig3-bloch-ball/          <- Figure 3: Bloch ball (DONE, interactive)
+  fig3b-bloch-root/         <- Figure 4: the qubit root, animated (DONE)
+  teaser-art/               <- listing card and social preview images
+```
+
+Each finished figure folder contains, by convention:
+
+| file | what it is |
+|------|------------|
+| `README.md` | the single self-contained doc: what the figure shows, the design knobs and constraints, how to build and modify it, how it is wired in |
+| `*_figure.py` | the generator: emits the **static** SVG, all geometry as constants at the top |
+| `*.svg` | the generated static SVG (the artifact that ships and survives with JS off) |
+| `interactive.qmd` | the partial the post includes: a single `{=html}` block with the inlined SVG plus a progressive-enhancement readout and `<script>` |
+
+The original task specs and handover notes have been summarised into each
+figure's `README.md`, so the folder carries only the working pipeline plus
+its one doc.
+
+## The pattern: progressive enhancement
+
+Every interactive figure is built as a **purely additive** layer on top
+of a static SVG:
+
+1. A Python generator emits a static SVG. This is the baseline that
+   survives in print, RSS, PDF, screenshots, and any context where
+   JavaScript fails or is disabled.
+2. `interactive.qmd` inlines that SVG **verbatim** and adds a scoped
+   `<style>`, a readout panel, and a `<script>`. The script only *adds*
+   overlay elements (markers, guides) and updates the readout. It never
+   redraws or mutates the static SVG.
+3. With JavaScript off, the reader sees exactly the static figure and a
+   quiet, empty readout. Nothing is allowed to make the figure depend on
+   JS to appear. The SVG is inlined (never `fetch()`ed) for this reason.
+
+Geometry has a **single source of truth**: the script reads the figure's
+geometry from the SVG itself (the `<polygon points>` for Figure 1, the
+`data-*` projection attributes for Figure 3), so nothing is retyped and
+the interaction stays correct if the figure is regenerated.
+
+## Colour scheme: purity
+
+Across the three **state-space** figures (simplex, trajectories, Bloch
+ball) the *background field* encodes **purity**, the quantity the post
+is about. The field is a calm blue-teal where states are pure, fading to
+a soft blue-grey at the maximally mixed state (a tinted centre, never
+white), which is drawn as a faint hollow ring (de-emphasised, but
+locatable). The same notion drives all three:
+
+- classical purity is the collision probability `sum_i p_i^2`, from `1/d`
+  (uniform) to `1` (pure);
+- qubit purity is `tr(rho^2) = (1 + r^2)/2`, from `1/2` (centre) to `1`
+  (surface).
+
+So "erasure" reads visually as the field draining from blue-teal to
+blue-grey, and the Bloch ball's "inside the sphere" depth is the same
+language in 3D. The blue-grey scientific palette:
+
+- field high end (pure / boundary): `PURE #2d6f8f`
+- field low end (maximally mixed): `MIXED #d6e5ea`
+- axes and text labels: `AXIS #233746`
+- grid lines (medians, wireframe): `GRID #829aa6`
+- centre marker halo: `CENTER #f5f7f8`, with a visible blue-grey outline
+
+**Identity colours for the classical figures (1 and 2):** the three
+pure-state corners and `e1, e2, e3` labels carry identity colours,
+`CORNER_COLOURS` = red `#cc3b3b`, green `#2e9e5b`, blue `#3b6fb0`, so the
+reader sees three distinct pure colours blending toward the grey centre
+(the post's opening "grey noise"), whose marker dot is a neutral
+`GREY_CENTER #8a8f94`. Figure 1 keeps the purity background field behind
+these corners. Figure 2 is **animated** and drops the background field:
+its cloud of states is coloured by the same barycentric RGB blend and
+drains to grey as the channel collapses it (see that figure's README).
+The Bloch ball keeps a single purity hue throughout (one qubit has no
+analogous three-corner identity).
+
+Figure 4 (the orbit cycle) is the label plane `F_d^2`, not a state
+space, so purity does not apply there; it uses its own scheme.
+
+## How a figure is wired into the post
+
+In `index.qmd`, each figure is a Quarto figure div that includes the
+partial and carries the caption:
+
+```markdown
+::: {#fig-simplex-d3}
+
+{{< include figures/fig1-state-space/interactive.qmd >}}
+
+The caption goes here, with math like $p_0$ if needed.
+
+:::
+```
+
+- The `#fig-...` id makes it a numbered, cross-referenceable figure.
+- The prose references it with `@fig-...`, which renders as "Figure N".
+  Every figure in the post is referenced from the text.
+- Captions are **not** manually prefixed with "Figure N"; Quarto numbers
+  them automatically.
+
+The figure ids in this post: `#fig-simplex-d3` (1), `#fig-root-d3`
+(2), `#fig-bloch` (3), `#fig-bloch-root` (4). Figures 1 and 2 live in
+`_02`, figures 3 and 4 in `_03`. Part 2 links to `#fig-bloch` and
+`#fig-bloch-root` by URL, so keep those two ids stable.
+
+## To modify a figure
+
+1. Edit the generator's constants and rerun it to regenerate the SVG
+   (e.g. `python fig1-state-space/state_space_figure.py
+   fig1-state-space/state_space.svg`).
+2. Re-copy the new SVG body (everything from `<svg ...>` to `</svg>`)
+   into the `interactive.qmd` partial, replacing the old inline SVG. The
+   `<script>` needs no edits; it re-reads the geometry from the SVG.
+3. Re-render the post (`quarto render posts/depolarizing-roots/index.qmd`)
+   and check the figure. No change to `index.qmd` is required.
+
+See each figure's own `README.md` for the specifics.
+
+## Status
+
+| # | figure | id | state |
+|---|--------|----|-------|
+| 1 | classical state space (2-simplex) | `fig-simplex-d3` | done, interactive |
+| 2 | square-root channel collapsing the simplex | `fig-root-d3` | done, animated |
+| 3 | Bloch ball (qubit state space) | `fig-bloch` | done, interactive |
+| 4 | the qubit root collapsing the Bloch cloud (folder `fig3b-bloch-root`) | `fig-bloch-root` | done, animated |
+
+## A note on CSS
+
+Each interactive figure carries its own scoped `<style>` block inside its
+partial (`.simplex-interactive` for Figure 1, `.bloch-interactive` for
+Figure 3). This keeps each figure fully self-contained. If a third
+interactive figure is added, consider factoring the shared readout styles
+into the site's `styles.css` so the common rules appear once.

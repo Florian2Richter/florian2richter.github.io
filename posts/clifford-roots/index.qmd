@@ -1,73 +1,48 @@
 ---
-title: "How finely can you divide a depolarizing channel?"
+# TODO(Florian): Titel ist nur ein Arbeitstitel.
+title: "Clifford roots of the depolarizing channel"
 description: "Clifford channels are a tiny corner of the space of quantum channels, and yet they let you divide the most destructive channel of all into nearly as many discrete steps as the full quantum machinery allows. The room to do this lives in a surprising place."
 author: "Florian Richter"
 subtitle: "Draft under review. Corrections and comments welcome."
-date: "2026-08-08"
+# Entwurf: wird gerendert und ist unter seiner URL erreichbar, steht
+# aber nicht in der Liste auf der Startseite (draft-mode: unlinked).
+draft: true
+# TODO(Florian): Datum setzen, wenn Teil 2 erscheint.
+date: "2026-11-08"
 date-format: "YYYY-MM-DD"
 categories: [quantum, channels, clifford, finite-fields]
-image: figures/teaser-art/clifford-teaser-card.png
-image-alt: "Thousands of faint teal chords trace Bloch vectors spiralling into a glowing grey core inside a dark sphere silhouette"
-open-graph:
-  image: figures/teaser-art/clifford-teaser-og.png
-twitter-card:
-  image: figures/teaser-art/clifford-teaser-og.png
+# TODO(Florian): eigenes Teaserbild. Das bisherige liegt jetzt bei
+# Teil 1 (posts/depolarizing-roots/figures/teaser-art/).
 format:
   html:
     toc: true
     toc-depth: 2
 ---
 
-This post grew out of my diploma thesis in Quantum Information, which
-I wrote in Hannover in 2010. The thesis was about quantum memory
-channels, and in particular about how deep their memory runs.
-Somewhere inside that work a smaller, self-contained question fell
-out: how finely can you divide the most destructive process there
-is?
+*Part 2. Part 1:
+[How finely can you divide a depolarizing channel?](../depolarizing-roots/)*
 
-The original was written for examiners, not for curious readers. I
-had long meant to rewrite it, and the advent of LLMs finally
-removed my last excuse. I used them as editorial tools while
-reorganizing the material, developing examples, and trying out
-clearer explanations; the mathematical argument comes from the
-original work, and I checked every derivation myself. The result
-trades the terse notation of a thesis for pictures, worked
-examples, and a slower pace intended for motivated undergraduates.
-
-The route, roughly: devices with memory give the problem its
-physical face, the classical world gives a first answer, and the
-quantum world a quadratically bigger one. Finally, we settle into a
-small subclass of all possible channels, simple enough to parameterize by hand, yet powerful enough that in prime dimensions it comes within a
-factor of two of the full quantum answer: the Clifford channels.
-
-This is a draft under review. If you find an error, a gap, or a
-passage that does not land, please tell me: in the comments at the
-end of the post, by highlighting the passage itself with the
-annotation sidebar at the right edge of the page, or by email through
-the envelope in the navigation bar.
-
-Enjoy the read.
-
-***
+<!-- TODO(Florian): Einleitung von Teil 2 neu schreiben. Sie muss
+     voraussetzen, was Teil 1 geliefert hat (Simplex, Bloch-Kugel,
+     Kanal, CDC, P + N, k <= d - 1 und k <= d^2 - 1). _01-paulis.qmd
+     beginnt schon mit einem Rueckblick samt Tabelle, das kann der
+     Einstieg bleiben. Der Absatz "This is a draft under review ..."
+     aus dem Vorwort von Teil 1 gehoert vermutlich auch hierher. -->
 
 <!-- The body of this post is split into per-section partials so each
      can be edited on its own. Order and content live in the _NN-*.qmd
      files below; this index just stitches them together. Leading
-     underscores keep Quarto from rendering them as standalone pages. -->
+     underscores keep Quarto from rendering them as standalone pages.
+     Part 1 (classical and general quantum roots) lives in
+     posts/depolarizing-roots/. -->
 
-{{< include _01-hook.qmd >}}
+{{< include _01-paulis.qmd >}}
 
-{{< include _02-classical-setup.qmd >}}
+{{< include _02-clifford-qubit.qmd >}}
 
-{{< include _03-quantum-upgrade.qmd >}}
+{{< include _03-clifford-higher-dimensions.qmd >}}
 
-{{< include _04-paulis.qmd >}}
-
-{{< include _05-clifford-qubit.qmd >}}
-
-{{< include _06-clifford-higher-dimensions.qmd >}}
-
-{{< include _07-whats-next.qmd >}}
+{{< include _04-whats-next.qmd >}}
 
 ```{=html}
 <p class="view-counter">Page views: <span id="view-count">&hellip;</span></p>

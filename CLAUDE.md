@@ -1,8 +1,8 @@
 # CLAUDE.md
 
 This is the source for [florian2richter.github.io](https://florian2richter.github.io),
-a personal blog built with Quarto. The current focus is one in-flight
-post on Clifford channels as finite roots of the depolarizing channel.
+a personal blog built with Quarto. The current focus is a two-part
+series on finite roots of the completely depolarizing channel.
 
 ## What this repo is
 
@@ -11,8 +11,24 @@ post on Clifford channels as finite roots of the depolarizing channel.
   branch (deployed by `.github/workflows/publish.yml`).
 - **Math rendering** is KaTeX (`html-math-method: katex` in
   `_quarto.yml`).
-- **The current post in progress** is `posts/clifford-roots/index.qmd`,
-  working title *"How finely can you divide a depolarizing channel?"*.
+- **The series in progress** has two posts:
+  - Part 1, `posts/depolarizing-roots/index.qmd`, *"How finely can you
+    divide a depolarizing channel?"*: preface, hook, the classical
+    bound $d - 1$, the general quantum bound $d^2 - 1$. This is the
+    launch post and is worked on first.
+  - Part 2, `posts/clifford-roots/index.qmd` (`draft: true`): Pauli
+    and Weyl labels, Clifford channels, the bound $(d^2 - 1)/2$.
+  Part 2 links to part 1's figures `#fig-bloch` and `#fig-bloch-root`
+  by URL. Open edits are marked `TODO(Florian)` in the sources.
+- **Part 1 is in skeleton mode.** Its chapters hold English keyword
+  boxes (`::: {.skeleton}`, styled in `styles.css`) between the fixed
+  math, figures, asides and footnotes. Florian replaces each box with
+  his own prose. The previous LLM text is kept unrendered in
+  `posts/depolarizing-roots/_llm-text/`.
+- **The English prose is to be rewritten by Florian himself.** The
+  plan and the list of passages to rewrite are in
+  `posts/depolarizing-roots/REWRITE-OUTLINE.md` (German). Do not
+  write or polish blog prose unless he explicitly asks for it.
 - **`PROJECT.md`** at the repo root is the original project brief:
   the result being explained, the angle, the source material, and what
   not to do. It is a frozen snapshot from the start of the project.
@@ -32,7 +48,7 @@ quarto render      # one-shot build to docs/
 
 Posts live at `posts/<slug>/index.qmd`. Figures and figure scripts go
 in `posts/<slug>/figures/` (see the README in
-`posts/clifford-roots/figures/` for the convention).
+`posts/depolarizing-roots/figures/` for the convention).
 
 ## Hard rules
 

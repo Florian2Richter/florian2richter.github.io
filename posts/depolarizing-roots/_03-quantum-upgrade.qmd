@@ -1,0 +1,289 @@
+## The quantum upgrade {#sec-quantum}
+
+::: {.skeleton}
+**From bit to qubit**
+
+- Classical bit: one number, a line segment. Ends = certainly $0$ or
+  certainly $1$, centre = fair coin
+- Qubit: infinitely many certain states, forming the surface of a ball
+  (not derived, taken as given)
+- Superpositions exist too, but here the geometry of states is what
+  counts[^qcvc]
+- Examples: photon polarization (filters at $0^\circ$, $90^\circ$,
+  $45^\circ$), electron spin
+- *Bloch ball*: an arrow with length and direction. Length = how
+  certain; surface = pure; centre = total ignorance
+- Direction = which measurement question the state answers with
+  certainty. Poles: "$0$ or $1$?". On the equator: a coin flip for that
+  question, certain for another one (@fig-bloch)
+:::
+
+::: {#fig-bloch}
+
+{{< include figures/fig3-bloch-ball/interactive.qmd >}}
+
+The Bloch ball, the state space of a single qubit: pure states live on the surface, mixed states inside, and the maximally mixed state $I/2$ sits at the centre. Compare the classical bit, whose states fill only a line segment. This is the quantum counterpart of the simplex in @fig-simplex-d3. Click the front of the ball to pick a direction, and use the Purity slider to slide the state inward from the surface; the readout names the one measurement that direction answers with certainty, and how that certainty fades as the state mixes.
+
+:::
+
+::: {.skeleton}
+**The qubit's density matrix**
+
+- Bookkeeping for the arrow $(x, y, z)$: a $2 \times 2$ matrix
+:::
+
+$$
+\rho \;=\;
+\begin{pmatrix}
+\dfrac{1 + z}{2} & \dfrac{x - iy}{2} \\[6pt]
+\dfrac{x + iy}{2} & \dfrac{1 - z}{2}
+\end{pmatrix}.
+$$
+
+::: {.skeleton}
+- Diagonal real, summing to $1$: one number, $z$. Off-diagonal entries
+  complex conjugates: two numbers, $x$ and $y$. Three in total
+- Eigenvalues $\tfrac12(1 \pm \ell)$ with $\ell$ = length of the arrow
+  (aside). Eigenvalues are probabilities, so $\ell \le 1$: the ball
+:::
+
+```{=html}
+<details class="aside">
+<summary>The two eigenvalues, computed</summary>
+```
+
+Two numbers pin down two eigenvalues: their sum and their product.
+The sum is the trace, $1$ by inspection of the diagonal. The product
+is the determinant,
+$$
+\det \rho
+\;=\; \frac{(1 + z)(1 - z)}{4} - \frac{(x - iy)(x + iy)}{4}
+\;=\; \frac{1 - (x^2 + y^2 + z^2)}{4}
+\;=\; \frac{1 - \ell^2}{4}.
+$$
+The matrix is Hermitian, so both eigenvalues are real, and the pair
+with sum $1$ and product $\tfrac14(1 - \ell^2)$ is
+$$
+\lambda_\pm \;=\; \frac{1 \pm \ell}{2},
+$$
+as multiplying them back out confirms. Demanding
+$\lambda_- \ge 0$ is exactly demanding $\ell \le 1$: the ball.
+
+```{=html}
+</details>
+```
+
+::: {.skeleton}
+**The classical bit sits inside the ball** (new, previously in part 2)
+
+- Set $x = y = 0$: $\rho$ becomes diagonal, and the diagonal is exactly
+  the bit's probabilities
+:::
+
+$$
+\rho \;=\; \begin{pmatrix} p & 0 \\ 0 & 1-p \end{pmatrix}
+\;=\; \tfrac12\bigl(I + r\,Z\bigr),
+\qquad r = 2p - 1,
+\qquad
+Z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}.
+$$
+
+::: {.skeleton}
+- $r$ runs from $+1$ to $-1$: the vertical axis of the ball is the
+  classical bit's line segment
+- The ball does not replace the classical picture, it grows around it
+- $Z$ reads off the parity $(-1)^x$ of the outcome. Part 1 needs only
+  this one matrix; $X$, $Y$ and their multiplication come in part 2
+:::
+
+::: {.skeleton}
+**General $d$ levels**
+
+- $d \times d$ density matrix: Hermitian, eigenvalues $\ge 0$ summing
+  to $1$, so a probability distribution sits inside
+- Eigenvectors: which alternatives it is spread across. The basis
+  belongs to the state
+- States with different bases do not commute. Classical = all in one
+  fixed basis (diagonal)
+- Count: $d^2 - 1$ real parameters (aside)
+:::
+
+```{=html}
+<details class="aside">
+<summary>Where $d^2 - 1$ comes from</summary>
+```
+
+A $d \times d$ Hermitian matrix is fixed by $d^2$ real numbers: $d$
+real numbers on the diagonal, plus the entries above the diagonal,
+each complex and so worth two reals, with everything below the diagonal
+forced by Hermiticity. The off-diagonal count is $2 \cdot \tfrac{d(d-1)}{2} = d(d-1)$,
+and $d + d(d-1) = d^2$. Fixing the trace to one removes a single degree
+of freedom, leaving $d^2 - 1$.
+
+```{=html}
+</details>
+```
+
+::: {.skeleton}
+- Quantum state space: dimension $d^2 - 1$ instead of $d - 1$; for the
+  bit $3$ instead of $1$
+
+**Channels**
+
+- Quantum copier = *channel*: linear, for the same mixture reason
+- Checklist translated: entries $\ge 0$ → positivity; column sums $1$
+  → *trace preserving*
+- New: *complete positivity*, valid states even when the channel acts
+  on part of an entangled system[^channels]
+- Centre fixed: $I/d$ stays put, *unital*
+- Quantum CDC: everything goes to $I/d$; the ball shrinks to its centre
+  in one step
+- Free again: every trace-preserving root of the CDC is unital (same
+  $SP = PS$ argument)
+
+**The bound**
+
+- Same skeleton: $S = P + N$, $N$ nilpotent on the traceless operators
+- Their dimension is $d^2 - 1$ instead of $d - 1$:
+:::
+
+$$
+k \;\leq\; d^2 - 1.
+$$
+
+::: {.skeleton}
+- Reached in every dimension: shift block on an orthonormal basis of
+  traceless operators; the Choi matrix must stay positive, hence
+  $\varepsilon \le 1/(d(d^2 - 2))$ (aside, Theorem 3.4 of the paper)
+:::
+
+```{=html}
+<details class="aside">
+<summary>Why the bound is reached in every dimension</summary>
+```
+
+Work with operators instead of probability vectors. Let
+$D = d^2 - 1$ and pick a basis of Hermitian matrices
+$I/\sqrt{d},\, F_1, \ldots, F_D$ with every $F_j$ traceless,
+orthonormal in the trace inner product
+$\langle A, B \rangle = \operatorname{tr}(A^\dagger B)$. Let $N$
+shift the list:
+$$
+N(I) = N(F_1) = 0, \qquad N(F_j) = F_{j-1} \quad (2 \le j \le D),
+$$
+so $N^D = 0$ while $N^{D-1} \neq 0$: the operator $F_D$ survives
+$D - 1$ steps. Set $S_\varepsilon = P + \varepsilon N$. Trace
+preservation and unitality hold by construction, since $N$ kills the
+identity and outputs only traceless operators, and the same two
+facts give $PN = NP = 0$. The cross terms die exactly as they did
+classically,
+$$
+S_\varepsilon^k \;=\; P + \varepsilon^k N^k,
+$$
+so every nonzero admissible $\varepsilon$ keeps the maximal order $D$.
+
+Only complete positivity can still fail, and the check mirrors the
+classical non-negativity argument. Complete positivity of a map is
+the positive semidefiniteness of a single matrix assembled from it,
+its *Choi matrix* $J$ (part of the structure theory in the footnote
+above), and $J$ depends linearly on the map:
+$$
+J(S_\varepsilon) \;=\; J(P) + \varepsilon\, J(N).
+$$
+In the convention
+$J(T) = \sum_{ij} T(|i\rangle\langle j|) \otimes |i\rangle\langle j|$,
+the completely depolarizing channel has $J(P) = I_{d^2}/d$, with
+$I_{d^2}$ the identity on the doubled, $d^2$-dimensional space:
+strictly positive definite, the quantum counterpart of "every entry
+of $P$ is $1/d$". A Hermitian perturbation cannot drag an eigenvalue below
+zero while
+$$
+|\varepsilon| \;\le\; \frac{\lambda_{\min}(J(P))}{\|J(N)\|_{\mathrm{op}}} .
+$$
+With the basis above, $\|J(N)\|_{\mathrm{op}} \le d^2 - 2$: the Choi
+matrix of the shift is a sum of $d^2 - 2$ terms
+$F_{j-1} \otimes \overline{F_j}$, each of operator norm at most one,
+because a Hermitian matrix of unit Hilbert-Schmidt norm has operator
+norm at most one. So the dimension-only choice
+$$
+|\varepsilon| \;\le\; \frac{1}{d\,(d^2 - 2)}
+$$
+suffices, and the shifted block, shrunk gently, is a lawful channel
+of order exactly $d^2 - 1$ in every dimension. The polished version
+of this construction is Theorem 3.4 of the paper.[^arw]
+
+```{=html}
+</details>
+```
+
+::: {.skeleton}
+**$d = 2$: one versus three** (new: with $Z$ as the mechanism)
+
+- The classical copier in the new language can only rescale $Z$:
+:::
+
+$$
+S(I) = I, \qquad S(Z) = (1 - 2a)\, Z .
+$$
+
+::: {.skeleton}
+- Rescaling reaches zero only at once, so $k = 1$
+- The qubit root moves the $z$ component to $y$, then to $x$, then it
+  is gone:
+:::
+
+$$
+(r_1, r_2, r_3) \;\longmapsto\; \bigl(\tfrac12 r_2,\; \tfrac12 r_3,\; 0\bigr).
+$$
+
+::: {.skeleton}
+- $z \to y \to x \to 0$: three steps, the north pole needs all three
+  (@fig-bloch-root)
+- Mechanism: the qubit has two extra directions in which information
+  can be parked
+- Open: that this root (factors $\tfrac12$) really is a channel is only
+  shown in part 2. Point there, or bring that aside over
+:::
+
+::: {#fig-bloch-root}
+
+{{< include figures/fig3b-bloch-root/interactive.qmd >}}
+
+A maximal qubit root $S$ acting on the Bloch ball (others exist). It
+sends a Bloch vector $(r_1, r_2, r_3)$ to $(r_2/2,\, r_3/2,\, 0)$,
+driving every state
+to the centre $I/2$ in at most three steps, and the $z$-pole takes all
+three, realizing the order-3 bound ($d^2 - 1 = 3$ at $d = 2$). As with
+the classical square root in @fig-root-d3, erasure happens in stages:
+each step both shrinks the vector and rotates it onto the next axis.
+Directions already in the channel's kernel (here the $x$-axis) collapse
+sooner; the slowest direction sets the order. The animation drives a
+whole cloud of Bloch vectors to $I/2$ through these stages and picks out
+the three axis orbits (the blue $z$-pole is the hero that takes all
+three steps); tap the figure to play it.
+
+:::
+
+::: {.skeleton}
+**Transition to the close**
+
+- Unrestricted: $d^2 - 1$, bound and construction
+:::
+
+[^qcvc]: We meet qubits, density matrices, and channels here at the
+level of pictures, not bra-ket algebra, so you can follow along cold. If
+you want the real foundations, single qubits, gates, and the
+$|0\rangle, |1\rangle$ notation built from scratch, Matuschak and
+Nielsen's [Quantum Computing for the Very Curious](https://quantum.country/qcvc)
+is the gentlest on-ramp I know, and it is the model this post is written
+in.
+
+[^channels]: For the structure theory of quantum channels, including
+the Kraus decomposition and the Stinespring dilation, the standard
+reference is Nielsen and Chuang, *Quantum Computation and Quantum
+Information*, chapter 8. Michael Wolf's lecture notes *Quantum Channels
+and Operations: Guided Tour* are a more focused modern treatment.
+
+[^arw]: A. Ahlbrecht, F. Richter and R. F. Werner, "How long can it
+take for a quantum channel to forget everything?", arXiv:1205.0693
+(2012); the construction is Theorem 3.4 there.
